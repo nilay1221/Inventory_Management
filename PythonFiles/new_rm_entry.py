@@ -83,11 +83,15 @@ class Ui_MainWindow(object):
         self.rm_new_confirm.setText(_translate("MainWindow", "Confirm"))
 
 
-if __name__ == "__main__":
-    import sys
+def new_shade_entry():
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
+
+
+if __name__ == "__main__":
+    import sys
+    new_shade_entry()
