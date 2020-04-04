@@ -6,19 +6,192 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1090</width>
-    <height>787</height>
+    <width>1036</width>
+    <height>851</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QComboBox" name="shade_customer">
+   <widget class="QLineEdit" name="shade_delete_remark">
     <property name="geometry">
      <rect>
-      <x>240</x>
-      <y>200</y>
+      <x>650</x>
+      <y>180</y>
+      <width>151</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_5">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>100</y>
+      <width>161</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Transaction ID : </string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>590</x>
+      <y>20</y>
+      <width>161</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Back to Main Menu</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="shade_delete_transaction_id">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>110</y>
+      <width>151</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="shade_delete_date">
+    <property name="geometry">
+     <rect>
+      <x>630</x>
+      <y>110</y>
+      <width>151</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="back_view_rm">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>30</y>
+      <width>93</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Back</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>30</y>
+      <width>151</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Shade Number</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>560</x>
+      <y>100</y>
+      <width>71</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Date :</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="shade_delete_confirm">
+    <property name="geometry">
+     <rect>
+      <x>720</x>
+      <y>720</y>
+      <width>141</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Delete</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_6">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>170</y>
+      <width>161</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Customer Name:</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="shade_delete_customer">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>180</y>
       <width>171</width>
       <height>41</height>
      </rect>
@@ -57,12 +230,12 @@
      </property>
     </item>
    </widget>
-   <widget class="QPushButton" name="shade_confirm">
+   <widget class="QLabel" name="label_7">
     <property name="geometry">
      <rect>
-      <x>890</x>
-      <y>660</y>
-      <width>111</width>
+      <x>550</x>
+      <y>170</y>
+      <width>101</width>
       <height>51</height>
      </rect>
     </property>
@@ -72,14 +245,47 @@
      </font>
     </property>
     <property name="text">
-     <string>Confirm</string>
+     <string>Remark :</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_8">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>240</y>
+      <width>161</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Shade Number :</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="shade_add_total">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>620</y>
+      <width>151</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
     </property>
    </widget>
    <widget class="QTableWidget" name="shade_addtable">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>360</y>
+      <x>10</x>
+      <y>330</y>
       <width>411</width>
       <height>251</height>
      </rect>
@@ -196,29 +402,11 @@
      </property>
     </item>
    </widget>
-   <widget class="QLabel" name="label_4">
+   <widget class="QLineEdit" name="shade_number_delete">
     <property name="geometry">
      <rect>
-      <x>590</x>
-      <y>120</y>
-      <width>71</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Date :</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="date">
-    <property name="geometry">
-     <rect>
-      <x>660</x>
-      <y>130</y>
+      <x>450</x>
+      <y>250</y>
       <width>151</width>
       <height>41</height>
      </rect>
@@ -227,151 +415,13 @@
      <font>
       <pointsize>12</pointsize>
      </font>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="shade_transaction_id">
-    <property name="geometry">
-     <rect>
-      <x>240</x>
-      <y>130</y>
-      <width>151</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="back_add_rm">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>50</y>
-      <width>93</width>
-      <height>28</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Back</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_3">
-    <property name="geometry">
-     <rect>
-      <x>370</x>
-      <y>40</y>
-      <width>151</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Shade Number </string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_6">
-    <property name="geometry">
-     <rect>
-      <x>60</x>
-      <y>190</y>
-      <width>161</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Customer Name:</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_5">
-    <property name="geometry">
-     <rect>
-      <x>60</x>
-      <y>120</y>
-      <width>161</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Transaction ID : </string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="shade_remark">
-    <property name="geometry">
-     <rect>
-      <x>680</x>
-      <y>200</y>
-      <width>151</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton">
-    <property name="geometry">
-     <rect>
-      <x>620</x>
-      <y>40</y>
-      <width>161</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>10</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Back to Main Menu</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_7">
-    <property name="geometry">
-     <rect>
-      <x>580</x>
-      <y>190</y>
-      <width>101</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Remark :</string>
     </property>
    </widget>
    <widget class="QTableWidget" name="shade_colortable">
     <property name="geometry">
      <rect>
-      <x>500</x>
-      <y>350</y>
+      <x>470</x>
+      <y>320</y>
       <width>541</width>
       <height>291</height>
      </rect>
@@ -499,44 +549,11 @@
      </property>
     </item>
    </widget>
-   <widget class="QLabel" name="label_8">
-    <property name="geometry">
-     <rect>
-      <x>320</x>
-      <y>270</y>
-      <width>161</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Shade Number :</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="shade_number_add">
-    <property name="geometry">
-     <rect>
-      <x>480</x>
-      <y>280</y>
-      <width>151</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_9">
     <property name="geometry">
      <rect>
-      <x>140</x>
-      <y>640</y>
+      <x>110</x>
+      <y>610</y>
       <width>161</width>
       <height>51</height>
      </rect>
@@ -550,31 +567,6 @@
      <string>Total Quantity :</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="shade_add_total">
-    <property name="geometry">
-     <rect>
-      <x>290</x>
-      <y>650</y>
-      <width>151</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-   </widget>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1090</width>
-     <height>26</height>
-    </rect>
-   </property>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>

@@ -6,37 +6,19 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>995</width>
-    <height>627</height>
+    <width>923</width>
+    <height>691</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="back_add_rm">
+   <widget class="QLineEdit" name="rm_modify_remark">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>20</y>
-      <width>93</width>
-      <height>28</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Back</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_3">
-    <property name="geometry">
-     <rect>
-      <x>330</x>
-      <y>20</y>
+      <x>640</x>
+      <y>190</y>
       <width>151</width>
       <height>41</height>
      </rect>
@@ -46,15 +28,30 @@
       <pointsize>12</pointsize>
      </font>
     </property>
-    <property name="text">
-     <string>Raw Material</string>
-    </property>
    </widget>
-   <widget class="QTableWidget" name="rm_addtable">
+   <widget class="QLabel" name="label_5">
     <property name="geometry">
      <rect>
-      <x>190</x>
-      <y>250</y>
+      <x>20</x>
+      <y>110</y>
+      <width>161</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Transaction ID : </string>
+    </property>
+   </widget>
+   <widget class="QTableWidget" name="rm_view_table">
+    <property name="geometry">
+     <rect>
+      <x>170</x>
+      <y>270</y>
       <width>541</width>
       <height>251</height>
      </rect>
@@ -171,98 +168,11 @@
      </property>
     </item>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QLineEdit" name="rm_modify_date">
     <property name="geometry">
      <rect>
-      <x>600</x>
-      <y>10</y>
-      <width>161</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>10</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Back to Main Menu</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="rm_confirm">
-    <property name="geometry">
-     <rect>
-      <x>750</x>
-      <y>500</y>
-      <width>111</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Confirm</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_4">
-    <property name="geometry">
-     <rect>
-      <x>570</x>
-      <y>90</y>
-      <width>71</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Date :</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="date">
-    <property name="geometry">
-     <rect>
-      <x>640</x>
-      <y>100</y>
-      <width>151</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_5">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>90</y>
-      <width>161</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Transaction ID : </string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="rm_transaction_id">
-    <property name="geometry">
-     <rect>
-      <x>220</x>
-      <y>100</y>
+      <x>620</x>
+      <y>120</y>
       <width>151</width>
       <height>41</height>
      </rect>
@@ -276,8 +186,8 @@
    <widget class="QLabel" name="label_6">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>160</y>
+      <x>20</x>
+      <y>180</y>
       <width>161</width>
       <height>51</height>
      </rect>
@@ -291,27 +201,12 @@
      <string>Customer Name:</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="rw_remark">
+   <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>660</x>
-      <y>170</y>
-      <width>151</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_7">
-    <property name="geometry">
-     <rect>
-      <x>560</x>
-      <y>160</y>
-      <width>101</width>
+      <x>550</x>
+      <y>110</y>
+      <width>71</width>
       <height>51</height>
      </rect>
     </property>
@@ -321,14 +216,14 @@
      </font>
     </property>
     <property name="text">
-     <string>Remark :</string>
+     <string>Date :</string>
     </property>
    </widget>
-   <widget class="QComboBox" name="rm_customer">
+   <widget class="QComboBox" name="rm_modify_customer">
     <property name="geometry">
      <rect>
-      <x>220</x>
-      <y>170</y>
+      <x>200</x>
+      <y>190</y>
       <width>171</width>
       <height>41</height>
      </rect>
@@ -366,6 +261,113 @@
       <string>Parth</string>
      </property>
     </item>
+   </widget>
+   <widget class="QLineEdit" name="rw_modify_transaction_id">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>120</y>
+      <width>151</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="back_view_rm">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>40</y>
+      <width>93</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Back</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>40</y>
+      <width>151</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Raw Material</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>580</x>
+      <y>30</y>
+      <width>161</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Back to Main Menu</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_7">
+    <property name="geometry">
+     <rect>
+      <x>540</x>
+      <y>180</y>
+      <width>101</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Remark :</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="rm_modify_confirm">
+    <property name="geometry">
+     <rect>
+      <x>700</x>
+      <y>570</y>
+      <width>141</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Modify</string>
+    </property>
    </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>

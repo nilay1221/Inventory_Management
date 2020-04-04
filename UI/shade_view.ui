@@ -14,31 +14,13 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="col_add">
+   <widget class="QPushButton" name="op_back">
     <property name="geometry">
      <rect>
-      <x>290</x>
-      <y>110</y>
-      <width>151</width>
-      <height>61</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>ADD</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="back">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>20</y>
-      <width>131</width>
-      <height>61</height>
+      <x>50</x>
+      <y>70</y>
+      <width>101</width>
+      <height>41</height>
      </rect>
     </property>
     <property name="font">
@@ -50,69 +32,12 @@
      <string>Back</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
+   <widget class="QPushButton" name="view_today">
     <property name="geometry">
      <rect>
-      <x>270</x>
-      <y>60</y>
-      <width>201</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Colour</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="col_modify">
-    <property name="geometry">
-     <rect>
-      <x>290</x>
-      <y>200</y>
-      <width>151</width>
-      <height>71</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>MODIFY</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="col_delete">
-    <property name="geometry">
-     <rect>
-      <x>290</x>
-      <y>290</y>
-      <width>151</width>
-      <height>71</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>DELETE</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="col_view">
-    <property name="geometry">
-     <rect>
-      <x>290</x>
-      <y>380</y>
-      <width>151</width>
+      <x>330</x>
+      <y>260</y>
+      <width>171</width>
       <height>61</height>
      </rect>
     </property>
@@ -122,19 +47,66 @@
      </font>
     </property>
     <property name="text">
-     <string>VIEW</string>
+     <string>Today</string>
     </property>
    </widget>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>800</width>
-     <height>26</height>
-    </rect>
-   </property>
+   <widget class="QPushButton" name="view_custom">
+    <property name="geometry">
+     <rect>
+      <x>332</x>
+      <y>347</y>
+      <width>171</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Custom Dates</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>120</y>
+      <width>161</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Shade Number</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="view_trans">
+    <property name="geometry">
+     <rect>
+      <x>330</x>
+      <y>170</y>
+      <width>171</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Transaction</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
