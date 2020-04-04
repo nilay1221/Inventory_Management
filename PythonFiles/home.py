@@ -8,7 +8,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+import new_shade_entry
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
