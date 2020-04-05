@@ -10,7 +10,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_MainWindow(object):
+class ShadeWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(993, 711)
@@ -101,11 +101,17 @@ class Ui_MainWindow(object):
         self.shade_new_confirm.setText(_translate("MainWindow", "Confirm"))
 
 
-if __name__ == "__main__":
+def new_shade_entry():
+    # print("called fn")
     import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
+    ui = ShadeWindow()
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
+
+
+
+new_shade_entry()
+
