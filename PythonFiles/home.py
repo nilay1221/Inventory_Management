@@ -91,11 +91,17 @@ class Ui_MainWindow(object):
         self.label_4.setFont(font)
         self.label_4.setObjectName("label_4")
         self.RM_5 = QtWidgets.QPushButton(self.centralwidget)
-        self.RM_5.setGeometry(QtCore.QRect(640, 440, 191, 61))
+        self.RM_5.setGeometry(QtCore.QRect(640, 280, 191, 61))
         font = QtGui.QFont()
         font.setPointSize(14)
         self.RM_5.setFont(font)
         self.RM_5.setObjectName("RM_5")
+        self.RM_6 = QtWidgets.QPushButton(self.centralwidget)
+        self.RM_6.setGeometry(QtCore.QRect(650, 440, 191, 61))
+        font = QtGui.QFont()
+        font.setPointSize(14)
+        self.RM_6.setFont(font)
+        self.RM_6.setObjectName("RM_6")
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -119,6 +125,7 @@ class Ui_MainWindow(object):
         self.label_3.setText(_translate("MainWindow", "View Stock Details :"))
         self.label_4.setText(_translate("MainWindow", "Enter Sale Details :"))
         self.RM_5.setText(_translate("MainWindow", "Shade Number"))
+        self.RM_6.setText(_translate("MainWindow", "Shade Number"))
 
 
 if __name__ == "__main__":
