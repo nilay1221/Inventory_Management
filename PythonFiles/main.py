@@ -24,7 +24,17 @@ pagesDict = {
         'shade_view_by_custom': 17,
         'shade_view_by_id': 18,
         'shade_view_by_today': 19,
-
+        'rm_stock_view_2':20,
+        'shade_stock_view':21,
+        'shade_sales':22,
+        'new_rm_operations':23,
+        'new_rm_modify': 24,
+        'new_rm_delete':25,
+        'new_rm_view':26,
+        'new_shade_operations':27,
+        'new_shade_modify':28,
+        'new_shade_delete':29,
+        'new_shade_view':30,
     }
 
 class MainWindow(QMainWindow):
@@ -39,12 +49,12 @@ class MainWindow(QMainWindow):
         self.uiWindow.setupUi(self)
         self.uiWindow.EP.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['shade_operations']))
         self.uiWindow.RM.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['rm_operations']))
-        self.uiWindow.RM_2.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['new_rm_entry']))
-        self.uiWindow.RM_3.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['new_shade_entry']))
+        self.uiWindow.RM_2.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['new_rm_operations']))
+        self.uiWindow.RM_3.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['new_shade_operations']))
         #self.uiWindow.RM_4.clicked.connect(lambda: self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['rm_stock_view']))
-        self.uiWindow.back_add_rm.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['Home']))
+        self.uiWindow.back_add_rm.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['new_rm_operations']))
         self.uiWindow.pushButton.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['Home']))
-        self.uiWindow.back_add_rm_2.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['Home']))
+        self.uiWindow.back_add_rm_2.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['new_shade_operations']))
         self.uiWindow.pushButton_2.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['Home']))
         self.uiWindow.back_add_rm_2.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['rm_operations']))
         self.uiWindow.back_add_rm_3.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['rm_operations']))
@@ -94,6 +104,41 @@ class MainWindow(QMainWindow):
         self.uiWindow.pushButton_14.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['Home']))
         self.uiWindow.pushButton_15.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['Home']))
         self.uiWindow.back_view_rm_10.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['shade_view']))
+        self.uiWindow.RM_4.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['rm_stock_view_2']))
+        self.uiWindow.RM_5.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['shade_stock_view']))
+        self.uiWindow.RM_6.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['shade_sales']))
+        self.uiWindow.back_view_rm_11.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['Home']))
+        self.uiWindow.pushButton_16.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['Home']))
+        self.uiWindow.back_view_rm_12.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['Home']))
+        self.uiWindow.pushButton_17.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['Home']))
+        self.uiWindow.pushButton_18.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['Home']))
+        self.uiWindow.pushButton_18.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['Home']))
+        self.uiWindow.pushButton_19.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['Home']))
+        self.uiWindow.pushButton_20.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['Home']))
+        self.uiWindow.pushButton_21.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['Home']))
+        self.uiWindow.pushButton_22.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['Home']))
+        self.uiWindow.pushButton_23.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['Home']))
+        self.uiWindow.pushButton_24.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['Home']))
+        self.uiWindow.back_add_rm_6.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['Home']))
+        self.uiWindow.back_3.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['Home']))
+        self.uiWindow.new_rm_add.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['new_rm_entry']))
+        self.uiWindow.new_rm_modify.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['new_rm_modify']))
+        self.uiWindow.new_rm_delete.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['new_rm_delete']))
+        self.uiWindow.new_rm_view.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['new_rm_view']))
+        self.uiWindow.back_add_rm_7.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['new_rm_operations']))
+        self.uiWindow.back_add_rm_8.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['new_rm_operations']))
+        self.uiWindow.back_add_rm_9.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['new_rm_operations']))
+        self.uiWindow.back_add_rm_9.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['new_rm_operations']))
+        self.uiWindow.back_4.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['Home']))
+        self.uiWindow.new_shade_add.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['new_shade_entry']))
+        self.uiWindow.new_shade_modify.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['new_shade_modify']))
+        self.uiWindow.new_shade_delete.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['new_shade_delete']))
+        self.uiWindow.new_shade_view.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['new_shade_view']))
+        self.uiWindow.back_add_rm_10.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['new_shade_operations']))
+        self.uiWindow.back_add_rm_11.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['new_shade_operations']))
+        self.uiWindow.back_add_rm_12.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['new_shade_operations']))
+
+
 
 
         self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['Home'])
