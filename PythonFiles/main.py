@@ -24,7 +24,6 @@ pagesDict = {
         'shade_view_by_custom': 17,
         'shade_view_by_id': 18,
         'shade_view_by_today': 19,
-
     }
 
 class MainWindow(QMainWindow):
