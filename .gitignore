@@ -1,1 +1,3 @@
 /venv/
+/.idea/
+/PythonFiles/__pycache__/
