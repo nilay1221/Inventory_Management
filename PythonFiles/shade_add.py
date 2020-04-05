@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'UI\shade_add.ui'
+# Form implementation generated from reading ui file 'shade_add.ui'
 #
 # Created by: PyQt5 UI code generator 5.13.2
 #
@@ -13,7 +13,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1090, 787)
+        MainWindow.resize(1304, 862)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.shade_customer = QtWidgets.QComboBox(self.centralwidget)
@@ -143,9 +143,9 @@ class Ui_MainWindow(object):
         self.label_7.setFont(font)
         self.label_7.setObjectName("label_7")
         self.shade_colortable = QtWidgets.QTableWidget(self.centralwidget)
-        self.shade_colortable.setGeometry(QtCore.QRect(500, 350, 541, 291))
+        self.shade_colortable.setGeometry(QtCore.QRect(500, 350, 661, 291))
         self.shade_colortable.setRowCount(8)
-        self.shade_colortable.setColumnCount(4)
+        self.shade_colortable.setColumnCount(5)
         self.shade_colortable.setObjectName("shade_colortable")
         item = QtWidgets.QTableWidgetItem()
         font = QtGui.QFont()
@@ -171,6 +171,12 @@ class Ui_MainWindow(object):
         font.setWeight(75)
         item.setFont(font)
         self.shade_colortable.setHorizontalHeaderItem(3, item)
+        item = QtWidgets.QTableWidgetItem()
+        font = QtGui.QFont()
+        font.setBold(True)
+        font.setWeight(75)
+        item.setFont(font)
+        self.shade_colortable.setHorizontalHeaderItem(4, item)
         item = QtWidgets.QTableWidgetItem()
         item.setFlags(QtCore.Qt.ItemIsSelectable|QtCore.Qt.ItemIsDragEnabled|QtCore.Qt.ItemIsEnabled)
         self.shade_colortable.setItem(0, 1, item)
@@ -220,10 +226,6 @@ class Ui_MainWindow(object):
         self.shade_add_total.setFont(font)
         self.shade_add_total.setObjectName("shade_add_total")
         MainWindow.setCentralWidget(self.centralwidget)
-        self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 1090, 26))
-        self.menubar.setObjectName("menubar")
-        MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
@@ -263,6 +265,8 @@ class Ui_MainWindow(object):
         item.setText(_translate("MainWindow", "Percentage"))
         item = self.shade_colortable.horizontalHeaderItem(3)
         item.setText(_translate("MainWindow", "Quantity"))
+        item = self.shade_colortable.horizontalHeaderItem(4)
+        item.setText(_translate("MainWindow", "Price"))
         __sortingEnabled = self.shade_colortable.isSortingEnabled()
         self.shade_colortable.setSortingEnabled(False)
         self.shade_colortable.setSortingEnabled(__sortingEnabled)

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'UI\rm_stock_view.ui'
+# Form implementation generated from reading ui file 'rm_stock_view.ui'
 #
 # Created by: PyQt5 UI code generator 5.13.2
 #
@@ -116,13 +116,13 @@ class Ui_MainWindow(object):
         font.setPointSize(12)
         self.label_11.setFont(font)
         self.label_11.setObjectName("label_11")
-        self.rw_view_starting_date_2 = QtWidgets.QLineEdit(self.centralwidget)
-        self.rw_view_starting_date_2.setGeometry(QtCore.QRect(790, 680, 151, 41))
+        self.rw_view_closing = QtWidgets.QLineEdit(self.centralwidget)
+        self.rw_view_closing.setGeometry(QtCore.QRect(790, 680, 151, 41))
         font = QtGui.QFont()
         font.setPointSize(12)
-        self.rw_view_starting_date_2.setFont(font)
-        self.rw_view_starting_date_2.setText("")
-        self.rw_view_starting_date_2.setObjectName("rw_view_starting_date_2")
+        self.rw_view_closing.setFont(font)
+        self.rw_view_closing.setText("")
+        self.rw_view_closing.setObjectName("rw_view_closing")
         self.label_12 = QtWidgets.QLabel(self.centralwidget)
         self.label_12.setGeometry(QtCore.QRect(630, 670, 181, 51))
         font = QtGui.QFont()

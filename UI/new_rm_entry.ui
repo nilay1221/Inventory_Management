@@ -138,7 +138,7 @@
     <property name="geometry">
      <rect>
       <x>320</x>
-      <y>360</y>
+      <y>420</y>
       <width>111</width>
       <height>51</height>
      </rect>
@@ -150,6 +150,39 @@
     </property>
     <property name="text">
      <string>Confirm</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="rm_new_product_price">
+    <property name="geometry">
+     <rect>
+      <x>410</x>
+      <y>330</y>
+      <width>151</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_6">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>330</y>
+      <width>201</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Enter Product Price : </string>
     </property>
    </widget>
   </widget>

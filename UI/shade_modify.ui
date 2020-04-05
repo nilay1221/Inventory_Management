@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1093</width>
-    <height>795</height>
+    <width>1268</width>
+    <height>816</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -341,7 +341,7 @@
      <rect>
       <x>490</x>
       <y>330</y>
-      <width>541</width>
+      <width>661</width>
       <height>291</height>
      </rect>
     </property>
@@ -349,7 +349,7 @@
      <number>8</number>
     </property>
     <property name="columnCount">
-     <number>4</number>
+     <number>5</number>
     </property>
     <row/>
     <row/>
@@ -395,6 +395,17 @@
     <column>
      <property name="text">
       <string>Quantity</string>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Price</string>
      </property>
      <property name="font">
       <font>
