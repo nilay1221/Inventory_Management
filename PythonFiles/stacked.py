@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'UI/StackedView.ui'
+# Form implementation generated from reading ui file 'StackedView.ui'
 #
 # Created by: PyQt5 UI code generator 5.13.2
 #
@@ -107,6 +107,14 @@ class Ui_MainWindow(object):
         font.setPointSize(12)
         self.exit.setFont(font)
         self.exit.setObjectName("exit")
+        self.label_114 = QtWidgets.QLabel(self.Home)
+        self.label_114.setGeometry(QtCore.QRect(400, 40, 221, 41))
+        font = QtGui.QFont()
+        font.setPointSize(14)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_114.setFont(font)
+        self.label_114.setObjectName("label_114")
         self.stackedWidget.addWidget(self.Home)
         self.new_rm_entry = QtWidgets.QWidget()
         self.new_rm_entry.setObjectName("new_rm_entry")
@@ -2648,6 +2656,14 @@ class Ui_MainWindow(object):
         font.setPointSize(10)
         self.pushButton_18.setFont(font)
         self.pushButton_18.setObjectName("pushButton_18")
+        self.pushButton_25 = QtWidgets.QPushButton(self.shade_sales)
+        self.pushButton_25.setGeometry(QtCore.QRect(800, 710, 151, 61))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setWeight(75)
+        self.pushButton_25.setFont(font)
+        self.pushButton_25.setObjectName("pushButton_25")
         self.stackedWidget.addWidget(self.shade_sales)
         self.new_rm_operations = QtWidgets.QWidget()
         self.new_rm_operations.setObjectName("new_rm_operations")
@@ -3089,7 +3105,7 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(30)
+        self.stackedWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -3108,6 +3124,7 @@ class Ui_MainWindow(object):
         self.RM_2.setText(_translate("MainWindow", "Add New Raw Material"))
         self.logout.setText(_translate("MainWindow", "Logout"))
         self.exit.setText(_translate("MainWindow", "Exit"))
+        self.label_114.setText(_translate("MainWindow", "PANKIT PROCESS"))
         self.label_78.setText(_translate("MainWindow", "Enter Product Price : "))
         self.label_4.setText(_translate("MainWindow", "Enter Product Name : "))
         self.label_3.setText(_translate("MainWindow", "Raw Material"))
@@ -3521,6 +3538,7 @@ class Ui_MainWindow(object):
         self.label_95.setText(_translate("MainWindow", "Customer Name:"))
         self.label_96.setText(_translate("MainWindow", "Remark :"))
         self.pushButton_18.setText(_translate("MainWindow", "Back to Main Menu"))
+        self.pushButton_25.setText(_translate("MainWindow", "Confirm"))
         self.new_rm_view.setText(_translate("MainWindow", "VIEW"))
         self.new_rm_delete.setText(_translate("MainWindow", "DELETE"))
         self.new_rm_modify.setText(_translate("MainWindow", "MODIFY"))
