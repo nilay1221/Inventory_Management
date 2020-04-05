@@ -8,9 +8,15 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import new_shade_entry
-
+# from new_shade_entry import ShadeWindow
 class Ui_MainWindow(object):
+    # def openWindow(self):
+    #     self.window.close()
+    #     self. = QtWidgets.QMainWindow()
+    #     # self.ui = ShadeWindow()
+    #     self.ui.setupUi(self.window)
+    #     self.window.show()
+
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1077, 782)
@@ -72,7 +78,7 @@ class Ui_MainWindow(object):
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
-
+        self.RM_2.clicked.connect(self.openWindow)
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
