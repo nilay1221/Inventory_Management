@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'UI\new_rm_entry.ui'
+# Form implementation generated from reading ui file 'new_rm_entry.ui'
 #
 # Created by: PyQt5 UI code generator 5.13.2
 #
@@ -59,11 +59,23 @@ class Ui_MainWindow(object):
         self.label_5.setFont(font)
         self.label_5.setObjectName("label_5")
         self.rm_new_confirm = QtWidgets.QPushButton(self.centralwidget)
-        self.rm_new_confirm.setGeometry(QtCore.QRect(320, 360, 111, 51))
+        self.rm_new_confirm.setGeometry(QtCore.QRect(320, 420, 111, 51))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.rm_new_confirm.setFont(font)
         self.rm_new_confirm.setObjectName("rm_new_confirm")
+        self.rm_new_product_price = QtWidgets.QLineEdit(self.centralwidget)
+        self.rm_new_product_price.setGeometry(QtCore.QRect(410, 330, 151, 41))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.rm_new_product_price.setFont(font)
+        self.rm_new_product_price.setObjectName("rm_new_product_price")
+        self.label_6 = QtWidgets.QLabel(self.centralwidget)
+        self.label_6.setGeometry(QtCore.QRect(160, 330, 201, 51))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.label_6.setFont(font)
+        self.label_6.setObjectName("label_6")
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -81,17 +93,14 @@ class Ui_MainWindow(object):
         self.label_4.setText(_translate("MainWindow", "Enter Product Name : "))
         self.label_5.setText(_translate("MainWindow", "Enter Product Code :"))
         self.rm_new_confirm.setText(_translate("MainWindow", "Confirm"))
+        self.label_6.setText(_translate("MainWindow", "Enter Product Price : "))
 
 
-def new_shade_entry():
+if __name__ == "__main__":
+    import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
-
-
-if __name__ == "__main__":
-    import sys
-    new_shade_entry()

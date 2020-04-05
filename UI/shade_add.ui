@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1090</width>
-    <height>787</height>
+    <width>1304</width>
+    <height>862</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -372,7 +372,7 @@
      <rect>
       <x>500</x>
       <y>350</y>
-      <width>541</width>
+      <width>661</width>
       <height>291</height>
      </rect>
     </property>
@@ -380,7 +380,7 @@
      <number>8</number>
     </property>
     <property name="columnCount">
-     <number>4</number>
+     <number>5</number>
     </property>
     <row/>
     <row/>
@@ -426,6 +426,17 @@
     <column>
      <property name="text">
       <string>Quantity</string>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Price</string>
      </property>
      <property name="font">
       <font>
@@ -565,16 +576,6 @@
      </font>
     </property>
    </widget>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1090</width>
-     <height>26</height>
-    </rect>
-   </property>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
