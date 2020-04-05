@@ -62,7 +62,7 @@ class MainWindow(QMainWindow):
         self.uiWindow.back_view_rm.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['rm_operations']))
         self.uiWindow.back_add_rm_4.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['shade_operations']))
         self.uiWindow.pushButton_4.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['Home']))
-        self.uiWindow.back_add_rm_2.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['Home']))
+        self.uiWindow.back_add_rm_2.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['new_shade_operations']))
         self.uiWindow.back_view_rm_2.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['rm_operations']))
         self.uiWindow.pushButton_5.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['Home']))
         self.uiWindow.back.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['Home']))
