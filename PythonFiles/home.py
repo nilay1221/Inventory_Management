@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'UI\home.ui'
+# Form implementation generated from reading ui file 'home.ui'
 #
 # Created by: PyQt5 UI code generator 5.13.2
 #
@@ -8,7 +8,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import new_shade_entry
+
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -17,37 +17,37 @@ class Ui_MainWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.RM = QtWidgets.QPushButton(self.centralwidget)
-        self.RM.setGeometry(QtCore.QRect(308, 140, 191, 61))
+        self.RM.setGeometry(QtCore.QRect(208, 210, 191, 61))
         font = QtGui.QFont()
         font.setPointSize(14)
         self.RM.setFont(font)
         self.RM.setObjectName("RM")
         self.EP = QtWidgets.QPushButton(self.centralwidget)
-        self.EP.setGeometry(QtCore.QRect(310, 220, 191, 51))
+        self.EP.setGeometry(QtCore.QRect(210, 290, 191, 51))
         font = QtGui.QFont()
         font.setPointSize(14)
         self.EP.setFont(font)
         self.EP.setObjectName("EP")
         self.logout = QtWidgets.QPushButton(self.centralwidget)
-        self.logout.setGeometry(QtCore.QRect(622, 20, 121, 41))
+        self.logout.setGeometry(QtCore.QRect(830, 30, 121, 41))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.logout.setFont(font)
         self.logout.setObjectName("logout")
         self.exit = QtWidgets.QPushButton(self.centralwidget)
-        self.exit.setGeometry(QtCore.QRect(380, 620, 121, 41))
+        self.exit.setGeometry(QtCore.QRect(390, 710, 121, 41))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.exit.setFont(font)
         self.exit.setObjectName("exit")
         self.RM_2 = QtWidgets.QPushButton(self.centralwidget)
-        self.RM_2.setGeometry(QtCore.QRect(270, 400, 341, 61))
+        self.RM_2.setGeometry(QtCore.QRect(160, 440, 341, 61))
         font = QtGui.QFont()
         font.setPointSize(14)
         self.RM_2.setFont(font)
         self.RM_2.setObjectName("RM_2")
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(290, 80, 261, 41))
+        self.label.setGeometry(QtCore.QRect(190, 150, 261, 41))
         font = QtGui.QFont()
         font.setPointSize(14)
         font.setBold(True)
@@ -55,7 +55,7 @@ class Ui_MainWindow(object):
         self.label.setFont(font)
         self.label.setObjectName("label")
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
-        self.label_2.setGeometry(QtCore.QRect(290, 340, 341, 41))
+        self.label_2.setGeometry(QtCore.QRect(180, 380, 341, 41))
         font = QtGui.QFont()
         font.setPointSize(14)
         font.setBold(True)
@@ -63,11 +63,39 @@ class Ui_MainWindow(object):
         self.label_2.setFont(font)
         self.label_2.setObjectName("label_2")
         self.RM_3 = QtWidgets.QPushButton(self.centralwidget)
-        self.RM_3.setGeometry(QtCore.QRect(270, 490, 341, 61))
+        self.RM_3.setGeometry(QtCore.QRect(160, 530, 341, 61))
         font = QtGui.QFont()
         font.setPointSize(14)
         self.RM_3.setFont(font)
         self.RM_3.setObjectName("RM_3")
+        self.RM_4 = QtWidgets.QPushButton(self.centralwidget)
+        self.RM_4.setGeometry(QtCore.QRect(638, 200, 191, 61))
+        font = QtGui.QFont()
+        font.setPointSize(14)
+        self.RM_4.setFont(font)
+        self.RM_4.setObjectName("RM_4")
+        self.label_3 = QtWidgets.QLabel(self.centralwidget)
+        self.label_3.setGeometry(QtCore.QRect(620, 140, 261, 41))
+        font = QtGui.QFont()
+        font.setPointSize(14)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_3.setFont(font)
+        self.label_3.setObjectName("label_3")
+        self.label_4 = QtWidgets.QLabel(self.centralwidget)
+        self.label_4.setGeometry(QtCore.QRect(622, 380, 261, 41))
+        font = QtGui.QFont()
+        font.setPointSize(14)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_4.setFont(font)
+        self.label_4.setObjectName("label_4")
+        self.RM_5 = QtWidgets.QPushButton(self.centralwidget)
+        self.RM_5.setGeometry(QtCore.QRect(640, 440, 191, 61))
+        font = QtGui.QFont()
+        font.setPointSize(14)
+        self.RM_5.setFont(font)
+        self.RM_5.setObjectName("RM_5")
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -87,6 +115,10 @@ class Ui_MainWindow(object):
         self.label.setText(_translate("MainWindow", "Enter Transactions : "))
         self.label_2.setText(_translate("MainWindow", "Add new Materail Details : "))
         self.RM_3.setText(_translate("MainWindow", "Add New Shade Number"))
+        self.RM_4.setText(_translate("MainWindow", "Raw Material"))
+        self.label_3.setText(_translate("MainWindow", "View Stock Details :"))
+        self.label_4.setText(_translate("MainWindow", "Enter Sale Details :"))
+        self.RM_5.setText(_translate("MainWindow", "Shade Number"))
 
 
 if __name__ == "__main__":
