@@ -1,4 +1,4 @@
-from PythonFiles.stacked import Ui_MainWindow
+from stacked import Ui_MainWindow
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import QGuiApplication
 from PyQt5.QtWidgets import QMainWindow
