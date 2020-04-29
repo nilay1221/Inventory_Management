@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>21</number>
     </property>
     <widget class="QWidget" name="Home">
      <widget class="QPushButton" name="RM_3">
@@ -2643,7 +2643,7 @@
      <widget class="QDateEdit" name="rw_view_starting_date_3">
       <property name="geometry">
        <rect>
-        <x>270</x>
+        <x>290</x>
         <y>160</y>
         <width>141</width>
         <height>41</height>
@@ -2656,7 +2656,7 @@
      <widget class="QDateEdit" name="rw_view_ending_date_2">
       <property name="geometry">
        <rect>
-        <x>700</x>
+        <x>740</x>
         <y>160</y>
         <width>151</width>
         <height>41</height>
@@ -3326,7 +3326,7 @@
      <widget class="QDateEdit" name="rm_view_today_date">
       <property name="geometry">
        <rect>
-        <x>450</x>
+        <x>470</x>
         <y>130</y>
         <width>161</width>
         <height>41</height>
@@ -5559,7 +5559,7 @@
      <widget class="QDateEdit" name="shade_view_start_date">
       <property name="geometry">
        <rect>
-        <x>240</x>
+        <x>260</x>
         <y>130</y>
         <width>151</width>
         <height>41</height>
@@ -5572,7 +5572,7 @@
      <widget class="QDateEdit" name="shade_view_end_date">
       <property name="geometry">
        <rect>
-        <x>690</x>
+        <x>710</x>
         <y>130</y>
         <width>151</width>
         <height>41</height>
@@ -6451,7 +6451,7 @@
      <widget class="QDateEdit" name="shade_view_today_date">
       <property name="geometry">
        <rect>
-        <x>440</x>
+        <x>460</x>
         <y>140</y>
         <width>141</width>
         <height>41</height>
@@ -6825,7 +6825,7 @@
      <widget class="QDateEdit" name="rw_view_starting_date_4">
       <property name="geometry">
        <rect>
-        <x>280</x>
+        <x>300</x>
         <y>170</y>
         <width>161</width>
         <height>41</height>
@@ -6838,7 +6838,7 @@
      <widget class="QDateEdit" name="rw_view_ending_date_3">
       <property name="geometry">
        <rect>
-        <x>720</x>
+        <x>750</x>
         <y>170</y>
         <width>171</width>
         <height>41</height>
@@ -8339,7 +8339,7 @@
       <property name="geometry">
        <rect>
         <x>460</x>
-        <y>630</y>
+        <y>650</y>
         <width>111</width>
         <height>51</height>
        </rect>
@@ -8502,7 +8502,7 @@
       <property name="geometry">
        <rect>
         <x>440</x>
-        <y>610</y>
+        <y>640</y>
         <width>111</width>
         <height>51</height>
        </rect>
@@ -8813,7 +8813,7 @@
      <x>0</x>
      <y>0</y>
      <width>1226</width>
-     <height>22</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>

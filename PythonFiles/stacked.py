@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'UI/StackedView.ui'
+# Form implementation generated from reading ui file 'StackedView.ui'
 #
 # Created by: PyQt5 UI code generator 5.13.2
 #
@@ -920,10 +920,10 @@ class Ui_MainWindow(object):
         self.back_view_rm_4.setFont(font)
         self.back_view_rm_4.setObjectName("back_view_rm_4")
         self.rw_view_starting_date_3 = QtWidgets.QDateEdit(self.rm_view_custom)
-        self.rw_view_starting_date_3.setGeometry(QtCore.QRect(270, 160, 141, 41))
+        self.rw_view_starting_date_3.setGeometry(QtCore.QRect(290, 160, 141, 41))
         self.rw_view_starting_date_3.setObjectName("rw_view_starting_date_3")
         self.rw_view_ending_date_2 = QtWidgets.QDateEdit(self.rm_view_custom)
-        self.rw_view_ending_date_2.setGeometry(QtCore.QRect(700, 160, 151, 41))
+        self.rw_view_ending_date_2.setGeometry(QtCore.QRect(740, 160, 151, 41))
         self.rw_view_ending_date_2.setObjectName("rw_view_ending_date_2")
         self.stackedWidget.addWidget(self.rm_view_custom)
         self.rm_vew_by_id = QtWidgets.QWidget()
@@ -1141,7 +1141,7 @@ class Ui_MainWindow(object):
         self.label_38.setFont(font)
         self.label_38.setObjectName("label_38")
         self.rm_view_today_date = QtWidgets.QDateEdit(self.rm_view_by_today)
-        self.rm_view_today_date.setGeometry(QtCore.QRect(450, 130, 161, 41))
+        self.rm_view_today_date.setGeometry(QtCore.QRect(470, 130, 161, 41))
         self.rm_view_today_date.setObjectName("rm_view_today_date")
         self.stackedWidget.addWidget(self.rm_view_by_today)
         self.shade_add = QtWidgets.QWidget()
@@ -1944,10 +1944,10 @@ class Ui_MainWindow(object):
         item.setFlags(QtCore.Qt.ItemIsSelectable|QtCore.Qt.ItemIsDragEnabled|QtCore.Qt.ItemIsEnabled)
         self.shade_view_table.setItem(7, 5, item)
         self.shade_view_start_date = QtWidgets.QDateEdit(self.shade_view_by_custom)
-        self.shade_view_start_date.setGeometry(QtCore.QRect(240, 130, 151, 41))
+        self.shade_view_start_date.setGeometry(QtCore.QRect(260, 130, 151, 41))
         self.shade_view_start_date.setObjectName("shade_view_start_date")
         self.shade_view_end_date = QtWidgets.QDateEdit(self.shade_view_by_custom)
-        self.shade_view_end_date.setGeometry(QtCore.QRect(690, 130, 151, 41))
+        self.shade_view_end_date.setGeometry(QtCore.QRect(710, 130, 151, 41))
         self.shade_view_end_date.setObjectName("shade_view_end_date")
         self.stackedWidget.addWidget(self.shade_view_by_custom)
         self.shade_view_by_id = QtWidgets.QWidget()
@@ -2248,7 +2248,7 @@ class Ui_MainWindow(object):
         self.back_view_rm_10.setFont(font)
         self.back_view_rm_10.setObjectName("back_view_rm_10")
         self.shade_view_today_date = QtWidgets.QDateEdit(self.shade_view_by_today)
-        self.shade_view_today_date.setGeometry(QtCore.QRect(440, 140, 141, 41))
+        self.shade_view_today_date.setGeometry(QtCore.QRect(460, 140, 141, 41))
         self.shade_view_today_date.setObjectName("shade_view_today_date")
         self.stackedWidget.addWidget(self.shade_view_by_today)
         self.rm_stock_view_2 = QtWidgets.QWidget()
@@ -2353,10 +2353,10 @@ class Ui_MainWindow(object):
         self.label_84.setFont(font)
         self.label_84.setObjectName("label_84")
         self.rw_view_starting_date_4 = QtWidgets.QDateEdit(self.rm_stock_view_2)
-        self.rw_view_starting_date_4.setGeometry(QtCore.QRect(280, 170, 161, 41))
+        self.rw_view_starting_date_4.setGeometry(QtCore.QRect(300, 170, 161, 41))
         self.rw_view_starting_date_4.setObjectName("rw_view_starting_date_4")
         self.rw_view_ending_date_3 = QtWidgets.QDateEdit(self.rm_stock_view_2)
-        self.rw_view_ending_date_3.setGeometry(QtCore.QRect(720, 170, 171, 41))
+        self.rw_view_ending_date_3.setGeometry(QtCore.QRect(750, 170, 171, 41))
         self.rw_view_ending_date_3.setObjectName("rw_view_ending_date_3")
         self.stackedWidget.addWidget(self.rm_stock_view_2)
         self.shade_stock_view = QtWidgets.QWidget()
@@ -2870,7 +2870,7 @@ class Ui_MainWindow(object):
         self.new_shade_modify_2 = QtWidgets.QWidget()
         self.new_shade_modify_2.setObjectName("new_shade_modify_2")
         self.rm_new_modify_confirm_2 = QtWidgets.QPushButton(self.new_shade_modify_2)
-        self.rm_new_modify_confirm_2.setGeometry(QtCore.QRect(460, 630, 111, 51))
+        self.rm_new_modify_confirm_2.setGeometry(QtCore.QRect(460, 650, 111, 51))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.rm_new_modify_confirm_2.setFont(font)
@@ -2932,7 +2932,7 @@ class Ui_MainWindow(object):
         self.new_shade_delete_2 = QtWidgets.QWidget()
         self.new_shade_delete_2.setObjectName("new_shade_delete_2")
         self.rm_new_delete_confirm_2 = QtWidgets.QPushButton(self.new_shade_delete_2)
-        self.rm_new_delete_confirm_2.setGeometry(QtCore.QRect(440, 610, 111, 51))
+        self.rm_new_delete_confirm_2.setGeometry(QtCore.QRect(440, 640, 111, 51))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.rm_new_delete_confirm_2.setFont(font)
@@ -3049,7 +3049,7 @@ class Ui_MainWindow(object):
         self.stackedWidget.addWidget(self.new_shade_view_2)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 1226, 22))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 1226, 26))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
@@ -3057,7 +3057,7 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(21)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
