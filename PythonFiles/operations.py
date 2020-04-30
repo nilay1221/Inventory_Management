@@ -49,3 +49,16 @@ def modify_info(product_code,product_name,product_price):
     except:
         #TODO check for exceptions
         pass
+
+
+# View raw material 
+
+def get_rm_data():
+    sql = " SELECT * from Raw_Material;"
+    try:
+        results = mycursor.execute(sql)
+        # results = mycursor.fetchall()
+        return results
+    except:
+        pass
+

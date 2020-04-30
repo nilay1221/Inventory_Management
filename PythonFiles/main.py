@@ -165,7 +165,7 @@ class MainWindow(QMainWindow):
 
     def maintain_operations(self):
         self.uiWindow.rm_new_confirm.clicked.connect(lambda : operations_callbacks.callback_add_raw_material(self))
-        
+        self.uiWindow.new_rm_view.clicked.connect(lambda : operations_callbacks.view_new_rm_data(self))
 
 
 if __name__ == "__main__":
