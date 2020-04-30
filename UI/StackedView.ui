@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1226</width>
-    <height>857</height>
+    <width>1262</width>
+    <height>873</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,14 +17,14 @@
    <widget class="QStackedWidget" name="stackedWidget">
     <property name="geometry">
      <rect>
-      <x>90</x>
-      <y>0</y>
-      <width>1121</width>
+      <x>50</x>
+      <y>10</y>
+      <width>1171</width>
       <height>811</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>21</number>
+     <number>18</number>
     </property>
     <widget class="QWidget" name="Home">
      <widget class="QPushButton" name="RM_3">
@@ -3458,138 +3458,6 @@
        </font>
       </property>
      </widget>
-     <widget class="QTableWidget" name="shade_colortable">
-      <property name="geometry">
-       <rect>
-        <x>470</x>
-        <y>330</y>
-        <width>541</width>
-        <height>291</height>
-       </rect>
-      </property>
-      <property name="rowCount">
-       <number>8</number>
-      </property>
-      <property name="columnCount">
-       <number>4</number>
-      </property>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <column>
-       <property name="text">
-        <string>Product Code</string>
-       </property>
-       <property name="font">
-        <font>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Product Name</string>
-       </property>
-       <property name="font">
-        <font>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Percentage</string>
-       </property>
-       <property name="font">
-        <font>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Quantity</string>
-       </property>
-       <property name="font">
-        <font>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-      </column>
-      <item row="0" column="1">
-       <property name="text">
-        <string/>
-       </property>
-       <property name="flags">
-        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
-       </property>
-      </item>
-      <item row="1" column="1">
-       <property name="text">
-        <string/>
-       </property>
-       <property name="flags">
-        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
-       </property>
-      </item>
-      <item row="2" column="1">
-       <property name="text">
-        <string/>
-       </property>
-       <property name="flags">
-        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
-       </property>
-      </item>
-      <item row="3" column="1">
-       <property name="text">
-        <string/>
-       </property>
-       <property name="flags">
-        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
-       </property>
-      </item>
-      <item row="4" column="1">
-       <property name="text">
-        <string/>
-       </property>
-       <property name="flags">
-        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
-       </property>
-      </item>
-      <item row="5" column="1">
-       <property name="text">
-        <string/>
-       </property>
-       <property name="flags">
-        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
-       </property>
-      </item>
-      <item row="6" column="1">
-       <property name="text">
-        <string/>
-       </property>
-       <property name="flags">
-        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
-       </property>
-      </item>
-      <item row="7" column="1">
-       <property name="text">
-        <string/>
-       </property>
-       <property name="flags">
-        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
-       </property>
-      </item>
-     </widget>
      <widget class="QTableWidget" name="shade_addtable">
       <property name="geometry">
        <rect>
@@ -3888,6 +3756,149 @@
       <property name="text">
        <string>Back to Main Menu</string>
       </property>
+     </widget>
+     <widget class="QTableWidget" name="shade_colortable">
+      <property name="geometry">
+       <rect>
+        <x>460</x>
+        <y>320</y>
+        <width>661</width>
+        <height>291</height>
+       </rect>
+      </property>
+      <property name="rowCount">
+       <number>8</number>
+      </property>
+      <property name="columnCount">
+       <number>5</number>
+      </property>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <column>
+       <property name="text">
+        <string>Product Code</string>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Product Name</string>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Percentage</string>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Quantity</string>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Price</string>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+      </column>
+      <item row="0" column="1">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="flags">
+        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="1" column="1">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="flags">
+        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="2" column="1">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="flags">
+        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="3" column="1">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="flags">
+        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="4" column="1">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="flags">
+        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="5" column="1">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="flags">
+        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="6" column="1">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="flags">
+        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="7" column="1">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="flags">
+        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
+       </property>
+      </item>
      </widget>
     </widget>
     <widget class="QWidget" name="shade_delete">
@@ -4317,7 +4328,7 @@
        <rect>
         <x>490</x>
         <y>300</y>
-        <width>541</width>
+        <width>661</width>
         <height>291</height>
        </rect>
       </property>
@@ -4325,7 +4336,7 @@
        <number>8</number>
       </property>
       <property name="columnCount">
-       <number>4</number>
+       <number>5</number>
       </property>
       <row/>
       <row/>
@@ -4371,6 +4382,17 @@
       <column>
        <property name="text">
         <string>Quantity</string>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Price</string>
        </property>
        <property name="font">
         <font>
@@ -4813,12 +4835,66 @@
        <string>Customer Name:</string>
       </property>
      </widget>
+     <widget class="QLabel" name="label_57">
+      <property name="geometry">
+       <rect>
+        <x>330</x>
+        <y>10</y>
+        <width>151</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Shade Number</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_58">
+      <property name="geometry">
+       <rect>
+        <x>300</x>
+        <y>220</y>
+        <width>161</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Shade Number :</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_59">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>80</y>
+        <width>161</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Transaction ID : </string>
+      </property>
+     </widget>
      <widget class="QTableWidget" name="shade_colortable_3">
       <property name="geometry">
        <rect>
-        <x>480</x>
+        <x>500</x>
         <y>300</y>
-        <width>541</width>
+        <width>661</width>
         <height>291</height>
        </rect>
       </property>
@@ -4826,7 +4902,7 @@
        <number>8</number>
       </property>
       <property name="columnCount">
-       <number>4</number>
+       <number>5</number>
       </property>
       <row/>
       <row/>
@@ -4872,6 +4948,17 @@
       <column>
        <property name="text">
         <string>Quantity</string>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Price</string>
        </property>
        <property name="font">
         <font>
@@ -4944,60 +5031,6 @@
         <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
        </property>
       </item>
-     </widget>
-     <widget class="QLabel" name="label_57">
-      <property name="geometry">
-       <rect>
-        <x>330</x>
-        <y>10</y>
-        <width>151</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Shade Number</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_58">
-      <property name="geometry">
-       <rect>
-        <x>300</x>
-        <y>220</y>
-        <width>161</width>
-        <height>51</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Shade Number :</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_59">
-      <property name="geometry">
-       <rect>
-        <x>40</x>
-        <y>80</y>
-        <width>161</width>
-        <height>51</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Transaction ID : </string>
-      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="shade_operations">
@@ -5906,138 +5939,6 @@
        <string>Date :</string>
       </property>
      </widget>
-     <widget class="QTableWidget" name="shade_colortable_4">
-      <property name="geometry">
-       <rect>
-        <x>500</x>
-        <y>330</y>
-        <width>541</width>
-        <height>291</height>
-       </rect>
-      </property>
-      <property name="rowCount">
-       <number>8</number>
-      </property>
-      <property name="columnCount">
-       <number>4</number>
-      </property>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <column>
-       <property name="text">
-        <string>Product Code</string>
-       </property>
-       <property name="font">
-        <font>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Product Name</string>
-       </property>
-       <property name="font">
-        <font>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Percentage</string>
-       </property>
-       <property name="font">
-        <font>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Quantity</string>
-       </property>
-       <property name="font">
-        <font>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-      </column>
-      <item row="0" column="1">
-       <property name="text">
-        <string/>
-       </property>
-       <property name="flags">
-        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
-       </property>
-      </item>
-      <item row="1" column="1">
-       <property name="text">
-        <string/>
-       </property>
-       <property name="flags">
-        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
-       </property>
-      </item>
-      <item row="2" column="1">
-       <property name="text">
-        <string/>
-       </property>
-       <property name="flags">
-        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
-       </property>
-      </item>
-      <item row="3" column="1">
-       <property name="text">
-        <string/>
-       </property>
-       <property name="flags">
-        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
-       </property>
-      </item>
-      <item row="4" column="1">
-       <property name="text">
-        <string/>
-       </property>
-       <property name="flags">
-        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
-       </property>
-      </item>
-      <item row="5" column="1">
-       <property name="text">
-        <string/>
-       </property>
-       <property name="flags">
-        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
-       </property>
-      </item>
-      <item row="6" column="1">
-       <property name="text">
-        <string/>
-       </property>
-       <property name="flags">
-        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
-       </property>
-      </item>
-      <item row="7" column="1">
-       <property name="text">
-        <string/>
-       </property>
-       <property name="flags">
-        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
-       </property>
-      </item>
-     </widget>
      <widget class="QComboBox" name="shade_view_customer">
       <property name="geometry">
        <rect>
@@ -6116,6 +6017,149 @@
       <property name="text">
        <string>Back</string>
       </property>
+     </widget>
+     <widget class="QTableWidget" name="shade_colortable_4">
+      <property name="geometry">
+       <rect>
+        <x>490</x>
+        <y>330</y>
+        <width>661</width>
+        <height>291</height>
+       </rect>
+      </property>
+      <property name="rowCount">
+       <number>8</number>
+      </property>
+      <property name="columnCount">
+       <number>5</number>
+      </property>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <column>
+       <property name="text">
+        <string>Product Code</string>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Product Name</string>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Percentage</string>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Quantity</string>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Price</string>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+      </column>
+      <item row="0" column="1">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="flags">
+        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="1" column="1">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="flags">
+        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="2" column="1">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="flags">
+        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="3" column="1">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="flags">
+        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="4" column="1">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="flags">
+        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="5" column="1">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="flags">
+        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="6" column="1">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="flags">
+        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="7" column="1">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="flags">
+        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
+       </property>
+      </item>
      </widget>
     </widget>
     <widget class="QWidget" name="shade_view_by_today">
@@ -8812,7 +8856,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1226</width>
+     <width>1262</width>
      <height>26</height>
     </rect>
    </property>
