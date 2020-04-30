@@ -1,7 +1,7 @@
 import sqlite3 
 
 
-mydb = sqlite3.connect("/home/jarvis/Python/Inventory_Management/inventory.db")
+mydb = sqlite3.connect("inventory.db")
 mycursor = mydb.cursor()
 
 
