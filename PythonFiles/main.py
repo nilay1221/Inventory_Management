@@ -1,7 +1,8 @@
 from stacked import Ui_MainWindow
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import QGuiApplication
-from PyQt5.QtWidgets import QMainWindow
+from PyQt5.QtWidgets import QMainWindow,QMessageBox
+import operations_callbacks
 
 pagesDict = {
         'Home': 0,
@@ -42,7 +43,8 @@ class MainWindow(QMainWindow):
         super(MainWindow,self).__init__(parent)
         self.uiWindow = Ui_MainWindow()
         self.startUIWindow()
-
+        self.maintain_operations()
+        self.show()
 
 
     def startUIWindow(self):
@@ -62,7 +64,8 @@ class MainWindow(QMainWindow):
         self.uiWindow.back_view_rm.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['rm_operations']))
         self.uiWindow.back_add_rm_4.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['shade_operations']))
         self.uiWindow.pushButton_4.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['Home']))
-        self.uiWindow.back_add_rm_2.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['new_shade_operations']))
+        self.uiWindow.back_add_rm_2.clicked.connect(lambda : self.uiWindow
+.stackedWidget.setCurrentIndex(pagesDict['new_shade_operations']))
         self.uiWindow.back_view_rm_2.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['rm_operations']))
         self.uiWindow.pushButton_5.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['Home']))
         self.uiWindow.back.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['Home']))
@@ -142,7 +145,27 @@ class MainWindow(QMainWindow):
 
 
         self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['Home'])
-        self.show()
+    
+    def show_info_popup(self,message):
+        #TODO change icon
+        msg = QMessageBox()
+        msg.setWindowTitle("Message")
+        msg.setText(message)
+        msg.setIcon(QMessageBox.Information)
+
+        x = msg.exec_()
+
+    def show_warning_info(self,message):
+        msg = QMessageBox()
+        msg.setWindowTitle("Message")
+        msg.setText(message)
+        msg.setIcon(QMessageBox.Warning)
+        x = msg.exec_()
+
+
+    def maintain_operations(self):
+        self.uiWindow.rm_new_confirm.clicked.connect(lambda : operations_callbacks.callback_add_raw_material(self))
+        
 
 
 if __name__ == "__main__":
