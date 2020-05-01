@@ -77,15 +77,14 @@ def get_rm_data():
     try:
         sql = " SELECT * from Raw_Material order by product_code;"
         try:
-            mycursor.execute(sql)
-            results = mycursor.fetchall()
+            results = mycursor.execute(sql)
+            print(results)
+            # results = mycursor.fetchall()
             return results
         except:
             pass
     except:
         pass
-    finally:
-        mydb.close()
 
 
 def get_product_name(code):
