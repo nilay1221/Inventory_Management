@@ -26,15 +26,96 @@ def callback_add_raw_material(self):
         #TODO Error handling if any of the fields empty
         self.show_warning_info("Please fill out the info")
 
+OLD_PRODUCT_CODE = ""
 
 def show_modify_raw_data(self):
-    product_code = self.uiWindow.rm_new_product_code.text()
+    #TODO modify product code also
+    # print("Called")
+    product_code = self.uiWindow.new_rm_modify_product_code.text()
     try:
         results = return_modify_info(product_code)
-        self.uiWindow.rm_new_product_name.setText(results['product_name'])
+        if results:
+            self.uiWindow.new_rm_modify_product_name.setText(results['product_name'])
+            self.uiWindow.new_rm_modify_product_price.setText(str(results['product_price']))
+            self.uiWindow.new_rm_modify_product_name.setReadOnly(False)
+            self.uiWindow.new_rm_modify_product_price.setReadOnly(False)
+            global OLD_PRODUCT_CODE
+            OLD_PRODUCT_CODE = product_code
+        else:
+            # TODO display popup for product code not found
+            # pass
+            # self.uiWindow.new_rm_modify_product_code.clear()
+            self.show_info_popup("Product Code not found")
     except:
         pass
 
+
+def modify_new_rm_data(self):
+    product_code = self.uiWindow.new_rm_modify_product_code.text()
+    product_name = self.uiWindow.new_rm_modify_product_name.text()
+    product_price = self.uiWindow.new_rm_modify_product_price.text()
+    if product_code and product_name and product_price:
+        if product_code == OLD_PRODUCT_CODE:
+            try:
+                modify_info(product_code,product_name,product_price)
+                self.show_info_popup("Details Modified Sucessfully")
+            except:
+                pass
+        else:
+            try:
+                modify_info(OLD_PRODUCT_CODE,product_name,product_price,product_code_changed=product_code)
+                self.show_info_popup("Details Modified Sucessfully")
+            except:
+                pass
+        self.uiWindow.new_rm_modify_product_code.clear()
+        self.uiWindow.new_rm_modify_product_name.clear()
+        self.uiWindow.new_rm_modify_product_price.clear()
+    else:
+        self.show_warning_info("Please fill out the form")
+
+
+def show_new_rm_del_info(self):
+    product_code = self.uiWindow.new_rm_delete_product_code
+    product_name = self.uiWindow.new_rm_delete_product_name
+    product_price = self.uiWindow.new_rm_delete_product_price
+    try:
+        results = return_modify_info(product_code.text())
+        if results:
+            product_name.setText(str(results['product_name']))
+            product_price.setText(str(results['product_price']))
+        else:
+            product_code.clear()
+            product_price.clear()
+            product_name.clear()
+            self.show_warning_info("No Product Code Found")
+    except:
+        pass
+
+def del_new_rm(self,btn=False):
+    product_code = self.uiWindow.new_rm_delete_product_code.text()
+    product_name = self.uiWindow.new_rm_delete_product_name.text()
+    product_price = self.uiWindow.new_rm_delete_product_price.text()
+    if product_code and product_name and product_price:
+        if not btn:
+            self.delete_confirm_dialog()
+        elif btn.text() == "&Yes":
+                try:
+                    if delete_new_rm(product_code):
+                        self.uiWindow.new_rm_delete_product_code.clear()
+                        self.uiWindow.new_rm_delete_product_name.clear()
+                        self.uiWindow.new_rm_delete_product_price.clear()
+                        self.show_info_popup("Deleted Sucessfully")
+                    else:
+                        self.show_info_popup("Deleted Unsucessfull")
+                except:
+                    pass      
+        elif btn.text() == "&No":
+            self.uiWindow.new_rm_delete_product_code.clear()
+            self.uiWindow.new_rm_delete_product_name.clear()
+            self.uiWindow.new_rm_delete_product_price.clear()
+                
+    else:
+            self.show_warning_info("Please fill out the form")
 
 def view_new_rm_data(self):
     self.uiWindow.tableWidget_2.setRowCount(0)
@@ -43,6 +124,8 @@ def view_new_rm_data(self):
         self.uiWindow.tableWidget_2.insertRow(row_number)
         for column_number,data in enumerate(row_data):
             self.uiWindow.tableWidget_2.setItem(row_number,column_number,QtWidgets.QTableWidgetItem(str(data)))
+
+
 
 
 def display_product_name(row, column,self,col):
@@ -85,6 +168,8 @@ def add_shade_material(self):
         self.show_warning_info("Please fill out the info")
 
 
+
+
 def view_new_shade_details(self):
     results = get_shade_details(self.uiWindow.shade_new__view_number.text())
     if results:
@@ -96,3 +181,5 @@ def view_new_shade_details(self):
                 self.uiWindow.shade_new_view_details_table.setItem(row_number, column_number, QtWidgets.QTableWidgetItem(str(data)))
     else:
         self.show_warning_info("Shade number does not exist")
+
+

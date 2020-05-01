@@ -48,27 +48,36 @@ def return_modify_info(product_code):
     finally:
         mydb.close()
 
-def modify_info(product_code,product_name,product_price):
+def modify_info(product_code,product_name,product_price,product_code_changed=False):
     mydb = sqlite3.connect("inventory.db")
     mycursor = mydb.cursor()
     try:
-        sql = f"""
+        if product_code_changed:
+            sql = f"""
             UPDATE Raw_Material
-            SET product_name = '{product_name}' , product_price = {product_price}
+            SET product_code='{product_code_changed}',product_name = '{product_name}' , product_price = {product_price}
             WHERE product_code = '{product_code}';
-        """
+            """
+        else:
+            sql = f"""
+                UPDATE Raw_Material
+                SET product_name = '{product_name}' , product_price = {product_price}
+                WHERE product_code = '{product_code}';
+            """
+        # print(sql)
         try:
             mycursor.execute(sql)
             mydb.commit()
-        except:
+        except Exception as e:
+            print(e)
             #TODO check for exceptions
-            pass
+            return e
     except:
         pass
     finally:
         mydb.close()
 
-
+modify_info("49","test",12)
 # View raw material 
 
 def get_rm_data():
@@ -78,7 +87,7 @@ def get_rm_data():
         sql = " SELECT * from Raw_Material order by product_code;"
         try:
             results = mycursor.execute(sql)
-            print(results)
+            # print(results)
             # results = mycursor.fetchall()
             return results
         except:
@@ -86,6 +95,20 @@ def get_rm_data():
     except:
         pass
 
+
+# Delete new Raw Material
+
+def delete_new_rm(product_code):
+    mydb = sqlite3.connect("inventory.db")
+    mycursor = mydb.cursor()
+    try:
+        sql = f"DELETE FROM Raw_Material WHERE product_code = '{product_code}';"
+        mycursor.execute(sql)
+        mydb.commit()
+        return True
+    except:
+        print("false")
+        return False
 
 def get_product_name(code):
     mydb = sqlite3.connect("inventory.db")

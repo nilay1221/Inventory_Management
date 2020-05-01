@@ -140,7 +140,10 @@ class MainWindow(QMainWindow):
         self.uiWindow.back_add_rm_10.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['new_shade_operations']))
         self.uiWindow.back_add_rm_11.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['new_shade_operations']))
         self.uiWindow.back_add_rm_12.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['new_shade_operations']))
-
+        self.uiWindow.new_rm_delete_product_name.setReadOnly(True)
+        self.uiWindow.new_rm_delete_product_price.setReadOnly(True)
+        self.uiWindow.new_rm_modify_product_name.setReadOnly(True)
+        self.uiWindow.new_rm_modify_product_price.setReadOnly(True)
 
 
 
@@ -162,6 +165,16 @@ class MainWindow(QMainWindow):
         msg.setIcon(QMessageBox.Warning)
         x = msg.exec_()
 
+    
+    def delete_confirm_dialog(self):
+        msg = QMessageBox()
+        msg.setWindowTitle("Message")
+        msg.setText("Are you sure want to Delete?")
+        msg.setIcon(QMessageBox.Question)
+        msg.setStandardButtons(QMessageBox.No|QMessageBox.Yes)
+        msg.buttonClicked.connect(lambda i: operations_callbacks.del_new_rm(self,btn=i))
+        x = msg.exec_()
+
 
     def maintain_operations(self):
         self.uiWindow.rm_new_confirm.clicked.connect(lambda : operations_callbacks.callback_add_raw_material(self))
@@ -172,6 +185,10 @@ class MainWindow(QMainWindow):
         self.uiWindow.shade_new__view_number.returnPressed.connect(lambda : operations_callbacks.view_new_shade_details(self))
         self.uiWindow.new_shade_view.clicked.connect(lambda : self.uiWindow.shade_new_view_details_table.clearContents())
         self.uiWindow.new_shade_view.clicked.connect(lambda : self.uiWindow.shade_new_view_details_table.setRowCount(10))
+        self.uiWindow.new_rm_modify_product_code.returnPressed.connect(lambda : operations_callbacks.show_modify_raw_data(self))
+        self.uiWindow.rm_new_modify_confirm.clicked.connect(lambda : operations_callbacks.modify_new_rm_data(self))
+        self.uiWindow.new_rm_delete_product_code.returnPressed.connect(lambda : operations_callbacks.show_new_rm_del_info(self))
+        self.uiWindow.rm_new_delete_confirm.clicked.connect(lambda : operations_callbacks.del_new_rm(self))
 
 if __name__ == "__main__":
     import sys
