@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'StackedView.ui'
+# Form implementation generated from reading ui file 'C:\Users\rajesh\Desktop\Inventory_Management\UI\StackedView.ui'
 #
 # Created by: PyQt5 UI code generator 5.13.2
 #
@@ -137,7 +137,7 @@ class Ui_MainWindow(object):
         self.label_3.setFont(font)
         self.label_3.setObjectName("label_3")
         self.rm_new_product_code = QtWidgets.QLineEdit(self.new_rm_entry)
-        self.rm_new_product_code.setGeometry(QtCore.QRect(540, 280, 151, 41))
+        self.rm_new_product_code.setGeometry(QtCore.QRect(540, 280, 421, 41))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.rm_new_product_code.setFont(font)
@@ -155,7 +155,7 @@ class Ui_MainWindow(object):
         self.pushButton.setFont(font)
         self.pushButton.setObjectName("pushButton")
         self.rm_new_product_name = QtWidgets.QLineEdit(self.new_rm_entry)
-        self.rm_new_product_name.setGeometry(QtCore.QRect(540, 340, 151, 41))
+        self.rm_new_product_name.setGeometry(QtCore.QRect(540, 340, 421, 41))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.rm_new_product_name.setFont(font)
@@ -173,7 +173,7 @@ class Ui_MainWindow(object):
         self.back_add_rm.setFont(font)
         self.back_add_rm.setObjectName("back_add_rm")
         self.rm_new_product_price = QtWidgets.QLineEdit(self.new_rm_entry)
-        self.rm_new_product_price.setGeometry(QtCore.QRect(540, 410, 151, 41))
+        self.rm_new_product_price.setGeometry(QtCore.QRect(540, 410, 421, 41))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.rm_new_product_price.setFont(font)
@@ -3081,7 +3081,7 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(18)
+        self.stackedWidget.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
