@@ -120,6 +120,7 @@ def del_new_rm(self,btn=False):
 def view_new_rm_data(self):
     self.uiWindow.tableWidget_2.setRowCount(0)
     results = get_rm_data()
+    # print(results)
     for row_number, row_data in enumerate(results):
         self.uiWindow.tableWidget_2.insertRow(row_number)
         for column_number,data in enumerate(row_data):
@@ -172,6 +173,7 @@ def add_shade_material(self):
 
 def view_new_shade_details(self):
     results = get_shade_details(self.uiWindow.shade_new__view_number.text())
+    # print(results)
     if results:
         self.uiWindow.shade_new__view_number.clear()
         self.uiWindow.shade_new_view_details_table.setRowCount(0)

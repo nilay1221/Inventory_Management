@@ -2,9 +2,16 @@ import sqlite3
 from PyQt5 import QtWidgets
 
 
+DATABASE_NAME = "newtable.db"
+
+
+def foreign_key_support(mycursor):
+    sql = "PRAGMA Foreign_keys = ON;"
+    mycursor.execute(sql)
+
 # For addding new raw material 
 def add_raw_material(product_code,product_name,product_price):
-    mydb = sqlite3.connect("inventory.db")
+    mydb = sqlite3.connect(DATABASE_NAME)
     mycursor = mydb.cursor()
     try:
         sql = f"""
@@ -27,7 +34,7 @@ def add_raw_material(product_code,product_name,product_price):
 
 # Return product name and price from the database
 def return_modify_info(product_code):
-    mydb = sqlite3.connect("inventory.db")
+    mydb = sqlite3.connect(DATABASE_NAME)
     mycursor = mydb.cursor()
     try:
         sql = f"""
@@ -49,8 +56,9 @@ def return_modify_info(product_code):
         mydb.close()
 
 def modify_info(product_code,product_name,product_price,product_code_changed=False):
-    mydb = sqlite3.connect("inventory.db")
+    mydb = sqlite3.connect(DATABASE_NAME)
     mycursor = mydb.cursor()
+    foreign_key_support(mycursor)
     try:
         if product_code_changed:
             sql = f"""
@@ -77,11 +85,11 @@ def modify_info(product_code,product_name,product_price,product_code_changed=Fal
     finally:
         mydb.close()
 
-modify_info("49","test",12)
+# modify_info("49","test",12)
 # View raw material 
 
 def get_rm_data():
-    mydb = sqlite3.connect("inventory.db")
+    mydb = sqlite3.connect(DATABASE_NAME)
     mycursor = mydb.cursor()
     try:
         sql = " SELECT * from Raw_Material order by product_code;"
@@ -99,8 +107,9 @@ def get_rm_data():
 # Delete new Raw Material
 
 def delete_new_rm(product_code):
-    mydb = sqlite3.connect("inventory.db")
+    mydb = sqlite3.connect(DATABASE_NAME)
     mycursor = mydb.cursor()
+    foreign_key_support(mycursor)
     try:
         sql = f"DELETE FROM Raw_Material WHERE product_code = '{product_code}';"
         mycursor.execute(sql)
@@ -111,7 +120,7 @@ def delete_new_rm(product_code):
         return False
 
 def get_product_name(code):
-    mydb = sqlite3.connect("inventory.db")
+    mydb = sqlite3.connect(DATABASE_NAME)
     mycursor = mydb.cursor()
     try:
         sql = f"SELECT product_name from raw_material where product_code='{code}';"
@@ -128,7 +137,7 @@ def get_product_name(code):
 
 
 def add_new_shade_material(shade_no):
-    mydb = sqlite3.connect("inventory.db")
+    mydb = sqlite3.connect(DATABASE_NAME)
     mycursor = mydb.cursor()
     try:
         sql= f"INSERT INTO SHADE_NUMBER VALUES('{shade_no}')"
@@ -146,11 +155,13 @@ def add_new_shade_material(shade_no):
 
 
 def add_madeup_of(shade_no,code,percentage):
-    mydb = sqlite3.connect("inventory.db")
+    mydb = sqlite3.connect(DATABASE_NAME)
     mycursor = mydb.cursor()
     try:
         sql = f"""INSERT into madeup_of VALUES('{shade_no}','{code}',{percentage});"""
         try:
+            # print("Adding")
+            # print(sql)
             mycursor.execute(sql)
         except sqlite3.IntegrityError as e:
             print(e)
@@ -162,7 +173,7 @@ def add_madeup_of(shade_no,code,percentage):
 
 
 def get_shade_details(shade_no):
-    mydb = sqlite3.connect("inventory.db")
+    mydb = sqlite3.connect(DATABASE_NAME)
     mycursor = mydb.cursor()
     try:
         sql = f"""
@@ -171,10 +182,12 @@ def get_shade_details(shade_no):
                 madeup_of.product_percentage,Raw_Material.product_name 
                 from madeup_of 
                 join Raw_Material where Raw_Material.product_code=madeup_of.product_code)
-                where shade_number={shade_no}"""
+                where shade_number={shade_no};"""
         try:
             mycursor.execute(sql)
+            # print(sql)
             results=mycursor.fetchall()
+            # print(results)
             return results
         except:
             return "false"
