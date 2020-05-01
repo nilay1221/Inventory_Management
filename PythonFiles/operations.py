@@ -54,7 +54,7 @@ def modify_info(product_code,product_name,product_price):
 # View raw material 
 
 def get_rm_data():
-    sql = " SELECT * from Raw_Material;"
+    sql = " SELECT * from Raw_Material order by product_code;"
     try:
         results = mycursor.execute(sql)
         # results = mycursor.fetchall()
