@@ -1,5 +1,5 @@
 import sqlite3 
-
+from PyQt5 import QtWidgets
 
 mydb = sqlite3.connect("inventory.db")
 mycursor = mydb.cursor()
@@ -62,3 +62,47 @@ def get_rm_data():
     except:
         pass
 
+
+def get_product_name(code):
+    sql = f"SELECT product_name from raw_material where product_code='{code}';"
+    try:
+        mycursor.execute(sql)
+        result = mycursor.fetchall()
+        return result[0][0]
+    except:
+        return "false"
+
+
+def add_new_shade_material(shade_no):
+    sql= f"INSERT INTO SHADE_NUMBER VALUES('{shade_no}')"
+    try:
+        mycursor.execute(sql)
+    except sqlite3.IntegrityError as e:
+        print(e)
+        return False
+    mydb.commit()
+    return True
+
+
+def add_madeup_of(shade_no,code,percentage):
+    sql = f"""INSERT into madeup_of VALUES('{shade_no}','{code}',{percentage});"""
+    try:
+        mycursor.execute(sql)
+    except sqlite3.IntegrityError as e:
+        print(e)
+    mydb.commit()
+
+
+def get_shade_details(shade_no):
+    sql = f"""
+            Select product_code,product_name,product_percentage FROM (
+            Select madeup_of.shade_number,madeup_of.product_code,madeup_of.product_percentage,Raw_Material.product_name 
+            from madeup_of 
+            join Raw_Material where Raw_Material.product_code=madeup_of.product_code)
+            where shade_number={shade_no}"""
+    try:
+        mycursor.execute(sql)
+        results=mycursor.fetchall()
+        return results
+    except:
+        return "false"

@@ -166,7 +166,12 @@ class MainWindow(QMainWindow):
     def maintain_operations(self):
         self.uiWindow.rm_new_confirm.clicked.connect(lambda : operations_callbacks.callback_add_raw_material(self))
         self.uiWindow.new_rm_view.clicked.connect(lambda : operations_callbacks.view_new_rm_data(self))
-
+        self.uiWindow.tableWidget.cellChanged.connect(
+            lambda row,column: operations_callbacks.display_product_name(row,column,self,0))
+        self.uiWindow.shade_new_confirm.clicked.connect(lambda: operations_callbacks.add_shade_material(self))
+        self.uiWindow.shade_new__view_number.returnPressed.connect(lambda : operations_callbacks.view_new_shade_details(self))
+        self.uiWindow.new_shade_view.clicked.connect(lambda : self.uiWindow.shade_new_view_details_table.clearContents())
+        self.uiWindow.new_shade_view.clicked.connect(lambda : self.uiWindow.shade_new_view_details_table.setRowCount(10))
 
 if __name__ == "__main__":
     import sys
