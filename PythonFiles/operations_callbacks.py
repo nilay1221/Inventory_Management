@@ -8,8 +8,8 @@ def callback_add_raw_material(self):
     product_name = self.uiWindow.rm_new_product_name.text()
     product_price = self.uiWindow.rm_new_product_price.text()
     if product_code and product_name and product_price:
-        try:    
-            if add_raw_material(product_code,product_name,int(product_price)):
+        try:
+            if add_raw_material(product_code, product_name, int(product_price)):
                 message = "Raw Material Added Successfully"
                 self.uiWindow.rm_new_product_code.clear()
                 self.uiWindow.rm_new_product_name.clear()
@@ -21,15 +21,17 @@ def callback_add_raw_material(self):
         except Exception as e:
             print(e)
             pass
-            #TODO exception
+            # TODO exception
     else:
-        #TODO Error handling if any of the fields empty
+        # TODO Error handling if any of the fields empty
         self.show_warning_info("Please fill out the info")
+
 
 OLD_PRODUCT_CODE = ""
 
+
 def show_modify_raw_data(self):
-    #TODO modify product code also
+    # TODO modify product code also
     # print("Called")
     product_code = self.uiWindow.new_rm_modify_product_code.text()
     try:
@@ -57,13 +59,13 @@ def modify_new_rm_data(self):
     if product_code and product_name and product_price:
         if product_code == OLD_PRODUCT_CODE:
             try:
-                modify_info(product_code,product_name,product_price)
+                modify_info(product_code, product_name, product_price)
                 self.show_info_popup("Details Modified Sucessfully")
             except:
                 pass
         else:
             try:
-                modify_info(OLD_PRODUCT_CODE,product_name,product_price,product_code_changed=product_code)
+                modify_info(OLD_PRODUCT_CODE, product_name, product_price, product_code_changed=product_code)
                 self.show_info_popup("Details Modified Sucessfully")
             except:
                 pass
@@ -91,7 +93,8 @@ def show_new_rm_del_info(self):
     except:
         pass
 
-def del_new_rm(self,btn=False):
+
+def del_new_rm(self, btn=False):
     product_code = self.uiWindow.new_rm_delete_product_code.text()
     product_name = self.uiWindow.new_rm_delete_product_name.text()
     product_price = self.uiWindow.new_rm_delete_product_price.text()
@@ -99,23 +102,24 @@ def del_new_rm(self,btn=False):
         if not btn:
             self.delete_confirm_dialog()
         elif btn.text() == "&Yes":
-                try:
-                    if delete_new_rm(product_code):
-                        self.uiWindow.new_rm_delete_product_code.clear()
-                        self.uiWindow.new_rm_delete_product_name.clear()
-                        self.uiWindow.new_rm_delete_product_price.clear()
-                        self.show_info_popup("Deleted Sucessfully")
-                    else:
-                        self.show_info_popup("Deleted Unsucessfull")
-                except:
-                    pass      
+            try:
+                if delete_new_rm(product_code):
+                    self.uiWindow.new_rm_delete_product_code.clear()
+                    self.uiWindow.new_rm_delete_product_name.clear()
+                    self.uiWindow.new_rm_delete_product_price.clear()
+                    self.show_info_popup("Deleted Sucessfully")
+                else:
+                    self.show_info_popup("Deleted Unsucessfull")
+            except:
+                pass
         elif btn.text() == "&No":
             self.uiWindow.new_rm_delete_product_code.clear()
             self.uiWindow.new_rm_delete_product_name.clear()
             self.uiWindow.new_rm_delete_product_price.clear()
-                
+
     else:
-            self.show_warning_info("Please fill out the form")
+        self.show_warning_info("Please fill out the form")
+
 
 def view_new_rm_data(self):
     self.uiWindow.tableWidget_2.setRowCount(0)
@@ -123,26 +127,24 @@ def view_new_rm_data(self):
     # print(re sults)
     for row_number, row_data in enumerate(results):
         self.uiWindow.tableWidget_2.insertRow(row_number)
-        for column_number,data in enumerate(row_data):
-            self.uiWindow.tableWidget_2.setItem(row_number,column_number,QtWidgets.QTableWidgetItem(str(data)))
+        for column_number, data in enumerate(row_data):
+            self.uiWindow.tableWidget_2.setItem(row_number, column_number, QtWidgets.QTableWidgetItem(str(data)))
 
 
-
-
-def display_product_name(row, column,self,col,tableWidget):
-    code = tableWidget.item(row,column).text()
-    if column==col:
+def display_product_name(row, column, self, col, tableWidget):
+    code = tableWidget.item(row, column).text()
+    if column == col:
         result = get_product_name(code)
         if result == 'false':
-            tableWidget.setItem(row,column+1,QtWidgets.QTableWidgetItem("No such product code"))
+            tableWidget.setItem(row, column + 1, QtWidgets.QTableWidgetItem("No such product code"))
         else:
-            tableWidget.setItem(row, column+1, QtWidgets.QTableWidgetItem(result))
+            tableWidget.setItem(row, column + 1, QtWidgets.QTableWidgetItem(result))
 
 
 def add_shade_material(self):
-    i=0
+    i = 0
     shade_no = self.uiWindow.rm_new_product_code_2.text()
-    if shade_no and self.uiWindow.tableWidget.item(0,0).text():
+    if shade_no and self.uiWindow.tableWidget.item(0, 0).text():
         try:
             if add_new_shade_material(shade_no):
                 for i in range(10):
@@ -169,8 +171,6 @@ def add_shade_material(self):
         self.show_warning_info("Please fill out the info")
 
 
-
-
 def view_new_shade_details(self):
     results = get_shade_details(self.uiWindow.shade_new__view_number.text())
     # print(results)
@@ -180,17 +180,73 @@ def view_new_shade_details(self):
         for row_number, row_data in enumerate(results):
             self.uiWindow.shade_new_view_details_table.insertRow(row_number)
             for column_number, data in enumerate(row_data):
-                self.uiWindow.shade_new_view_details_table.setItem(row_number, column_number, QtWidgets.QTableWidgetItem(str(data)))
+                self.uiWindow.shade_new_view_details_table.setItem(row_number, column_number,
+                                                                   QtWidgets.QTableWidgetItem(str(data)))
     else:
         self.show_warning_info("Shade number does not exist")
 
+def show_new_shade_del_info(self):
+    shade_no = self.uiWindow.shade_new__delete_number.text()
+    try:
+        results = get_shade_details(shade_no)
+        if results:
+            self.uiWindow.shade_new_delete_details_table.setRowCount(0)
+            for row_number, row_data in enumerate(results):
+                self.uiWindow.shade_new_delete_details_table.insertRow(row_number)
+                for column_number, data in enumerate(row_data):
+                    self.uiWindow.shade_new_delete_details_table.setItem(row_number, column_number,
+                                                                       QtWidgets.QTableWidgetItem(str(data)))
+        else:
+            self.uiWindow.shade_new__delete_number.clear()
+            self.show_warning_info("Shade number does not exist")
+    except:
+        pass
+
+
+def show_new_shade_modify_info(self):
+    shade_no = self.uiWindow.shade_new__modify_number.text()
+    try:
+        results = get_shade_details(shade_no)
+        if results:
+            self.uiWindow.shade_new_modify_details_table.setRowCount(0)
+            for row_number, row_data in enumerate(results):
+                self.uiWindow.shade_new_modify_details_table.insertRow(row_number)
+                for column_number, data in enumerate(row_data):
+                    self.uiWindow.shade_new_modify_details_table.setItem(row_number, column_number,
+                                                                       QtWidgets.QTableWidgetItem(str(data)))
+        else:
+            self.uiWindow.shade_new__modify_number.clear()
+            self.show_warning_info("Shade number does not exist")
+    except:
+        pass
+
+
+def del_new_shade(self, btn=False):
+    shade_no = self.uiWindow.shade_new__delete_number.text()
+    if shade_no:
+        if not btn:
+            self.delete_confirm_dialog_shade_number()
+        elif btn.text() == "&Yes":
+            try:
+                if new_shade_delete(shade_no):
+                    self.uiWindow.shade_new__delete_number.clear()
+                    self.uiWindow.shade_new_delete_details_table.clearContents()
+                    self.show_info_popup("Deleted Successfully")
+                else:
+                    self.show_info_popup("Deleted Unsuccessfull")
+            except Exception as e:
+                print(e)
+        elif btn.text() == "&No":
+            self.uiWindow.shade_new__delete_number.clear()
+            self.uiWindow.shade_new_delete_details_table.clearContents()
+    else:
+        self.show_warning_info("Please fill out the form")
+
+# Add Raw Material Transaction
 
 
 
 
-# Add Raw Material Transaction 
-
-def add_rm_transaction(self):
 
 
 

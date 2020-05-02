@@ -175,21 +175,39 @@ class MainWindow(QMainWindow):
         msg.buttonClicked.connect(lambda i: operations_callbacks.del_new_rm(self,btn=i))
         x = msg.exec_()
 
+    def delete_confirm_dialog_shade_number(self):
+        msg = QMessageBox()
+        msg.setWindowTitle("Message")
+        msg.setText("Are you sure want to Delete?")
+        msg.setIcon(QMessageBox.Question)
+        msg.setStandardButtons(QMessageBox.No|QMessageBox.Yes)
+        msg.buttonClicked.connect(lambda i: operations_callbacks.del_new_shade(self,btn=i))
+        x = msg.exec_()
+
 
     def maintain_operations(self):
-        self.uiWindow.rm_new_confirm.clicked.connect(lambda : operations_callbacks.callback_add_raw_material(self))
-        self.uiWindow.new_rm_view.clicked.connect(lambda : operations_callbacks.view_new_rm_data(self))
-        self.uiWindow.tableWidget.cellChanged.connect(
-            lambda row,column: operations_callbacks.display_product_name(row,column,self,0,self.uiWindow.tableWidget))
+        self.uiWindow.rm_new_confirm.clicked.connect(lambda: operations_callbacks.callback_add_raw_material(self))
+        self.uiWindow.new_rm_view.clicked.connect(lambda: operations_callbacks.view_new_rm_data(self))
+        self.uiWindow.tableWidget.cellChanged.connect(lambda row, column: operations_callbacks.display_product_name(row, column, self, 0,
+                                                                          self.uiWindow.tableWidget))
         self.uiWindow.shade_new_confirm.clicked.connect(lambda: operations_callbacks.add_shade_material(self))
-        self.uiWindow.shade_new__view_number.returnPressed.connect(lambda : operations_callbacks.view_new_shade_details(self))
-        self.uiWindow.new_shade_view.clicked.connect(lambda : self.uiWindow.shade_new_view_details_table.clearContents())
-        self.uiWindow.new_shade_view.clicked.connect(lambda : self.uiWindow.shade_new_view_details_table.setRowCount(10))
-        self.uiWindow.new_rm_modify_product_code.returnPressed.connect(lambda : operations_callbacks.show_modify_raw_data(self))
-        self.uiWindow.rm_new_modify_confirm.clicked.connect(lambda : operations_callbacks.modify_new_rm_data(self))
-        self.uiWindow.new_rm_delete_product_code.returnPressed.connect(lambda : operations_callbacks.show_new_rm_del_info(self))
-        self.uiWindow.rm_new_delete_confirm.clicked.connect(lambda : operations_callbacks.del_new_rm(self))
-        self.uiWindow.rm_addtable.cellChanged.connect(lambda row,column: operations_callbacks.display_product_name(row,column,self,0,self.uiWindow.rm_addtable))
+        self.uiWindow.shade_new__view_number.returnPressed.connect(
+            lambda: operations_callbacks.view_new_shade_details(self))
+        self.uiWindow.new_shade_view.clicked.connect(lambda: self.uiWindow.shade_new_view_details_table.clearContents())
+        self.uiWindow.new_shade_view.clicked.connect(lambda: self.uiWindow.shade_new_view_details_table.setRowCount(10))
+        self.uiWindow.new_rm_modify_product_code.returnPressed.connect(
+            lambda: operations_callbacks.show_modify_raw_data(self))
+        self.uiWindow.rm_new_modify_confirm.clicked.connect(lambda: operations_callbacks.modify_new_rm_data(self))
+        self.uiWindow.new_rm_delete_product_code.returnPressed.connect(
+            lambda: operations_callbacks.show_new_rm_del_info(self))
+        self.uiWindow.rm_new_delete_confirm.clicked.connect(lambda: operations_callbacks.del_new_rm(self))
+        self.uiWindow.rm_addtable.cellChanged.connect(
+            lambda row, column: operations_callbacks.display_product_name(row, column, self, 0,self.uiWindow.rm_addtable))
+        self.uiWindow.shade_new__delete_number.returnPressed.connect(lambda : operations_callbacks.show_new_shade_del_info(self))
+        self.uiWindow.shade_new__modify_number.returnPressed.connect(
+            lambda: operations_callbacks.show_new_shade_modify_info(self))
+        self.uiWindow.rm_new_delete_confirm_2.clicked.connect(lambda: operations_callbacks.del_new_shade(self))
+
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
