@@ -263,7 +263,7 @@ def modify_new_shade_data(self):
                                     pass
                             except:
                                 break
-                    self.show_info_popup("Details Modified Sucessfully")
+                        self.show_info_popup("Details Modified Sucessfully")
                 except:
                     pass
             else:
@@ -273,7 +273,7 @@ def modify_new_shade_data(self):
                             remove_previous_shade(OLD_SHADE_NUMBER)
                         except:
                             pass
-                    self.show_info_popup("Details Modified Sucessfully")
+                        self.show_info_popup("Details Modified Sucessfully")
                 except:
                     pass
             self.uiWindow.shade_new__modify_number.clear()
