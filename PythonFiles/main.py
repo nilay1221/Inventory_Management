@@ -1,7 +1,8 @@
 from stacked import Ui_MainWindow
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import QGuiApplication
-from PyQt5.QtWidgets import QMainWindow,QMessageBox
+from PyQt5.QtWidgets import QMainWindow,QMessageBox,QShortcut
+from PyQt5.QtGui import QKeySequence
 import operations_callbacks
 
 pagesDict = {
@@ -144,6 +145,9 @@ class MainWindow(QMainWindow):
         self.uiWindow.new_rm_delete_product_price.setReadOnly(True)
         self.uiWindow.new_rm_modify_product_name.setReadOnly(True)
         self.uiWindow.new_rm_modify_product_price.setReadOnly(True)
+        self.uiWindow.rm_view_date.setReadOnly(True)
+        self.uiWindow.rm_view_remark.setReadOnly(True)
+        # TODO combo box disable 
 
 
 
@@ -184,6 +188,16 @@ class MainWindow(QMainWindow):
         msg.buttonClicked.connect(lambda i: operations_callbacks.del_new_shade(self,btn=i))
         x = msg.exec_()
 
+    
+    def delete_confirm_dialog_rm(self):
+        msg = QMessageBox()
+        msg.setWindowTitle("Message")
+        msg.setText("Are you sure want to Delete?")
+        msg.setIcon(QMessageBox.Question)
+        msg.setStandardButtons(QMessageBox.No|QMessageBox.Yes)
+        msg.buttonClicked.connect(lambda i: operations_callbacks.delete_rm(self,btn=i))
+        x = msg.exec_()
+
 
     def maintain_operations(self):
         self.uiWindow.rm_new_confirm.clicked.connect(lambda: operations_callbacks.callback_add_raw_material(self))
@@ -207,6 +221,19 @@ class MainWindow(QMainWindow):
         self.uiWindow.shade_new__modify_number.returnPressed.connect(
             lambda: operations_callbacks.show_new_shade_modify_info(self))
         self.uiWindow.rm_new_delete_confirm_2.clicked.connect(lambda: operations_callbacks.del_new_shade(self))
+        self.uiWindow.rm_add_2.clicked.connect(lambda : operations_callbacks.set_raw_material_data(self))
+        self.uiWindow.rm_confirm.clicked.connect(lambda : operations_callbacks.add_raw_material_callback(self))
+        self.uiWindow.rw_view_transaction_id.returnPressed.connect(lambda:operations_callbacks.view_rm_by_id(self))
+        self.uiWindow.view_today.clicked.connect(lambda:operations_callbacks.view_rm_by_today(self))
+        self.uiWindow.rw_delete_transaction_id.returnPressed.connect(lambda : operations_callbacks.set_delete_rm(self))
+        self.uiWindow.rm_delete_confirm.clicked.connect(self.delete_confirm_dialog_rm)
+        self.uiWindow.rw_modify_transaction_id.returnPressed.connect(lambda : operations_callbacks.set_modify_rm(self))
+        self.uiWindow.rm_modify_confirm.clicked.connect(lambda: operations_callbacks.modify_rm(self))
+        self.uiWindow.view_trans.clicked.connect(lambda :operations_callbacks.clear_view_by_id(self))
+        # self.uiWindow.rw_view_starting_date_3.dateChanged.connect(lambda : operations_callbacks.view_by_custom_dates(self))
+        shortcut1 = QShortcut(QKeySequence('Return'),self.uiWindow.rw_view_ending_date_2)
+        shortcut1.activated.connect(lambda : operations_callbacks.view_by_custom_dates(self))
+
 
 if __name__ == "__main__":
     import sys

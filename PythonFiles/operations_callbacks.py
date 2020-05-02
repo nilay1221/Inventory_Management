@@ -1,6 +1,7 @@
 # Callback Function when Adding raw material
 from operations import *
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets,QtCore
+import datetime
 
 
 def callback_add_raw_material(self):
@@ -244,9 +245,241 @@ def del_new_shade(self, btn=False):
 
 # Add Raw Material Transaction
 
+def set_raw_material_data(self):
+    trans_id = get_trans_id("rm_stock")
+    date = datetime.date.today().strftime("%d-%m-%Y")
+    self.uiWindow.rm_transaction_id.setText(str(trans_id))
+    self.uiWindow.date.setText(str(date))
 
 
+def add_raw_material_callback(self):
+    print("Inside")
+    # TODO check if table is empty or not
+    trans_id_widget = self.uiWindow.rm_transaction_id
+    date_widget = self.uiWindow.date
+    customer_widget = self.uiWindow.rm_customer
+    remark_widget = self.uiWindow.rw_remark
+    trans_id = 'RMT' +  str(trans_id_widget.text())
+    date = date_widget.text()
+    customer = customer_widget.currentText()
+    remark = remark_widget.text()
+    if customer and remark:
+        products = []
+        for i in range(8):
+            try:
+                if self.uiWindow.rm_addtable.item(i,0).text() and self.uiWindow.rm_addtable.item(i,2).text():
+                    product_code = self.uiWindow.rm_addtable.item(i,0).text()
+                    quantity = self.uiWindow.rm_addtable.item(i,2).text()
+                    products.append((product_code,float(quantity)))
+            except:
+                try:
+                    self.uiWindow.rm_addtable.item(i,0).text()
+                    self.show_warning_info("Please fill info")
+                    break
+                except:
+                    print("inside exception")
+                    if products:
+                        # print(products)
+                        if add_raw_material_data(trans_id,date,customer,remark,products):
+                            # print("Inside")
+                            set_raw_material_data(self)
+                            customer_widget.clearEditText()
+                            remark_widget.clear()
+                            self.uiWindow.rm_addtable.clearContents()
+                            self.show_info_popup("Transaction Added Sucessfully")
+                            break
+                    else:
+                        self.show_warning_info("Please fill info")
+                        break
+        
+    else:
+        self.show_warning_info("Please fill out the form")
 
 
+def view_rm_by_id(self):
+    #TODO make table uneditable
+    trans_id = "RMT" + str(self.uiWindow.rw_view_transaction_id.text()).zfill(3)
+    results = get_rm_transacs(by_Id=trans_id)
+    # print(results)
+    if results:
+        date = results[0][1]
+        remark = results[0][2]
+        customer = results[0][3]
+        self.uiWindow.rm_view_date.setText(str(date))
+        self.uiWindow.rm_view_remark.setText(str(remark))
+        self.uiWindow.rm_view_customer.setCurrentText(customer)
+        self.uiWindow.rm_view_table_4.setRowCount(0)
+        for row in range(len(results[1])):
+            self.uiWindow.rm_view_table_4.insertRow(row)
+            for column in range(len(results[1][row])):
+                value = results[1][row][column]
+                # print(value)
+                self.uiWindow.rm_view_table_4.setItem(row,column,QtWidgets.QTableWidgetItem(str(value)))
+    else:
+        self.uiWindow.rw_view_transaction_id.clear()
+        self.uiWindow.rm_view_date.clear()
+        self.uiWindow.rm_view_remark.clear()
+        self.uiWindow.rm_view_table_4.clearContents()
+        self.uiWindow.rm_view_table_4.setRowCount(0)
+        self.uiWindow.rm_view_customer.clearEditText()
+        self.show_warning_info("Transaction id not found")
 
 
+def view_rm_by_today(self):
+    self.uiWindow.rm_view_today_date.setDate(QtCore.QDate.currentDate())
+    self.uiWindow.rm_view_table_5.setRowCount(0)
+    results = get_rm_transacs(by_Today=True)
+    if results:
+            for row in range(len(results)):
+                self.uiWindow.rm_view_table_5.insertRow(row)
+                for column in range(len(results[row])):
+                    self.uiWindow.rm_view_table_5.setItem(row,column,QtWidgets.QTableWidgetItem(str(results[row][column])))
+    else:
+        self.show_info_popup("No Transactions Done Today")
+
+def set_delete_rm(self):
+    trans_id = "RMT" + str(self.uiWindow.rw_delete_transaction_id.text()).zfill(3)
+    print(trans_id)
+    if check_rm_transacs(trans_id) :
+        results = get_rm_transacs(by_Id=trans_id)
+        # print(results)
+        if results:
+            date = results[0][1]
+            remark = results[0][2]
+            customer = results[0][3]
+            self.uiWindow.rm_delete_date.setText(str(date))
+            self.uiWindow.rm_delete_remark.setText(str(remark))
+            self.uiWindow.rm_delete_customer.setCurrentText(customer)
+            self.uiWindow.rm_delete_table.setRowCount(0)
+            for row in range(len(results[1])):
+                self.uiWindow.rm_delete_table.insertRow(row)
+                for column in range(len(results[1][row])):
+                    value = results[1][row][column]
+                    # print(value)
+                    self.uiWindow.rm_delete_table.setItem(row,column,QtWidgets.QTableWidgetItem(str(value)))
+
+    else:
+        self.show_warning_info("Invalid Transaction Code")
+
+def delete_rm(self,btn):
+    trans_id = "RMT" + str(self.uiWindow.rw_delete_transaction_id.text()).zfill(3)
+    if check_rm_transacs(trans_id):
+        if btn.text() == "&Yes":
+            delete_rm_transacs(trans_id)
+            self.show_info_popup("Deleted Sucessfully")
+            self.uiWindow.rw_delete_transaction_id.clear()
+            self.uiWindow.rm_delete_date.clear()
+            self.uiWindow.rm_delete_customer.clearEditText()
+            self.uiWindow.rm_delete_remark.clear()
+            self.uiWindow.rm_delete_table.clearContents()
+            self.uiWindow.rm_delete_table.setRowCount(0)
+    else:
+        self.show_warning_info("Invalid Transaction Code")
+
+
+def set_modify_rm(self):
+    trans_id = "RMT" + str(self.uiWindow.rw_modify_transaction_id.text()).zfill(3)
+    print(trans_id)
+    if check_rm_transacs(trans_id) :
+        results = get_rm_transacs(by_Id=trans_id)
+        # print(results)
+        if results:
+            date = results[0][1]
+            remark = results[0][2]
+            customer = results[0][3]
+            self.uiWindow.rm_modify_date.setText(str(date))
+            self.uiWindow.rm_modify_remark.setText(str(remark))
+            self.uiWindow.rm_modify_customer.setCurrentText(customer)
+            self.uiWindow.rm_view_table.setRowCount(0)
+            for row in range(len(results[1])):
+                self.uiWindow.rm_view_table.insertRow(row)
+                for column in range(len(results[1][row])):
+                    value = results[1][row][column]
+                    # print(value)
+                    self.uiWindow.rm_view_table.setItem(row,column,QtWidgets.QTableWidgetItem(str(value)))
+
+    else:
+        self.show_warning_info("Invalid Transaction Code")
+        self.uiWindow.rw_modify_transaction_id.clear()
+        self.uiWindow.rm_modify_date.clear()
+        self.uiWindow.rm_modify_customer.clearEditText()
+        self.uiWindow.rm_modify_remark.clear()
+        self.uiWindow.rm_view_table.clearContents()
+
+
+def modify_rm(self):
+    print("Inside")
+    trans_id = "RMT" + str(self.uiWindow.rw_modify_transaction_id.text()).zfill(3)
+    if check_rm_transacs(trans_id):
+        delete_rm_transacs(trans_id)
+        print("Deleted")
+        trans_id_widget = self.uiWindow.rw_modify_transaction_id
+        date_widget = self.uiWindow.rm_modify_date
+        customer_widget = self.uiWindow.rm_modify_customer
+        remark_widget = self.uiWindow.rm_modify_remark
+        trans_id = 'RMT' +  str(trans_id_widget.text()).zfill(3)
+        date = date_widget.text()
+        customer = customer_widget.currentText()
+        remark = remark_widget.text()
+        if customer and remark:
+            products = []
+            for i in range(8):
+                try:
+                    if self.uiWindow.rm_view_table.item(i,0).text() and self.uiWindow.rm_view_table.item(i,2).text():
+                        product_code = self.uiWindow.rm_view_table.item(i,0).text()
+                        quantity = self.uiWindow.rm_view_table.item(i,2).text()
+                        products.append((product_code,float(quantity)))
+                except:
+                    try:
+                        self.uiWindow.rm_view_table.item(i,0).text()
+                        self.show_warning_info("Please fill info")
+                        break
+                    except:
+                        print("inside exception")
+                        if products:
+                            if add_raw_material_data(trans_id,date,customer,remark,products):
+                                # set_raw_material_data(self)
+                                self.uiWindow.rw_modify_transaction_id.clear()
+                                self.uiWindow.rm_modify_date.clear()
+                                customer_widget.clearEditText()
+                                remark_widget.clear()
+                                self.uiWindow.rm_view_table.clearContents()
+                                self.show_info_popup("Transaction Modified Sucessfully")
+                        else:
+                            self.show_warning_info("Please fill info")
+                            break
+            
+        else:
+            self.show_warning_info("Please fill out the form")
+
+def clear_view_by_id(self):
+    self.uiWindow.rw_view_transaction_id.clear()
+    self.uiWindow.rm_view_date.clear()
+    self.uiWindow.rm_view_customer.clearEditText()
+    self.uiWindow.rm_view_remark.clear()
+    self.uiWindow.rm_view_table_4.clear()
+    self.uiWindow.rm_view_table_4.setRowCount(9)
+
+def view_by_custom_dates(self):
+    d1 = self.uiWindow.rw_view_starting_date_3.date()
+    d2 = self.uiWindow.rw_view_ending_date_2.date()
+    x = d1.toString('dd/MM/yyyy')
+    y = d2.toString('dd/MM/yyyy')
+    # print(type(x))
+    x_date = datetime.datetime.strptime(x,'%d/%m/%Y')
+    y_date = datetime.datetime.strptime(y,'%d/%m/%Y')
+    delta = y_date - x_date
+    if delta.days > 0:
+        results = get_rm_transacs(by_custom=[x,y])
+        if results:
+            self.uiWindow.rm_view_table_3.setRowCount(0)
+            for each_list in results: 
+                for row in range(len(each_list)):
+                    self.uiWindow.rm_view_table_3.insertRow(row)
+                    for column in range(len(each_list[row])):
+                        self.uiWindow.rm_view_table_3.setItem(row,column,QtWidgets.QTableWidgetItem(str(each_list[row][column])))
+        else:
+            pass
+    else:
+        self.show_warning_info("Please select correct date")
+    
