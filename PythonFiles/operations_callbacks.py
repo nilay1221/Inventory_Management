@@ -133,12 +133,21 @@ def view_new_rm_data(self):
 
 def display_product_name(row, column, self, col, tableWidget):
     code = tableWidget.item(row, column).text()
+    list_of_entries=[]
     if column == col:
-        result = get_product_name(code)
-        if result == 'false':
-            tableWidget.setItem(row, column + 1, QtWidgets.QTableWidgetItem("No such product code"))
-        else:
-            tableWidget.setItem(row, column + 1, QtWidgets.QTableWidgetItem(result))
+        for i in range(tableWidget.currentRow()):
+            list_of_entries.append(tableWidget.item(i, col).text())
+        try:
+            if code in list_of_entries:
+                tableWidget.setItem(row, column + 1, QtWidgets.QTableWidgetItem("Product already added above"))
+            else:
+                result = get_product_name(code)
+                if result == 'false':
+                    tableWidget.setItem(row, column + 1, QtWidgets.QTableWidgetItem("No such product code"))
+                else:
+                    tableWidget.setItem(row, column + 1, QtWidgets.QTableWidgetItem(result))
+        except Exception as e:
+            print(e)
 
 
 def add_shade_material(self):

@@ -225,6 +225,8 @@ def new_shade_delete(shade_no):
         return True
     except:
         return False
+    finally:
+        mydb.close()
 
 def remove_previous_data(shade_no):
     mydb = sqlite3.connect(DATABASE_NAME)
@@ -240,6 +242,8 @@ def remove_previous_data(shade_no):
         return True
     except:
         return False
+    finally:
+        mydb.close()
 
 
 def modify_shade_data(shade_no,code,percentage,changed=1):
@@ -274,6 +278,8 @@ def remove_previous_shade(shade_no):
         return True
     except:
         return False
+    finally:
+        mydb.close()
 
 def get_trans_id(tableName):
     sql = f"SELECT * from {tableName} ORDER BY "
