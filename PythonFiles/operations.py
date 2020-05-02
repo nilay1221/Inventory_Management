@@ -24,6 +24,14 @@ def add_raw_material(product_code,product_name,product_price):
             print(e)
             return False
         mydb.commit()
+        sql = f"""
+                    INSERT into rm_closing_stock VALUES('{product_code}',{0});
+                """
+        try:
+            mycursor.execute(sql)
+        except:
+            pass
+        mydb.commit()
         return True
     except:
         pass
