@@ -202,5 +202,6 @@ def get_shade_details(shade_no):
         mydb.close()
 
 
+
 def get_trans_id(tableName):
     sql = f"SELECT * from {tableName} ORDER BY "
