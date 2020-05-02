@@ -1,4 +1,4 @@
-import sqlite3 
+import sqlite3
 from PyQt5 import QtWidgets
 
 
@@ -9,7 +9,7 @@ def foreign_key_support(mycursor):
     sql = "PRAGMA Foreign_keys = ON;"
     mycursor.execute(sql)
 
-# For addding new raw material 
+# For addding new raw material
 def add_raw_material(product_code,product_name,product_price):
     mydb = sqlite3.connect(DATABASE_NAME)
     mycursor = mydb.cursor()
@@ -87,7 +87,7 @@ def modify_info(product_code,product_name,product_price,product_code_changed=Fal
         mydb.close()
 
 # modify_info("49","test",12)
-# View raw material 
+# View raw material
 
 def get_rm_data():
     mydb = sqlite3.connect(DATABASE_NAME)
@@ -202,5 +202,25 @@ def get_shade_details(shade_no):
         mydb.close()
 
 
+#Delete shade number data and delete
+def new_shade_delete(shade_no):
+    mydb = sqlite3.connect(DATABASE_NAME)
+    mycursor = mydb.cursor()
+    try:
+        sql = f"DELETE FROM shade_number WHERE shade_number = {shade_no};"
+        mycursor.execute("PRAGMA foreign_keys = ON;")
+        # mycursor.execute("PRAGMA foreign_keys")
+        # result=mycursor.fetchall()
+        # print(result)
+        mycursor.execute(sql)
+        mydb.commit()
+        return True
+    except:
+        return False
+
+
 def get_trans_id(tableName):
     sql = f"SELECT * from {tableName} ORDER BY "
+
+
+
