@@ -66,6 +66,7 @@ def modify_info(product_code,product_name,product_price,product_code_changed=Fal
             """
         # print(sql)
         try:
+            mycursor.execute("PRAGMA foreign_keys = ON;")
             mycursor.execute(sql)
             mydb.commit()
         except Exception as e:
@@ -103,6 +104,10 @@ def delete_new_rm(product_code):
     mycursor = mydb.cursor()
     try:
         sql = f"DELETE FROM Raw_Material WHERE product_code = '{product_code}';"
+        mycursor.execute("PRAGMA foreign_keys = ON;")
+        #mycursor.execute("PRAGMA foreign_keys")
+        #result=mycursor.fetchall()
+        #print(result)
         mycursor.execute(sql)
         mydb.commit()
         return True
