@@ -180,7 +180,7 @@ class MainWindow(QMainWindow):
         self.uiWindow.rm_new_confirm.clicked.connect(lambda : operations_callbacks.callback_add_raw_material(self))
         self.uiWindow.new_rm_view.clicked.connect(lambda : operations_callbacks.view_new_rm_data(self))
         self.uiWindow.tableWidget.cellChanged.connect(
-            lambda row,column: operations_callbacks.display_product_name(row,column,self,0))
+            lambda row,column: operations_callbacks.display_product_name(row,column,self,0,self.uiWindow.tableWidget))
         self.uiWindow.shade_new_confirm.clicked.connect(lambda: operations_callbacks.add_shade_material(self))
         self.uiWindow.shade_new__view_number.returnPressed.connect(lambda : operations_callbacks.view_new_shade_details(self))
         self.uiWindow.new_shade_view.clicked.connect(lambda : self.uiWindow.shade_new_view_details_table.clearContents())
@@ -189,7 +189,7 @@ class MainWindow(QMainWindow):
         self.uiWindow.rm_new_modify_confirm.clicked.connect(lambda : operations_callbacks.modify_new_rm_data(self))
         self.uiWindow.new_rm_delete_product_code.returnPressed.connect(lambda : operations_callbacks.show_new_rm_del_info(self))
         self.uiWindow.rm_new_delete_confirm.clicked.connect(lambda : operations_callbacks.del_new_rm(self))
-
+        self.uiWindow.rm_addtable.cellChanged.connect(lambda row,column: operations_callbacks.display_product_name(row,column,self,0,self.uiWindow.rm_addtable))
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
