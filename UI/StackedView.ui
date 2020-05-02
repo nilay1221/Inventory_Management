@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="Home">
      <widget class="QPushButton" name="RM_3">
@@ -7803,7 +7803,7 @@
        <rect>
         <x>520</x>
         <y>390</y>
-        <width>151</width>
+        <width>491</width>
         <height>41</height>
        </rect>
       </property>
@@ -7872,7 +7872,7 @@
        <rect>
         <x>520</x>
         <y>460</y>
-        <width>151</width>
+        <width>491</width>
         <height>41</height>
        </rect>
       </property>
@@ -7959,7 +7959,7 @@
        <rect>
         <x>520</x>
         <y>330</y>
-        <width>151</width>
+        <width>491</width>
         <height>41</height>
        </rect>
       </property>
@@ -8102,7 +8102,7 @@
        <rect>
         <x>540</x>
         <y>370</y>
-        <width>151</width>
+        <width>421</width>
         <height>41</height>
        </rect>
       </property>
@@ -8117,7 +8117,7 @@
        <rect>
         <x>540</x>
         <y>500</y>
-        <width>151</width>
+        <width>421</width>
         <height>41</height>
        </rect>
       </property>
@@ -8132,7 +8132,7 @@
        <rect>
         <x>540</x>
         <y>430</y>
-        <width>151</width>
+        <width>421</width>
         <height>41</height>
        </rect>
       </property>

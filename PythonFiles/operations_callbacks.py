@@ -29,7 +29,7 @@ def callback_add_raw_material(self):
 
 
 OLD_PRODUCT_CODE = ""
-
+OLD_SHADE_NUMBER = ""
 
 def show_modify_raw_data(self):
     # TODO modify product code also
@@ -125,7 +125,7 @@ def del_new_rm(self, btn=False):
 def view_new_rm_data(self):
     self.uiWindow.tableWidget_2.setRowCount(0)
     results = get_rm_data()
-    # print(re sults)
+    # print(results)
     for row_number, row_data in enumerate(results):
         self.uiWindow.tableWidget_2.insertRow(row_number)
         for column_number, data in enumerate(row_data):
@@ -209,17 +209,20 @@ def show_new_shade_modify_info(self):
     try:
         results = get_shade_details(shade_no)
         if results:
+            global OLD_SHADE_NUMBER
+            OLD_SHADE_NUMBER=shade_no
             self.uiWindow.shade_new_modify_details_table.setRowCount(0)
             for row_number, row_data in enumerate(results):
                 self.uiWindow.shade_new_modify_details_table.insertRow(row_number)
                 for column_number, data in enumerate(row_data):
                     self.uiWindow.shade_new_modify_details_table.setItem(row_number, column_number,
                                                                        QtWidgets.QTableWidgetItem(str(data)))
+            self.uiWindow.shade_new_modify_details_table.setRowCount(10)
         else:
             self.uiWindow.shade_new__modify_number.clear()
             self.show_warning_info("Shade number does not exist")
-    except:
-        pass
+    except Exception as e:
+        print(e)
 
 
 def del_new_shade(self, btn=False):
@@ -243,6 +246,70 @@ def del_new_shade(self, btn=False):
     else:
         self.show_warning_info("Please fill out the form")
 
+def modify_new_shade_data(self):
+    shade_no = self.uiWindow.shade_new__modify_number.text()
+    if shade_no and self.uiWindow.shade_new_modify_details_table.item(0, 0).text():
+        try:
+            if shade_no == OLD_SHADE_NUMBER:
+                try:
+                    if remove_previous_data(shade_no):
+                        for i in range(10):
+                            try:
+                                self.uiWindow.shade_new_modify_details_table.item(i, 0).text()
+                                row_data0 = self.uiWindow.shade_new_modify_details_table.item(i, 0).text()
+                                row_data2 = self.uiWindow.shade_new_modify_details_table.item(i, 2).text()
+                                try:
+                                    modify_shade_data(shade_no, row_data0, row_data2)
+                                except:
+                                    pass
+                            except:
+                                break
+                        self.show_info_popup("Details Modified Sucessfully")
+                except:
+                    pass
+            else:
+                try:
+                    if readd_shade_material_on_modify(self):
+                        try:
+                            remove_previous_shade(OLD_SHADE_NUMBER)
+                        except:
+                            pass
+                        self.show_info_popup("Details Modified Sucessfully")
+                except:
+                    pass
+            self.uiWindow.shade_new__modify_number.clear()
+            self.uiWindow.shade_new_modify_details_table.clearContents()
+        except:
+            pass
+    else:
+        self.show_warning_info("Please fill out the form")
+
+
+def readd_shade_material_on_modify(self):
+    i = 0
+    shade_no = self.uiWindow.shade_new__modify_number.text()
+    if shade_no and self.uiWindow.shade_new_modify_details_table.item(0, 0).text():
+        try:
+            if add_new_shade_material(shade_no):
+                for i in range(10):
+                    try:
+                        self.uiWindow.shade_new_modify_details_table.item(i, 0).text()
+                        row_data0 = self.uiWindow.shade_new_modify_details_table.item(i, 0).text()
+                        row_data2 = self.uiWindow.shade_new_modify_details_table.item(i, 2).text()
+                        try:
+                            add_madeup_of(shade_no, row_data0, row_data2)
+                        except:
+                            pass
+                    except:
+                        break
+                return True
+            else:
+                self.show_warning_info("Shade Number Already Exists")
+                return False
+        except:
+            pass
+    else:
+        self.show_warning_info("Please fill out the info")
 # Add Raw Material Transaction
 
 def set_raw_material_data(self):
