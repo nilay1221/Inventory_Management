@@ -218,6 +218,54 @@ def new_shade_delete(shade_no):
     except:
         return False
 
+def remove_previous_data(shade_no):
+    mydb = sqlite3.connect(DATABASE_NAME)
+    mycursor = mydb.cursor()
+    try:
+        sql = f"DELETE FROM madeup_of WHERE shade_number = {shade_no};"
+        mycursor.execute("PRAGMA foreign_keys = ON;")
+        # mycursor.execute("PRAGMA foreign_keys")
+        # result=mycursor.fetchall()
+        # print(result)
+        mycursor.execute(sql)
+        mydb.commit()
+        return True
+    except:
+        return False
+
+
+def modify_shade_data(shade_no,code,percentage,changed=1):
+    mydb = sqlite3.connect(DATABASE_NAME)
+    mycursor = mydb.cursor()
+    try:
+        sql = f"""INSERT into madeup_of VALUES('{shade_no}','{code}',{percentage});"""
+        try:
+            # print("Adding")
+            # print(sql)
+            mycursor.execute(sql)
+        except sqlite3.IntegrityError as e:
+            print(e)
+        mydb.commit()
+    except:
+        pass
+    finally:
+        mydb.close()
+
+
+def remove_previous_shade(shade_no):
+    mydb = sqlite3.connect(DATABASE_NAME)
+    mycursor = mydb.cursor()
+    try:
+        sql = f"DELETE FROM shade_number WHERE shade_number = {shade_no};"
+        mycursor.execute("PRAGMA foreign_keys = ON;")
+        # mycursor.execute("PRAGMA foreign_keys")
+        # result=mycursor.fetchall()
+        # print(result)
+        mycursor.execute(sql)
+        mydb.commit()
+        return True
+    except:
+        return False
 
 def get_trans_id(tableName):
     sql = f"SELECT * from {tableName} ORDER BY "
