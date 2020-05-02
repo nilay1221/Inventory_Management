@@ -365,7 +365,7 @@ def add_raw_material_callback(self):
 
 def view_rm_by_id(self):
     #TODO make table uneditable
-    trans_id = "RMT" + str(self.uiWindow.rw_view_transaction_id.text()).zfill(3)
+    trans_id = "RMT" + str(self.uiWindow.rw_view_transaction_id.text()).zfill(5)
     results = get_rm_transacs(by_Id=trans_id)
     # print(results)
     if results:
@@ -405,7 +405,7 @@ def view_rm_by_today(self):
         self.show_info_popup("No Transactions Done Today")
 
 def set_delete_rm(self):
-    trans_id = "RMT" + str(self.uiWindow.rw_delete_transaction_id.text()).zfill(3)
+    trans_id = "RMT" + str(self.uiWindow.rw_delete_transaction_id.text()).zfill(5)
     print(trans_id)
     if check_rm_transacs(trans_id) :
         results = get_rm_transacs(by_Id=trans_id)
@@ -429,7 +429,7 @@ def set_delete_rm(self):
         self.show_warning_info("Invalid Transaction Code")
 
 def delete_rm(self,btn):
-    trans_id = "RMT" + str(self.uiWindow.rw_delete_transaction_id.text()).zfill(3)
+    trans_id = "RMT" + str(self.uiWindow.rw_delete_transaction_id.text()).zfill(5)
     if check_rm_transacs(trans_id):
         if btn.text() == "&Yes":
             delete_rm_transacs(trans_id)
@@ -445,7 +445,7 @@ def delete_rm(self,btn):
 
 
 def set_modify_rm(self):
-    trans_id = "RMT" + str(self.uiWindow.rw_modify_transaction_id.text()).zfill(3)
+    trans_id = "RMT" + str(self.uiWindow.rw_modify_transaction_id.text()).zfill(5)
     print(trans_id)
     if check_rm_transacs(trans_id) :
         results = get_rm_transacs(by_Id=trans_id)
@@ -476,7 +476,7 @@ def set_modify_rm(self):
 
 def modify_rm(self):
     print("Inside")
-    trans_id = "RMT" + str(self.uiWindow.rw_modify_transaction_id.text()).zfill(3)
+    trans_id = "RMT" + str(self.uiWindow.rw_modify_transaction_id.text()).zfill(5)
     if check_rm_transacs(trans_id):
         delete_rm_transacs(trans_id)
         print("Deleted")
@@ -484,7 +484,7 @@ def modify_rm(self):
         date_widget = self.uiWindow.rm_modify_date
         customer_widget = self.uiWindow.rm_modify_customer
         remark_widget = self.uiWindow.rm_modify_remark
-        trans_id = 'RMT' +  str(trans_id_widget.text()).zfill(3)
+        trans_id = 'RMT' +  str(trans_id_widget.text()).zfill(5)
         date = date_widget.text()
         customer = customer_widget.currentText()
         remark = remark_widget.text()
@@ -502,7 +502,7 @@ def modify_rm(self):
                         self.show_warning_info("Please fill info")
                         break
                     except:
-                        print("inside exception")
+                        # print("inside exception")
                         if products:
                             if add_raw_material_data(trans_id,date,customer,remark,products):
                                 # set_raw_material_data(self)

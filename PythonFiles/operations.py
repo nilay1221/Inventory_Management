@@ -287,9 +287,9 @@ def get_trans_id(tableName):
         # print(results)
         if results:
             trans_id = int(results[0].split("RMT")[1]) + 1
-            return str(trans_id).zfill(3)        
+            return str(trans_id).zfill(5)        
         else:
-            return "001"
+            return "00001"
     except:
         pass
     finally:
