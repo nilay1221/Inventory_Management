@@ -120,6 +120,7 @@ def del_new_rm(self,btn=False):
 def view_new_rm_data(self):
     self.uiWindow.tableWidget_2.setRowCount(0)
     results = get_rm_data()
+    # print(re sults)
     for row_number, row_data in enumerate(results):
         self.uiWindow.tableWidget_2.insertRow(row_number)
         for column_number,data in enumerate(row_data):
@@ -128,14 +129,14 @@ def view_new_rm_data(self):
 
 
 
-def display_product_name(row, column,self,col):
-    code = self.uiWindow.tableWidget.item(row,column).text()
+def display_product_name(row, column,self,col,tableWidget):
+    code = tableWidget.item(row,column).text()
     if column==col:
         result = get_product_name(code)
         if result == 'false':
-             self.uiWindow.tableWidget.setItem(row,column+1,QtWidgets.QTableWidgetItem("No such product code"))
+            tableWidget.setItem(row,column+1,QtWidgets.QTableWidgetItem("No such product code"))
         else:
-            self.uiWindow.tableWidget.setItem(row, column+1, QtWidgets.QTableWidgetItem(result))
+            tableWidget.setItem(row, column+1, QtWidgets.QTableWidgetItem(result))
 
 
 def add_shade_material(self):
@@ -172,6 +173,7 @@ def add_shade_material(self):
 
 def view_new_shade_details(self):
     results = get_shade_details(self.uiWindow.shade_new__view_number.text())
+    # print(results)
     if results:
         self.uiWindow.shade_new__view_number.clear()
         self.uiWindow.shade_new_view_details_table.setRowCount(0)
@@ -181,5 +183,14 @@ def view_new_shade_details(self):
                 self.uiWindow.shade_new_view_details_table.setItem(row_number, column_number, QtWidgets.QTableWidgetItem(str(data)))
     else:
         self.show_warning_info("Shade number does not exist")
+
+
+
+
+
+# Add Raw Material Transaction 
+
+def add_rm_transaction(self):
+
 
 
