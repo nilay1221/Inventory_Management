@@ -236,8 +236,24 @@ class MainWindow(QMainWindow):
         # self.uiWindow.rw_view_starting_date_3.dateChanged.connect(lambda : operations_callbacks.view_by_custom_dates(self))
         shortcut1 = QShortcut(QKeySequence('Return'),self.uiWindow.rw_view_ending_date_2)
         shortcut1.activated.connect(lambda : operations_callbacks.view_by_custom_dates(self))
-
-
+        self.uiWindow.shade_add_2.clicked.connect(lambda: operations_callbacks.set_shade_number_transacs(self))
+        self.uiWindow.shade_number_add.returnPressed.connect(lambda : operations_callbacks.set_shade_number_details(self,self.uiWindow.shade_number_add,self.uiWindow.shade_addtable,self.uiWindow.shade_colortable,self.uiWindow.shade_add_total))
+        self.uiWindow.shade_addtable.cellChanged.connect(lambda row,column : operations_callbacks.display_product_name(row,column,self,0,self.uiWindow.shade_addtable))
+        self.uiWindow.shade_addtable.cellChanged.connect(lambda row,column: operations_callbacks.set_total_quantity(row,column,self,self.uiWindow.shade_addtable,self.uiWindow.shade_colortable,self.uiWindow.shade_add_total))
+        self.uiWindow.shade_confirm.clicked.connect(lambda : operations_callbacks.confirm_add_shade_number(self))
+        self.uiWindow.shade_view_transaction_id.returnPressed.connect(lambda:operations_callbacks.view_shade_stock_by_id(self))
+        self.uiWindow.view_today_2.clicked.connect(lambda: operations_callbacks.view_shade_transaction_today(self))
+        self.uiWindow.shade_delete_transaction_id.returnPressed.connect(lambda : operations_callbacks.set_delete_shade_transaction(self))
+        self.uiWindow.shade_delete_confirm.clicked.connect(lambda : operations_callbacks.delete_shade_transaction(self))
+        self.uiWindow.shade_modify_transaction_id.returnPressed.connect(lambda:operations_callbacks.set_modify_shade_transaction(self))
+        self.uiWindow.shade_addtable_3.cellChanged.connect(lambda row,column:operations_callbacks.display_product_name(row,column,self,0,self.uiWindow.shade_addtable_3))
+        self.uiWindow.shade_addtable_3.cellChanged.connect(lambda row,column:operations_callbacks.set_total_quantity(row,column,self,self.uiWindow.shade_addtable_3,self.uiWindow.shade_colortable_3,self.uiWindow.shade_add_total_3))
+        # self.uiWindow.shade_modify_transaction_id.returnPressed.connect(lambda:operations_callbacks.set_modify_shade_transaction(self))
+        self.uiWindow.shade_number_modify.returnPressed.connect(lambda : operations_callbacks.set_shade_number_details(self,self.uiWindow.shade_number_modify,self.uiWindow.shade_addtable_3,self.uiWindow.shade_colortable_3,self.uiWindow.shade_add_total_3))
+        self.uiWindow.shade_modify_confirm.clicked.connect(lambda:operations_callbacks.confirm_modify_shade_trans(self))
+        shortcut2 = QShortcut(QKeySequence('Return'),self.uiWindow.shade_view_end_date)
+        shortcut2.activated.connect(lambda : operations_callbacks.shade_view_by_custom_dates(self))
+        self.uiWindow.view_trans_2.clicked.connect(lambda:operations_callbacks.clear_shade_view_by_today(self))
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)

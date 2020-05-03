@@ -284,8 +284,8 @@ def modify_new_shade_material(shade_no,old_shade_no):
 
 
 # Getting the last transaction id in the database
-def get_trans_id(tableName):
-    sql = f"SELECT * from {tableName} WHERE trans_id LIKE 'RMT%' ORDER BY trans_id DESC LIMIT 1"
+def get_trans_id(tableName,fieldName):
+    sql = f"SELECT * from {tableName} WHERE trans_id LIKE '{fieldName}%' ORDER BY trans_id DESC LIMIT 1"
     mydb = sqlite3.connect(DATABASE_NAME)
     mycursor = mydb.cursor()
     try:
@@ -293,7 +293,7 @@ def get_trans_id(tableName):
         results = mycursor.fetchone()
         # print(results)
         if results:
-            trans_id = int(results[0].split("RMT")[1]) + 1
+            trans_id = int(results[0].split(fieldName)[1]) + 1
             return str(trans_id).zfill(5)        
         else:
             return "00001"
@@ -317,8 +317,8 @@ def add_raw_material_data(trans_id,date,customer,remark,productDetails,type="IN"
                 pass
         mydb.commit()
         return True
-    except:
-        pass
+    except Exception as e:
+        print(e)
     finally:
         mydb.close()
 
@@ -416,5 +416,211 @@ def delete_rm_transacs(trans_id):
     mydb.close()
 
 
-# print(get_trans_id('rm_stock'))
-# print(check_rm_transacs('RMT001'))
+# print(get_trans_id('shade_stock','SNT'))
+# print(check_rm_transacs('RMT001'))\
+
+def check_shade_number_exists(shade_number):
+    mydb = sqlite3.connect(DATABASE_NAME)
+    mycursor = mydb.cursor()
+    try:
+        sql = f"SELECT EXISTS(SELECT * from shade_number where shade_number = '{shade_number}');"
+        mycursor.execute(sql)
+        result = mycursor.fetchone()
+        if result[0] == 0:
+            return False
+        elif result[0] == 1:
+            return True
+    except:
+        pass
+    finally:
+        mydb.close()
+                
+def get_shade_number_details(shade_number):
+    if check_shade_number_exists(shade_number):
+        mydb = sqlite3.connect(DATABASE_NAME)
+        mycursor = mydb.cursor()
+        sql = f"""
+                SELECT madeup_of.product_code , raw_material.product_name ,madeup_of.product_percentage,'-',raw_material.product_price
+                FROM madeup_of
+                JOIN raw_material
+                ON madeup_of.product_code = raw_material.product_code
+                WHERE shade_number = '{shade_number}';
+            """
+        mycursor.execute(sql)
+        results = mycursor.fetchall()
+        mydb.close()
+        return results
+    else:
+        return False
+
+def add_shade_stock_trans(trans_id,date,customer,remark,shade_number,productDetails,type="IN"):
+    mydb = sqlite3.connect(DATABASE_NAME)
+    mycursor = mydb.cursor()
+    try:
+        sql = f" INSERT INTO shade_stock VALUES('{trans_id}','{date}','{customer}','{remark}','{shade_number}'); "
+        mycursor.execute(sql)
+        mydb.commit()
+        try:
+            for each in productDetails:
+                sql = f"INSERT INTO has_shade VALUES('{type}',{each[1]},'{trans_id}','{shade_number}','{each[0]}'); "
+                mycursor.execute(sql)
+                mydb.commit()
+        except:
+            pass
+    except:
+        pass
+    finally:
+        mydb.close()
+
+def add_into_duplicates(shade_trans,raw_trans):
+    mydb = sqlite3.connect(DATABASE_NAME)
+    mycursor = mydb.cursor()
+    try:
+        sql = f"INSERT INTO duplicates VALUES('{raw_trans}','{shade_trans}');"
+        mycursor.execute(sql)
+        mydb.commit()
+    except:
+        pass
+    finally:
+        mydb.close()
+
+def check_shade_trans(trans_id):
+    mydb = sqlite3.connect(DATABASE_NAME)
+    mycursor = mydb.cursor()
+    try:
+        sql = f"SELECT EXISTS(SELECT * from shade_stock WHERE trans_id = '{trans_id}');"
+        mycursor.execute(sql)
+        result = mycursor.fetchone()
+        if result[0] == 0:
+            return False
+        else:
+            return True
+    except Exception as e:
+        print(e)
+    finally:
+        mydb.close()
+
+
+def view_shade_transaction(by_Id=False,by_today=False,by_custom=False):
+    mydb = sqlite3.connect(DATABASE_NAME)
+    mycursor = mydb.cursor()
+    try:
+        if by_Id:
+            shade_trans_id = by_Id
+            sql = f"SELECT rm_trans_id from duplicates where shade_trans_id = '{shade_trans_id}';"
+            mycursor.execute(sql)
+            raw_trans_id = mycursor.fetchone()[0]
+            sql = f"SELECT date,customer_id,remark,shade_number from shade_stock where trans_id = '{shade_trans_id}';"
+            mycursor.execute(sql)
+            trans_details = mycursor.fetchone()
+            shade_number = trans_details[3]
+            sql = f"""
+                    SELECT has_shade.product_code , raw_material.product_name ,has_shade.quantity 
+                    FROM has_shade
+                    JOIN raw_material on
+                    has_shade.product_code = raw_material.product_code
+                    WHERE has_shade.trans_id = '{shade_trans_id}';
+            """
+            mycursor.execute(sql)
+            table1_details = mycursor.fetchall()
+            sql = f"""
+                SELECT has_rm.product_code,raw_material.product_name,madeup_of.product_percentage,has_rm.quantity*1000,has_rm.quantity * raw_material.product_price * 1000 FROM
+                has_rm
+                JOIN madeup_of ON
+                has_rm.product_code = madeup_of.product_code
+                JOIN raw_material ON
+                madeup_of.product_code = raw_material.product_code
+                WHERE has_rm.trans_id = "{raw_trans_id}"
+                AND madeup_of.shade_number = "{shade_number}"
+                AND has_rm.product_code NOT IN(SELECT has_shade.product_code from has_shade WHERE trans_id = "{shade_trans_id}");
+                """
+            mycursor.execute(sql)
+            table2_details = mycursor.fetchall()
+            return {
+                'trans_details':trans_details,
+                'table1_details':table1_details,
+                'table2_detials':table2_details,
+            }
+        if by_today:
+            today_date = datetime.date.today().strftime('%d-%m-%Y')
+            sql = f"""
+                 SELECT shade_stock.trans_id , shade_stock.customer_id , shade_stock.remark , shade_stock.shade_number , has_shade.product_code ,raw_material.product_name,has_shade.quantity FROM shade_stock
+                 JOIN has_shade
+                 ON shade_stock.trans_id = has_shade.trans_id
+                 JOIN raw_material ON
+                 has_shade.product_code = raw_material.product_code
+                 WHERE shade_stock.date = '{today_date}';
+            """
+            mycursor.execute(sql)
+            results = mycursor.fetchall()
+            return results
+        if by_custom:
+            start_date = datetime.datetime.strptime(by_custom[0],'%d/%m/%Y').date()
+            end_date = datetime.datetime.strptime(by_custom[1],'%d/%m/%Y').date()
+            delta = end_date - start_date
+            all_dates = []
+            for i in range(delta.days + 1):
+                day = end_date - datetime.timedelta(days=i)
+                all_dates.append(day.strftime('%d-%m-%Y'))
+            results=[]
+            for each_date in all_dates:
+                sql = f"""
+                 SELECT shade_stock.trans_id , shade_stock.customer_id , shade_stock.remark , shade_stock.shade_number , has_shade.product_code ,raw_material.product_name,has_shade.quantity FROM shade_stock
+                 JOIN has_shade
+                 ON shade_stock.trans_id = has_shade.trans_id
+                 JOIN raw_material ON
+                 has_shade.product_code = raw_material.product_code
+                 WHERE shade_stock.date = '{each_date}';
+                """
+                try:
+                    # print(sql)
+                    mycursor.execute(sql)
+                    result = mycursor.fetchall()
+                    # print(result)
+                    if result:
+                        results.append(result)
+                except:
+                    pass
+            return results
+    except Exception as e:
+        print(e)
+        pass
+    finally:
+        mydb.close()
+        
+# print(view_shade_transaction(by_today=True))
+# print(check_shade_trans("SNT00009"))
+
+
+def delete_shade_trans(trans_id):
+    mydb = sqlite3.connect(DATABASE_NAME)
+    mycursor = mydb.cursor()
+    try:
+        foreign_key_support(mycursor)
+        sql =  f"SELECT rm_trans_id from duplicates where shade_trans_id = '{trans_id}';"
+        mycursor.execute(sql)
+        rm_trans_id = mycursor.fetchone()[0]
+        sql = f"DELETE from shade_stock where trans_id = '{trans_id}';"
+        mycursor.execute(sql)
+        sql = f"DELETE from rm_stock where trans_id = '{rm_trans_id}';"
+        mycursor.execute(sql)
+        mydb.commit()
+        return True
+    except:
+        return False
+    finally:
+        mydb.close()
+
+def get_raw_trans(shade_trans_id):
+    mydb = sqlite3.connect(DATABASE_NAME)
+    mycursor = mydb.cursor()
+    try:
+        sql = f"SELECT rm_trans_id from duplicates where shade_trans_id = '{trans_id}';"
+        mycursor.execute(sql)
+        return mycursor.fetchone()[0]
+    except:
+        pass
+    finally:
+        mydb.close()
+
+# print(delete_shade_trans

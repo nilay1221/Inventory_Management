@@ -346,14 +346,14 @@ def readd_shade_material_on_modify(self):
 # Add Raw Material Transaction
 
 def set_raw_material_data(self):
-    trans_id = get_trans_id("rm_stock")
+    trans_id = get_trans_id("rm_stock",'RMT')
     date = datetime.date.today().strftime("%d-%m-%Y")
     self.uiWindow.rm_transaction_id.setText(str(trans_id))
     self.uiWindow.date.setText(str(date))
 
 
 def add_raw_material_callback(self):
-    print("Inside")
+    # print("Inside")
     # TODO check if table is empty or not
     trans_id_widget = self.uiWindow.rm_transaction_id
     date_widget = self.uiWindow.date
@@ -597,4 +597,362 @@ def view_by_custom_dates(self):
             pass
     else:
         self.show_warning_info("Please select correct date")
+
+# Set Transaction ID and date for Adding Shade Number Transaction
+def set_shade_number_transacs(self):
+    trans_id = str(get_trans_id('shade_stock','SNT'))
+    date = datetime.date.today().strftime("%d-%m-%Y")
+    self.uiWindow.shade_transaction_id.setText(trans_id)
+    self.uiWindow.date_2.setText(date)
+
+ORIGIGNAL_PRICES = []
+
+def set_shade_number_details(self,shadeNumberwidget,rawTable,shadeTable,addTotal):
+    global ORIGIGNAL_PRICES
+    ORIGIGNAL_PRICES = []
+    shade_number = shadeNumberwidget.text()
+    if check_shade_number_exists(shade_number):
+        results = get_shade_number_details(shade_number)
+        shadeTable.setRowCount(0)
+        for row in range(len(results)):
+            shadeTable.insertRow(row)
+            for column in range(len(results[0])):
+                if column == 4:
+                    ORIGIGNAL_PRICES.append(results[row][column])
+                shadeTable.setItem(row,column,QtWidgets.QTableWidgetItem(str(results[row][column])))
+        if addTotal.text():
+            # print("inside")
+            set_total_quantity(0,2,self,rawTable,shadeTable,addTotal)
+    else:
+        self.show_warning_info("Shade Number Does not exists")
+
+def set_total_quantity(row,column,self,tableWidget1,tableWidget2,quantitywidget):
+    #TODO Check for empty
+    if column == 2:
+        # if self.uiWindow.shade_add_total.text():
+        #     present_quantity = float(self.uiWindow.shade_add_total.text())
+        # else:
+        #     present_quantity = float(0)
+        # new_quantity = float(self.uiWindow.shade_addtable_3.item(row,column).text())
+        # total_quantity = present_quantity + new_quantity
+        # self.uiWindow.shade_add_total.setText(str(total_quantity))
+        total_quantity = 0
+        for i in range(8):
+            try:
+                quantity = float(tableWidget1.item(i,2).text())
+                total_quantity += quantity
+            except:
+                pass
+                # pass
+        # print(total_quantity)
+        quantitywidget.setText(str(total_quantity))
+        for i in range(tableWidget2.rowCount()):
+            # print(i)
+            try:
+                percentage = float(tableWidget2.item(i,2).text())
+                # print(percentage)
+                quantity = (percentage * total_quantity)*10
+                price = quantity * float(ORIGIGNAL_PRICES[i])
+                tableWidget2.setItem(i,3,QtWidgets.QTableWidgetItem(str(quantity)))
+                tableWidget2.setItem(i,4,QtWidgets.QTableWidgetItem(str(price)))
+            except:
+                pass
+
+def confirm_add_shade_number(self):
+    trans_widget = self.uiWindow.shade_transaction_id
+    date_widget = self.uiWindow.date_2
+    customer_widget = self.uiWindow.shade_customer
+    remark_widget = self.uiWindow.shade_remark
+    shade_number_widget = self.uiWindow.shade_number_add
+    trans_id = "SNT" +  str(trans_widget.text())
+    date = date_widget.text()
+    customer = customer_widget.currentText()
+    remark = remark_widget.text()
+    shade_number = shade_number_widget.text()
+    if trans_id and date and customer and remark and shade_number:
+        try:
+            row_count_1 = self.uiWindow.shade_addtable.rowCount()
+            row_count_2 = self.uiWindow.shade_colortable.rowCount()
+            try:
+                results = []
+                raw_details = []
+                for i in range(row_count_1):
+                        if self.uiWindow.shade_addtable.item(i,0).text() and self.uiWindow.shade_addtable.item(i,2).text():
+                            x = self.uiWindow.shade_addtable.item(i,0).text()
+                            y = self.uiWindow.shade_addtable.item(i,2).text()
+                            results.append((x,y))
+                            raw_details.append((x,y))
+                        else:
+                            raise Exception
+            except:
+                try:
+                    if i!=0:
+                        if not self.uiWindow.shade_addtable.item(i,0).text():
+                            raise Exception
+                    self.show_warning_info("Please complete table")
+                except:
+                    for i in range(row_count_2):
+                        x = self.uiWindow.shade_colortable.item(i,0).text()
+                        y = float(self.uiWindow.shade_colortable.item(i,3).text())/1000
+                        for each in raw_details:
+                            if x == each[0]:
+                                # print(each[0])
+                                # print(x)
+                                raise Exception("Colour cannot be used")
+                        results.append((x,y))
+                        # raw_details.append((x,y))
+                    
+                    negative_trans_id = "SRT" + str(get_trans_id('rm_stock','SRT'))
+                    # print(results)
+                    if add_raw_material_data(negative_trans_id,date,customer,remark,results,type="OUT"):
+                        add_shade_stock_trans(trans_id,date,customer,remark,shade_number,raw_details)
+                        add_into_duplicates(trans_id,negative_trans_id)
+                        self.show_info_popup("Transaction Completed Sucessfully")
+                        set_shade_number_transacs(self)
+                        self.uiWindow.shade_customer.clearEditText()
+                        self.uiWindow.shade_remark.clear()
+                        self.uiWindow.shade_number_add.clear()
+                        self.uiWindow.shade_addtable.clearContents()
+                        self.uiWindow.shade_colortable.clearContents()
+                        self.uiWindow.shade_add_total.clear()
+
+
+
+                    else:
+                        self.show_warning_info("Transaction Unsucessfull")
+        except Exception as err:
+            self.show_warning_info(err.__str__())
+
+def view_shade_stock_by_id(self):
+    trans_id = "SNT" +  str(self.uiWindow.shade_view_transaction_id.text()).zfill(5)
+    if check_shade_trans(trans_id):
+        results = view_shade_transaction(by_Id=trans_id)
+        trans_details = results['trans_details']
+        self.uiWindow.date_3.setText(str(trans_details[0]))
+        self.uiWindow.shade_view_customer.setEditText(str(trans_details[1]))
+        self.uiWindow.shade_view_remark.setText(str(trans_details[2]))
+        self.uiWindow.shade_number_add_view.setText(str(trans_details[3]))
+        table1_details = results['table1_details']
+        self.uiWindow.shade_addtable_4.setRowCount(0)
+        total_quantity = 0 
+        for each_row in range(len(table1_details)):
+            self.uiWindow.shade_addtable_4.insertRow(each_row)
+            for each_column in range(len(table1_details[each_row])):
+                if each_column == 2:
+                    total_quantity += table1_details[each_row][each_column]
+                self.uiWindow.shade_addtable_4.setItem(each_row,each_column,QtWidgets.QTableWidgetItem(str(table1_details[each_row][each_column])))
+        table2_details = results['table2_detials']
+        self.uiWindow.shade_colortable_4.setRowCount(0)
+        for row in range(len(table2_details)):
+            self.uiWindow.shade_colortable_4.insertRow(row)
+            for column in range(len(table2_details[row])):
+                self.uiWindow.shade_colortable_4.setItem(row,column,QtWidgets.QTableWidgetItem(str(table2_details[row][column])))
+        self.uiWindow.shade_add_total_4.setText(str(total_quantity))
+
+    else:
+        self.show_warning_info("Incorrect transaction id")
+
+
+
+def view_shade_transaction_today(self):
+    self.uiWindow.shade_view_today_date.setDate(QtCore.QDate.currentDate())
+    results = view_shade_transaction(by_today=True)
+    if results:
+        # print(results)
+        self.uiWindow.shade_view_table_2.setRowCount(0)
+        for row in range(len(results)):
+            self.uiWindow.shade_view_table_2.insertRow(row)
+            for column in range(len(results[row])):
+                self.uiWindow.shade_view_table_2.setItem(row,column,QtWidgets.QTableWidgetItem(str(results[row][column])))
+    else:
+        self.uiWindow.show_info_popup("No Transactions Done Today")
+
+
+def set_delete_shade_transaction(self):
+    trans_id = "SNT" + str(self.uiWindow.shade_delete_transaction_id.text()).zfill(5)
+    if check_shade_trans(trans_id):
+        results = view_shade_transaction(by_Id=trans_id)
+        trans_details = results['trans_details']
+        self.uiWindow.shade_delete_date.setText(str(trans_details[0]))
+        self.uiWindow.shade_delete_customer.setEditText(str(trans_details[1]))
+        self.uiWindow.shade_delete_remark.setText(str(trans_details[2]))
+        self.uiWindow.shade_number_delete.setText(str(trans_details[3]))
+        table1_details = results['table1_details']
+        self.uiWindow.shade_addtable_2.setRowCount(0)
+        total_quantity = 0 
+        for each_row in range(len(table1_details)):
+            self.uiWindow.shade_addtable_2.insertRow(each_row)
+            for each_column in range(len(table1_details[each_row])):
+                if each_column == 2:
+                    total_quantity += table1_details[each_row][each_column]
+                self.uiWindow.shade_addtable_2.setItem(each_row,each_column,QtWidgets.QTableWidgetItem(str(table1_details[each_row][each_column])))
+        table2_details = results['table2_detials']
+        self.uiWindow.shade_colortable_2.setRowCount(0)
+        for row in range(len(table2_details)):
+            self.uiWindow.shade_colortable_2.insertRow(row)
+            for column in range(len(table2_details[row])):
+                self.uiWindow.shade_colortable_2.setItem(row,column,QtWidgets.QTableWidgetItem(str(table2_details[row][column])))
+        self.uiWindow.shade_add_total_2.setText(str(total_quantity))
+    else:
+        self.show_warning_info("Transaction id does not exists")
     
+def delete_shade_transaction(self):
+    trans_id = "SNT" + str(self.uiWindow.shade_delete_transaction_id.text()).zfill(5)
+    if check_shade_trans(trans_id):
+        if delete_shade_trans(trans_id):
+            self.show_info_popup("Deleted Successfully")
+            self.uiWindow.shade_delete_transaction_id.clear()
+            self.uiWindow.shade_delete_date.clear()
+            self.uiWindow.shade_delete_customer.clearEditText()
+            self.uiWindow.shade_delete_remark.clear()
+            self.uiWindow.shade_addtable_2.clearContents()
+            self.uiWindow.shade_colortable_2.clearContents()
+            self.uiWindow.shade_add_total_2.clear()
+
+        else:
+            self.show_warning_info("Deletion Unsucessful")
+
+def set_modify_shade_transaction(self):
+    # print("Called")
+    trans_id = "SNT" +  str(self.uiWindow.shade_modify_transaction_id.text()).zfill(5)
+    if check_shade_trans(trans_id):
+        results = view_shade_transaction(by_Id=trans_id)
+        trans_details = results['trans_details']
+        self.uiWindow.shade_modify_date.setText(str(trans_details[0]))
+        self.uiWindow.shade_modify_customer.setEditText(str(trans_details[1]))
+        self.uiWindow.shade_modify_remark.setText(str(trans_details[2]))
+        self.uiWindow.shade_number_modify.setText(str(trans_details[3]))
+        table1_details = results['table1_details']
+        # print(table1_details)
+        self.uiWindow.shade_addtable_3.setRowCount(8)
+        total_quantity = 0 
+        for each_row in range(len(table1_details)):
+            self.uiWindow.shade_addtable_3.insertRow(each_row)
+            for each_column in range(len(table1_details[each_row])):
+                if each_column == 2:
+                    total_quantity += table1_details[each_row][each_column]
+                self.uiWindow.shade_addtable_3.setItem(each_row,each_column,QtWidgets.QTableWidgetItem(str(table1_details[each_row][each_column])))
+        table2_details = results['table2_detials']
+        self.uiWindow.shade_add_total_3.setText(str(total_quantity))
+        set_shade_number_details(self,self.uiWindow.shade_number_modify,self.uiWindow.shade_addtable_3,self.uiWindow.shade_colortable_3,self.uiWindow.shade_add_total_3)
+        # self.uiWindow.shade_colortable_3.setRowCount(10)
+        # for row in range(len(table2_details)):
+        #     self.uiWindow.shade_colortable_3.insertRow(row)
+        #     for column in range(len(table2_details[row])):
+        #         self.uiWindow.shade_colortable_3.setItem(row,column,QtWidgets.QTableWidgetItem(str(table2_details[row][column])))
+        
+
+    else:
+        self.show_warning_info("Incorrect transaction id")
+
+def confirm_modify_shade_trans(self):
+    trans_id = "SNT" + str(self.uiWindow.shade_modify_transaction_id.text()).zfill(5)
+    if check_shade_trans(trans_id):
+            negative_trans_id = get_raw_trans(trans_id)
+            delete_shade_trans(trans_id)
+            trans_widget = self.uiWindow.shade_modify_transaction_id
+            date_widget = self.uiWindow.shade_modify_date
+            customer_widget = self.uiWindow.shade_modify_customer
+            remark_widget = self.uiWindow.shade_modify_remark
+            shade_number_widget = self.uiWindow.shade_number_modify
+            # trans_id = "SNT" +  str(trans_widget.text())
+            date = date_widget.text()
+            customer = customer_widget.currentText()
+            remark = remark_widget.text()
+            shade_number = shade_number_widget.text()
+            if trans_id and date and customer and remark and shade_number:
+                try:
+                    row_count_1 = self.uiWindow.shade_addtable_3.rowCount()
+                    row_count_2 = self.uiWindow.shade_colortable_3.rowCount()
+                    try:
+                        results = []
+                        raw_details = []
+                        for i in range(row_count_1):
+                                if self.uiWindow.shade_addtable_3.item(i,0).text() and self.uiWindow.shade_addtable_3.item(i,2).text():
+                                    x = self.uiWindow.shade_addtable_3.item(i,0).text()
+                                    y = self.uiWindow.shade_addtable_3.item(i,2).text()
+                                    results.append((x,y))
+                                    raw_details.append((x,y))
+                                else:
+                                    raise Exception
+                    except:
+                        try:
+                            if i!=0:
+                                if not self.uiWindow.shade_addtable_3.item(i,0).text():
+                                    raise Exception
+                            self.show_warning_info("Please complete table")
+                        except:
+                            for i in range(row_count_2):
+                                x = self.uiWindow.shade_colortable_3.item(i,0).text()
+                                y = float(self.uiWindow.shade_colortable_3.item(i,3).text())/1000
+                                for each in raw_details:
+                                    if x == each[0]:
+                                        # print(each[0])
+                                        # print(x)
+                                        raise Exception("Colour cannot be used")
+                                results.append((x,y))
+                                # raw_details.append((x,y))
+                            
+                            # negative_trans_id = "SRT" + str(get_trans_id('rm_stock','SRT'))
+                            # print(results)
+                            if add_raw_material_data(negative_trans_id,date,customer,remark,results,type="OUT"):
+                                add_shade_stock_trans(trans_id,date,customer,remark,shade_number,raw_details)
+                                add_into_duplicates(trans_id,negative_trans_id)
+                                self.show_info_popup("Transaction Modified Sucessfully")
+                                # set_shade_number_transacs(self)
+                                self.uiWindow.shade_modify_transaction_id.clear()
+                                self.uiWindow.shade_modify_date.clear()
+                                self.uiWindow.shade_modify_customer.clearEditText()
+                                self.uiWindow.shade_modify_remark.clear()
+                                self.uiWindow.shade_number_modify.clear()
+                                self.uiWindow.shade_addtable_3.clearContents()
+                                self.uiWindow.shade_colortable_3.clearContents()
+                                self.uiWindow.shade_add_total_3.clear()
+                            else:
+                                self.show_warning_info("Transaction Unsucessfull")
+                except Exception as err:
+                    self.show_warning_info(err.__str__())
+
+def shade_view_by_custom_dates(self):
+    d1 = self.uiWindow.shade_view_start_date.date()
+    d2 = self.uiWindow.shade_view_end_date.date()
+    x = d1.toString('dd/MM/yyyy')
+    y = d2.toString('dd/MM/yyyy')
+    # print(type(x))
+    x_date = datetime.datetime.strptime(x,'%d/%m/%Y')
+    y_date = datetime.datetime.strptime(y,'%d/%m/%Y')
+    delta = y_date - x_date
+    if delta.days > 0:
+        results = view_shade_transaction(by_custom=[x,y])
+        if results:
+            self.uiWindow.shade_view_table.setRowCount(0)
+            trans_list=[]
+            for each_list in results: 
+                for row in range(len(each_list)):
+                    self.uiWindow.shade_view_table.insertRow(row)
+                    for column in range(len(each_list[row])):
+                        if column ==0:
+                            if str(each_list[row][column]) not in trans_list:
+                                trans_list.append(str(each_list[row][column]))
+                                self.uiWindow.shade_view_table.setItem(row,column,QtWidgets.QTableWidgetItem(str(each_list[row][column])))
+                        else:
+                            self.uiWindow.shade_view_table.setItem(row, column, QtWidgets.QTableWidgetItem(
+                                str(each_list[row][column])))
+        else:
+            pass
+    else:
+        self.show_warning_info("Please select correct date")
+
+
+
+def clear_shade_view_by_today(self):
+    self.uiWindow.shade_view_transaction_id.clear()
+    self.uiWindow.date_3.clear()
+    self.uiWindow.shade_view_customer.clearEditText()
+    self.uiWindow.shade_view_remark.clear()
+    self.uiWindow.shade_number_add_view.clear()
+    self.uiWindow.shade_addtable_4.clearContents()
+    self.uiWindow.shade_addtable_4.setRowCount(0)
+    self.uiWindow.shade_colortable_4.clearContents()
+    self.uiWindow.shade_colortable_4.setRowCount(0)
+    self.uiWindow.shade_add_total_4.clear()
