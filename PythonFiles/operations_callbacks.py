@@ -466,7 +466,7 @@ def set_modify_rm(self):
             self.uiWindow.rm_modify_date.setText(str(date))
             self.uiWindow.rm_modify_remark.setText(str(remark))
             self.uiWindow.rm_modify_customer.setCurrentText(customer)
-            self.uiWindow.rm_view_table.setRowCount(0)
+            self.uiWindow.rm_view_table.setRowCount(8)
             for row in range(len(results[1])):
                 self.uiWindow.rm_view_table.insertRow(row)
                 for column in range(len(results[1][row])):
