@@ -861,7 +861,7 @@ def confirm_modify_shade_trans(self):
     trans_id = "SNT" + str(self.uiWindow.shade_modify_transaction_id.text()).zfill(5)
     if check_shade_trans(trans_id):
             negative_trans_id = get_raw_trans(trans_id)
-            print(negative_trans_id)
+            # print(negative_trans_id)
             delete_shade_trans(trans_id)
             trans_widget = self.uiWindow.shade_modify_transaction_id
             date_widget = self.uiWindow.shade_modify_date

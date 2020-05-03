@@ -632,7 +632,8 @@ def get_raw_trans(shade_trans_id):
     mydb = sqlite3.connect(DATABASE_NAME)
     mycursor = mydb.cursor()
     try:
-        sql = f"SELECT rm_trans_id from duplicates where shade_trans_id = '{trans_id}';"
+        sql = f"SELECT rm_trans_id from duplicates where shade_trans_id = '{shade_trans_id}';"
+        print(sql)
         mycursor.execute(sql)
         return mycursor.fetchone()[0]
     except:
