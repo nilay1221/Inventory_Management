@@ -367,7 +367,7 @@ def set_raw_material_data(self):
 def add_raw_material_callback(self):
     # print("Inside")
     # TODO check if table is empty or not
-    trans_id_widget = self.uiWindow.rm_transaction_id
+    trans_id_widget = self.uiWindow.rm_transaction_id                                                                                                                                                                     
     date_widget = self.uiWindow.date
     customer_widget = self.uiWindow.rm_customer
     remark_widget = self.uiWindow.rw_remark
@@ -777,7 +777,7 @@ def view_shade_transaction_today(self):
             for column in range(len(results[row])):
                 self.uiWindow.shade_view_table_2.setItem(row,column,QtWidgets.QTableWidgetItem(str(results[row][column])))
     else:
-        self.uiWindow.show_info_popup("No Transactions Done Today")
+        self.show_info_popup("No Transactions Done Today")
 
 
 def set_delete_shade_transaction(self):
@@ -861,6 +861,7 @@ def confirm_modify_shade_trans(self):
     trans_id = "SNT" + str(self.uiWindow.shade_modify_transaction_id.text()).zfill(5)
     if check_shade_trans(trans_id):
             negative_trans_id = get_raw_trans(trans_id)
+            print(negative_trans_id)
             delete_shade_trans(trans_id)
             trans_widget = self.uiWindow.shade_modify_transaction_id
             date_widget = self.uiWindow.shade_modify_date
