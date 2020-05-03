@@ -263,23 +263,24 @@ def modify_shade_data(shade_no,code,percentage,changed=1):
     finally:
         mydb.close()
 
-
-def remove_previous_shade(shade_no):
+def modify_new_shade_material(shade_no,old_shade_no):
     mydb = sqlite3.connect(DATABASE_NAME)
     mycursor = mydb.cursor()
     try:
-        sql = f"DELETE FROM shade_number WHERE shade_number = {shade_no};"
-        mycursor.execute("PRAGMA foreign_keys = ON;")
-        # mycursor.execute("PRAGMA foreign_keys")
-        # result=mycursor.fetchall()
-        # print(result)
-        mycursor.execute(sql)
+        sql= f"Update SHADE_NUMBER set shade_number={shade_no} where shade_number={old_shade_no};"
+        try:
+            mycursor.execute("PRAGMA foreign_keys = ON;")
+            mycursor.execute(sql)
+        except Exception as e:
+            print(e)
+            return False
         mydb.commit()
         return True
     except:
-        return False
+        pass
     finally:
         mydb.close()
+
 
 
 # Getting the last transaction id in the database
@@ -361,7 +362,7 @@ def get_rm_transacs(by_Id=False,by_Today=False,by_custom=False):
         delta = end_date - start_date
         all_dates = []
         for i in range(delta.days + 1):
-            day = start_date  + datetime.timedelta(days=i)
+            day = end_date - datetime.timedelta(days=i)
             all_dates.append(day.strftime('%d-%m-%Y'))
         results=[]
         for each_date in all_dates:
