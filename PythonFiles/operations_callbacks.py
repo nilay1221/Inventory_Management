@@ -343,6 +343,18 @@ def readd_shade_material_on_modify(self):
             print(e)
     else:
         self.show_warning_info("Please fill out the info")
+
+
+def shade_view_all(self):
+    self.uiWindow.shade_new_viewall_details_table.setRowCount(0)
+    results = get_shade_all()
+    # print(results)
+    for row_number, row_data in enumerate(results):
+        self.uiWindow.shade_new_viewall_details_table.insertRow(row_number)
+        for column_number, data in enumerate(row_data):
+            self.uiWindow.shade_new_viewall_details_table.setItem(row_number, column_number, QtWidgets.QTableWidgetItem(str(data)))
+
+
 # Add Raw Material Transaction
 
 def set_raw_material_data(self):

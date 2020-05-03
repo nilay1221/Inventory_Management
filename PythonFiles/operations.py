@@ -103,14 +103,16 @@ def get_rm_data():
     try:
         sql = " SELECT * from Raw_Material order by product_code;"
         try:
-            results = mycursor.execute(sql)
+            mycursor.execute(sql)
             # print(results)
-            # results = mycursor.fetchall()
+            results = mycursor.fetchall()
             return results
         except:
             pass
     except:
         pass
+    finally:
+        mydb.close()
 
 
 # Delete new Raw Material
@@ -281,7 +283,22 @@ def modify_new_shade_material(shade_no,old_shade_no):
     finally:
         mydb.close()
 
-
+def get_shade_all():
+    mydb = sqlite3.connect(DATABASE_NAME)
+    mycursor = mydb.cursor()
+    try:
+        sql = " SELECT * from shade_number order by shade_number;"
+        try:
+            mycursor.execute(sql)
+            # print(results)
+            results = mycursor.fetchall()
+            return results
+        except:
+            pass
+    except:
+        pass
+    finally:
+        mydb.close()
 
 # Getting the last transaction id in the database
 def get_trans_id(tableName,fieldName):

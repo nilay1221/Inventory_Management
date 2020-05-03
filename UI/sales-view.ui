@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>sales_view</class>
+ <widget class="QMainWindow" name="sales_view">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>758</width>
+    <width>800</width>
     <height>600</height>
    </rect>
   </property>
@@ -14,13 +14,13 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="back">
+   <widget class="QPushButton" name="sales_view_back">
     <property name="geometry">
      <rect>
-      <x>50</x>
-      <y>20</y>
-      <width>131</width>
-      <height>61</height>
+      <x>48</x>
+      <y>53</y>
+      <width>101</width>
+      <height>41</height>
      </rect>
     </property>
     <property name="font">
@@ -32,85 +32,13 @@
      <string>Back</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="new_shade_view">
-    <property name="geometry">
-     <rect>
-      <x>330</x>
-      <y>410</y>
-      <width>151</width>
-      <height>61</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>VIEW</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="new_shade_add">
-    <property name="geometry">
-     <rect>
-      <x>330</x>
-      <y>100</y>
-      <width>151</width>
-      <height>61</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>ADD</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="new_shade_delete">
-    <property name="geometry">
-     <rect>
-      <x>330</x>
-      <y>310</y>
-      <width>151</width>
-      <height>71</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>DELETE</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="new_shade_modify">
-    <property name="geometry">
-     <rect>
-      <x>330</x>
-      <y>200</y>
-      <width>151</width>
-      <height>71</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>MODIFY</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>300</x>
-      <y>60</y>
-      <width>201</width>
-      <height>20</height>
+      <x>330</x>
+      <y>90</y>
+      <width>161</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="font">
@@ -119,12 +47,76 @@
      </font>
     </property>
     <property name="text">
-     <string>Shade Number</string>
+     <string>SALES</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
+   <widget class="QPushButton" name="sales_view_transaction">
+    <property name="geometry">
+     <rect>
+      <x>328</x>
+      <y>153</y>
+      <width>171</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Transaction</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="sales_view_today">
+    <property name="geometry">
+     <rect>
+      <x>328</x>
+      <y>243</y>
+      <width>171</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Today</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="sales_view_custom">
+    <property name="geometry">
+     <rect>
+      <x>330</x>
+      <y>330</y>
+      <width>171</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Custom Dates</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>26</height>
+    </rect>
+   </property>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
