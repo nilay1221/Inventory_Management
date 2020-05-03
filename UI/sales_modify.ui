@@ -1,51 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>sales_modify</class>
+ <widget class="QMainWindow" name="sales_modify">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1044</width>
-    <height>723</height>
+    <width>1089</width>
+    <height>818</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="label_3">
+   <widget class="QTableWidget" name="sales_addtable1">
     <property name="geometry">
      <rect>
-      <x>330</x>
-      <y>30</y>
-      <width>151</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Shade Number</string>
-    </property>
-   </widget>
-   <widget class="QTableWidget" name="shade_view_table">
-    <property name="geometry">
-     <rect>
-      <x>60</x>
-      <y>190</y>
-      <width>811</width>
-      <height>411</height>
+      <x>230</x>
+      <y>280</y>
+      <width>511</width>
+      <height>321</height>
      </rect>
     </property>
     <property name="rowCount">
-     <number>100</number>
+     <number>8</number>
     </property>
     <property name="columnCount">
-     <number>7</number>
+     <number>4</number>
     </property>
     <row/>
     <row/>
@@ -55,131 +37,6 @@
     <row/>
     <row/>
     <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <row/>
-    <column>
-     <property name="text">
-      <string>Transaction ID</string>
-     </property>
-     <property name="font">
-      <font>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>Customer</string>
-     </property>
-     <property name="font">
-      <font>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>Remark</string>
-     </property>
-     <property name="font">
-      <font>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-    </column>
     <column>
      <property name="text">
       <string>Shade Number</string>
@@ -224,7 +81,7 @@
       </font>
      </property>
     </column>
-    <item row="0" column="5">
+    <item row="0" column="2">
      <property name="text">
       <string/>
      </property>
@@ -232,7 +89,7 @@
       <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
      </property>
     </item>
-    <item row="1" column="5">
+    <item row="1" column="2">
      <property name="text">
       <string/>
      </property>
@@ -240,7 +97,7 @@
       <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
      </property>
     </item>
-    <item row="2" column="5">
+    <item row="2" column="2">
      <property name="text">
       <string/>
      </property>
@@ -248,7 +105,7 @@
       <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
      </property>
     </item>
-    <item row="3" column="5">
+    <item row="3" column="2">
      <property name="text">
       <string/>
      </property>
@@ -256,7 +113,7 @@
       <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
      </property>
     </item>
-    <item row="4" column="5">
+    <item row="4" column="2">
      <property name="text">
       <string/>
      </property>
@@ -264,7 +121,7 @@
       <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
      </property>
     </item>
-    <item row="5" column="5">
+    <item row="5" column="2">
      <property name="text">
       <string/>
      </property>
@@ -272,7 +129,7 @@
       <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
      </property>
     </item>
-    <item row="6" column="5">
+    <item row="6" column="2">
      <property name="text">
       <string/>
      </property>
@@ -280,7 +137,7 @@
       <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
      </property>
     </item>
-    <item row="7" column="5">
+    <item row="7" column="2">
      <property name="text">
       <string/>
      </property>
@@ -289,12 +146,32 @@
      </property>
     </item>
    </widget>
-   <widget class="QLabel" name="label_8">
+   <widget class="QPushButton" name="sales_modify_confirm">
     <property name="geometry">
      <rect>
-      <x>80</x>
-      <y>100</y>
-      <width>181</width>
+      <x>710</x>
+      <y>680</y>
+      <width>141</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Modify</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_6">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>190</y>
+      <width>161</width>
       <height>51</height>
      </rect>
     </property>
@@ -304,14 +181,134 @@
      </font>
     </property>
     <property name="text">
-     <string>Starting date : </string>
+     <string>Customer Name:</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="back_view_rm">
+   <widget class="QLabel" name="label_7">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>30</y>
+      <x>620</x>
+      <y>190</y>
+      <width>101</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Remark :</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="sales_modify_transid">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>130</y>
+      <width>151</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_5">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>120</y>
+      <width>161</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Transaction ID : </string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>630</x>
+      <y>120</y>
+      <width>71</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Date :</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="sales_modify_remark">
+    <property name="geometry">
+     <rect>
+      <x>720</x>
+      <y>200</y>
+      <width>151</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>50</y>
+      <width>151</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>SALES</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="sales_modify_backmenu">
+    <property name="geometry">
+     <rect>
+      <x>660</x>
+      <y>40</y>
+      <width>201</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>BACK TO MAIN MENU</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="sales_modify_back">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>50</y>
       <width>93</width>
       <height>28</height>
      </rect>
@@ -322,81 +319,42 @@
      </font>
     </property>
     <property name="text">
-     <string>Back</string>
+     <string>BACK</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="shade_view_start_date">
+   <widget class="QDateEdit" name="dateEdit_sales_modify">
     <property name="geometry">
      <rect>
-      <x>230</x>
-      <y>110</y>
-      <width>151</width>
+      <x>700</x>
+      <y>130</y>
+      <width>141</width>
       <height>41</height>
      </rect>
     </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string/>
+    <property name="displayFormat">
+     <string>dd/MM/yyyy</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QListView" name="listView">
     <property name="geometry">
      <rect>
-      <x>600</x>
-      <y>20</y>
-      <width>161</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>10</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Back to Main Menu</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_9">
-    <property name="geometry">
-     <rect>
-      <x>540</x>
-      <y>100</y>
-      <width>181</width>
+      <x>280</x>
+      <y>190</y>
+      <width>171</width>
       <height>51</height>
      </rect>
     </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Ending date : </string>
-    </property>
    </widget>
-   <widget class="QLineEdit" name="shade_view_end_date">
-    <property name="geometry">
-     <rect>
-      <x>690</x>
-      <y>110</y>
-      <width>151</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1089</width>
+     <height>26</height>
+    </rect>
+   </property>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
