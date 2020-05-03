@@ -279,10 +279,6 @@ def modify_new_shade_data(self):
             else:
                 try:
                     if readd_shade_material_on_modify(self):
-                        try:
-                            remove_previous_shade(OLD_SHADE_NUMBER)
-                        except:
-                            pass
                         self.show_info_popup("Details Modified Sucessfully")
                 except:
                     pass
@@ -299,18 +295,8 @@ def readd_shade_material_on_modify(self):
     shade_no = self.uiWindow.shade_new__modify_number.text()
     if shade_no and self.uiWindow.shade_new_modify_details_table.item(0, 0).text():
         try:
-            if add_new_shade_material(shade_no):
-                for i in range(10):
-                    try:
-                        self.uiWindow.shade_new_modify_details_table.item(i, 0).text()
-                        row_data0 = self.uiWindow.shade_new_modify_details_table.item(i, 0).text()
-                        row_data2 = self.uiWindow.shade_new_modify_details_table.item(i, 2).text()
-                        try:
-                            add_madeup_of(shade_no, row_data0, row_data2)
-                        except:
-                            pass
-                    except:
-                        break
+            print("in try")
+            if modify_new_shade_material(shade_no,OLD_SHADE_NUMBER):
                 return True
             else:
                 self.show_warning_info("Shade Number Already Exists")
@@ -406,10 +392,17 @@ def view_rm_by_today(self):
     self.uiWindow.rm_view_table_5.setRowCount(0)
     results = get_rm_transacs(by_Today=True)
     if results:
-            for row in range(len(results)):
-                self.uiWindow.rm_view_table_5.insertRow(row)
-                for column in range(len(results[row])):
+        trans_list=[]
+        for row in range(len(results)):
+            self.uiWindow.rm_view_table_5.insertRow(row)
+            for column in range(len(results[row])):
+                if column == 0:
+                    if str(results[row][column]) not in trans_list:
+                        trans_list.append(str(results[row][column]))
+                        self.uiWindow.rm_view_table_5.setItem(row,column,QtWidgets.QTableWidgetItem(str(results[row][column])))
+                else:
                     self.uiWindow.rm_view_table_5.setItem(row,column,QtWidgets.QTableWidgetItem(str(results[row][column])))
+
     else:
         self.show_info_popup("No Transactions Done Today")
 
@@ -473,6 +466,7 @@ def set_modify_rm(self):
                     value = results[1][row][column]
                     # print(value)
                     self.uiWindow.rm_view_table.setItem(row,column,QtWidgets.QTableWidgetItem(str(value)))
+            self.uiWindow.rm_view_table.setRowCount(8)
 
     else:
         self.show_warning_info("Invalid Transaction Code")
@@ -549,11 +543,18 @@ def view_by_custom_dates(self):
         results = get_rm_transacs(by_custom=[x,y])
         if results:
             self.uiWindow.rm_view_table_3.setRowCount(0)
+            trans_list=[]
             for each_list in results: 
                 for row in range(len(each_list)):
                     self.uiWindow.rm_view_table_3.insertRow(row)
                     for column in range(len(each_list[row])):
-                        self.uiWindow.rm_view_table_3.setItem(row,column,QtWidgets.QTableWidgetItem(str(each_list[row][column])))
+                        if column ==0:
+                            if str(each_list[row][column]) not in trans_list:
+                                trans_list.append(str(each_list[row][column]))
+                                self.uiWindow.rm_view_table_3.setItem(row,column,QtWidgets.QTableWidgetItem(str(each_list[row][column])))
+                        else:
+                            self.uiWindow.rm_view_table_3.setItem(row, column, QtWidgets.QTableWidgetItem(
+                                str(each_list[row][column])))
         else:
             pass
     else:

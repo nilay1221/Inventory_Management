@@ -221,6 +221,7 @@ class MainWindow(QMainWindow):
         self.uiWindow.shade_new__modify_number.returnPressed.connect(
             lambda: operations_callbacks.show_new_shade_modify_info(self))
         self.uiWindow.rm_new_delete_confirm_2.clicked.connect(lambda: operations_callbacks.del_new_shade(self))
+        self.uiWindow.rm_new_modify_confirm_2.clicked.connect(lambda :operations_callbacks.modify_new_shade_data(self))
         self.uiWindow.rm_add_2.clicked.connect(lambda : operations_callbacks.set_raw_material_data(self))
         self.uiWindow.rm_confirm.clicked.connect(lambda : operations_callbacks.add_raw_material_callback(self))
         self.uiWindow.rw_view_transaction_id.returnPressed.connect(lambda:operations_callbacks.view_rm_by_id(self))
