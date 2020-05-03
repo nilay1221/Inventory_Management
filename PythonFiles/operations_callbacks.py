@@ -66,8 +66,8 @@ def modify_new_rm_data(self):
                 pass
         else:
             try:
-                modify_info(OLD_PRODUCT_CODE, product_name, product_price, product_code_changed=product_code)
-                self.show_info_popup("Details Modified Sucessfully")
+                # modify_info(OLD_PRODUCT_CODE, product_name, product_price, product_code_changed=product_code)
+                self.show_warning_info("Cannot Modify Product Code")
             except:
                 pass
         self.uiWindow.new_rm_modify_product_code.clear()
