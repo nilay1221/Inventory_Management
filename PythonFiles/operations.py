@@ -218,7 +218,7 @@ def new_shade_delete(shade_no):
     mycursor = mydb.cursor()
     try:
         sql = f"DELETE FROM shade_number WHERE shade_number = {shade_no};"
-        mycursor.execute("PRAGMA foreign_keys = ON;")
+        mycursor.execute("PRAGMA foreign_keys = OFF;")
         # mycursor.execute("PRAGMA foreign_keys")
         # result=mycursor.fetchall()
         # print(result)
