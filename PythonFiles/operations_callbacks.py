@@ -509,7 +509,7 @@ def set_modify_rm(self):
             self.uiWindow.rm_modify_date.setText(str(date))
             self.uiWindow.rm_modify_remark.setText(str(remark))
             self.uiWindow.rm_modify_customer.setCurrentText(customer)
-            self.uiWindow.rm_view_table.setRowCount(8)
+            self.uiWindow.rm_view_table.setRowCount(0)
             for row in range(len(results[1])):
                 self.uiWindow.rm_view_table.insertRow(row)
                 for column in range(len(results[1][row])):
@@ -664,7 +664,7 @@ def set_total_quantity(row,column,self,tableWidget1,tableWidget2,quantitywidget)
                 percentage = float(tableWidget2.item(i,2).text())
                 # print(percentage)
                 quantity = (percentage * total_quantity)*10
-                price = quantity * float(ORIGIGNAL_PRICES[i])
+                price = (quantity * float(ORIGIGNAL_PRICES[i]))/1000
                 tableWidget2.setItem(i,3,QtWidgets.QTableWidgetItem(str(quantity)))
                 tableWidget2.setItem(i,4,QtWidgets.QTableWidgetItem(str(price)))
             except:
@@ -836,7 +836,7 @@ def set_modify_shade_transaction(self):
         self.uiWindow.shade_number_modify.setText(str(trans_details[3]))
         table1_details = results['table1_details']
         # print(table1_details)
-        self.uiWindow.shade_addtable_3.setRowCount(8)
+        self.uiWindow.shade_addtable_3.setRowCount(0)
         total_quantity = 0 
         for each_row in range(len(table1_details)):
             self.uiWindow.shade_addtable_3.insertRow(each_row)
@@ -847,6 +847,7 @@ def set_modify_shade_transaction(self):
         table2_details = results['table2_detials']
         self.uiWindow.shade_add_total_3.setText(str(total_quantity))
         set_shade_number_details(self,self.uiWindow.shade_number_modify,self.uiWindow.shade_addtable_3,self.uiWindow.shade_colortable_3,self.uiWindow.shade_add_total_3)
+        self.uiWindow.shade_addtable_3.setRowCount(8)
         # self.uiWindow.shade_colortable_3.setRowCount(10)
         # for row in range(len(table2_details)):
         #     self.uiWindow.shade_colortable_3.insertRow(row)
