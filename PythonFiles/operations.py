@@ -223,6 +223,8 @@ def new_shade_delete(shade_no):
         # result=mycursor.fetchall()
         # print(result)
         mycursor.execute(sql)
+        sql=f"Delete from madeup_of where shade_number = {shade_no};"
+        mycursor.execute(sql)
         mydb.commit()
         return True
     except:
