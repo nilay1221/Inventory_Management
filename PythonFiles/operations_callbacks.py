@@ -295,7 +295,6 @@ def readd_shade_material_on_modify(self):
     shade_no = self.uiWindow.shade_new__modify_number.text()
     if shade_no and self.uiWindow.shade_new_modify_details_table.item(0, 0).text():
         try:
-            print("in try")
             if modify_new_shade_material(shade_no,OLD_SHADE_NUMBER):
                 return True
             else:
