@@ -37,6 +37,7 @@ pagesDict = {
         'new_shade_modify':28,
         'new_shade_delete':29,
         'new_shade_view':30,
+        'new_shade_view_all':31,
     }
 
 class MainWindow(QMainWindow):
@@ -123,6 +124,8 @@ class MainWindow(QMainWindow):
         self.uiWindow.pushButton_22.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['Home']))
         self.uiWindow.pushButton_23.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['Home']))
         self.uiWindow.pushButton_24.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['Home']))
+        self.uiWindow.pushButton_26.clicked.connect(
+            lambda: self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['Home']))
         self.uiWindow.back_add_rm_6.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['Home']))
         self.uiWindow.back_3.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['Home']))
         self.uiWindow.new_rm_add.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['new_rm_entry']))
@@ -138,9 +141,13 @@ class MainWindow(QMainWindow):
         self.uiWindow.new_shade_modify.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['new_shade_modify']))
         self.uiWindow.new_shade_delete.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['new_shade_delete']))
         self.uiWindow.new_shade_view.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['new_shade_view']))
+        self.uiWindow.new_shade_view_all.clicked.connect(
+            lambda: self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['new_shade_view_all']))
         self.uiWindow.back_add_rm_10.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['new_shade_operations']))
         self.uiWindow.back_add_rm_11.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['new_shade_operations']))
         self.uiWindow.back_add_rm_12.clicked.connect(lambda : self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['new_shade_operations']))
+        self.uiWindow.back_add_rm_13.clicked.connect(
+            lambda: self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['new_shade_operations']))
         self.uiWindow.new_rm_delete_product_name.setReadOnly(True)
         self.uiWindow.new_rm_delete_product_price.setReadOnly(True)
         self.uiWindow.new_rm_modify_product_name.setReadOnly(True)
@@ -224,6 +231,7 @@ class MainWindow(QMainWindow):
         self.uiWindow.rm_new_modify_confirm_2.clicked.connect(lambda :operations_callbacks.modify_new_shade_data(self))
         self.uiWindow.shade_new_modify_details_table.cellChanged.connect(lambda row, column: operations_callbacks.display_product_name(row, column, self, 0,
                                                                           self.uiWindow.shade_new_modify_details_table))
+        self.uiWindow.new_shade_view_all.clicked.connect(lambda : operations_callbacks.shade_view_all(self))
         self.uiWindow.rm_add_2.clicked.connect(lambda : operations_callbacks.set_raw_material_data(self))
         self.uiWindow.rm_confirm.clicked.connect(lambda : operations_callbacks.add_raw_material_callback(self))
         self.uiWindow.rw_view_transaction_id.returnPressed.connect(lambda:operations_callbacks.view_rm_by_id(self))
