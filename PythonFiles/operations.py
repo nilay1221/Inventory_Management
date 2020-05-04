@@ -635,4 +635,4 @@ def get_raw_trans(shade_trans_id):
     finally:
         mydb.close()
 
-# print(delete_shade_trans
+# print(delete_shade_trans)

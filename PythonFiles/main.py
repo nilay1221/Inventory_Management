@@ -276,7 +276,6 @@ class MainWindow(QMainWindow):
         self.uiWindow.shade_colortable_2.cellChanged.connect(lambda row,column: operations_callbacks.display_product_name(row,column,self,0,self.uiWindow.shade_colortable_2))
         self.uiWindow.shade_addtable_4.cellChanged.connect(lambda row,column: operations_callbacks.display_product_name(row,column,self,0,self.uiWindow.shade_addtable_4))
         self.uiWindow.shade_colortable_4.cellChanged.connect(lambda row,column: operations_callbacks.display_product_name(row,column,self,0,self.uiWindow.shade_colortable_4))
-
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)

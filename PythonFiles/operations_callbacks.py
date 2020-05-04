@@ -376,34 +376,36 @@ def add_raw_material_callback(self):
     customer = customer_widget.currentText()
     remark = remark_widget.text()
     if customer and remark:
-        products = []
-        for i in range(8):
-            try:
-                if self.uiWindow.rm_addtable.item(i,0).text() and self.uiWindow.rm_addtable.item(i,2).text():
-                    product_code = self.uiWindow.rm_addtable.item(i,0).text()
-                    quantity = self.uiWindow.rm_addtable.item(i,2).text()
-                    products.append((product_code,float(quantity)))
-            except:
+        if check_for_no_product_code(self.uiWindow.rm_addtable):
+            products = []
+            for i in range(8):
                 try:
-                    self.uiWindow.rm_addtable.item(i,0).text()
-                    self.show_warning_info("Please fill info")
-                    break
+                    if self.uiWindow.rm_addtable.item(i,0).text() and self.uiWindow.rm_addtable.item(i,2).text():
+                        product_code = self.uiWindow.rm_addtable.item(i,0).text()
+                        quantity = self.uiWindow.rm_addtable.item(i,2).text()
+                        products.append((product_code,float(quantity)))
                 except:
-                    print("inside exception")
-                    if products:
-                        # print(products)
-                        if add_raw_material_data(trans_id,date,customer,remark,products):
-                            # print("Inside")
-                            set_raw_material_data(self)
-                            customer_widget.clearEditText()
-                            remark_widget.clear()
-                            self.uiWindow.rm_addtable.clearContents()
-                            self.show_info_popup("Transaction Added Sucessfully")
-                            break
-                    else:
+                    try:
+                        self.uiWindow.rm_addtable.item(i,0).text()
                         self.show_warning_info("Please fill info")
                         break
-        
+                    except:
+                        print("inside exception")
+                        if products:
+                            # print(products)
+                            if add_raw_material_data(trans_id,date,customer,remark,products):
+                                # print("Inside")
+                                set_raw_material_data(self)
+                                customer_widget.clearEditText()
+                                remark_widget.clear()
+                                self.uiWindow.rm_addtable.clearContents()
+                                self.show_info_popup("Transaction Added Sucessfully")
+                                break
+                        else:
+                            self.show_warning_info("Please fill info")
+                            break
+        else:
+            self.show_warning_info("Please fill out from available product code")           
     else:
         self.show_warning_info("Please fill out the form")
 
@@ -531,11 +533,11 @@ def set_modify_rm(self):
 
 
 def modify_rm(self):
-    print("Inside")
+    # print("Inside")
     trans_id = "RMT" + str(self.uiWindow.rw_modify_transaction_id.text()).zfill(5)
     if check_rm_transacs(trans_id):
         delete_rm_transacs(trans_id)
-        print("Deleted")
+        # print("Deleted")
         trans_id_widget = self.uiWindow.rw_modify_transaction_id
         date_widget = self.uiWindow.rm_modify_date
         customer_widget = self.uiWindow.rm_modify_customer
@@ -686,58 +688,63 @@ def confirm_add_shade_number(self):
     remark = remark_widget.text()
     shade_number = shade_number_widget.text()
     if trans_id and date and customer and remark and shade_number:
-        try:
-            row_count_1 = self.uiWindow.shade_addtable.rowCount()
-            row_count_2 = self.uiWindow.shade_colortable.rowCount()
+        if check_for_no_product_code(self.uiWindow.shade_addtable):
             try:
-                results = []
-                raw_details = []
-                for i in range(row_count_1):
-                        if self.uiWindow.shade_addtable.item(i,0).text() and self.uiWindow.shade_addtable.item(i,2).text():
-                            x = self.uiWindow.shade_addtable.item(i,0).text()
-                            y = self.uiWindow.shade_addtable.item(i,2).text()
-                            results.append((x,y))
-                            raw_details.append((x,y))
-                        else:
-                            raise Exception
-            except:
+                row_count_1 = self.uiWindow.shade_addtable.rowCount()
+                row_count_2 = self.uiWindow.shade_colortable.rowCount()
                 try:
-                    if i!=0:
-                        if not self.uiWindow.shade_addtable.item(i,0).text():
-                            raise Exception
-                    self.show_warning_info("Please complete table")
+                    results = []
+                    raw_details = []
+                    for i in range(row_count_1):
+                            if self.uiWindow.shade_addtable.item(i,0).text() and self.uiWindow.shade_addtable.item(i,2).text():
+                                x = self.uiWindow.shade_addtable.item(i,0).text()
+                                y = self.uiWindow.shade_addtable.item(i,2).text()
+                                results.append((x,y))
+                                raw_details.append((x,y))
+                            else:
+                                raise Exception
                 except:
-                    for i in range(row_count_2):
-                        x = self.uiWindow.shade_colortable.item(i,0).text()
-                        y = float(self.uiWindow.shade_colortable.item(i,3).text())/1000
-                        for each in raw_details:
-                            if x == each[0]:
-                                # print(each[0])
-                                # print(x)
-                                raise Exception("Colour cannot be used")
-                        results.append((x,y))
-                        # raw_details.append((x,y))
-                    
-                    negative_trans_id = "SRT" + str(get_trans_id('rm_stock','SRT'))
-                    # print(results)
-                    if add_raw_material_data(negative_trans_id,date,customer,remark,results,type="OUT"):
-                        add_shade_stock_trans(trans_id,date,customer,remark,shade_number,raw_details)
-                        add_into_duplicates(trans_id,negative_trans_id)
-                        self.show_info_popup("Transaction Completed Sucessfully")
-                        set_shade_number_transacs(self)
-                        self.uiWindow.shade_customer.clearEditText()
-                        self.uiWindow.shade_remark.clear()
-                        self.uiWindow.shade_number_add.clear()
-                        self.uiWindow.shade_addtable.clearContents()
-                        self.uiWindow.shade_colortable.clearContents()
-                        self.uiWindow.shade_add_total.clear()
+                    try:
+                        if i!=0:
+                            if not self.uiWindow.shade_addtable.item(i,0).text():
+                                raise Exception
+                        self.show_warning_info("Please complete table")
+                    except:
+                        for i in range(row_count_2):
+                            x = self.uiWindow.shade_colortable.item(i,0).text()
+                            y = float(self.uiWindow.shade_colortable.item(i,3).text())/1000
+                            for each in raw_details:
+                                if x == each[0]:
+                                    # print(each[0])
+                                    # print(x)
+                                    raise Exception("Colour cannot be used")
+                            results.append((x,y))
+                            # raw_details.append((x,y))
+                        
+                        negative_trans_id = "SRT" + str(get_trans_id('rm_stock','SRT'))
+                        # print(results)
+                        if add_raw_material_data(negative_trans_id,date,customer,remark,results,type="OUT"):
+                            add_shade_stock_trans(trans_id,date,customer,remark,shade_number,raw_details)
+                            add_into_duplicates(trans_id,negative_trans_id)
+                            self.show_info_popup("Transaction Completed Sucessfully")
+                            set_shade_number_transacs(self)
+                            self.uiWindow.shade_customer.clearEditText()
+                            self.uiWindow.shade_remark.clear()
+                            self.uiWindow.shade_number_add.clear()
+                            self.uiWindow.shade_addtable.clearContents()
+                            self.uiWindow.shade_colortable.clearContents()
+                            self.uiWindow.shade_add_total.clear()
 
 
 
-                    else:
-                        self.show_warning_info("Transaction Unsucessfull")
-        except Exception as err:
-            self.show_warning_info(err.__str__())
+                        else:
+                            self.show_warning_info("Transaction Unsucessfull")
+            except Exception as err:
+                self.show_warning_info(err.__str__())
+        else:
+            self.show_warning_info("Please choose from available product codes")
+    else:
+        self.show_warning_info("Please fill out the info")
 
 def view_shade_stock_by_id(self):
     trans_id = "SNT" +  str(self.uiWindow.shade_view_transaction_id.text()).zfill(5)
@@ -980,3 +987,10 @@ def clear_shade_view_by_today(self):
     self.uiWindow.shade_colortable_4.clearContents()
     self.uiWindow.shade_colortable_4.setRowCount(0)
     self.uiWindow.shade_add_total_4.clear()
+
+def check_for_no_product_code(tableWidget):
+    results = tableWidget.findItems("No such product code",QtCore.Qt.MatchExactly)
+    if results:
+        return False
+    else:
+        return True
