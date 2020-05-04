@@ -40,8 +40,8 @@
    <widget class="QPushButton" name="pushButton_2">
     <property name="geometry">
      <rect>
-      <x>820</x>
-      <y>20</y>
+      <x>790</x>
+      <y>10</y>
       <width>291</width>
       <height>51</height>
      </rect>
@@ -59,17 +59,22 @@
       <height>41</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
     <property name="text">
      <string>SALES</string>
     </property>
    </widget>
-   <widget class="QTableWidget" name="sales_delete_table1">
+   <widget class="QTableWidget" name="sales_delete_table">
     <property name="geometry">
      <rect>
       <x>320</x>
       <y>280</y>
-      <width>541</width>
-      <height>421</height>
+      <width>531</width>
+      <height>401</height>
      </rect>
     </property>
     <row>
@@ -188,8 +193,8 @@
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>90</x>
-      <y>80</y>
+      <x>100</x>
+      <y>110</y>
       <width>151</width>
       <height>51</height>
      </rect>
@@ -206,8 +211,8 @@
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>90</x>
-      <y>179</y>
+      <x>100</x>
+      <y>200</y>
       <width>161</width>
       <height>31</height>
      </rect>
@@ -220,7 +225,7 @@
     <property name="geometry">
      <rect>
       <x>690</x>
-      <y>100</y>
+      <y>140</y>
       <width>71</width>
       <height>21</height>
      </rect>
@@ -233,7 +238,7 @@
     <property name="geometry">
      <rect>
       <x>670</x>
-      <y>170</y>
+      <y>190</y>
       <width>111</width>
       <height>41</height>
      </rect>
@@ -245,20 +250,10 @@
    <widget class="QListView" name="sales_delete_trans_id">
     <property name="geometry">
      <rect>
-      <x>260</x>
-      <y>80</y>
-      <width>256</width>
-      <height>61</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QListView" name="sales_delete_customer_name">
-    <property name="geometry">
-     <rect>
-      <x>260</x>
-      <y>170</y>
-      <width>256</width>
-      <height>61</height>
+      <x>280</x>
+      <y>120</y>
+      <width>171</width>
+      <height>41</height>
      </rect>
     </property>
    </widget>
@@ -266,24 +261,64 @@
     <property name="geometry">
      <rect>
       <x>800</x>
-      <y>170</y>
-      <width>256</width>
-      <height>61</height>
+      <y>200</y>
+      <width>261</width>
+      <height>31</height>
      </rect>
     </property>
    </widget>
-   <widget class="QDateEdit" name="dateEdit_SALES_dELETE">
+   <widget class="QListView" name="sales_delete_date">
     <property name="geometry">
      <rect>
-      <x>820</x>
-      <y>90</y>
-      <width>161</width>
+      <x>800</x>
+      <y>130</y>
+      <width>151</width>
       <height>41</height>
      </rect>
     </property>
-    <property name="displayFormat">
-     <string>dd/MM/yyyy</string>
+   </widget>
+   <widget class="QComboBox" name="sales_delete_customer">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>190</y>
+      <width>181</width>
+      <height>41</height>
+     </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="editable">
+     <bool>true</bool>
+    </property>
+    <item>
+     <property name="text">
+      <string/>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Rajesh</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Nishit</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Nilay</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Parth</string>
+     </property>
+    </item>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">

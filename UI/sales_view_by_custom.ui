@@ -142,6 +142,17 @@
     </column>
     <column>
      <property name="text">
+      <string>Date</string>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+    </column>
+    <column>
+     <property name="text">
       <string>Customer</string>
      </property>
      <property name="font">
@@ -206,18 +217,7 @@
       </font>
      </property>
     </column>
-    <column>
-     <property name="text">
-      <string>Date</string>
-     </property>
-     <property name="font">
-      <font>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-    </column>
-    <item row="0" column="5">
+    <item row="0" column="6">
      <property name="text">
       <string/>
      </property>
@@ -225,7 +225,7 @@
       <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
      </property>
     </item>
-    <item row="1" column="5">
+    <item row="1" column="6">
      <property name="text">
       <string/>
      </property>
@@ -233,7 +233,7 @@
       <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
      </property>
     </item>
-    <item row="2" column="5">
+    <item row="2" column="6">
      <property name="text">
       <string/>
      </property>
@@ -241,7 +241,7 @@
       <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
      </property>
     </item>
-    <item row="3" column="5">
+    <item row="3" column="6">
      <property name="text">
       <string/>
      </property>
@@ -249,7 +249,7 @@
       <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
      </property>
     </item>
-    <item row="4" column="5">
+    <item row="4" column="6">
      <property name="text">
       <string/>
      </property>
@@ -257,7 +257,7 @@
       <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
      </property>
     </item>
-    <item row="5" column="5">
+    <item row="5" column="6">
      <property name="text">
       <string/>
      </property>
@@ -265,7 +265,7 @@
       <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
      </property>
     </item>
-    <item row="6" column="5">
+    <item row="6" column="6">
      <property name="text">
       <string/>
      </property>
@@ -273,7 +273,7 @@
       <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
      </property>
     </item>
-    <item row="7" column="5">
+    <item row="7" column="6">
      <property name="text">
       <string/>
      </property>
