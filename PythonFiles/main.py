@@ -265,6 +265,18 @@ class MainWindow(QMainWindow):
         shortcut2 = QShortcut(QKeySequence('Return'),self.uiWindow.shade_view_end_date)
         shortcut2.activated.connect(lambda : operations_callbacks.shade_view_by_custom_dates(self))
         self.uiWindow.view_trans_2.clicked.connect(lambda:operations_callbacks.clear_shade_view_by_today(self))
+        self.uiWindow.shade_view_table_2.cellChanged.connect(lambda row,column:operations_callbacks.display_product_name(row,column,self,4,self.uiWindow.shade_view_table_2))
+        self.uiWindow.shade_view_table.cellChanged.connect(lambda row,column:operations_callbacks.display_product_name(row,column,self,4,self.uiWindow.shade_view_table))
+        self.uiWindow.rm_view_table_5.cellChanged.connect(lambda row,column:operations_callbacks.display_product_name(row,column,self,3,self.uiWindow.rm_view_table_5))
+        self.uiWindow.rm_view_table_3.cellChanged.connect(lambda row,column: operations_callbacks.display_product_name(row,column,self,4,self.uiWindow.rm_view_table_3))
+        self.uiWindow.rm_view_table_4.cellChanged.connect(lambda row,column: operations_callbacks.display_product_name(row,column,self,0,self.uiWindow.rm_view_table_4))
+        self.uiWindow.shade_addtable_3.cellChanged.connect(lambda row,column:operations_callbacks.display_product_name(row,column,self,0,self.uiWindow.shade_addtable_3))
+        self.uiWindow.rm_delete_table.cellChanged.connect(lambda row,column: operations_callbacks.display_product_name(row,column,self,0,self.uiWindow.rm_delete_table))
+        self.uiWindow.shade_addtable_2.cellChanged.connect(lambda row,column:operations_callbacks.display_product_name(row,column,self,0,self.uiWindow.shade_addtable_2))
+        self.uiWindow.shade_colortable_2.cellChanged.connect(lambda row,column: operations_callbacks.display_product_name(row,column,self,0,self.uiWindow.shade_colortable_2))
+        self.uiWindow.shade_addtable_4.cellChanged.connect(lambda row,column: operations_callbacks.display_product_name(row,column,self,0,self.uiWindow.shade_addtable_4))
+        self.uiWindow.shade_colortable_4.cellChanged.connect(lambda row,column: operations_callbacks.display_product_name(row,column,self,0,self.uiWindow.shade_colortable_4))
+
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)

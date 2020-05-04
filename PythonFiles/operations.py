@@ -66,7 +66,7 @@ def return_modify_info(product_code):
 def modify_info(product_code,product_name,product_price,product_code_changed=False):
     mydb = sqlite3.connect(DATABASE_NAME)
     mycursor = mydb.cursor()
-    foreign_key_support(mycursor)
+    # foreign_key_support(mycursor)
     try:
         if product_code_changed:
             sql = f"""
@@ -82,7 +82,7 @@ def modify_info(product_code,product_name,product_price,product_code_changed=Fal
             """
         # print(sql)
         try:
-            mycursor.execute("PRAGMA foreign_keys = ON;")
+            # mycursor.execute("PRAGMA foreign_keys = ON;")
             mycursor.execute(sql)
             mydb.commit()
         except Exception as e:
@@ -120,10 +120,10 @@ def get_rm_data():
 def delete_new_rm(product_code):
     mydb = sqlite3.connect(DATABASE_NAME)
     mycursor = mydb.cursor()
-    foreign_key_support(mycursor)
+    # foreign_key_support(mycursor)
     try:
         sql = f"DELETE FROM Raw_Material WHERE product_code = '{product_code}';"
-        mycursor.execute("PRAGMA foreign_keys = OFF;")
+        # mycursor.execute("PRAGMA foreign_keys = OFF;")
         #mycursor.execute("PRAGMA foreign_keys")
         #result=mycursor.fetchall()
         #print(result)
@@ -143,7 +143,7 @@ def get_product_name(code):
             mycursor.execute(sql)
             result = mycursor.fetchall()
             return result[0][0]
-        except:
+        except Exception as e:
             return "false"
     except:
         pass
@@ -354,10 +354,10 @@ def get_rm_transacs(by_Id=False,by_Today=False,by_custom=False):
         results = mycursor.fetchone()
         if results:
             sql = f"SELECT has_rm.product_code,'-',has_rm.quantity from has_rm WHERE has_rm.trans_id = '{trans_id}';"
-            print(sql)
+            # print(sql)
             mycursor.execute(sql)
             products = mycursor.fetchall()
-            print(products)
+            # print(products)
             return [results,products]
             pass
         else:
@@ -365,12 +365,10 @@ def get_rm_transacs(by_Id=False,by_Today=False,by_custom=False):
     if by_Today:
         by_Today = datetime.date.today().strftime("%d-%m-%Y")
         sql =f"""
-            SELECT rm_stock.trans_id,rm_stock.customer_id,rm_stock.remark,has_rm.product_code,raw_material.product_name,has_rm.quantity
+            SELECT rm_stock.trans_id,rm_stock.customer_id,rm_stock.remark,has_rm.product_code,'-',has_rm.quantity
             FROM rm_stock
             JOIN has_rm ON
             rm_stock.trans_id = has_rm.trans_id
-            JOIN raw_material ON
-            has_rm.product_code = raw_material.product_code
             WHERE rm_stock.date = '{by_Today}';
         """
         # print(sql)
@@ -388,12 +386,10 @@ def get_rm_transacs(by_Id=False,by_Today=False,by_custom=False):
         results=[]
         for each_date in all_dates:
             sql =f"""
-                SELECT rm_stock.trans_id,rm_stock.date,rm_stock.customer_id,rm_stock.remark,has_rm.product_code,raw_material.product_name,has_rm.quantity
+                SELECT rm_stock.trans_id,rm_stock.date,rm_stock.customer_id,rm_stock.remark,has_rm.product_code,'-',has_rm.quantity
                 FROM rm_stock
                 JOIN has_rm ON
                 rm_stock.trans_id = has_rm.trans_id
-                JOIN raw_material ON
-                has_rm.product_code = raw_material.product_code
                 WHERE rm_stock.date = '{each_date}';
             """
             try:
@@ -430,7 +426,7 @@ def check_rm_transacs(trans_id):
 def delete_rm_transacs(trans_id):
     mydb = sqlite3.connect(DATABASE_NAME)
     mycursor = mydb.cursor()
-    foreign_key_support(mycursor)
+    # foreign_key_support(mycursor)
     sql = f"DELETE from rm_stock where trans_id = '{trans_id}';"
     mycursor.execute(sql)
     mydb.commit()
@@ -536,16 +532,14 @@ def view_shade_transaction(by_Id=False,by_today=False,by_custom=False):
             trans_details = mycursor.fetchone()
             shade_number = trans_details[3]
             sql = f"""
-                    SELECT has_shade.product_code , raw_material.product_name ,has_shade.quantity 
+                    SELECT has_shade.product_code , '-' ,has_shade.quantity 
                     FROM has_shade
-                    JOIN raw_material on
-                    has_shade.product_code = raw_material.product_code
                     WHERE has_shade.trans_id = '{shade_trans_id}';
             """
             mycursor.execute(sql)
             table1_details = mycursor.fetchall()
             sql = f"""
-                SELECT has_rm.product_code,raw_material.product_name,madeup_of.product_percentage,has_rm.quantity*1000,has_rm.quantity * raw_material.product_price * 1000 FROM
+                SELECT has_rm.product_code,'-',madeup_of.product_percentage,has_rm.quantity*1000,has_rm.quantity * raw_material.product_price * 1000 FROM
                 has_rm
                 JOIN madeup_of ON
                 has_rm.product_code = madeup_of.product_code
@@ -565,11 +559,9 @@ def view_shade_transaction(by_Id=False,by_today=False,by_custom=False):
         if by_today:
             today_date = datetime.date.today().strftime('%d-%m-%Y')
             sql = f"""
-                 SELECT shade_stock.trans_id , shade_stock.customer_id , shade_stock.remark , shade_stock.shade_number , has_shade.product_code ,raw_material.product_name,has_shade.quantity FROM shade_stock
+                 SELECT shade_stock.trans_id , shade_stock.customer_id , shade_stock.remark , shade_stock.shade_number , has_shade.product_code ,'-',has_shade.quantity FROM shade_stock
                  JOIN has_shade
                  ON shade_stock.trans_id = has_shade.trans_id
-                 JOIN raw_material ON
-                 has_shade.product_code = raw_material.product_code
                  WHERE shade_stock.date = '{today_date}';
             """
             mycursor.execute(sql)
@@ -586,11 +578,9 @@ def view_shade_transaction(by_Id=False,by_today=False,by_custom=False):
             results=[]
             for each_date in all_dates:
                 sql = f"""
-                 SELECT shade_stock.trans_id , shade_stock.customer_id , shade_stock.remark , shade_stock.shade_number , has_shade.product_code ,raw_material.product_name,has_shade.quantity FROM shade_stock
+                 SELECT shade_stock.trans_id , shade_stock.customer_id , shade_stock.remark , shade_stock.shade_number , has_shade.product_code ,'-',has_shade.quantity FROM shade_stock
                  JOIN has_shade
                  ON shade_stock.trans_id = has_shade.trans_id
-                 JOIN raw_material ON
-                 has_shade.product_code = raw_material.product_code
                  WHERE shade_stock.date = '{each_date}';
                 """
                 try:

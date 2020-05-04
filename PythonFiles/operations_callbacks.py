@@ -426,7 +426,8 @@ def view_rm_by_id(self):
             for column in range(len(results[1][row])):
                 value = results[1][row][column]
                 # print(value)
-                self.uiWindow.rm_view_table_4.setItem(row,column,QtWidgets.QTableWidgetItem(str(value)))
+                if value != '-':
+                    self.uiWindow.rm_view_table_4.setItem(row,column,QtWidgets.QTableWidgetItem(str(value)))
     else:
         self.uiWindow.rw_view_transaction_id.clear()
         self.uiWindow.rm_view_date.clear()
@@ -450,7 +451,7 @@ def view_rm_by_today(self):
                     if str(results[row][column]) not in trans_list:
                         trans_list.append(str(results[row][column]))
                         self.uiWindow.rm_view_table_5.setItem(row,column,QtWidgets.QTableWidgetItem(str(results[row][column])))
-                else:
+                elif results[row][column] != '-':
                     self.uiWindow.rm_view_table_5.setItem(row,column,QtWidgets.QTableWidgetItem(str(results[row][column])))
 
     else:
@@ -458,7 +459,7 @@ def view_rm_by_today(self):
 
 def set_delete_rm(self):
     trans_id = "RMT" + str(self.uiWindow.rw_delete_transaction_id.text()).zfill(5)
-    print(trans_id)
+    # print(trans_id)
     if check_rm_transacs(trans_id) :
         results = get_rm_transacs(by_Id=trans_id)
         # print(results)
@@ -475,7 +476,8 @@ def set_delete_rm(self):
                 for column in range(len(results[1][row])):
                     value = results[1][row][column]
                     # print(value)
-                    self.uiWindow.rm_delete_table.setItem(row,column,QtWidgets.QTableWidgetItem(str(value)))
+                    if value != '-' :
+                        self.uiWindow.rm_delete_table.setItem(row,column,QtWidgets.QTableWidgetItem(str(value)))
 
     else:
         self.show_warning_info("Invalid Transaction Code")
@@ -603,7 +605,7 @@ def view_by_custom_dates(self):
                             if str(each_list[row][column]) not in trans_list:
                                 trans_list.append(str(each_list[row][column]))
                                 self.uiWindow.rm_view_table_3.setItem(row,column,QtWidgets.QTableWidgetItem(str(each_list[row][column])))
-                        else:
+                        elif each_list[row][column] != '-':
                             self.uiWindow.rm_view_table_3.setItem(row, column, QtWidgets.QTableWidgetItem(
                                 str(each_list[row][column])))
         else:
@@ -632,7 +634,8 @@ def set_shade_number_details(self,shadeNumberwidget,rawTable,shadeTable,addTotal
             for column in range(len(results[0])):
                 if column == 4:
                     ORIGIGNAL_PRICES.append(results[row][column])
-                shadeTable.setItem(row,column,QtWidgets.QTableWidgetItem(str(results[row][column])))
+                if results[row][column] != '-':
+                    shadeTable.setItem(row,column,QtWidgets.QTableWidgetItem(str(results[row][column])))
         if addTotal.text():
             # print("inside")
             set_total_quantity(0,2,self,rawTable,shadeTable,addTotal)
@@ -753,13 +756,15 @@ def view_shade_stock_by_id(self):
             for each_column in range(len(table1_details[each_row])):
                 if each_column == 2:
                     total_quantity += table1_details[each_row][each_column]
-                self.uiWindow.shade_addtable_4.setItem(each_row,each_column,QtWidgets.QTableWidgetItem(str(table1_details[each_row][each_column])))
+                if table1_details[each_row][each_column] != '-':
+                    self.uiWindow.shade_addtable_4.setItem(each_row,each_column,QtWidgets.QTableWidgetItem(str(table1_details[each_row][each_column])))
         table2_details = results['table2_detials']
         self.uiWindow.shade_colortable_4.setRowCount(0)
         for row in range(len(table2_details)):
             self.uiWindow.shade_colortable_4.insertRow(row)
             for column in range(len(table2_details[row])):
-                self.uiWindow.shade_colortable_4.setItem(row,column,QtWidgets.QTableWidgetItem(str(table2_details[row][column])))
+                if table2_details[row][column] != '-':
+                    self.uiWindow.shade_colortable_4.setItem(row,column,QtWidgets.QTableWidgetItem(str(table2_details[row][column])))
         self.uiWindow.shade_add_total_4.setText(str(total_quantity))
 
     else:
@@ -776,7 +781,8 @@ def view_shade_transaction_today(self):
         for row in range(len(results)):
             self.uiWindow.shade_view_table_2.insertRow(row)
             for column in range(len(results[row])):
-                self.uiWindow.shade_view_table_2.setItem(row,column,QtWidgets.QTableWidgetItem(str(results[row][column])))
+                if results[row][column] != '-':
+                    self.uiWindow.shade_view_table_2.setItem(row,column,QtWidgets.QTableWidgetItem(str(results[row][column])))
     else:
         self.show_info_popup("No Transactions Done Today")
 
@@ -798,13 +804,15 @@ def set_delete_shade_transaction(self):
             for each_column in range(len(table1_details[each_row])):
                 if each_column == 2:
                     total_quantity += table1_details[each_row][each_column]
-                self.uiWindow.shade_addtable_2.setItem(each_row,each_column,QtWidgets.QTableWidgetItem(str(table1_details[each_row][each_column])))
+                if table1_details[each_row][each_column] != '-':
+                    self.uiWindow.shade_addtable_2.setItem(each_row,each_column,QtWidgets.QTableWidgetItem(str(table1_details[each_row][each_column])))
         table2_details = results['table2_detials']
         self.uiWindow.shade_colortable_2.setRowCount(0)
         for row in range(len(table2_details)):
             self.uiWindow.shade_colortable_2.insertRow(row)
             for column in range(len(table2_details[row])):
-                self.uiWindow.shade_colortable_2.setItem(row,column,QtWidgets.QTableWidgetItem(str(table2_details[row][column])))
+                if table2_details[row][column] != '-':
+                    self.uiWindow.shade_colortable_2.setItem(row,column,QtWidgets.QTableWidgetItem(str(table2_details[row][column])))
         self.uiWindow.shade_add_total_2.setText(str(total_quantity))
     else:
         self.show_warning_info("Transaction id does not exists")
@@ -844,7 +852,8 @@ def set_modify_shade_transaction(self):
             for each_column in range(len(table1_details[each_row])):
                 if each_column == 2:
                     total_quantity += table1_details[each_row][each_column]
-                self.uiWindow.shade_addtable_3.setItem(each_row,each_column,QtWidgets.QTableWidgetItem(str(table1_details[each_row][each_column])))
+                if table1_details[each_row][each_column] != '-':
+                    self.uiWindow.shade_addtable_3.setItem(each_row,each_column,QtWidgets.QTableWidgetItem(str(table1_details[each_row][each_column])))
         table2_details = results['table2_detials']
         self.uiWindow.shade_add_total_3.setText(str(total_quantity))
         set_shade_number_details(self,self.uiWindow.shade_number_modify,self.uiWindow.shade_addtable_3,self.uiWindow.shade_colortable_3,self.uiWindow.shade_add_total_3)
@@ -950,7 +959,7 @@ def shade_view_by_custom_dates(self):
                             if str(each_list[row][column]) not in trans_list:
                                 trans_list.append(str(each_list[row][column]))
                                 self.uiWindow.shade_view_table.setItem(row,column,QtWidgets.QTableWidgetItem(str(each_list[row][column])))
-                        else:
+                        elif each_list[row][column] != '-':
                             self.uiWindow.shade_view_table.setItem(row, column, QtWidgets.QTableWidgetItem(
                                 str(each_list[row][column])))
         else:
