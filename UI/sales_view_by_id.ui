@@ -164,7 +164,7 @@
      </font>
     </property>
    </widget>
-   <widget class="QTableWidget" name="sales_view_by_id_table1">
+   <widget class="QTableWidget" name="sales_view_by_id_table">
     <property name="geometry">
      <rect>
       <x>230</x>
@@ -373,17 +373,19 @@
      <string>Customer Name:</string>
     </property>
    </widget>
-   <widget class="QDateEdit" name="dateEdit">
+   <widget class="QLineEdit" name="sales_view_by_id_date">
     <property name="geometry">
      <rect>
-      <x>690</x>
+      <x>710</x>
       <y>170</y>
-      <width>161</width>
-      <height>51</height>
+      <width>151</width>
+      <height>41</height>
      </rect>
     </property>
-    <property name="displayFormat">
-     <string>dd/MM/yyyy</string>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
     </property>
    </widget>
   </widget>

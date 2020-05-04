@@ -14,13 +14,13 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QTableWidget" name="sales_addtable1">
+   <widget class="QTableWidget" name="sales_modify_table">
     <property name="geometry">
      <rect>
       <x>230</x>
       <y>280</y>
-      <width>511</width>
-      <height>321</height>
+      <width>521</width>
+      <height>341</height>
      </rect>
     </property>
     <property name="rowCount">
@@ -205,9 +205,9 @@
    <widget class="QLineEdit" name="sales_modify_transid">
     <property name="geometry">
      <rect>
-      <x>280</x>
+      <x>270</x>
       <y>130</y>
-      <width>151</width>
+      <width>181</width>
       <height>41</height>
      </rect>
     </property>
@@ -322,28 +322,63 @@
      <string>BACK</string>
     </property>
    </widget>
-   <widget class="QDateEdit" name="dateEdit_sales_modify">
+   <widget class="QLineEdit" name="sales_modify_date">
     <property name="geometry">
      <rect>
-      <x>700</x>
+      <x>720</x>
       <y>130</y>
-      <width>141</width>
+      <width>151</width>
       <height>41</height>
      </rect>
     </property>
-    <property name="displayFormat">
-     <string>dd/MM/yyyy</string>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
     </property>
    </widget>
-   <widget class="QListView" name="listView">
+   <widget class="QComboBox" name="sales_modify_customer">
     <property name="geometry">
      <rect>
-      <x>280</x>
-      <y>190</y>
-      <width>171</width>
-      <height>51</height>
+      <x>270</x>
+      <y>200</y>
+      <width>181</width>
+      <height>41</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="editable">
+     <bool>true</bool>
+    </property>
+    <item>
+     <property name="text">
+      <string/>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Rajesh</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Nishit</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Nilay</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Parth</string>
+     </property>
+    </item>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">

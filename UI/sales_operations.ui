@@ -90,7 +90,7 @@
     <string>DELETE</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="sales_delete_2">
+  <widget class="QPushButton" name="sales_view">
    <property name="geometry">
     <rect>
      <x>290</x>
