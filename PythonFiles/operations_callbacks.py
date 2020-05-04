@@ -515,7 +515,8 @@ def set_modify_rm(self):
                 for column in range(len(results[1][row])):
                     value = results[1][row][column]
                     # print(value)
-                    self.uiWindow.rm_view_table.setItem(row,column,QtWidgets.QTableWidgetItem(str(value)))
+                    if str(value)!='-':
+                        self.uiWindow.rm_view_table.setItem(row,column,QtWidgets.QTableWidgetItem(str(value)))
             self.uiWindow.rm_view_table.setRowCount(8)
 
     else:

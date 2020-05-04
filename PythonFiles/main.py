@@ -239,6 +239,9 @@ class MainWindow(QMainWindow):
         self.uiWindow.rw_delete_transaction_id.returnPressed.connect(lambda : operations_callbacks.set_delete_rm(self))
         self.uiWindow.rm_delete_confirm.clicked.connect(self.delete_confirm_dialog_rm)
         self.uiWindow.rw_modify_transaction_id.returnPressed.connect(lambda : operations_callbacks.set_modify_rm(self))
+        self.uiWindow.rm_view_table.cellChanged.connect(
+            lambda row, column: operations_callbacks.display_product_name(row, column, self, 0,
+                                                                          self.uiWindow.rm_view_table))
         self.uiWindow.rm_modify_confirm.clicked.connect(lambda: operations_callbacks.modify_rm(self))
         self.uiWindow.view_trans.clicked.connect(lambda :operations_callbacks.clear_view_by_id(self))
         # self.uiWindow.rw_view_starting_date_3.dateChanged.connect(lambda : operations_callbacks.view_by_custom_dates(self))

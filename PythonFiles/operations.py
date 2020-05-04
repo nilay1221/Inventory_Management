@@ -123,7 +123,7 @@ def delete_new_rm(product_code):
     foreign_key_support(mycursor)
     try:
         sql = f"DELETE FROM Raw_Material WHERE product_code = '{product_code}';"
-        mycursor.execute("PRAGMA foreign_keys = ON;")
+        mycursor.execute("PRAGMA foreign_keys = OFF;")
         #mycursor.execute("PRAGMA foreign_keys")
         #result=mycursor.fetchall()
         #print(result)
@@ -218,10 +218,12 @@ def new_shade_delete(shade_no):
     mycursor = mydb.cursor()
     try:
         sql = f"DELETE FROM shade_number WHERE shade_number = {shade_no};"
-        mycursor.execute("PRAGMA foreign_keys = ON;")
+        mycursor.execute("PRAGMA foreign_keys = OFF;")
         # mycursor.execute("PRAGMA foreign_keys")
         # result=mycursor.fetchall()
         # print(result)
+        mycursor.execute(sql)
+        sql=f"Delete from madeup_of where shade_number = {shade_no};"
         mycursor.execute(sql)
         mydb.commit()
         return True
@@ -351,9 +353,11 @@ def get_rm_transacs(by_Id=False,by_Today=False,by_custom=False):
         mycursor.execute(sql)
         results = mycursor.fetchone()
         if results:
-            sql = f"SELECT has_rm.product_code,raw_material.product_name,has_rm.quantity from raw_material JOIN has_rm ON has_rm.product_code = raw_material.product_code WHERE has_rm.trans_id = '{trans_id}';"
+            sql = f"SELECT has_rm.product_code,'-',has_rm.quantity from has_rm WHERE has_rm.trans_id = '{trans_id}';"
+            print(sql)
             mycursor.execute(sql)
             products = mycursor.fetchall()
+            print(products)
             return [results,products]
             pass
         else:
