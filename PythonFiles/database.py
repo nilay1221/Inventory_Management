@@ -22,7 +22,10 @@ MyQuery("""
     CREATE TABLE consists_of(
         type varchar(255),
         quantity real NOT NULL,
-        product_code NOT NULL,
+        product_code varchar(255) NOT NULL,
+        trans_id varchar(255) NOT NULL,
+        shade_number varchar(255) NOT NULL,
+        FOREIGN KEY(trans_id) REFERENCES sales(trans_id) ON UPDATE CASCADE ON DELETE CASCADE,
         FOREIGN KEY(product_code) REFERENCES Raw_Material(product_code) ON UPDATE CASCADE ON DELETE CASCADE
     );
 """).sql_execute(mycursor)
@@ -183,10 +186,10 @@ CREATE TABLE sn_closing_stock(
 mydb.commit()
 # mycursor.execute(sql)
 
-SELECT rm_stock.trans_id,rm_stock.customer_id,rm_stock.remark,has_rm.product_code,'-',has_rm.quantity
-            FROM rm_stock
-            JOIN has_rm ON
-            rm_stock.trans_id = has_rm.trans_id
-            JOIN raw_material ON
-            has_rm.product_code = raw_material.product_code
-            WHERE rm_stock.date = '{by_Today}';
+# SELECT rm_stock.trans_id,rm_stock.customer_id,rm_stock.remark,has_rm.product_code,'-',has_rm.quantity
+#             FROM rm_stock
+#             JOIN has_rm ON
+#             rm_stock.trans_id = has_rm.trans_id
+#             JOIN raw_material ON
+#             has_rm.product_code = raw_material.product_code
+#             WHERE rm_stock.date = '{by_Today}';
