@@ -48,7 +48,6 @@ MyQuery("""
         trans_id varchar(255) NOT NULL,
         product_code varchar(255) NOT NULL,
         product_type varchar(2),
-        FOREIGN KEY(product_type) REFERENCES Raw_Material(product_type) ON UPDATE CASCADE ON DELETE CASCADE,
         FOREIGN KEY(trans_id) REFERENCES Rm_Stock(Trans_id) ON UPDATE CASCADE ON DELETE CASCADE,
         FOREIGN KEY(product_code) REFERENCES Raw_Material(product_code) ON UPDATE CASCADE ON DELETE CASCADE,
         PRIMARY KEY (trans_id,product_code,product_type)
