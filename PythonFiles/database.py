@@ -15,7 +15,8 @@ class MyQuery:
 MyQuery("""CREATE TABLE Raw_Material(
     product_code varchar(255) NOT NULL UNIQUE PRIMARY KEY ,
     product_name varchar(255),
-    product_price integer
+    product_price integer,
+    product_type varchar(2)
 ); """).sql_execute(mycursor)
 
 MyQuery("""
@@ -46,9 +47,11 @@ MyQuery("""
         quantity real NOT NULL,
         trans_id varchar(255) NOT NULL,
         product_code varchar(255) NOT NULL,
+        product_type varchar(2),
+        FOREIGN KEY(product_type) REFERENCES Raw_Material(product_type) ON UPDATE CASCADE ON DELETE CASCADE,
         FOREIGN KEY(trans_id) REFERENCES Rm_Stock(Trans_id) ON UPDATE CASCADE ON DELETE CASCADE,
         FOREIGN KEY(product_code) REFERENCES Raw_Material(product_code) ON UPDATE CASCADE ON DELETE CASCADE,
-        PRIMARY KEY (trans_id,product_code)
+        PRIMARY KEY (trans_id,product_code,product_type)
     );""").sql_execute(mycursor)
 
 MyQuery("""
