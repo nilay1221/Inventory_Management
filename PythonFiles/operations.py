@@ -417,15 +417,19 @@ def get_rm_transacs(by_Id=False,by_Today=False,by_custom=False):
 def check_rm_transacs(trans_id):
     mydb = sqlite3.connect(DATABASE_NAME)
     mycursor = mydb.cursor()
-    sql = f""" SELECT EXISTS(SELECT trans_id from rm_stock where trans_id = '{trans_id}') ; """
-    mycursor.execute(sql)
-    results = mycursor.fetchone()
-    # print(results)
-    mydb.close()
-    if results[0] == 1:
-        return True
-    else:
-        return False
+    try:
+        sql = f""" SELECT EXISTS(SELECT trans_id from rm_stock where trans_id = '{trans_id}') ; """
+        mycursor.execute(sql)
+        results = mycursor.fetchone()
+        # print(results)
+        if results[0] == 1:
+            return True
+        else:
+            return False
+    except:
+        pass
+    finally:
+        mydb.close()
 
 def delete_rm_transacs(trans_id):
     mydb = sqlite3.connect(DATABASE_NAME)
@@ -745,3 +749,29 @@ def get_shade(shade):
         pass
     finally:
         mydb.close()
+
+
+def check_sales_transacs(trans_id):
+    mydb = sqlite3.connect(DATABASE_NAME)
+    mycursor = mydb.cursor()
+    try:
+        sql = f""" SELECT EXISTS(SELECT trans_id from sales where trans_id = '{trans_id}'); """
+        mycursor.execute(sql)
+        results = mycursor.fetchone()
+        return results[0]
+    except:
+        pass
+    finally:
+        mydb.close()
+
+
+def delete_sales_transacs(trans_id):
+    mydb = sqlite3.connect(DATABASE_NAME)
+    mycursor = mydb.cursor()
+    foreign_key_support(mycursor)
+    sql = f"DELETE from sales where trans_id = '{trans_id}';"
+    mycursor.execute(sql)
+    mydb.commit()
+    mydb.close()
+
+

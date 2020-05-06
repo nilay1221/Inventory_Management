@@ -1191,3 +1191,45 @@ def view_sales_by_custom(self):
             pass
     else:
         self.show_warning_info("Please select correct date")
+
+
+def set_delete_sales(self):
+    trans_id = "SLS" + str(self.uiWindow.sales_delete_trans_id.text()).zfill(5)
+    if check_sales_transacs(trans_id):
+        results = get_sales_transacs(by_Id=trans_id)
+        # print(results)
+        if results:
+            date = results[0][1]
+            remark = results[0][2]
+            customer = results[0][3]
+            self.uiWindow.sales_delete_date.setText(str(date))
+            self.uiWindow.sales_delete_remark.setText(str(remark))
+            self.uiWindow.sales_delete_customer.setCurrentText(customer)
+            self.uiWindow.sales_delete_table.setRowCount(0)
+            for row in range(len(results[1])):
+                self.uiWindow.sales_delete_table.insertRow(row)
+                for column in range(len(results[1][row])):
+                    value = results[1][row][column]
+                    # print(value)
+                    if value != '-' :
+                        self.uiWindow.sales_delete_table.setItem(row,column,QtWidgets.QTableWidgetItem(str(value)))
+
+    else:
+        self.show_warning_info("Invalid Transaction Code")
+
+def delete_sales(self,btn=False):
+    trans_id = "SLS" + str(self.uiWindow.sales_delete_trans_id.text()).zfill(5)
+    if check_sales_transacs(trans_id):
+        if not btn:
+            self.delete_confirm_dialog_sales()
+        elif btn.text() == "&Yes":
+            delete_sales_transacs(trans_id)
+            self.show_info_popup("Deleted Sucessfully")
+            self.uiWindow.sales_delete_trans_id.clear()
+            self.uiWindow.sales_delete_date.clear()
+            self.uiWindow.sales_delete_customer.clearEditText()
+            self.uiWindow.sales_delete_remark.clear()
+            self.uiWindow.sales_delete_table.clearContents()
+            self.uiWindow.sales_delete_table.setRowCount(0)
+    else:
+        self.show_warning_info("Invalid Transaction Code")

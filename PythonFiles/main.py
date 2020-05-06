@@ -255,6 +255,15 @@ class MainWindow(QMainWindow):
         msg.buttonClicked.connect(lambda i: operations_callbacks.delete_rm(self,btn=i))
         x = msg.exec_()
 
+    def delete_confirm_dialog_sales(self):
+        msg = QMessageBox()
+        msg.setWindowTitle("Message")
+        msg.setText("Are you sure want to Delete?")
+        msg.setIcon(QMessageBox.Question)
+        msg.setStandardButtons(QMessageBox.No|QMessageBox.Yes)
+        msg.buttonClicked.connect(lambda i: operations_callbacks.delete_sales(self,btn=i))
+        x = msg.exec_()
+
 
     def maintain_operations(self):
         self.uiWindow.rm_new_confirm.clicked.connect(lambda: operations_callbacks.callback_add_raw_material(self))
@@ -342,6 +351,9 @@ class MainWindow(QMainWindow):
             lambda: operations_callbacks.view_sales_by_id(self))
         shortcut3 = QShortcut(QKeySequence('Return'), self.uiWindow.sales_view_custom_end_date)
         shortcut3.activated.connect(lambda: operations_callbacks.view_sales_by_custom(self))
+        self.uiWindow.sales_delete_trans_id.returnPressed.connect(lambda: operations_callbacks.set_delete_sales(self))
+        self.uiWindow.sales_delete_confirm.clicked.connect(lambda : operations_callbacks.delete_sales(self))
+        #self.uiWindow.sales_delete_confirm.clicked.connect(self.delete_confirm_dialog_sales())
 
 if __name__ == "__main__":
     import sys

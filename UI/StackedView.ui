@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>38</number>
+     <number>34</number>
     </property>
     <widget class="QWidget" name="Home">
      <widget class="QPushButton" name="RM_3">
@@ -9287,7 +9287,7 @@
        </font>
       </property>
      </widget>
-     <widget class="QLineEdit" name="sales_modify_transid">
+     <widget class="QLineEdit" name="sales_modify_trans_id">
       <property name="geometry">
        <rect>
         <x>290</x>
@@ -9436,26 +9436,6 @@
      </widget>
     </widget>
     <widget class="QWidget" name="sales_delete_2">
-     <widget class="QListView" name="sales_delete_remark">
-      <property name="geometry">
-       <rect>
-        <x>760</x>
-        <y>210</y>
-        <width>171</width>
-        <height>41</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QListView" name="sales_delete_trans_id">
-      <property name="geometry">
-       <rect>
-        <x>270</x>
-        <y>140</y>
-        <width>171</width>
-        <height>41</height>
-       </rect>
-      </property>
-     </widget>
      <widget class="QTableWidget" name="sales_delete_table">
       <property name="geometry">
        <rect>
@@ -9576,16 +9556,6 @@
       </property>
       <property name="text">
        <string>DATE:</string>
-      </property>
-     </widget>
-     <widget class="QListView" name="sales_delete_date">
-      <property name="geometry">
-       <rect>
-        <x>760</x>
-        <y>140</y>
-        <width>151</width>
-        <height>41</height>
-       </rect>
       </property>
      </widget>
      <widget class="QLabel" name="label_122">
@@ -9755,6 +9725,51 @@
       </property>
       <property name="text">
        <string>REMARK:</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="sales_delete_date">
+      <property name="geometry">
+       <rect>
+        <x>760</x>
+        <y>140</y>
+        <width>181</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="sales_delete_remark">
+      <property name="geometry">
+       <rect>
+        <x>760</x>
+        <y>210</y>
+        <width>181</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="sales_delete_trans_id">
+      <property name="geometry">
+       <rect>
+        <x>270</x>
+        <y>140</y>
+        <width>171</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
       </property>
      </widget>
     </widget>
