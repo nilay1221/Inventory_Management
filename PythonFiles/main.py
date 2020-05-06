@@ -353,7 +353,15 @@ class MainWindow(QMainWindow):
         shortcut3.activated.connect(lambda: operations_callbacks.view_sales_by_custom(self))
         self.uiWindow.sales_delete_trans_id.returnPressed.connect(lambda: operations_callbacks.set_delete_sales(self))
         self.uiWindow.sales_delete_confirm.clicked.connect(lambda : operations_callbacks.delete_sales(self))
-        #self.uiWindow.sales_delete_confirm.clicked.connect(self.delete_confirm_dialog_sales())
+        self.uiWindow.sales_modify_trans_id.returnPressed.connect(lambda: operations_callbacks.set_modify_sales(self))
+        self.uiWindow.sales_modify_confirm.clicked.connect(lambda: operations_callbacks.modify_sales(self))
+        self.uiWindow.sales_modify_table.cellChanged.connect(
+            lambda row, column: operations_callbacks.display_product_name(row, column, self, 1,
+                                                                          self.uiWindow.sales_modify_table)
+        )
+        self.uiWindow.sales_modify_table.cellChanged.connect(
+            lambda row, column: operations_callbacks.find_shade(row, column, self, 0, self.uiWindow.sales_modify_table))
+
 
 if __name__ == "__main__":
     import sys

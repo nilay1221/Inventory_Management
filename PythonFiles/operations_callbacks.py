@@ -133,24 +133,27 @@ def view_new_rm_data(self):
 
 
 def display_product_name(row, column, self, col, tableWidget):
-    code = tableWidget.item(row, column).text()
-    list_of_entries=[]
-    if column == col:
-        for i in range(tableWidget.currentRow()):
-            list_of_entries.append(tableWidget.item(i, col).text())
-        try:
-            if code == "":
-                tableWidget.setItem(row, column + 1, QtWidgets.QTableWidgetItem(""))
-            elif code in list_of_entries:
-                tableWidget.setItem(row, column + 1, QtWidgets.QTableWidgetItem("Product already added above"))
-            else:
-                result = get_product_name(code)
-                if result == 'false':
-                    tableWidget.setItem(row, column + 1, QtWidgets.QTableWidgetItem("No such product code"))
+    try:
+        code = tableWidget.item(row, column).text()
+        list_of_entries=[]
+        if column == col:
+            for i in range(tableWidget.currentRow()):
+                list_of_entries.append(tableWidget.item(i, col).text())
+            try:
+                if code == "":
+                    tableWidget.setItem(row, column + 1, QtWidgets.QTableWidgetItem(""))
+                elif code in list_of_entries:
+                    tableWidget.setItem(row, column + 1, QtWidgets.QTableWidgetItem("Product already added above"))
                 else:
-                    tableWidget.setItem(row, column + 1, QtWidgets.QTableWidgetItem(result))
-        except Exception as e:
-            print(e)
+                    result = get_product_name(code)
+                    if result == 'false':
+                        tableWidget.setItem(row, column + 1, QtWidgets.QTableWidgetItem("No such product code"))
+                    else:
+                        tableWidget.setItem(row, column + 1, QtWidgets.QTableWidgetItem(result))
+            except Exception as e:
+                print(e)
+    except Exception as e:
+        print(e)
 
 
 def add_shade_material(self):
@@ -1037,9 +1040,8 @@ def add_sales_callback(self):
             sales = []
             for i in range(8):
                 try:
-                    if self.uiWindow.sales_add_table.item(i, 0).text() or self.uiWindow.sales_add_table.item(i, 0).text() == '':
+                    if self.uiWindow.sales_add_table.item(i, 0).text():
                         try:
-                            self.uiWindow.sales_add_table.item(i, 0).text()
                             self.uiWindow.sales_add_table.item(i, 1).text()
                             self.uiWindow.sales_add_table.item(i, 3).text()
                             if self.uiWindow.sales_add_table.item(i, 0).text() == '' or self.uiWindow.sales_add_table.item(i, 1).text()=='' or self.uiWindow.sales_add_table.item(i, 3).text()=='':
@@ -1048,6 +1050,31 @@ def add_sales_callback(self):
                                 break
                         except:
                             self.show_warning_info(f"Please fill info in the table at '{i+1}'")
+                            flag = 1
+                            break
+                    if self.uiWindow.sales_add_table.item(i, 1).text():
+                        try:
+                            self.uiWindow.sales_add_table.item(i, 0).text()
+                            self.uiWindow.sales_add_table.item(i, 3).text()
+                            if self.uiWindow.sales_add_table.item(i, 0).text() == '' or self.uiWindow.sales_add_table.item(i, 1).text()=='' or self.uiWindow.sales_add_table.item(i, 3).text()=='':
+                                self.show_warning_info(f"Please fill info in the table at '{i + 1}'")
+                                flag = 1
+                                break
+                        except:
+                            self.show_warning_info(f"Please fill info in the table at '{i+1}'")
+                            flag = 1
+                            break
+                    if self.uiWindow.sales_add_table.item(i, 3).text():
+                        try:
+                            self.uiWindow.sales_add_table.item(i, 0).text()
+                            self.uiWindow.sales_add_table.item(i, 1).text()
+                            if self.uiWindow.sales_add_table.item(i, 0).text() == '' or self.uiWindow.sales_add_table.item(
+                                    i, 1).text() == '' or self.uiWindow.sales_add_table.item(i, 3).text() == '':
+                                self.show_warning_info(f"Please fill info in the table at '{i + 1}'")
+                                flag = 1
+                                break
+                        except:
+                            self.show_warning_info(f"Please fill info in the table at '{i + 1}'")
                             flag = 1
                             break
                 except:
@@ -1078,8 +1105,7 @@ def add_sales_callback(self):
                             # print("inside exception")
                             # print(sales)
                             if sales:
-                                pass
-                                print(sales)
+                                # print(sales)
                                 if add_sales_data(trans_id,date,customer,remark,sales):
                                     # print("Inside")
                                     set_sales_data(self)
@@ -1199,9 +1225,9 @@ def set_delete_sales(self):
         results = get_sales_transacs(by_Id=trans_id)
         # print(results)
         if results:
-            date = results[0][1]
-            remark = results[0][2]
-            customer = results[0][3]
+            date = results[0][2]
+            remark = results[0][3]
+            customer = results[0][1]
             self.uiWindow.sales_delete_date.setText(str(date))
             self.uiWindow.sales_delete_remark.setText(str(remark))
             self.uiWindow.sales_delete_customer.setCurrentText(customer)
@@ -1215,6 +1241,10 @@ def set_delete_sales(self):
                         self.uiWindow.sales_delete_table.setItem(row,column,QtWidgets.QTableWidgetItem(str(value)))
 
     else:
+        self.uiWindow.sales_delete_date.setText("")
+        self.uiWindow.sales_delete_remark.setText("")
+        self.uiWindow.sales_delete_customer.setCurrentText("")
+        self.uiWindow.sales_delete_table.clearContents()
         self.show_warning_info("Invalid Transaction Code")
 
 def delete_sales(self,btn=False):
@@ -1233,3 +1263,145 @@ def delete_sales(self,btn=False):
             self.uiWindow.sales_delete_table.setRowCount(0)
     else:
         self.show_warning_info("Invalid Transaction Code")
+
+def set_modify_sales(self):
+    trans_id = "SLS" + str(self.uiWindow.sales_modify_trans_id.text()).zfill(5)
+    if check_sales_transacs(trans_id):
+        results = get_sales_transacs(by_Id=trans_id)
+        # print(results)
+        if results:
+            date = results[0][2]
+            remark = results[0][3]
+            customer = results[0][1]
+            self.uiWindow.sales_modify_date.setText(str(date))
+            self.uiWindow.sales_modify_remark.setText(str(remark))
+            self.uiWindow.sales_modify_customer.setCurrentText(customer)
+            self.uiWindow.sales_modify_table.setRowCount(0)
+            for row in range(len(results[1])):
+                self.uiWindow.sales_modify_table.insertRow(row)
+                for column in range(len(results[1][row])):
+                    value = results[1][row][column]
+                    # print(value)
+                    if value != '-' :
+                        self.uiWindow.sales_modify_table.setItem(row,column,QtWidgets.QTableWidgetItem(str(value)))
+        self.uiWindow.sales_modify_table.setRowCount(8)
+    else:
+        self.uiWindow.sales_modify_date.setText("")
+        self.uiWindow.sales_modify_remark.setText("")
+        self.uiWindow.sales_modify_customer.setCurrentText("")
+        self.uiWindow.sales_modify_table.clearContents()
+        self.show_warning_info("Invalid Transaction Code")
+
+
+def modify_sales(self):
+    # print("Inside")
+    flag=0
+    trans_id = "SLS" + str(self.uiWindow.sales_modify_trans_id.text()).zfill(5)
+    if check_sales_transacs(trans_id):
+        # print("Deleted")
+        trans_id_widget = self.uiWindow.sales_modify_trans_id
+        date_widget = self.uiWindow.sales_modify_date
+        customer_widget = self.uiWindow.sales_modify_customer
+        remark_widget = self.uiWindow.sales_modify_remark
+        trans_id = 'SLS' + str(trans_id_widget.text()).zfill(5)
+        date = date_widget.text()
+        customer = customer_widget.currentText()
+        remark = remark_widget.text()
+        if customer and remark:
+            if check_for_no_product_code(self.uiWindow.sales_modify_table):
+                sales = []
+                for i in range(8):
+                    try:
+                        if self.uiWindow.sales_modify_table.item(i, 0).text():
+                            try:
+                                self.uiWindow.sales_modify_table.item(i, 1).text()
+                                self.uiWindow.sales_modify_table.item(i, 3).text()
+                                if self.uiWindow.sales_modify_table.item(i,
+                                                                      0).text() == '' or self.uiWindow.sales_modify_table.item(
+                                        i, 1).text() == '' or self.uiWindow.sales_modify_table.item(i, 3).text() == '':
+                                    self.show_warning_info(f"Please fill info in the table at '{i + 1}'")
+                                    flag = 1
+                                    break
+                            except:
+                                self.show_warning_info(f"Please fill info in the table at '{i + 1}'")
+                                flag = 1
+                                break
+                        if self.uiWindow.sales_modify_table.item(i, 1).text():
+                            try:
+                                self.uiWindow.sales_modify_table.item(i, 0).text()
+                                self.uiWindow.sales_modify_table.item(i, 3).text()
+                                if self.uiWindow.sales_modify_table.item(i,
+                                                                      0).text() == '' or self.uiWindow.sales_modify_table.item(
+                                        i, 1).text() == '' or self.uiWindow.sales_modify_table.item(i, 3).text() == '':
+                                    self.show_warning_info(f"Please fill info in the table at '{i + 1}'")
+                                    flag = 1
+                                    break
+                            except:
+                                self.show_warning_info(f"Please fill info in the table at '{i + 1}'")
+                                flag = 1
+                                break
+                        if self.uiWindow.sales_modify_table.item(i, 3).text():
+                            try:
+                                self.uiWindow.sales_modify_table.item(i, 0).text()
+                                self.uiWindow.sales_modify_table.item(i, 1).text()
+                                if self.uiWindow.sales_modify_table.item(i,
+                                                                      0).text() == '' or self.uiWindow.sales_modify_table.item(
+                                        i, 1).text() == '' or self.uiWindow.sales_modify_table.item(i, 3).text() == '':
+                                    self.show_warning_info(f"Please fill info in the table at '{i + 1}'")
+                                    flag = 1
+                                    break
+                            except:
+                                self.show_warning_info(f"Please fill info in the table at '{i + 1}'")
+                                flag = 1
+                                break
+                    except:
+                        try:
+                            if self.uiWindow.sales_modify_table.item(i,1).text() != '' or \
+                                    self.uiWindow.sales_modify_table.item(i, 3).text() != '':
+                                self.show_warning_info(f"Please fill info in the table at '{i + 1}'")
+                                flag = 1
+                                break
+                        except Exception as e:
+                            print(e)
+                            break
+                if flag == 0:
+                    delete_sales_transacs(trans_id)
+                    for i in range(8):
+                        try:
+                            if self.uiWindow.sales_modify_table.item(i, 0).text() and \
+                                    self.uiWindow.sales_modify_table.item(i,1).text() and \
+                                    self.uiWindow.sales_modify_table.item(i, 3).text():
+                                shade_number = self.uiWindow.sales_modify_table.item(i, 0).text()
+                                product_code = self.uiWindow.sales_modify_table.item(i, 1).text()
+                                quantity = self.uiWindow.sales_modify_table.item(i, 3).text()
+                                sales.append((shade_number, product_code, float(quantity)))
+                        except:
+                            try:
+                                self.uiWindow.sales_modify_table.item(i, 0).text()
+                                self.uiWindow.sales_modify_table.item(i, 1).text()
+                                self.uiWindow.sales_modify_table.item(i, 3).text()
+                                self.show_warning_info("Please fill info")
+                                break
+                            except:
+                                # print("inside exception")
+                                # print(sales)
+                                if sales:
+                                    # print(sales)
+                                    if add_sales_data(trans_id, date, customer, remark, sales):
+                                        # print("Inside")
+                                        set_sales_data(self)
+                                        customer_widget.clearEditText()
+                                        remark_widget.clear()
+                                        date_widget.clear()
+                                        self.uiWindow.sales_modify_table.clearContents()
+                                        trans_id_widget.clear()
+                                        self.show_info_popup("Transaction Modified Sucessfully")
+                                        break
+                                else:
+                                    self.show_warning_info("Please fill info")
+                                    break
+            else:
+                self.show_warning_info("Please fill out from available product code")
+        else:
+            self.show_warning_info("Please fill out the form")
+
