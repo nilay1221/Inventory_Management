@@ -326,6 +326,21 @@ class MainWindow(QMainWindow):
         self.uiWindow.shade_colortable_2.cellChanged.connect(lambda row,column: operations_callbacks.display_product_name(row,column,self,0,self.uiWindow.shade_colortable_2))
         self.uiWindow.shade_addtable_4.cellChanged.connect(lambda row,column: operations_callbacks.display_product_name(row,column,self,0,self.uiWindow.shade_addtable_4))
         self.uiWindow.shade_colortable_4.cellChanged.connect(lambda row,column: operations_callbacks.display_product_name(row,column,self,0,self.uiWindow.shade_colortable_4))
+        self.uiWindow.sales_add.clicked.connect(lambda: operations_callbacks.set_sales_data(self))
+        self.uiWindow.sales_add_confirm.clicked.connect(lambda: operations_callbacks.add_sales_callback(self))
+        self.uiWindow.sales_view_today.clicked.connect(lambda: operations_callbacks.view_sales_by_today(self))
+        self.uiWindow.sales_add_table.cellChanged.connect(
+            lambda row,column: operations_callbacks.find_shade(row,column,self,0,self.uiWindow.sales_add_table))
+        self.uiWindow.sales_add_table.cellChanged.connect(lambda row,column: operations_callbacks.display_product_name(row,column,self,1,self.uiWindow.sales_add_table))
+        self.uiWindow.sales_view_today_table.cellChanged.connect(
+            lambda row, column: operations_callbacks.display_product_name(row, column, self, 4,
+                                                                          self.uiWindow.sales_view_today_table))
+        self.uiWindow.sales_view_by_id_table.cellChanged.connect(
+            lambda row, column: operations_callbacks.display_product_name(row, column, self, 1,
+                                                                          self.uiWindow.sales_view_by_id_table))
+        self.uiWindow.sales_view_by_id_transaction_id.returnPressed.connect(
+            lambda: operations_callbacks.view_sales_by_id(self))
+
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)

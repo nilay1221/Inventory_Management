@@ -183,10 +183,10 @@ CREATE TABLE sn_closing_stock(
 mydb.commit()
 # mycursor.execute(sql)
 
-SELECT rm_stock.trans_id,rm_stock.customer_id,rm_stock.remark,has_rm.product_code,'-',has_rm.quantity
-            FROM rm_stock
-            JOIN has_rm ON
-            rm_stock.trans_id = has_rm.trans_id
-            JOIN raw_material ON
-            has_rm.product_code = raw_material.product_code
-            WHERE rm_stock.date = '{by_Today}';
+# SELECT rm_stock.trans_id,rm_stock.customer_id,rm_stock.remark,has_rm.product_code,'-',has_rm.quantity
+# #             FROM rm_stock
+# #             JOIN has_rm ON
+# #             rm_stock.trans_id = has_rm.trans_id
+# #             JOIN raw_material ON
+# #             has_rm.product_code = raw_material.product_code
+# #             WHERE rm_stock.date = '{by_Today}';

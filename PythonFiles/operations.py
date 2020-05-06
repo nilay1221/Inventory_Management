@@ -347,61 +347,65 @@ def add_raw_material_data(trans_id,date,customer,remark,productDetails,type="IN"
 def get_rm_transacs(by_Id=False,by_Today=False,by_custom=False):
     mydb = sqlite3.connect(DATABASE_NAME)
     mycursor = mydb.cursor()
-    if by_Id:
-        trans_id = by_Id
-        sql = f"SELECT * from rm_stock WHERE trans_id = '{trans_id}' ;"
-        mycursor.execute(sql)
-        results = mycursor.fetchone()
-        if results:
-            sql = f"SELECT has_rm.product_code,'-',has_rm.quantity from has_rm WHERE has_rm.trans_id = '{trans_id}';"
-            # print(sql)
+    try:
+        if by_Id:
+            trans_id = by_Id
+            sql = f"SELECT * from rm_stock WHERE trans_id = '{trans_id}' ;"
             mycursor.execute(sql)
-            products = mycursor.fetchall()
-            # print(products)
-            return [results,products]
-            pass
-        else:
-            return None
-    if by_Today:
-        by_Today = datetime.date.today().strftime("%d-%m-%Y")
-        sql =f"""
-            SELECT rm_stock.trans_id,rm_stock.customer_id,rm_stock.remark,has_rm.product_code,'-',has_rm.quantity
-            FROM rm_stock
-            JOIN has_rm ON
-            rm_stock.trans_id = has_rm.trans_id
-            WHERE rm_stock.date = '{by_Today}';
-        """
-        # print(sql)
-        mycursor.execute(sql)
-        results = mycursor.fetchall()
-        return results
-    if by_custom:
-        start_date = datetime.datetime.strptime(by_custom[0],'%d/%m/%Y').date()
-        end_date = datetime.datetime.strptime(by_custom[1],'%d/%m/%Y').date()
-        delta = end_date - start_date
-        all_dates = []
-        for i in range(delta.days + 1):
-            day = end_date - datetime.timedelta(days=i)
-            all_dates.append(day.strftime('%d-%m-%Y'))
-        results=[]
-        for each_date in all_dates:
+            results = mycursor.fetchone()
+            if results:
+                sql = f"SELECT has_rm.product_code,'-',has_rm.quantity from has_rm WHERE has_rm.trans_id = '{trans_id}';"
+                # print(sql)
+                mycursor.execute(sql)
+                products = mycursor.fetchall()
+                # print(products)
+                return [results,products]
+                pass
+            else:
+                return None
+        if by_Today:
+            by_Today = datetime.date.today().strftime("%d-%m-%Y")
             sql =f"""
-                SELECT rm_stock.trans_id,rm_stock.date,rm_stock.customer_id,rm_stock.remark,has_rm.product_code,'-',has_rm.quantity
+                SELECT rm_stock.trans_id,rm_stock.customer_id,rm_stock.remark,has_rm.product_code,'-',has_rm.quantity
                 FROM rm_stock
                 JOIN has_rm ON
                 rm_stock.trans_id = has_rm.trans_id
-                WHERE rm_stock.date = '{each_date}';
+                WHERE rm_stock.date = '{by_Today}';
             """
-            try:
-                # print(sql)
-                mycursor.execute(sql)
-                result = mycursor.fetchall()
-                # print(result)
-                if result:
-                    results.append(result)
-            except:
-                pass
-        return results
+            # print(sql)
+            mycursor.execute(sql)
+            results = mycursor.fetchall()
+            return results
+        if by_custom:
+            start_date = datetime.datetime.strptime(by_custom[0],'%d/%m/%Y').date()
+            end_date = datetime.datetime.strptime(by_custom[1],'%d/%m/%Y').date()
+            delta = end_date - start_date
+            all_dates = []
+            for i in range(delta.days + 1):
+                day = end_date - datetime.timedelta(days=i)
+                all_dates.append(day.strftime('%d-%m-%Y'))
+            results=[]
+            for each_date in all_dates:
+                sql =f"""
+                    SELECT rm_stock.trans_id,rm_stock.date,rm_stock.customer_id,rm_stock.remark,has_rm.product_code,'-',has_rm.quantity
+                    FROM rm_stock
+                    JOIN has_rm ON
+                    rm_stock.trans_id = has_rm.trans_id
+                    WHERE rm_stock.date = '{each_date}';
+                """
+                try:
+                    # print(sql)
+                    mycursor.execute(sql)
+                    result = mycursor.fetchall()
+                    # print(result)
+                    if result:
+                        results.append(result)
+                except:
+                    pass
+            return results
+    except:
+        pass
+    finally:
         mydb.close()
 
 
@@ -636,3 +640,107 @@ def get_raw_trans(shade_trans_id):
         mydb.close()
 
 # print(delete_shade_trans)
+
+def add_sales_data(trans_id,date,customer,remark,productDetails,type="IN"):
+    mydb = sqlite3.connect(DATABASE_NAME)
+    mycursor = mydb.cursor()
+    sql = f"INSERT INTO sales VALUES('{trans_id}','{customer}','{date}','{remark}');"
+    try:
+        mycursor.execute(sql)
+        mydb.commit()
+        for each in productDetails:
+            sql = f"INSERT into consists_of VALUES('{type}',{each[2]},'{trans_id}','{each[0]}','{each[1]}')"
+            try:
+                mycursor.execute(sql)
+            except:
+                pass
+        mydb.commit()
+        return True
+    except Exception as e:
+        print(e)
+    finally:
+        mydb.close()
+
+
+def get_sales_transacs(by_Id=False,by_Today=False,by_custom=False):
+    mydb = sqlite3.connect(DATABASE_NAME)
+    mycursor = mydb.cursor()
+    try:
+        if by_Id:
+            trans_id = by_Id
+            sql = f"SELECT * from sales WHERE trans_id = '{trans_id}' ;"
+            mycursor.execute(sql)
+            results = mycursor.fetchone()
+            if results:
+                sql = f"""SELECT consists_of.shade_number,consists_of.product_code,'-',consists_of.quantity 
+                from consists_of WHERE consists_of.trans_id = '{trans_id}';"""
+                # print(sql)
+                mycursor.execute(sql)
+                products = mycursor.fetchall()
+                # print(products)
+                return [results,products]
+                pass
+            else:
+                return None
+        if by_Today:
+            by_Today = datetime.date.today().strftime("%d-%m-%Y")
+            sql =f"""
+                SELECT sales.trans_id,sales.customer_id,sales.remark,
+                consists_of.shade_number,consists_of.product_code,'-',consists_of.quantity
+                FROM sales
+                JOIN consists_of ON
+                sales.trans_id = consists_of.trans_id
+                WHERE sales.date = '{by_Today}';
+            """
+            # print(sql)
+            mycursor.execute(sql)
+            results = mycursor.fetchall()
+            return results
+        if by_custom:
+            start_date = datetime.datetime.strptime(by_custom[0],'%d/%m/%Y').date()
+            end_date = datetime.datetime.strptime(by_custom[1],'%d/%m/%Y').date()
+            delta = end_date - start_date
+            all_dates = []
+            for i in range(delta.days + 1):
+                day = end_date - datetime.timedelta(days=i)
+                all_dates.append(day.strftime('%d-%m-%Y'))
+            results=[]
+            for each_date in all_dates:
+                sql =f"""
+                    SELECT rm_stock.trans_id,rm_stock.date,rm_stock.customer_id,rm_stock.remark,has_rm.product_code,'-',has_rm.quantity
+                    FROM rm_stock
+                    JOIN has_rm ON
+                    rm_stock.trans_id = has_rm.trans_id
+                    WHERE rm_stock.date = '{each_date}';
+                """
+                try:
+                    # print(sql)
+                    mycursor.execute(sql)
+                    result = mycursor.fetchall()
+                    # print(result)
+                    if result:
+                        results.append(result)
+                except:
+                    pass
+            return results
+    except:
+        pass
+    finally:
+        mydb.close()
+
+
+def get_shade(shade):
+    mydb = sqlite3.connect(DATABASE_NAME)
+    mycursor = mydb.cursor()
+    try:
+        sql=f"Select * from shade_number where shade_number={shade};"
+        mycursor.execute(sql)
+        results=mycursor.fetchone()
+        if results[0]:
+            return True
+        else:
+            return False
+    except:
+        pass
+    finally:
+        mydb.close()

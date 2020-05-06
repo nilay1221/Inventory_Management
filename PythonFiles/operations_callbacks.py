@@ -165,6 +165,10 @@ def add_shade_material(self):
                         try:
                             if self.uiWindow.tableWidget.item(i, 0).text() and self.uiWindow.tableWidget.item(i, 2).text():
                                 pass
+                            if self.uiWindow.tableWidget.item(i, 0).text()=="" or self.uiWindow.tableWidget.item(i, 2).text()=="":
+                                self.show_info_popup(f"Please fill the table at row '{i + 1}'")
+                                flag=1
+                                break
                         except:
                             self.show_info_popup(f"Please fill the table at row '{i + 1}'")
                             flag = 1
@@ -173,24 +177,28 @@ def add_shade_material(self):
                     print(e)
                     break
             if flag==0:
-                if add_new_shade_material(shade_no):
-                    for i in range(10):
-                        try:
-                            self.uiWindow.tableWidget.item(i, 0).text()
-                            row_data0 = self.uiWindow.tableWidget.item(i, 0).text()
-                            row_data2 = self.uiWindow.tableWidget.item(i, 2).text()
+                if check_for_no_product_code(self.uiWindow.tableWidget):
+                    if add_new_shade_material(shade_no):
+                        for i in range(10):
                             try:
-                                add_madeup_of(shade_no, row_data0, row_data2)
+                                self.uiWindow.tableWidget.item(i, 0).text()
+                                row_data0 = self.uiWindow.tableWidget.item(i, 0).text()
+                                row_data2 = self.uiWindow.tableWidget.item(i, 2).text()
+                                try:
+                                    add_madeup_of(shade_no, row_data0, row_data2)
+                                except:
+                                    pass
                             except:
-                                pass
-                        except:
-                            break
-                    message = "Shade Number Added Successfully"
-                    self.uiWindow.rm_new_product_code_2.clear()
-                    self.uiWindow.tableWidget.clearContents()
-                    self.show_info_popup(message)
+                                break
+                        message = "Shade Number Added Successfully"
+                        self.uiWindow.rm_new_product_code_2.clear()
+                        self.uiWindow.tableWidget.clearContents()
+                        self.show_info_popup(message)
+                    else:
+                        message = "Shade Number Already Exists"
+                        self.show_warning_info(message)
                 else:
-                    message = "Shade Number Already Exists"
+                    message = "Please enter proper Product code"
                     self.show_warning_info(message)
         except:
             pass
@@ -292,31 +300,39 @@ def modify_new_shade_data(self,show=1):
                             flag = 1
                             break
                 except Exception as e:
-                    print("in")
+                    print("inside exception")
                     break
             if flag==0:
                 if shade_no == OLD_SHADE_NUMBER:
                     try:
-                        if remove_previous_data(shade_no):
-                            for i in range(10):
-                                try:
-                                    self.uiWindow.shade_new_modify_details_table.item(i, 0).text()
-                                    row_data0 = self.uiWindow.shade_new_modify_details_table.item(i, 0).text()
-                                    row_data2 = self.uiWindow.shade_new_modify_details_table.item(i, 2).text()
+                        if check_for_no_product_code(self.uiWindow.shade_new_modify_details_table):
+                            if remove_previous_data(shade_no):
+                                for i in range(10):
                                     try:
-                                        modify_shade_data(shade_no, row_data0, row_data2)
+                                        self.uiWindow.shade_new_modify_details_table.item(i, 0).text()
+                                        row_data0 = self.uiWindow.shade_new_modify_details_table.item(i, 0).text()
+                                        row_data2 = self.uiWindow.shade_new_modify_details_table.item(i, 2).text()
+                                        try:
+                                            modify_shade_data(shade_no, row_data0, row_data2)
+                                        except:
+                                            pass
                                     except:
-                                        pass
-                                except:
-                                    break
+                                        break
                             if show==1:
                                 self.show_info_popup("Details Modified Sucessfully")
+                        else:
+                            message = "Please enter proper Product code"
+                            self.show_warning_info(message)
                     except:
                         pass
                 else:
                     try:
-                        if readd_shade_material_on_modify(self):
-                            self.show_info_popup("Details Modified Sucessfully")
+                        if check_for_no_product_code(self.uiWindow.shade_new_modify_details_table):
+                            if readd_shade_material_on_modify(self):
+                                self.show_info_popup("Details Modified Sucessfully")
+                        else:
+                            message = "Please enter proper Product code"
+                            self.show_warning_info(message)
                     except:
                         pass
                 self.uiWindow.shade_new__modify_number.clear()
@@ -778,7 +794,6 @@ def view_shade_stock_by_id(self):
         self.show_warning_info("Incorrect transaction id")
 
 
-
 def view_shade_transaction_today(self):
     self.uiWindow.shade_view_today_date.setDate(QtCore.QDate.currentDate())
     results = view_shade_transaction(by_today=True)
@@ -823,7 +838,8 @@ def set_delete_shade_transaction(self):
         self.uiWindow.shade_add_total_2.setText(str(total_quantity))
     else:
         self.show_warning_info("Transaction id does not exists")
-    
+
+
 def delete_shade_transaction(self):
     trans_id = "SNT" + str(self.uiWindow.shade_delete_transaction_id.text()).zfill(5)
     if check_shade_trans(trans_id):
@@ -839,6 +855,7 @@ def delete_shade_transaction(self):
 
         else:
             self.show_warning_info("Deletion Unsucessful")
+
 
 def set_modify_shade_transaction(self):
     # print("Called")
@@ -870,10 +887,9 @@ def set_modify_shade_transaction(self):
         #     self.uiWindow.shade_colortable_3.insertRow(row)
         #     for column in range(len(table2_details[row])):
         #         self.uiWindow.shade_colortable_3.setItem(row,column,QtWidgets.QTableWidgetItem(str(table2_details[row][column])))
-        
-
     else:
         self.show_warning_info("Incorrect transaction id")
+
 
 def confirm_modify_shade_trans(self):
     trans_id = "SNT" + str(self.uiWindow.shade_modify_transaction_id.text()).zfill(5)
@@ -944,6 +960,7 @@ def confirm_modify_shade_trans(self):
                 except Exception as err:
                     self.show_warning_info(err.__str__())
 
+
 def shade_view_by_custom_dates(self):
     d1 = self.uiWindow.shade_view_start_date.date()
     d2 = self.uiWindow.shade_view_end_date.date()
@@ -975,7 +992,6 @@ def shade_view_by_custom_dates(self):
         self.show_warning_info("Please select correct date")
 
 
-
 def clear_shade_view_by_today(self):
     self.uiWindow.shade_view_transaction_id.clear()
     self.uiWindow.date_3.clear()
@@ -988,9 +1004,159 @@ def clear_shade_view_by_today(self):
     self.uiWindow.shade_colortable_4.setRowCount(0)
     self.uiWindow.shade_add_total_4.clear()
 
+
 def check_for_no_product_code(tableWidget):
     results = tableWidget.findItems("No such product code",QtCore.Qt.MatchExactly)
     if results:
         return False
     else:
         return True
+
+
+def set_sales_data(self):
+    trans_id = get_trans_id("sales",'SLS')
+    date = datetime.date.today().strftime("%d-%m-%Y")
+    self.uiWindow.sales_add_transid.setText(str(trans_id))
+    self.uiWindow.sales_add_date.setText(str(date))
+
+
+def add_sales_callback(self):
+    # print("Inside")
+    # TODO check if table is empty or not
+    flag = 0
+    trans_id_widget = self.uiWindow.sales_add_transid
+    date_widget = self.uiWindow.sales_add_date
+    customer_widget = self.uiWindow.sales_add_customer
+    remark_widget = self.uiWindow.sales_add_remark
+    trans_id = 'SLS' +  str(trans_id_widget.text())
+    date = date_widget.text()
+    customer = customer_widget.currentText()
+    remark = remark_widget.text()
+    if customer and remark:
+        if check_for_no_product_code(self.uiWindow.sales_add_table):
+            sales = []
+            for i in range(8):
+                try:
+                    if self.uiWindow.sales_add_table.item(i, 0).text() or self.uiWindow.sales_add_table.item(i, 0).text() == '':
+                        try:
+                            self.uiWindow.sales_add_table.item(i, 0).text()
+                            self.uiWindow.sales_add_table.item(i, 1).text()
+                            self.uiWindow.sales_add_table.item(i, 3).text()
+                            if self.uiWindow.sales_add_table.item(i, 0).text() == '' or self.uiWindow.sales_add_table.item(i, 1).text()=='' or self.uiWindow.sales_add_table.item(i, 3).text()=='':
+                                self.show_warning_info(f"Please fill info in the table at '{i + 1}'")
+                                flag = 1
+                                break
+                        except:
+                            self.show_warning_info(f"Please fill info in the table at '{i+1}'")
+                            flag = 1
+                            break
+                except:
+                    try:
+                        if self.uiWindow.sales_add_table.item(i,1).text() != '' or self.uiWindow.sales_add_table.item(i, 3).text() != '':
+                            self.show_warning_info(f"Please fill info in the table at '{i + 1}'")
+                            flag = 1
+                            break
+                    except Exception as e:
+                        print(e)
+                        break
+            if flag == 0:
+                for i in range(8):
+                    try:
+                        if self.uiWindow.sales_add_table.item(i,0).text() and self.uiWindow.sales_add_table.item(i,1).text() and self.uiWindow.sales_add_table.item(i,3).text():
+                            shade_number= self.uiWindow.sales_add_table.item(i,0).text()
+                            product_code = self.uiWindow.sales_add_table.item(i,1).text()
+                            quantity = self.uiWindow.sales_add_table.item(i,3).text()
+                            sales.append((shade_number,product_code,float(quantity)))
+                    except:
+                        try:
+                            self.uiWindow.sales_add_table.item(i,0).text()
+                            self.uiWindow.sales_add_table.item(i, 1).text()
+                            self.uiWindow.sales_add_table.item(i, 3).text()
+                            self.show_warning_info("Please fill info")
+                            break
+                        except:
+                            # print("inside exception")
+                            # print(sales)
+                            if sales:
+                                pass
+                                print(sales)
+                                if add_sales_data(trans_id,date,customer,remark,sales):
+                                    # print("Inside")
+                                    set_sales_data(self)
+                                    customer_widget.clearEditText()
+                                    remark_widget.clear()
+                                    self.uiWindow.sales_add_table.clearContents()
+                                    self.show_info_popup("Transaction Added Sucessfully")
+                                    break
+                            else:
+                                self.show_warning_info("Please fill info")
+                                break
+        else:
+            self.show_warning_info("Please fill out from available product code")
+    else:
+        self.show_warning_info("Please fill out the form")
+
+
+def view_sales_by_today(self):
+    self.uiWindow.sales_view_by_today_date.setDate(QtCore.QDate.currentDate())
+    self.uiWindow.sales_view_today_table.setRowCount(0)
+    results = get_sales_transacs(by_Today=True)
+    # print(results)
+    if results:
+        trans_list=[]
+        for row in range(len(results)):
+            self.uiWindow.sales_view_today_table.insertRow(row)
+            for column in range(len(results[row])):
+                if column == 0:
+                    if str(results[row][column]) not in trans_list:
+                        trans_list.append(str(results[row][column]))
+                        self.uiWindow.sales_view_today_table.setItem(row,column,QtWidgets.QTableWidgetItem(str(results[row][column])))
+                elif results[row][column] != '-':
+                    self.uiWindow.sales_view_today_table.setItem(row,column,QtWidgets.QTableWidgetItem(str(results[row][column])))
+    else:
+        self.show_info_popup("No Transactions Done Today")
+
+def find_shade(row, column, self, col, tableWidget):
+    code = tableWidget.item(row, column).text()
+    if column==col:
+        try:
+            if code=="":
+                pass
+            else:
+                results=get_shade(code)
+                if results:
+                    pass
+                else:
+                    self.show_warning_info("The shade number entered does not exist")
+                    tableWidget.setItem(row,column,QtWidgets.QTableWidgetItem(""))
+        except:
+            pass
+
+def view_sales_by_id(self):
+    #TODO make table uneditable
+    trans_id = "SLS" + str(self.uiWindow.sales_view_by_id_transaction_id.text()).zfill(5)
+    results = get_sales_transacs(by_Id=trans_id)
+    # print(results)
+    if results:
+        date = results[0][2]
+        remark = results[0][3]
+        customer = results[0][1]
+        self.uiWindow.sales_view_by_id_date.setText(str(date))
+        self.uiWindow.sales_view_by_id_remark.setText(str(remark))
+        self.uiWindow.sales_view_by_id_customer.setCurrentText(customer)
+        self.uiWindow.sales_view_by_id_table.setRowCount(0)
+        for row in range(len(results[1])):
+            self.uiWindow.sales_view_by_id_table.insertRow(row)
+            for column in range(len(results[1][row])):
+                value = results[1][row][column]
+                # print(value)
+                if value != '-':
+                    self.uiWindow.sales_view_by_id_table.setItem(row,column,QtWidgets.QTableWidgetItem(str(value)))
+    else:
+        self.uiWindow.sales_view_by_id_transaction_id.clear()
+        self.uiWindow.sales_view_by_id_date.clear()
+        self.uiWindow.sales_view_by_id_remark.clear()
+        self.uiWindow.sales_view_by_id_table.clearContents()
+        self.uiWindow.sales_view_by_id_table.setRowCount(0)
+        self.uiWindow.sales_view_by_id_customer.clearEditText()
+        self.show_warning_info("Transaction id not found")

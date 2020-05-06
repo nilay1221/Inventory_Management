@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>38</number>
+     <number>36</number>
     </property>
     <widget class="QWidget" name="Home">
      <widget class="QPushButton" name="RM_3">
