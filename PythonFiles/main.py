@@ -361,6 +361,9 @@ class MainWindow(QMainWindow):
         )
         self.uiWindow.sales_modify_table.cellChanged.connect(
             lambda row, column: operations_callbacks.find_shade(row, column, self, 0, self.uiWindow.sales_modify_table))
+        self.uiWindow.rw_view_stock_code_2.returnPressed.connect(lambda: operations_callbacks.set_product_name(self))
+        shortcut4 = QShortcut(QKeySequence('Return'), self.uiWindow.rw_view_ending_date_3)
+        shortcut4.activated.connect(lambda: operations_callbacks.product_stock_view(self))
 
 
 if __name__ == "__main__":

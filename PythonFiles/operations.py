@@ -775,3 +775,37 @@ def delete_sales_transacs(trans_id):
     mydb.close()
 
 
+# Closing stock view for Raw material
+def get_product_stock(code):
+    mydb = sqlite3.connect(DATABASE_NAME)
+    mycursor = mydb.cursor()
+    try:
+        sql=f"""select trans_id,date,type,quantity from 
+                (select * from has_rm join RM_Stock on RM_Stock.trans_id= has_rm.trans_id) 
+                where product_code = '{code}' ORDER by date"""
+        mycursor.execute(sql)
+        results=mycursor.fetchall()
+        return results
+    except:
+        pass
+    finally:
+        mydb.close()
+
+def raw_material_closing_stock(code):
+    mydb = sqlite3.connect(DATABASE_NAME)
+    mycursor = mydb.cursor()
+    try:
+        sql = f"""Select sum(quantity) from has_rm where product_code='{code}' and type = 'IN'"""
+        mycursor.execute(sql)
+        total_in = mycursor.fetchone()
+        sql = f"""Select sum(quantity) from has_rm where product_code='{code}' and type = 'OUT'"""
+        mycursor.execute(sql)
+        total_out = mycursor.fetchone()
+        total= total_in[0]-total_out[0]
+        return total
+    except Exception as e:
+        print(e)
+    finally:
+        mydb.close()
+
+

@@ -1405,3 +1405,57 @@ def modify_sales(self):
         else:
             self.show_warning_info("Please fill out the form")
 
+
+def set_product_name(self):
+    code =self.uiWindow.rw_view_stock_code_2.text()
+    result = get_product_name(code)
+    if result == "false":
+        self.uiWindow.rw_view_stock_name_2.setText("No such product Code")
+    else:
+        self.uiWindow.rw_view_stock_name_2.setText(result)
+
+
+
+def product_stock_view(self):
+    code = self.uiWindow.rw_view_stock_code_2.text()
+    d1 = self.uiWindow.rw_view_starting_date_4.date()
+    d2 = self.uiWindow.rw_view_ending_date_3.date()
+    x = d1.toString('dd/MM/yyyy')
+    y = d2.toString('dd/MM/yyyy')
+    # print(type(x))
+    x_date = datetime.datetime.strptime(x,'%d/%m/%Y')
+    y_date = datetime.datetime.strptime(y,'%d/%m/%Y')
+    delta = y_date - x_date
+    if self.uiWindow.rw_view_stock_name_2.text() != "No such product Code":
+        if delta.days > 0:
+            results = get_product_stock(code)
+            if results:
+                # print(results)
+                try:
+                    self.uiWindow.rm_view_table_6.setRowCount(0)
+                    for row_number, row_data in enumerate(results):
+                        self.uiWindow.rm_view_table_6.insertRow(row_number)
+                        for column_number, data in enumerate(row_data):
+                            if str(data)== "OUT" or str(data)=="IN":
+                                pass
+                            else:
+                                if column_number==3:
+                                    if results[row_number][2]=="IN":
+                                        self.uiWindow.rm_view_table_6.setItem(row_number, column_number-1,
+                                                                                   QtWidgets.QTableWidgetItem(str(data)))
+                                    elif results[row_number][2]=="OUT":
+                                        self.uiWindow.rm_view_table_6.setItem(row_number, column_number,
+                                                                              QtWidgets.QTableWidgetItem(str(data)))
+                                else:
+                                    self.uiWindow.rm_view_table_6.setItem(row_number, column_number,
+                                                                          QtWidgets.QTableWidgetItem(str(data)))
+                    closing = raw_material_closing_stock(code)
+                    self.uiWindow.rw_view_closing.setText(str(closing))
+                except Exception as e:
+                    print(e)
+            else:
+                pass
+        else:
+            self.show_warning_info("Please select correct date")
+    else:
+        self.show_warning_info("Please select correct product code")
