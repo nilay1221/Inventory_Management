@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>36</number>
+     <number>38</number>
     </property>
     <widget class="QWidget" name="Home">
      <widget class="QPushButton" name="RM_3">
@@ -10551,32 +10551,6 @@
      </widget>
     </widget>
     <widget class="QWidget" name="sales_view_by_custom">
-     <widget class="QDateEdit" name="sales_view_custom_end_date">
-      <property name="geometry">
-       <rect>
-        <x>720</x>
-        <y>120</y>
-        <width>131</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="displayFormat">
-       <string>dd/MM/yyyy</string>
-      </property>
-     </widget>
-     <widget class="QDateEdit" name="sales_view_custom_start_date">
-      <property name="geometry">
-       <rect>
-        <x>280</x>
-        <y>120</y>
-        <width>131</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="displayFormat">
-       <string>dd/MM/yyyy</string>
-      </property>
-     </widget>
      <widget class="QPushButton" name="sales_view_custom_back">
       <property name="geometry">
        <rect>
@@ -10933,6 +10907,32 @@
       </property>
       <property name="text">
        <string>Ending date : </string>
+      </property>
+     </widget>
+     <widget class="QDateEdit" name="sales_view_custom_start_date">
+      <property name="geometry">
+       <rect>
+        <x>270</x>
+        <y>120</y>
+        <width>141</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="displayFormat">
+       <string>dd/MM/yyyy</string>
+      </property>
+     </widget>
+     <widget class="QDateEdit" name="sales_view_custom_end_date">
+      <property name="geometry">
+       <rect>
+        <x>720</x>
+        <y>120</y>
+        <width>151</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="displayFormat">
+       <string>dd/MM/yyyy</string>
       </property>
      </widget>
     </widget>

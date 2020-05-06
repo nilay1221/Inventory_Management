@@ -1160,3 +1160,34 @@ def view_sales_by_id(self):
         self.uiWindow.sales_view_by_id_table.setRowCount(0)
         self.uiWindow.sales_view_by_id_customer.clearEditText()
         self.show_warning_info("Transaction id not found")
+
+
+def view_sales_by_custom(self):
+    d1 = self.uiWindow.sales_view_custom_start_date.date()
+    d2 = self.uiWindow.sales_view_custom_end_date.date()
+    x = d1.toString('dd/MM/yyyy')
+    y = d2.toString('dd/MM/yyyy')
+    # print(type(x))
+    x_date = datetime.datetime.strptime(x,'%d/%m/%Y')
+    y_date = datetime.datetime.strptime(y,'%d/%m/%Y')
+    delta = y_date - x_date
+    if delta.days > 0:
+        results = get_sales_transacs(by_custom=[x,y])
+        if results:
+            self.uiWindow.sales_view_custom_table.setRowCount(0)
+            trans_list=[]
+            for each_list in results:
+                for row in range(len(each_list)):
+                    self.uiWindow.sales_view_custom_table.insertRow(row)
+                    for column in range(len(each_list[row])):
+                        if column ==0:
+                            if str(each_list[row][column]) not in trans_list:
+                                trans_list.append(str(each_list[row][column]))
+                                self.uiWindow.sales_view_custom_table.setItem(row,column,QtWidgets.QTableWidgetItem(str(each_list[row][column])))
+                        elif each_list[row][column] != '-':
+                            self.uiWindow.sales_view_custom_table.setItem(row, column, QtWidgets.QTableWidgetItem(
+                                str(each_list[row][column])))
+        else:
+            pass
+    else:
+        self.show_warning_info("Please select correct date")

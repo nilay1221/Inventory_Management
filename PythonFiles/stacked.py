@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\rajesh\Desktop\Inventory_Management\UI\StackedView.ui'
+# Form implementation generated from reading ui file 'StackedView.ui'
 #
 # Created by: PyQt5 UI code generator 5.13.2
 #
@@ -3675,12 +3675,6 @@ class Ui_MainWindow(object):
         self.stackedWidget.addWidget(self.sales_view_by_today)
         self.sales_view_by_custom = QtWidgets.QWidget()
         self.sales_view_by_custom.setObjectName("sales_view_by_custom")
-        self.sales_view_custom_end_date = QtWidgets.QDateEdit(self.sales_view_by_custom)
-        self.sales_view_custom_end_date.setGeometry(QtCore.QRect(720, 120, 131, 41))
-        self.sales_view_custom_end_date.setObjectName("sales_view_custom_end_date")
-        self.sales_view_custom_start_date = QtWidgets.QDateEdit(self.sales_view_by_custom)
-        self.sales_view_custom_start_date.setGeometry(QtCore.QRect(280, 120, 131, 41))
-        self.sales_view_custom_start_date.setObjectName("sales_view_custom_start_date")
         self.sales_view_custom_back = QtWidgets.QPushButton(self.sales_view_by_custom)
         self.sales_view_custom_back.setGeometry(QtCore.QRect(72, 17, 91, 51))
         font = QtGui.QFont()
@@ -3788,6 +3782,12 @@ class Ui_MainWindow(object):
         font.setPointSize(12)
         self.label_136.setFont(font)
         self.label_136.setObjectName("label_136")
+        self.sales_view_custom_start_date = QtWidgets.QDateEdit(self.sales_view_by_custom)
+        self.sales_view_custom_start_date.setGeometry(QtCore.QRect(270, 120, 141, 41))
+        self.sales_view_custom_start_date.setObjectName("sales_view_custom_start_date")
+        self.sales_view_custom_end_date = QtWidgets.QDateEdit(self.sales_view_by_custom)
+        self.sales_view_custom_end_date.setGeometry(QtCore.QRect(720, 120, 151, 41))
+        self.sales_view_custom_end_date.setObjectName("sales_view_custom_end_date")
         self.stackedWidget.addWidget(self.sales_view_by_custom)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
@@ -4444,8 +4444,6 @@ class Ui_MainWindow(object):
         self.label_132.setText(_translate("MainWindow", "Today\'s date : "))
         self.label_133.setText(_translate("MainWindow", "SALES"))
         self.sales_view_today_back.setText(_translate("MainWindow", "Back"))
-        self.sales_view_custom_end_date.setDisplayFormat(_translate("MainWindow", "dd/MM/yyyy"))
-        self.sales_view_custom_start_date.setDisplayFormat(_translate("MainWindow", "dd/MM/yyyy"))
         self.sales_view_custom_back.setText(_translate("MainWindow", "Back"))
         self.label_134.setText(_translate("MainWindow", "Starting date : "))
         self.label_135.setText(_translate("MainWindow", "SALES"))
@@ -4470,6 +4468,8 @@ class Ui_MainWindow(object):
         self.sales_view_custom_table.setSortingEnabled(False)
         self.sales_view_custom_table.setSortingEnabled(__sortingEnabled)
         self.label_136.setText(_translate("MainWindow", "Ending date : "))
+        self.sales_view_custom_start_date.setDisplayFormat(_translate("MainWindow", "dd/MM/yyyy"))
+        self.sales_view_custom_end_date.setDisplayFormat(_translate("MainWindow", "dd/MM/yyyy"))
 
 
 if __name__ == "__main__":

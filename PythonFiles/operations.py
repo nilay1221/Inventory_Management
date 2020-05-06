@@ -707,11 +707,12 @@ def get_sales_transacs(by_Id=False,by_Today=False,by_custom=False):
             results=[]
             for each_date in all_dates:
                 sql =f"""
-                    SELECT rm_stock.trans_id,rm_stock.date,rm_stock.customer_id,rm_stock.remark,has_rm.product_code,'-',has_rm.quantity
-                    FROM rm_stock
-                    JOIN has_rm ON
-                    rm_stock.trans_id = has_rm.trans_id
-                    WHERE rm_stock.date = '{each_date}';
+                    SELECT sales.trans_id,sales.customer_id,sales.remark,
+                    consists_of.shade_number,consists_of.product_code,'-',consists_of.quantity
+                    FROM sales
+                    JOIN consists_of ON
+                    sales.trans_id = consists_of.trans_id
+                    WHERE sales.date = '{each_date}';
                 """
                 try:
                     # print(sql)

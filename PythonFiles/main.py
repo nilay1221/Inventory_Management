@@ -340,6 +340,8 @@ class MainWindow(QMainWindow):
                                                                           self.uiWindow.sales_view_by_id_table))
         self.uiWindow.sales_view_by_id_transaction_id.returnPressed.connect(
             lambda: operations_callbacks.view_sales_by_id(self))
+        shortcut3 = QShortcut(QKeySequence('Return'), self.uiWindow.sales_view_custom_end_date)
+        shortcut3.activated.connect(lambda: operations_callbacks.view_sales_by_custom(self))
 
 if __name__ == "__main__":
     import sys
