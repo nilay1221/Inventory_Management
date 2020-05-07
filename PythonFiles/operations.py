@@ -852,7 +852,7 @@ def get_shade_stock(shade,code):
                 where product_code = '{code}' and has_shade.shade_number = {shade} 
                 UNION select consists_of.trans_id,date,'-',quantity from consists_of 
                 join sales on sales.trans_id= consists_of.trans_id 
-                where product_code = '{code}' and consists_of.shade_number = {shade})ORDER by date,trans_id desc"""
+                where product_code = '{code}' and consists_of.shade_number = {shade})ORDER by date"""
         mycursor.execute(sql)
         results=mycursor.fetchall()
         return results
