@@ -822,12 +822,21 @@ def raw_material_closing_stock(code):
         sql = f"""Select sum(quantity) from has_rm where product_code='{code}' and type = 'IN'"""
         mycursor.execute(sql)
         total_in = mycursor.fetchone()
+        if not total_in[0]:
+            total_in = 0
+        else:
+            total_in = total_in[0]
         sql = f"""Select sum(quantity) from has_rm where product_code='{code}' and type = 'OUT'"""
         mycursor.execute(sql)
         total_out = mycursor.fetchone()
-        total= total_in[0]-total_out[0]
+        if not total_out[0]:
+            total_out = 0
+        else:
+            total_out = total_out[0]
+        total= total_in-total_out
         return total
     except Exception as e:
+        # print("inside")
         print(e)
     finally:
         mydb.close()
@@ -849,5 +858,4 @@ def shade_raw_closing_stock(shade,code):
         print(e)
     finally:
         mydb.close()
-
 

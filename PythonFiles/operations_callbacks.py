@@ -793,8 +793,10 @@ def confirm_add_shade_number(self):
                         # print(results)
                         if add_raw_material_data(negative_trans_id,date,customer,remark,results,type="OUT"):
                             add_shade_stock_trans(trans_id,date,customer,remark,shade_number,raw_details)
-                            
                             add_into_duplicates(trans_id,negative_trans_id)
+                            for each_raw in results:
+                                if raw_material_closing_stock(each_raw[0]) < 0:
+                                    self.show_info_popup(f"Raw Material with Product Code {each_raw[0]} has negative closing stock")
                             self.show_info_popup("Transaction Completed Sucessfully")
                             set_shade_number_transacs(self)
                             self.uiWindow.shade_customer.clearEditText()
