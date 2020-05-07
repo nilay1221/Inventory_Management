@@ -15,14 +15,18 @@ class MyQuery:
 MyQuery("""CREATE TABLE Raw_Material(
     product_code varchar(255) NOT NULL UNIQUE PRIMARY KEY ,
     product_name varchar(255),
-    product_price integer
+    product_price integer,
+    product_type varchar(2)
 ); """).sql_execute(mycursor)
 
 MyQuery("""
     CREATE TABLE consists_of(
         type varchar(255),
         quantity real NOT NULL,
-        product_code NOT NULL,
+        product_code varchar(255) NOT NULL,
+        trans_id varchar(255) NOT NULL,
+        shade_number varchar(255) NOT NULL,
+        FOREIGN KEY(trans_id) REFERENCES sales(trans_id) ON UPDATE CASCADE ON DELETE CASCADE,
         FOREIGN KEY(product_code) REFERENCES Raw_Material(product_code) ON UPDATE CASCADE ON DELETE CASCADE
     );
 """).sql_execute(mycursor)
@@ -43,9 +47,10 @@ MyQuery("""
         quantity real NOT NULL,
         trans_id varchar(255) NOT NULL,
         product_code varchar(255) NOT NULL,
+        product_type varchar(2),
         FOREIGN KEY(trans_id) REFERENCES Rm_Stock(Trans_id) ON UPDATE CASCADE ON DELETE CASCADE,
         FOREIGN KEY(product_code) REFERENCES Raw_Material(product_code) ON UPDATE CASCADE ON DELETE CASCADE,
-        PRIMARY KEY (trans_id,product_code)
+        PRIMARY KEY (trans_id,product_code,product_type)
     );""").sql_execute(mycursor)
 
 MyQuery("""
@@ -183,10 +188,10 @@ CREATE TABLE sn_closing_stock(
 mydb.commit()
 # mycursor.execute(sql)
 
-SELECT rm_stock.trans_id,rm_stock.customer_id,rm_stock.remark,has_rm.product_code,'-',has_rm.quantity
-            FROM rm_stock
-            JOIN has_rm ON
-            rm_stock.trans_id = has_rm.trans_id
-            JOIN raw_material ON
-            has_rm.product_code = raw_material.product_code
-            WHERE rm_stock.date = '{by_Today}';
+# SELECT rm_stock.trans_id,rm_stock.customer_id,rm_stock.remark,has_rm.product_code,'-',has_rm.quantity
+#             FROM rm_stock
+#             JOIN has_rm ON
+#             rm_stock.trans_id = has_rm.trans_id
+#             JOIN raw_material ON
+#             has_rm.product_code = raw_material.product_code
+#             WHERE rm_stock.date = '{by_Today}';
