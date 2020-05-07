@@ -266,6 +266,18 @@ class MainWindow(QMainWindow):
         msg.buttonClicked.connect(lambda i: operations_callbacks.delete_sales(self,btn=i))
         x = msg.exec_()
 
+    def eventFilter(self, widget, event):
+        if (event.type() == QtCore.QEvent.KeyPress and
+                widget is self.uiWindow.shade_view_ending_date):
+            key = event.key()
+            if key == QtCore.Qt.Key_Return:
+                print('return')
+            elif key == QtCore.Qt.Key_Enter:
+                print('enter')
+            return True
+        return QMainWindow.eventFilter(self, widget, event)
+
+
 
     def maintain_operations(self):
         self.uiWindow.rm_new_confirm.clicked.connect(lambda: operations_callbacks.callback_add_raw_material(self))
@@ -327,7 +339,7 @@ class MainWindow(QMainWindow):
         shortcut2.activated.connect(lambda : operations_callbacks.shade_view_by_custom_dates(self))
         self.uiWindow.view_trans_2.clicked.connect(lambda:operations_callbacks.clear_shade_view_by_today(self))
         self.uiWindow.shade_view_table_2.cellChanged.connect(lambda row,column:operations_callbacks.display_product_name(row,column,self,4,DEFAULT_SHOW,self.uiWindow.shade_view_table_2))
-        self.uiWindow.shade_view_table.cellChanged.connect(lambda row,column:operations_callbacks.display_product_name(row,column,self,4,DEFAULT_SHOW,self.uiWindow.shade_view_table))
+        self.uiWindow.shade_view_table.cellChanged.connect(lambda row,column:operations_callbacks.display_product_name(row,column,self,5,DEFAULT_SHOW,self.uiWindow.shade_view_table))
         self.uiWindow.rm_view_table_5.cellChanged.connect(lambda row,column:operations_callbacks.display_product_name(row,column,self,3,DEFAULT_SHOW,self.uiWindow.rm_view_table_5))
         self.uiWindow.rm_view_table_3.cellChanged.connect(lambda row,column: operations_callbacks.display_product_name(row,column,self,4,DEFAULT_SHOW,self.uiWindow.rm_view_table_3))
         self.uiWindow.rm_view_table_4.cellChanged.connect(lambda row,column: operations_callbacks.display_product_name(row,column,self,0,DEFAULT_SHOW,self.uiWindow.rm_view_table_4))
@@ -376,8 +388,9 @@ class MainWindow(QMainWindow):
         self.uiWindow.shade_view_stock_shade_number.returnPressed.connect(
             lambda: operations_callbacks.check_shade(self))
         self.uiWindow.shade_view_stock_code.returnPressed.connect(lambda: operations_callbacks.set_sales_product_name(self))
-        shortcut5 = QShortcut(QKeySequence('Return'), self.uiWindow.shade_view_stock_name)
-        shortcut5.activated.connect(lambda: operations_callbacks.shade_stock_view(self))
+        # shortcut5 = QShortcut(QKeySequence('Return'), self.uiWindow.shade_view_ending_date)
+        # self.uiWindow.shade_view_ending_date.dateChanged.connect(lambda: operations_callbacks.shade_stock_view(self))
+        # self.uiWindow.shade_view_ending_date..installEventFilter(self)
 
 
 if __name__ == "__main__":

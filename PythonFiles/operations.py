@@ -612,7 +612,7 @@ def view_shade_transaction(by_Id=False,by_today=False,by_custom=False):
             results=[]
             for each_date in all_dates:
                 sql = f"""
-                 SELECT shade_stock.trans_id , shade_stock.customer_id , shade_stock.remark , shade_stock.shade_number , has_shade.product_code ,'-',has_shade.quantity FROM shade_stock
+                 SELECT shade_stock.trans_id , shade_stock.date, shade_stock.customer_id , shade_stock.remark , shade_stock.shade_number , has_shade.product_code ,'-',has_shade.quantity FROM shade_stock
                  JOIN has_shade
                  ON shade_stock.trans_id = has_shade.trans_id
                  WHERE shade_stock.date = '{each_date}';
