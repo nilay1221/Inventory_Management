@@ -1469,6 +1469,9 @@ def modify_sales(self):
                                         self.uiWindow.sales_modify_table.clearContents()
                                         trans_id_widget.clear()
                                         self.show_info_popup("Transaction Modified Sucessfully")
+                                        for each in sales:
+                                            if shade_raw_closing_stock(each[0],each[1])<0:
+                                                self.show_warning_info(f"Stock is negative for shade number'{each[0]}' and product code '{each[1]}'")
                                         break
                                 else:
                                     self.show_warning_info("Please fill info")

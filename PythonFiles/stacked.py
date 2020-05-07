@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'UI/StackedView.ui'
+# Form implementation generated from reading ui file 'StackedView.ui'
 #
 # Created by: PyQt5 UI code generator 5.13.2
 #
@@ -3845,7 +3845,7 @@ class Ui_MainWindow(object):
         self.stackedWidget.addWidget(self.sales_view_by_custom)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 1262, 22))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 1262, 26))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
@@ -3853,7 +3853,7 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(1)
+        self.stackedWidget.setCurrentIndex(32)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
