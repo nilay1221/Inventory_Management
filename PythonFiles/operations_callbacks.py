@@ -793,6 +793,7 @@ def confirm_add_shade_number(self):
                         # print(results)
                         if add_raw_material_data(negative_trans_id,date,customer,remark,results,type="OUT"):
                             add_shade_stock_trans(trans_id,date,customer,remark,shade_number,raw_details)
+                            
                             add_into_duplicates(trans_id,negative_trans_id)
                             self.show_info_popup("Transaction Completed Sucessfully")
                             set_shade_number_transacs(self)

@@ -284,7 +284,7 @@ class MainWindow(QMainWindow):
             lambda: operations_callbacks.show_new_rm_del_info(self))
         self.uiWindow.rm_new_delete_confirm.clicked.connect(lambda: operations_callbacks.del_new_rm(self))
         self.uiWindow.rm_addtable.cellChanged.connect(
-            lambda row, column: operations_callbacks.display_product_name(row, column, self, 0,"R",self.uiWindow.rm_addtable))
+            lambda row, column: operations_callbacks.display_product_name(row, column, self, 0,"RC",self.uiWindow.rm_addtable))
         self.uiWindow.shade_new__delete_number.returnPressed.connect(lambda : operations_callbacks.show_new_shade_del_info(self))
         self.uiWindow.shade_new__modify_number.returnPressed.connect(
             lambda: operations_callbacks.show_new_shade_modify_info(self))
@@ -302,7 +302,7 @@ class MainWindow(QMainWindow):
         self.uiWindow.rw_modify_transaction_id.returnPressed.connect(lambda : operations_callbacks.set_modify_rm(self))
         self.uiWindow.rm_view_table.cellChanged.connect(
             lambda row, column: operations_callbacks.display_product_name(row, column, self, 0,
-                                                                          "R",self.uiWindow.rm_view_table))
+                                                                          "RC",self.uiWindow.rm_view_table))
         self.uiWindow.rm_modify_confirm.clicked.connect(lambda: operations_callbacks.modify_rm(self))
         self.uiWindow.view_trans.clicked.connect(lambda :operations_callbacks.clear_view_by_id(self))
         # self.uiWindow.rw_view_starting_date_3.dateChanged.connect(lambda : operations_callbacks.view_by_custom_dates(self))
