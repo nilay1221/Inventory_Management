@@ -79,7 +79,7 @@ def modify_new_rm_data(self):
         if product_code == OLD_PRODUCT_CODE:
             try:
                 modify_info(product_code, product_name, product_price,product_type)
-                self.show_info_popup("Details Modified Sucessfully")
+                self.show_info_popup("Details Modified Successfully")
             except:
                 pass
         else:
@@ -130,9 +130,9 @@ def del_new_rm(self, btn=False):
                     self.uiWindow.new_rm_delete_product_code.clear()
                     self.uiWindow.new_rm_delete_product_name.clear()
                     self.uiWindow.new_rm_delete_product_price.clear()
-                    self.show_info_popup("Deleted Sucessfully")
+                    self.show_info_popup("Deleted Successfully")
                 else:
-                    self.show_info_popup("Deleted Unsucessfull")
+                    self.show_info_popup("Deleted UnSuccessfull")
             except:
                 pass
         elif btn.text() == "&No":
@@ -360,7 +360,7 @@ def modify_new_shade_data(self,show=1):
                                     except:
                                         break
                             if show==1:
-                                self.show_info_popup("Details Modified Sucessfully")
+                                self.show_info_popup("Details Modified Successfully")
                         else:
                             message = "Please enter proper Product code"
                             self.show_warning_info(message)
@@ -370,7 +370,7 @@ def modify_new_shade_data(self,show=1):
                     try:
                         if check_for_no_product_code(self.uiWindow.shade_new_modify_details_table,'C'):
                             if readd_shade_material_on_modify(self):
-                                self.show_info_popup("Details Modified Sucessfully")
+                                self.show_info_popup("Details Modified Successfully")
                         else:
                             message = "Please enter proper Product code"
                             self.show_warning_info(message)
@@ -457,7 +457,7 @@ def add_raw_material_callback(self):
                                 customer_widget.clearEditText()
                                 remark_widget.clear()
                                 self.uiWindow.rm_addtable.clearContents()
-                                self.show_info_popup("Transaction Added Sucessfully")
+                                self.show_info_popup("Transaction Added Successfully")
                                 break
                         else:
                             self.show_warning_info("Please fill info")
@@ -549,7 +549,7 @@ def delete_rm(self,btn):
     if check_rm_transacs(trans_id):
         if btn.text() == "&Yes":
             delete_rm_transacs(trans_id)
-            self.show_info_popup("Deleted Sucessfully")
+            self.show_info_popup("Deleted Successfully")
             self.uiWindow.rw_delete_transaction_id.clear()
             self.uiWindow.rm_delete_date.clear()
             self.uiWindow.rm_delete_customer.clearEditText()
@@ -632,7 +632,7 @@ def modify_rm(self):
                                     customer_widget.clearEditText()
                                     remark_widget.clear()
                                     self.uiWindow.rm_view_table.clearContents()
-                                    self.show_info_popup("Transaction Modified Sucessfully")
+                                    self.show_info_popup("Transaction Modified Successfully")
                             else:
                                 self.show_warning_info("Please fill info")
                                 break
@@ -797,7 +797,7 @@ def confirm_add_shade_number(self):
                             for each_raw in results:
                                 if raw_material_closing_stock(each_raw[0]) < 0:
                                     self.show_info_popup(f"Raw Material with Product Code {each_raw[0]} has negative closing stock")
-                            self.show_info_popup("Transaction Completed Sucessfully")
+                            self.show_info_popup("Transaction Completed Successfully")
                             set_shade_number_transacs(self)
                             self.uiWindow.shade_customer.clearEditText()
                             self.uiWindow.shade_remark.clear()
@@ -809,7 +809,7 @@ def confirm_add_shade_number(self):
 
 
                         else:
-                            self.show_warning_info("Transaction Unsucessfull")
+                            self.show_warning_info("Transaction UnSuccessfull")
             except Exception as err:
                 self.show_warning_info(err.__str__())
         elif table_check == "False":
@@ -912,7 +912,7 @@ def delete_shade_transaction(self):
             self.uiWindow.shade_add_total_2.clear()
 
         else:
-            self.show_warning_info("Deletion Unsucessful")
+            self.show_warning_info("Deletion UnSuccessful")
 
 
 def set_modify_shade_transaction(self):
@@ -1005,7 +1005,11 @@ def confirm_modify_shade_trans(self):
                                 if add_raw_material_data(negative_trans_id,date,customer,remark,results,type="OUT"):
                                     add_shade_stock_trans(trans_id,date,customer,remark,shade_number,raw_details)
                                     add_into_duplicates(trans_id,negative_trans_id)
-                                    self.show_info_popup("Transaction Modified Sucessfully")
+                                    for each_raw in results:
+                                        if raw_material_closing_stock(each_raw[0]) < 0:
+                                            self.show_info_popup(
+                                                f"Raw Material with Product Code {each_raw[0]} has negative closing stock")
+                                    self.show_info_popup("Transaction Modified Successfully")
                                     # set_shade_number_transacs(self)
                                     self.uiWindow.shade_modify_transaction_id.clear()
                                     self.uiWindow.shade_modify_date.clear()
@@ -1014,7 +1018,7 @@ def confirm_modify_shade_trans(self):
                                     self.uiWindow.shade_number_modify.clear()
                                     self.uiWindow.shade_addtable_3.clearContents()
                                 else:
-                                    self.show_warning_info("Transaction Unsucessfull")
+                                    self.show_warning_info("Transaction UnSuccessfull")
                     except Exception as err:
                         self.show_warning_info(err.__str__())
                 elif table_check == "False":
@@ -1180,10 +1184,10 @@ def add_sales_callback(self):
                                         customer_widget.clearEditText()
                                         remark_widget.clear()
                                         self.uiWindow.sales_add_table.clearContents()
-                                        self.show_info_popup("Transaction Added Sucessfully")
+                                        self.show_info_popup("Transaction Added Successfully")
                                         for each in sales:
                                             if shade_raw_closing_stock(each[0],each[1])<0:
-                                                self.show_warning_info(f"Stock is negative for shade number'{each[0]}' and product code '{each[1]}'")
+                                                self.show_warning_info(f"Stock for shade number'{each[0]}' and product code '{each[1]}' is negative")
                                         break
                                 else:
                                     self.show_warning_info("Please fill info")
@@ -1328,7 +1332,7 @@ def delete_sales(self,btn=False):
             self.delete_confirm_dialog_sales()
         elif btn.text() == "&Yes":
             delete_sales_transacs(trans_id)
-            self.show_info_popup("Deleted Sucessfully")
+            self.show_info_popup("Deleted Successfully")
             self.uiWindow.sales_delete_trans_id.clear()
             self.uiWindow.sales_delete_date.clear()
             self.uiWindow.sales_delete_customer.clearEditText()
@@ -1469,10 +1473,10 @@ def modify_sales(self):
                                         date_widget.clear()
                                         self.uiWindow.sales_modify_table.clearContents()
                                         trans_id_widget.clear()
-                                        self.show_info_popup("Transaction Modified Sucessfully")
+                                        self.show_info_popup("Transaction Modified Successfully")
                                         for each in sales:
                                             if shade_raw_closing_stock(each[0],each[1])<0:
-                                                self.show_warning_info(f"Stock is negative for shade number'{each[0]}' and product code '{each[1]}'")
+                                                self.show_warning_info(f"Stock for shade number'{each[0]}' and product code '{each[1]}' is negative")
                                         break
                                 else:
                                     self.show_warning_info("Please fill info")
