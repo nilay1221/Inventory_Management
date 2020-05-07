@@ -1017,6 +1017,8 @@ def confirm_modify_shade_trans(self):
                                     self.uiWindow.shade_modify_remark.clear()
                                     self.uiWindow.shade_number_modify.clear()
                                     self.uiWindow.shade_addtable_3.clearContents()
+                                    self.uiWindow.shade_colortable_3.clearContents()
+                                    self.uiWindow.shade_add_total_3.clear()
                                 else:
                                     self.show_warning_info("Transaction UnSuccessfull")
                     except Exception as err:
@@ -1180,14 +1182,14 @@ def add_sales_callback(self):
                                     # print(sales)
                                     if add_sales_data(trans_id,date,customer,remark,sales):
                                         # print("Inside")
+                                        for each in sales:
+                                            if shade_raw_closing_stock(each[0],each[1])<0:
+                                                self.show_warning_info(f"Stock for shade number'{each[0]}' and product code '{each[1]}' is negative")
                                         set_sales_data(self)
                                         customer_widget.clearEditText()
                                         remark_widget.clear()
                                         self.uiWindow.sales_add_table.clearContents()
                                         self.show_info_popup("Transaction Added Successfully")
-                                        for each in sales:
-                                            if shade_raw_closing_stock(each[0],each[1])<0:
-                                                self.show_warning_info(f"Stock for shade number'{each[0]}' and product code '{each[1]}' is negative")
                                         break
                                 else:
                                     self.show_warning_info("Please fill info")
@@ -1467,6 +1469,10 @@ def modify_sales(self):
                                     # print(sales)
                                     if add_sales_data(trans_id, date, customer, remark, sales):
                                         # print("Inside")
+
+                                        for each in sales:
+                                            if shade_raw_closing_stock(each[0],each[1])<0:
+                                                self.show_warning_info(f"Stock for shade number'{each[0]}' and product code '{each[1]}' is negative")
                                         set_sales_data(self)
                                         customer_widget.clearEditText()
                                         remark_widget.clear()
@@ -1474,9 +1480,6 @@ def modify_sales(self):
                                         self.uiWindow.sales_modify_table.clearContents()
                                         trans_id_widget.clear()
                                         self.show_info_popup("Transaction Modified Successfully")
-                                        for each in sales:
-                                            if shade_raw_closing_stock(each[0],each[1])<0:
-                                                self.show_warning_info(f"Stock for shade number'{each[0]}' and product code '{each[1]}' is negative")
                                         break
                                 else:
                                     self.show_warning_info("Please fill info")
@@ -1513,27 +1516,46 @@ def product_stock_view(self):
     delta = y_date - x_date
     if self.uiWindow.rw_view_stock_name_2.text() != "No such product Code":
         if delta.days > 0:
-            results = get_product_stock(code)
+            results = get_product_stock(code,by_custom=[x,y])
             if results:
                 # print(results)
                 try:
                     self.uiWindow.rm_view_table_6.setRowCount(0)
-                    for row_number, row_data in enumerate(results):
-                        self.uiWindow.rm_view_table_6.insertRow(row_number)
-                        for column_number, data in enumerate(row_data):
-                            if str(data)== "OUT" or str(data)=="IN":
-                                pass
-                            else:
-                                if column_number==3:
-                                    if results[row_number][2]=="IN":
-                                        self.uiWindow.rm_view_table_6.setItem(row_number, column_number-1,
-                                                                                   QtWidgets.QTableWidgetItem(str(data)))
-                                    elif results[row_number][2]=="OUT":
-                                        self.uiWindow.rm_view_table_6.setItem(row_number, column_number,
-                                                                              QtWidgets.QTableWidgetItem(str(data)))
+                    trans_list = []
+                    for each_list in results:
+                        for row in range(len(each_list)):
+                            self.uiWindow.rm_view_table_6.insertRow(row)
+                            for column in range(len(each_list[row])):
+                                if column == 0:
+                                    if str(each_list[row][column]) not in trans_list:
+                                        trans_list.append(str(each_list[row][column]))
+                                        self.uiWindow.rm_view_table_6.setItem(row, column,
+                                                                                 QtWidgets.QTableWidgetItem(
+                                                                                     str(each_list[
+                                                                                             row][
+                                                                                             column])))
                                 else:
-                                    self.uiWindow.rm_view_table_6.setItem(row_number, column_number,
-                                                                          QtWidgets.QTableWidgetItem(str(data)))
+                                    self.uiWindow.rm_view_table_6.setItem(row, column,
+                                                                             QtWidgets.QTableWidgetItem(
+                                                                                 str(each_list[row][
+                                                                                         column])))
+                    # self.uiWindow.rm_view_table_6.setRowCount(0)
+                    # for row_number, row_data in enumerate(results):
+                    #     self.uiWindow.rm_view_table_6.insertRow(row_number)
+                    #     for column_number, data in enumerate(row_data):
+                    #         if str(data)== "OUT" or str(data)=="IN":
+                    #             pass
+                    #         else:
+                    #             if column_number==3:
+                    #                 if results[row_number][2]=="IN":
+                    #                     self.uiWindow.rm_view_table_6.setItem(row_number, column_number-1,
+                    #                                                                QtWidgets.QTableWidgetItem(str(data)))
+                    #                 elif results[row_number][2]=="OUT":
+                    #                     self.uiWindow.rm_view_table_6.setItem(row_number, column_number,
+                    #                                                           QtWidgets.QTableWidgetItem(str(data)))
+                    #             else:
+                    #                 self.uiWindow.rm_view_table_6.setItem(row_number, column_number,
+                    #                                                       QtWidgets.QTableWidgetItem(str(data)))
                     closing = raw_material_closing_stock(code)
                     self.uiWindow.rw_view_closing.setText(str(closing))
                 except Exception as e:
@@ -1561,16 +1583,30 @@ def shade_stock_view(self):
             if shade!="":
                 if self.uiWindow.shade_view_stock_name.text() != "No such product Code":
                     if delta.days > 0:
-                        results = get_shade_stock(shade,code)
+                        results = get_shade_stock(shade,code,by_custom=[x,y])
+                        # print(results)
                         if results:
                             # print(results)
                             try:
                                 self.uiWindow.shade_view_table_3.setRowCount(0)
-                                for row_number, row_data in enumerate(results):
-                                    self.uiWindow.shade_view_table_3.insertRow(row_number)
-                                    for column_number, data in enumerate(row_data):
-                                        self.uiWindow.shade_view_table_3.setItem(row_number, column_number,
-                                                                                      QtWidgets.QTableWidgetItem(str(data)))
+                                trans_list = []
+                                for each_list in results:
+                                    for row in range(len(each_list)):
+                                        self.uiWindow.shade_view_table_3.insertRow(row)
+                                        for column in range(len(each_list[row])):
+                                            if column == 0:
+                                                if str(each_list[row][column]) not in trans_list:
+                                                    trans_list.append(str(each_list[row][column]))
+                                                    self.uiWindow.shade_view_table_3.setItem(row, column,
+                                                                                                  QtWidgets.QTableWidgetItem(
+                                                                                                      str(each_list[
+                                                                                                              row][
+                                                                                                              column])))
+                                            else:
+                                                self.uiWindow.shade_view_table_3.setItem(row, column,
+                                                                                              QtWidgets.QTableWidgetItem(
+                                                                                                  str(each_list[row][
+                                                                                                          column])))
                                 closing = shade_raw_closing_stock(shade,code)
                                 self.uiWindow.shade_view_closing.setText(str(closing))
                             except Exception as e:

@@ -802,15 +802,29 @@ def delete_sales_transacs(trans_id):
 
 
 # Closing stock view for Raw material
-def get_product_stock(code):
+def get_product_stock(code,by_custom):
+    start_date = datetime.datetime.strptime(by_custom[0], '%d/%m/%Y').date()
+    end_date = datetime.datetime.strptime(by_custom[1], '%d/%m/%Y').date()
+    delta = end_date - start_date
+    all_dates = []
+    for i in range(delta.days + 1):
+        day = end_date - datetime.timedelta(days=i)
+        all_dates.append(day.strftime('%d-%m-%Y'))
+    results = []
     mydb = sqlite3.connect(DATABASE_NAME)
     mycursor = mydb.cursor()
     try:
-        sql=f"""select trans_id,date,type,quantity from 
-                (select * from has_rm join RM_Stock on RM_Stock.trans_id= has_rm.trans_id) 
-                where product_code = '{code}' ORDER by date"""
-        mycursor.execute(sql)
-        results=mycursor.fetchall()
+        for each in all_dates:
+            sql = f"""select * from 
+             (select RM_Stock.trans_id,RM_Stock.date,has_rm.quantity,'-' from has_rm join RM_Stock on RM_Stock.trans_id= has_rm.trans_id 
+              where type = "IN" and product_code = '{code}' and date='{each}'
+			  UNION
+			  select RM_Stock.trans_id,RM_Stock.date,'-',has_rm.quantity from has_rm join RM_Stock on RM_Stock.trans_id= has_rm.trans_id
+              where type = "OUT" and product_code = '{code}' and date='{each}') order by date;"""
+            mycursor.execute(sql)
+            result=mycursor.fetchall()
+            if result:
+                results.append(result)
         return results
     except:
         pass
@@ -844,22 +858,33 @@ def raw_material_closing_stock(code):
         mydb.close()
 
 
-def get_shade_stock(shade,code):
+def get_shade_stock(shade,code,by_custom):
+    start_date = datetime.datetime.strptime(by_custom[0], '%d/%m/%Y').date()
+    end_date = datetime.datetime.strptime(by_custom[1], '%d/%m/%Y').date()
+    delta = end_date - start_date
+    all_dates = []
+    for i in range(delta.days + 1):
+        day = end_date - datetime.timedelta(days=i)
+        all_dates.append(day.strftime('%d-%m-%Y'))
+    results = []
     mydb = sqlite3.connect(DATABASE_NAME)
     mycursor = mydb.cursor()
     try:
-        sql=f"""select * from 
-                (select has_shade.trans_id,date,quantity,'-' from has_shade 
-                join shade_Stock on shade_stock.trans_id= has_shade.trans_id 
-                where product_code = '{code}' and has_shade.shade_number = {shade} 
-                UNION select consists_of.trans_id,date,'-',quantity from consists_of 
-                join sales on sales.trans_id= consists_of.trans_id 
-                where product_code = '{code}' and consists_of.shade_number = {shade})ORDER by date"""
-        mycursor.execute(sql)
-        results=mycursor.fetchall()
+        for each in all_dates:
+            sql=f"""select * from 
+                    (select has_shade.trans_id,date,quantity,'-' from has_shade 
+                    join shade_Stock on shade_stock.trans_id= has_shade.trans_id 
+                    where product_code = '{code}' and has_shade.shade_number = {shade} 
+                    UNION select consists_of.trans_id,date,'-',quantity from consists_of 
+                    join sales on sales.trans_id= consists_of.trans_id 
+                    where product_code = '{code}' and consists_of.shade_number = {shade}) where date='{each}'"""
+            mycursor.execute(sql)
+            result=mycursor.fetchall()
+            if result:
+                results.append(result)
         return results
-    except:
-        pass
+    except Exception as e:
+        print(e)
     finally:
         mydb.close()
 
