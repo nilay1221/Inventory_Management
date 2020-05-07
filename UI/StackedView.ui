@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>10</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="Home">
      <widget class="QPushButton" name="RM_3">
@@ -231,42 +231,6 @@
       </property>
       <property name="text">
        <string>Add New Raw Material</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="logout">
-      <property name="geometry">
-       <rect>
-        <x>840</x>
-        <y>10</y>
-        <width>121</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Logout</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="exit">
-      <property name="geometry">
-       <rect>
-        <x>460</x>
-        <y>670</y>
-        <width>121</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Exit</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_114">
