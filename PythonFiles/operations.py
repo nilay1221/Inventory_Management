@@ -645,7 +645,7 @@ def get_raw_trans(shade_trans_id):
 
 # print(delete_shade_trans)
 
-def add_sales_data(trans_id,date,customer,remark,productDetails,type="IN"):
+def add_sales_data(trans_id,date,customer,remark,productDetails,type="OUT"):
     mydb = sqlite3.connect(DATABASE_NAME)
     mycursor = mydb.cursor()
     sql = f"INSERT INTO sales VALUES('{trans_id}','{customer}','{date}','{remark}');"
@@ -799,6 +799,24 @@ def raw_material_closing_stock(code):
         mycursor.execute(sql)
         total_in = mycursor.fetchone()
         sql = f"""Select sum(quantity) from has_rm where product_code='{code}' and type = 'OUT'"""
+        mycursor.execute(sql)
+        total_out = mycursor.fetchone()
+        total= total_in[0]-total_out[0]
+        return total
+    except Exception as e:
+        print(e)
+    finally:
+        mydb.close()
+
+
+def shade_raw_closing_stock(shade,code):
+    mydb = sqlite3.connect(DATABASE_NAME)
+    mycursor = mydb.cursor()
+    try:
+        sql = f"""Select sum(quantity) from has_shade where product_code='{code}' and shade_number={shade} and type = 'IN'"""
+        mycursor.execute(sql)
+        total_in = mycursor.fetchone()
+        sql = f"""Select sum(quantity) from consists_of where product_code='{code}' and shade_number={shade} and type = 'IN'"""
         mycursor.execute(sql)
         total_out = mycursor.fetchone()
         total= total_in[0]-total_out[0]
