@@ -1471,12 +1471,16 @@ def modify_sales(self):
 
 
 def set_product_name(self):
-    code =self.uiWindow.rw_view_stock_code_2.text()
-    result = get_product_name(code)
-    if result == "false":
-        self.uiWindow.rw_view_stock_name_2.setText("No such product Code")
-    else:
-        self.uiWindow.rw_view_stock_name_2.setText(result)
+    try:
+        code =self.uiWindow.rw_view_stock_code_2.text()
+        result = get_product_name(code,'RC')
+        print("result")
+        if result == "false":
+            self.uiWindow.rw_view_stock_name_2.setText("No such product Code")
+        else:
+            self.uiWindow.rw_view_stock_name_2.setText(result)
+    except Exception as e:
+        print(e)
 
 
 
