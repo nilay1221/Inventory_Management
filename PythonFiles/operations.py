@@ -842,6 +842,27 @@ def raw_material_closing_stock(code):
         mydb.close()
 
 
+def get_shade_stock(shade,code):
+    mydb = sqlite3.connect(DATABASE_NAME)
+    mycursor = mydb.cursor()
+    try:
+        sql=f"""select * from 
+                (select has_shade.trans_id,date,quantity,'-' from has_shade 
+                join shade_Stock on shade_stock.trans_id= has_shade.trans_id 
+                where product_code = '{code}' and has_shade.shade_number = {shade} 
+                UNION select consists_of.trans_id,date,'-',quantity from consists_of 
+                join sales on sales.trans_id= consists_of.trans_id 
+                where product_code = '{code}' and consists_of.shade_number = {shade})ORDER by date,trans_id desc"""
+        mycursor.execute(sql)
+        results=mycursor.fetchall()
+        return results
+    except:
+        pass
+    finally:
+        mydb.close()
+
+
+
 def shade_raw_closing_stock(shade,code):
     mydb = sqlite3.connect(DATABASE_NAME)
     mycursor = mydb.cursor()
@@ -849,10 +870,18 @@ def shade_raw_closing_stock(shade,code):
         sql = f"""Select sum(quantity) from has_shade where product_code='{code}' and shade_number={shade} and type = 'IN'"""
         mycursor.execute(sql)
         total_in = mycursor.fetchone()
-        sql = f"""Select sum(quantity) from consists_of where product_code='{code}' and shade_number={shade} and type = 'IN'"""
+        if not total_in[0]:
+            total_in = 0
+        else:
+            total_in = total_in[0]
+        sql = f"""Select sum(quantity) from consists_of where product_code='{code}' and shade_number={shade} and type = 'OUT'"""
         mycursor.execute(sql)
         total_out = mycursor.fetchone()
-        total= total_in[0]-total_out[0]
+        if not total_out[0]:
+            total_out = 0
+        else:
+            total_out = total_out[0]
+        total = total_in - total_out
         return total
     except Exception as e:
         print(e)

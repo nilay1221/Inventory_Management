@@ -1094,100 +1094,103 @@ def add_sales_callback(self):
     # print("Inside")
     # TODO check if table is empty or not
     flag = 0
-    trans_id_widget = self.uiWindow.sales_add_transid
-    date_widget = self.uiWindow.sales_add_date
-    customer_widget = self.uiWindow.sales_add_customer
-    remark_widget = self.uiWindow.sales_add_remark
-    trans_id = 'SLS' +  str(trans_id_widget.text())
-    date = date_widget.text()
-    customer = customer_widget.currentText()
-    remark = remark_widget.text()
-    if customer and remark:
-        if check_for_no_product_code(self.uiWindow.sales_add_table):
-            sales = []
-            for i in range(8):
-                try:
-                    if self.uiWindow.sales_add_table.item(i, 0).text():
-                        try:
-                            self.uiWindow.sales_add_table.item(i, 1).text()
-                            self.uiWindow.sales_add_table.item(i, 3).text()
-                            if self.uiWindow.sales_add_table.item(i, 0).text() == '' or self.uiWindow.sales_add_table.item(i, 1).text()=='' or self.uiWindow.sales_add_table.item(i, 3).text()=='':
-                                self.show_warning_info(f"Please fill info in the table at '{i + 1}'")
-                                flag = 1
-                                break
-                        except:
-                            self.show_warning_info(f"Please fill info in the table at '{i+1}'")
-                            flag = 1
-                            break
-                    if self.uiWindow.sales_add_table.item(i, 1).text():
-                        try:
-                            self.uiWindow.sales_add_table.item(i, 0).text()
-                            self.uiWindow.sales_add_table.item(i, 3).text()
-                            if self.uiWindow.sales_add_table.item(i, 0).text() == '' or self.uiWindow.sales_add_table.item(i, 1).text()=='' or self.uiWindow.sales_add_table.item(i, 3).text()=='':
-                                self.show_warning_info(f"Please fill info in the table at '{i + 1}'")
-                                flag = 1
-                                break
-                        except:
-                            self.show_warning_info(f"Please fill info in the table at '{i+1}'")
-                            flag = 1
-                            break
-                    if self.uiWindow.sales_add_table.item(i, 3).text():
-                        try:
-                            self.uiWindow.sales_add_table.item(i, 0).text()
-                            self.uiWindow.sales_add_table.item(i, 1).text()
-                            if self.uiWindow.sales_add_table.item(i, 0).text() == '' or self.uiWindow.sales_add_table.item(
-                                    i, 1).text() == '' or self.uiWindow.sales_add_table.item(i, 3).text() == '':
-                                self.show_warning_info(f"Please fill info in the table at '{i + 1}'")
-                                flag = 1
-                                break
-                        except:
-                            self.show_warning_info(f"Please fill info in the table at '{i + 1}'")
-                            flag = 1
-                            break
-                except:
-                    try:
-                        if self.uiWindow.sales_add_table.item(i,1).text() != '' or self.uiWindow.sales_add_table.item(i, 3).text() != '':
-                            self.show_warning_info(f"Please fill info in the table at '{i + 1}'")
-                            flag = 1
-                            break
-                    except Exception as e:
-                        print(e)
-                        break
-            if flag == 0:
+    try:
+        trans_id_widget = self.uiWindow.sales_add_transid
+        date_widget = self.uiWindow.sales_add_date
+        customer_widget = self.uiWindow.sales_add_customer
+        remark_widget = self.uiWindow.sales_add_remark
+        trans_id = 'SLS' +  str(trans_id_widget.text())
+        date = date_widget.text()
+        customer = customer_widget.currentText()
+        remark = remark_widget.text()
+        if customer and remark:
+            if check_for_no_product_code(self.uiWindow.sales_add_table,'R'):
+                sales = []
                 for i in range(8):
                     try:
-                        if self.uiWindow.sales_add_table.item(i,0).text() and self.uiWindow.sales_add_table.item(i,1).text() and self.uiWindow.sales_add_table.item(i,3).text():
-                            shade_number= self.uiWindow.sales_add_table.item(i,0).text()
-                            product_code = self.uiWindow.sales_add_table.item(i,1).text()
-                            quantity = self.uiWindow.sales_add_table.item(i,3).text()
-                            sales.append((shade_number,product_code,float(quantity)))
+                        if self.uiWindow.sales_add_table.item(i, 0).text():
+                            try:
+                                self.uiWindow.sales_add_table.item(i, 1).text()
+                                self.uiWindow.sales_add_table.item(i, 3).text()
+                                if self.uiWindow.sales_add_table.item(i, 0).text() == '' or self.uiWindow.sales_add_table.item(i, 1).text()=='' or self.uiWindow.sales_add_table.item(i, 3).text()=='':
+                                    self.show_warning_info(f"Please fill info in the table at '{i + 1}'")
+                                    flag = 1
+                                    break
+                            except:
+                                self.show_warning_info(f"Please fill info in the table at '{i+1}'")
+                                flag = 1
+                                break
+                        if self.uiWindow.sales_add_table.item(i, 1).text():
+                            try:
+                                self.uiWindow.sales_add_table.item(i, 0).text()
+                                self.uiWindow.sales_add_table.item(i, 3).text()
+                                if self.uiWindow.sales_add_table.item(i, 0).text() == '' or self.uiWindow.sales_add_table.item(i, 1).text()=='' or self.uiWindow.sales_add_table.item(i, 3).text()=='':
+                                    self.show_warning_info(f"Please fill info in the table at '{i + 1}'")
+                                    flag = 1
+                                    break
+                            except:
+                                self.show_warning_info(f"Please fill info in the table at '{i+1}'")
+                                flag = 1
+                                break
+                        if self.uiWindow.sales_add_table.item(i, 3).text():
+                            try:
+                                self.uiWindow.sales_add_table.item(i, 0).text()
+                                self.uiWindow.sales_add_table.item(i, 1).text()
+                                if self.uiWindow.sales_add_table.item(i, 0).text() == '' or self.uiWindow.sales_add_table.item(
+                                        i, 1).text() == '' or self.uiWindow.sales_add_table.item(i, 3).text() == '':
+                                    self.show_warning_info(f"Please fill info in the table at '{i + 1}'")
+                                    flag = 1
+                                    break
+                            except:
+                                self.show_warning_info(f"Please fill info in the table at '{i + 1}'")
+                                flag = 1
+                                break
                     except:
                         try:
-                            self.uiWindow.sales_add_table.item(i,0).text()
-                            self.uiWindow.sales_add_table.item(i, 1).text()
-                            self.uiWindow.sales_add_table.item(i, 3).text()
-                            self.show_warning_info("Please fill info")
+                            if self.uiWindow.sales_add_table.item(i,1).text() != '' or self.uiWindow.sales_add_table.item(i, 3).text() != '':
+                                self.show_warning_info(f"Please fill info in the table at '{i + 1}'")
+                                flag = 1
+                                break
+                        except Exception as e:
+                            print(e)
                             break
+                if flag == 0:
+                    for i in range(8):
+                        try:
+                            if self.uiWindow.sales_add_table.item(i,0).text() and self.uiWindow.sales_add_table.item(i,1).text() and self.uiWindow.sales_add_table.item(i,3).text():
+                                shade_number= self.uiWindow.sales_add_table.item(i,0).text()
+                                product_code = self.uiWindow.sales_add_table.item(i,1).text()
+                                quantity = self.uiWindow.sales_add_table.item(i,3).text()
+                                sales.append((shade_number,product_code,float(quantity)))
                         except:
-                            # print("inside exception")
-                            # print(sales)
-                            if sales:
-                                # print(sales)
-                                if add_sales_data(trans_id,date,customer,remark,sales):
-                                    # print("Inside")
-                                    set_sales_data(self)
-                                    customer_widget.clearEditText()
-                                    remark_widget.clear()
-                                    self.uiWindow.sales_add_table.clearContents()
-                                    self.show_info_popup("Transaction Added Sucessfully")
-                                    break
-                            else:
+                            try:
+                                self.uiWindow.sales_add_table.item(i,0).text()
+                                self.uiWindow.sales_add_table.item(i, 1).text()
+                                self.uiWindow.sales_add_table.item(i, 3).text()
                                 self.show_warning_info("Please fill info")
                                 break
+                            except:
+                                # print("inside exception")
+                                # print(sales)
+                                if sales:
+                                    # print(sales)
+                                    if add_sales_data(trans_id,date,customer,remark,sales):
+                                        # print("Inside")
+                                        set_sales_data(self)
+                                        customer_widget.clearEditText()
+                                        remark_widget.clear()
+                                        self.uiWindow.sales_add_table.clearContents()
+                                        self.show_info_popup("Transaction Added Sucessfully")
+                                        break
+                                else:
+                                    self.show_warning_info("Please fill info")
+                                    break
+            else:
+                self.show_warning_info("Please fill out from available product code")
         else:
-            self.show_warning_info("Please fill out from available product code")
-    else:
-        self.show_warning_info("Please fill out the form")
+            self.show_warning_info("Please fill out the form")
+    except Exception as e:
+        print(e)
 
 
 def view_sales_by_today(self):
@@ -1375,7 +1378,7 @@ def modify_sales(self):
         customer = customer_widget.currentText()
         remark = remark_widget.text()
         if customer and remark:
-            if check_for_no_product_code(self.uiWindow.sales_modify_table):
+            if check_for_no_product_code(self.uiWindow.sales_modify_table,'R'):
                 sales = []
                 for i in range(8):
                     try:
@@ -1530,3 +1533,92 @@ def product_stock_view(self):
             self.show_warning_info("Please select correct date")
     else:
         self.show_warning_info("Please select correct product code")
+
+def shade_stock_view(self):
+    try:
+        if check_for_shade(self):
+            code = self.uiWindow.shade_view_stock_code.text()
+            shade = self.uiWindow.shade_view_stock_shade_number.text()
+            d1 = self.uiWindow.shade_view_starting_date.date()
+            d2 = self.uiWindow.shade_view_ending_date.date()
+            x = d1.toString('dd/MM/yyyy')
+            y = d2.toString('dd/MM/yyyy')
+            # print(type(x))
+            x_date = datetime.datetime.strptime(x,'%d/%m/%Y')
+            y_date = datetime.datetime.strptime(y,'%d/%m/%Y')
+            delta = y_date - x_date
+            if shade!="":
+                if self.uiWindow.shade_view_stock_name.text() != "No such product Code":
+                    if delta.days > 0:
+                        results = get_shade_stock(shade,code)
+                        if results:
+                            # print(results)
+                            try:
+                                self.uiWindow.shade_view_table_3.setRowCount(0)
+                                for row_number, row_data in enumerate(results):
+                                    self.uiWindow.shade_view_table_3.insertRow(row_number)
+                                    for column_number, data in enumerate(row_data):
+                                        self.uiWindow.shade_view_table_3.setItem(row_number, column_number,
+                                                                                      QtWidgets.QTableWidgetItem(str(data)))
+                                closing = shade_raw_closing_stock(shade,code)
+                                self.uiWindow.shade_view_closing.setText(str(closing))
+                            except Exception as e:
+                                print(e)
+                        else:
+                            pass
+                    else:
+                        self.show_warning_info("Please select correct date")
+                else:
+                    self.show_warning_info("Please select correct product code")
+            else:
+                self.show_warning_info("Please enter shade number")
+    except Exception as e:
+        print(e)
+        self.show_warning_info("Please fill the complete form")
+
+def check_shade(self):
+    code = self.uiWindow.shade_view_stock_shade_number.text()
+    try:
+        if code=="":
+            pass
+        else:
+            results=get_shade(code)
+            if results:
+                pass
+            else:
+                self.show_warning_info("The shade number entered does not exist")
+                self.uiWindow.shade_view_stock_shade_number.setText("")
+    except:
+        pass
+
+def check_for_shade(self):
+    code = self.uiWindow.shade_view_stock_shade_number.text()
+    try:
+        if code=="":
+            pass
+        else:
+            results=get_shade(code)
+            if results:
+                return True
+            else:
+                self.show_warning_info("The shade number entered does not exist")
+                return False
+        return False
+    except:
+        pass
+
+def set_sales_product_name(self):
+    try:
+        code =self.uiWindow.shade_view_stock_code.text()
+        result = get_product_name(code,'R')
+        print("result")
+        if result == "false":
+            self.uiWindow.shade_view_stock_name.setText("No such product Code")
+        elif result=="Product mismatch":
+            self.uiWindow.shade_view_stock_name.setText("")
+            self.uiWindow.shade_view_stock_code.setText("")
+            self.show_warning_info("Only raw material is allowed")
+        else:
+            self.uiWindow.shade_view_stock_name.setText(result)
+    except Exception as e:
+        print(e)

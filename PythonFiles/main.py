@@ -366,6 +366,11 @@ class MainWindow(QMainWindow):
         self.uiWindow.rw_view_stock_code_2.returnPressed.connect(lambda: operations_callbacks.set_product_name(self))
         shortcut4 = QShortcut(QKeySequence('Return'), self.uiWindow.rw_view_ending_date_3)
         shortcut4.activated.connect(lambda: operations_callbacks.product_stock_view(self))
+        self.uiWindow.shade_view_stock_shade_number.returnPressed.connect(
+            lambda: operations_callbacks.check_shade(self))
+        self.uiWindow.shade_view_stock_code.returnPressed.connect(lambda: operations_callbacks.set_sales_product_name(self))
+        shortcut5 = QShortcut(QKeySequence('Return'), self.uiWindow.shade_view_stock_name)
+        shortcut5.activated.connect(lambda: operations_callbacks.shade_stock_view(self))
 
 
 if __name__ == "__main__":
