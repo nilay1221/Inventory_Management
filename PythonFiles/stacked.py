@@ -996,7 +996,7 @@ class Ui_MainWindow(object):
         self.label_34.setFont(font)
         self.label_34.setObjectName("label_34")
         self.rm_view_table_4 = QtWidgets.QTableWidget(self.rm_vew_by_id)
-        self.rm_view_table_4.setGeometry(QtCore.QRect(230, 330, 541, 251))
+        self.rm_view_table_4.setGeometry(QtCore.QRect(230, 330, 411, 341))
         self.rm_view_table_4.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
         self.rm_view_table_4.setRowCount(8)
         self.rm_view_table_4.setColumnCount(3)
@@ -3977,7 +3977,7 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(38)
+        self.stackedWidget.setCurrentIndex(10)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):

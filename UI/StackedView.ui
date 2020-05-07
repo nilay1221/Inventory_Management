@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>38</number>
+     <number>10</number>
     </property>
     <widget class="QWidget" name="Home">
      <widget class="QPushButton" name="RM_3">
@@ -2848,8 +2848,8 @@
        <rect>
         <x>230</x>
         <y>330</y>
-        <width>541</width>
-        <height>251</height>
+        <width>411</width>
+        <height>341</height>
        </rect>
       </property>
       <property name="editTriggers">
