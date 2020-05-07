@@ -175,9 +175,15 @@ def display_product_name(row, column, self, col, product_type,tableWidget):
                     tableWidget.setItem(row, column + 1, QtWidgets.QTableWidgetItem("No such product code"))
                 elif result == "Product mismatch":
                     if product_type == "R" :
-                        tableWidget.setItem(row, column + 1, QtWidgets.QTableWidgetItem("Only Raw Material Allowed"))
+                        tableWidget.removeRow(row)
+                        tableWidget.insertRow(row)
+                        self.show_warning_info("Select only from raw materials")
+                        # tableWidget.setItem(row, column + 1, QtWidgets.QTableWidgetItem("Only Raw Material Allowed"))
                     else:
-                        tableWidget.setItem(row, column + 1, QtWidgets.QTableWidgetItem("Only Colour Allowed"))
+                        tableWidget.removeRow(row)
+                        tableWidget.insertRow(row)
+                        self.show_warning_info("Select only from Colours")
+                        # tableWidget.setItem(row, column + 1, QtWidgets.QTableWidgetItem("Only Colour Allowed"))
                 else:
                     tableWidget.setItem(row, column + 1, QtWidgets.QTableWidgetItem(result))
         except Exception as e:
