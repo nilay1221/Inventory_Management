@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1038</width>
-    <height>854</height>
+    <width>1074</width>
+    <height>883</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -443,6 +443,24 @@
     </property>
     <property name="text">
      <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="shade_stock_view_clear">
+    <property name="geometry">
+     <rect>
+      <x>770</x>
+      <y>810</y>
+      <width>151</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Clear</string>
     </property>
    </widget>
   </widget>

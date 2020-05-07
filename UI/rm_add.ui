@@ -192,8 +192,8 @@
    <widget class="QPushButton" name="rm_confirm">
     <property name="geometry">
      <rect>
-      <x>750</x>
-      <y>500</y>
+      <x>540</x>
+      <y>530</y>
       <width>111</width>
       <height>51</height>
      </rect>
@@ -366,6 +366,24 @@
       <string>Parth</string>
      </property>
     </item>
+   </widget>
+   <widget class="QPushButton" name="rm_add_clear">
+    <property name="geometry">
+     <rect>
+      <x>710</x>
+      <y>530</y>
+      <width>141</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Clear</string>
+    </property>
    </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>

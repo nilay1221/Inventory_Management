@@ -373,11 +373,29 @@
      <string>Product Name : </string>
     </property>
    </widget>
+   <widget class="QPushButton" name="rm_stock_view_clear">
+    <property name="geometry">
+     <rect>
+      <x>740</x>
+      <y>660</y>
+      <width>141</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Clear</string>
+    </property>
+   </widget>
    <widget class="QLineEdit" name="rw_view_closing">
     <property name="geometry">
      <rect>
-      <x>790</x>
-      <y>680</y>
+      <x>860</x>
+      <y>580</y>
       <width>151</width>
       <height>41</height>
      </rect>
@@ -394,8 +412,8 @@
    <widget class="QLabel" name="label_12">
     <property name="geometry">
      <rect>
-      <x>630</x>
-      <y>670</y>
+      <x>710</x>
+      <y>570</y>
       <width>181</width>
       <height>51</height>
      </rect>

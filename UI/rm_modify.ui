@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>923</width>
+    <width>924</width>
     <height>691</height>
    </rect>
   </property>
@@ -352,8 +352,8 @@
    <widget class="QPushButton" name="rm_modify_confirm">
     <property name="geometry">
      <rect>
-      <x>700</x>
-      <y>570</y>
+      <x>410</x>
+      <y>560</y>
       <width>141</width>
       <height>61</height>
      </rect>
@@ -367,6 +367,24 @@
     </property>
     <property name="text">
      <string>Modify</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="rm_modify_clear">
+    <property name="geometry">
+     <rect>
+      <x>580</x>
+      <y>560</y>
+      <width>141</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Clear</string>
     </property>
    </widget>
   </widget>

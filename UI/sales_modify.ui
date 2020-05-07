@@ -17,8 +17,8 @@
    <widget class="QTableWidget" name="sales_modify_table">
     <property name="geometry">
      <rect>
-      <x>230</x>
-      <y>280</y>
+      <x>270</x>
+      <y>290</y>
       <width>521</width>
       <height>341</height>
      </rect>
@@ -149,7 +149,7 @@
    <widget class="QPushButton" name="sales_modify_confirm">
     <property name="geometry">
      <rect>
-      <x>710</x>
+      <x>470</x>
       <y>680</y>
       <width>141</width>
       <height>61</height>
@@ -379,6 +379,24 @@
       <string>Parth</string>
      </property>
     </item>
+   </widget>
+   <widget class="QPushButton" name="sales_modify_clear">
+    <property name="geometry">
+     <rect>
+      <x>780</x>
+      <y>680</y>
+      <width>131</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Clear</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
