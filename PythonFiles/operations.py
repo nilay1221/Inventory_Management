@@ -143,6 +143,8 @@ def delete_new_rm(product_code):
         #result=mycursor.fetchall()
         #print(result)
         mycursor.execute(sql)
+        sql = f"DELETE FROM madeup_of WHERE product_code = '{product_code}';"
+        mycursor.execute(sql)
         mydb.commit()
         return True
     except:
