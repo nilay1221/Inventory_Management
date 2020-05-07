@@ -1272,6 +1272,7 @@ def view_sales_by_custom(self):
     delta = y_date - x_date
     if delta.days > 0:
         results = get_sales_transacs(by_custom=[x,y])
+        # print(results)
         if results:
             self.uiWindow.sales_view_custom_table.setRowCount(0)
             trans_list=[]
@@ -1279,7 +1280,7 @@ def view_sales_by_custom(self):
                 for row in range(len(each_list)):
                     self.uiWindow.sales_view_custom_table.insertRow(row)
                     for column in range(len(each_list[row])):
-                        if column ==0:
+                        if column == 0:
                             if str(each_list[row][column]) not in trans_list:
                                 trans_list.append(str(each_list[row][column]))
                                 self.uiWindow.sales_view_custom_table.setItem(row,column,QtWidgets.QTableWidgetItem(str(each_list[row][column])))

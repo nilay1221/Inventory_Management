@@ -735,7 +735,7 @@ def get_sales_transacs(by_Id=False,by_Today=False,by_custom=False):
             results=[]
             for each_date in all_dates:
                 sql =f"""
-                    SELECT sales.trans_id,sales.customer_id,sales.remark,
+                    SELECT sales.trans_id,sales.date,sales.customer_id,sales.remark,
                     consists_of.shade_number,consists_of.product_code,'-',consists_of.quantity
                     FROM sales
                     JOIN consists_of ON

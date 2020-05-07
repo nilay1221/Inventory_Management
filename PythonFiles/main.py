@@ -344,11 +344,14 @@ class MainWindow(QMainWindow):
             lambda row,column: operations_callbacks.find_shade(row,column,self,0,self.uiWindow.sales_add_table))
         self.uiWindow.sales_add_table.cellChanged.connect(lambda row,column: operations_callbacks.display_product_name(row,column,self,1,'R',self.uiWindow.sales_add_table))
         self.uiWindow.sales_view_today_table.cellChanged.connect(
-            lambda row, column: operations_callbacks.display_product_name(row, column, self, 4,
+            lambda row, column: operations_callbacks.display_product_name(row, column, self, 4,'R',
                                                                           self.uiWindow.sales_view_today_table))
         self.uiWindow.sales_view_by_id_table.cellChanged.connect(
-            lambda row, column: operations_callbacks.display_product_name(row, column, self, 1,
+            lambda row, column: operations_callbacks.display_product_name(row, column, self, 1,'R',
                                                                           self.uiWindow.sales_view_by_id_table))
+        self.uiWindow.sales_view_custom_table.cellChanged.connect(
+            lambda row, column: operations_callbacks.display_product_name(row, column, self, 5, 'R',
+                                                                          self.uiWindow.sales_view_custom_table))
         self.uiWindow.sales_view_by_id_transaction_id.returnPressed.connect(
             lambda: operations_callbacks.view_sales_by_id(self))
         shortcut3 = QShortcut(QKeySequence('Return'), self.uiWindow.sales_view_custom_end_date)
@@ -360,6 +363,10 @@ class MainWindow(QMainWindow):
         self.uiWindow.sales_modify_table.cellChanged.connect(
             lambda row, column: operations_callbacks.display_product_name(row, column, self, 1,'R',
                                                                           self.uiWindow.sales_modify_table)
+        )
+        self.uiWindow.sales_delete_table.cellChanged.connect(
+            lambda row, column: operations_callbacks.display_product_name(row, column, self, 1, 'R',
+                                                                          self.uiWindow.sales_delete_table)
         )
         self.uiWindow.sales_modify_table.cellChanged.connect(
             lambda row, column: operations_callbacks.find_shade(row, column, self, 0, self.uiWindow.sales_modify_table))
