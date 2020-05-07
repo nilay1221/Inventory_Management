@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>11</number>
+     <number>38</number>
     </property>
     <widget class="QWidget" name="Home">
      <widget class="QPushButton" name="RM_3">
@@ -467,7 +467,7 @@
        <rect>
         <x>400</x>
         <y>490</y>
-        <width>121</width>
+        <width>141</width>
         <height>31</height>
        </rect>
       </property>
@@ -503,6 +503,11 @@
         <width>111</width>
         <height>31</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
       </property>
       <property name="styleSheet">
        <string notr="true">QRadioButton::indicator { width: 20px; height: 20px;};</string>
@@ -675,6 +680,49 @@
         </font>
        </property>
       </column>
+      <item row="0" column="1">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="flags">
+        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="1" column="1">
+       <property name="flags">
+        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="2" column="1">
+       <property name="flags">
+        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="3" column="1">
+       <property name="flags">
+        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="6" column="1">
+       <property name="flags">
+        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="7" column="1">
+       <property name="flags">
+        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="8" column="1">
+       <property name="flags">
+        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="9" column="1">
+       <property name="flags">
+        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
+       </property>
+      </item>
      </widget>
     </widget>
     <widget class="QWidget" name="rm_add">
@@ -701,8 +749,8 @@
        <rect>
         <x>230</x>
         <y>300</y>
-        <width>541</width>
-        <height>251</height>
+        <width>411</width>
+        <height>331</height>
        </rect>
       </property>
       <property name="rowCount">
@@ -1027,7 +1075,7 @@
        <rect>
         <x>700</x>
         <y>220</y>
-        <width>151</width>
+        <width>311</width>
         <height>41</height>
        </rect>
       </property>
@@ -1062,7 +1110,7 @@
        <rect>
         <x>690</x>
         <y>210</y>
-        <width>151</width>
+        <width>301</width>
         <height>41</height>
        </rect>
       </property>
@@ -1212,8 +1260,8 @@
        <rect>
         <x>220</x>
         <y>290</y>
-        <width>541</width>
-        <height>251</height>
+        <width>401</width>
+        <height>331</height>
        </rect>
       </property>
       <property name="editTriggers">
@@ -1581,7 +1629,7 @@
        <rect>
         <x>710</x>
         <y>220</y>
-        <width>151</width>
+        <width>301</width>
         <height>41</height>
        </rect>
       </property>
@@ -1606,7 +1654,7 @@
        </font>
       </property>
       <property name="readOnly">
-       <bool>true</bool>
+       <bool>false</bool>
       </property>
      </widget>
      <widget class="QLabel" name="label_22">
@@ -1650,8 +1698,8 @@
        <rect>
         <x>240</x>
         <y>300</y>
-        <width>541</width>
-        <height>251</height>
+        <width>411</width>
+        <height>331</height>
        </rect>
       </property>
       <property name="rowCount">
@@ -3021,7 +3069,7 @@
        <rect>
         <x>700</x>
         <y>250</y>
-        <width>151</width>
+        <width>321</width>
         <height>41</height>
        </rect>
       </property>
@@ -3461,6 +3509,9 @@
         <pointsize>12</pointsize>
        </font>
       </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
      </widget>
      <widget class="QLabel" name="label_40">
       <property name="geometry">
@@ -3547,6 +3598,9 @@
        <font>
         <pointsize>12</pointsize>
        </font>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
       </property>
      </widget>
      <widget class="QTableWidget" name="shade_addtable">
@@ -3736,7 +3790,7 @@
        <rect>
         <x>650</x>
         <y>180</y>
-        <width>151</width>
+        <width>361</width>
         <height>41</height>
        </rect>
       </property>
@@ -3759,6 +3813,9 @@
        <font>
         <pointsize>12</pointsize>
        </font>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
       </property>
      </widget>
      <widget class="QLineEdit" name="shade_number_add">
@@ -3856,6 +3913,9 @@
         <width>661</width>
         <height>291</height>
        </rect>
+      </property>
+      <property name="editTriggers">
+       <set>QAbstractItemView::NoEditTriggers</set>
       </property>
       <property name="rowCount">
        <number>8</number>
@@ -4007,6 +4067,9 @@
         <pointsize>12</pointsize>
        </font>
       </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
      </widget>
      <widget class="QLineEdit" name="shade_delete_date">
       <property name="geometry">
@@ -4021,6 +4084,9 @@
        <font>
         <pointsize>12</pointsize>
        </font>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
       </property>
      </widget>
      <widget class="QLineEdit" name="shade_delete_transaction_id">
@@ -4082,6 +4148,9 @@
         <width>411</width>
         <height>261</height>
        </rect>
+      </property>
+      <property name="editTriggers">
+       <set>QAbstractItemView::NoEditTriggers</set>
       </property>
       <property name="rowCount">
        <number>8</number>
@@ -4245,6 +4314,9 @@
         <pointsize>12</pointsize>
        </font>
       </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
      </widget>
      <widget class="QLabel" name="label_49">
       <property name="geometry">
@@ -4384,7 +4456,7 @@
        <rect>
         <x>670</x>
         <y>160</y>
-        <width>151</width>
+        <width>341</width>
         <height>41</height>
        </rect>
       </property>
@@ -4392,6 +4464,9 @@
        <font>
         <pointsize>12</pointsize>
        </font>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
       </property>
      </widget>
      <widget class="QPushButton" name="shade_delete_confirm">
@@ -4422,6 +4497,9 @@
         <width>661</width>
         <height>291</height>
        </rect>
+      </property>
+      <property name="editTriggers">
+       <set>QAbstractItemView::NoEditTriggers</set>
       </property>
       <property name="rowCount">
        <number>8</number>
@@ -4588,6 +4666,9 @@
         <pointsize>12</pointsize>
        </font>
       </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
      </widget>
      <widget class="QPushButton" name="shade_modify_confirm">
       <property name="geometry">
@@ -4614,7 +4695,7 @@
        <rect>
         <x>660</x>
         <y>160</y>
-        <width>151</width>
+        <width>331</width>
         <height>41</height>
        </rect>
       </property>
@@ -4907,6 +4988,9 @@
         <pointsize>12</pointsize>
        </font>
       </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
      </widget>
      <widget class="QLabel" name="label_56">
       <property name="geometry">
@@ -4988,6 +5072,9 @@
         <width>661</width>
         <height>291</height>
        </rect>
+      </property>
+      <property name="editTriggers">
+       <set>QAbstractItemView::NoEditTriggers</set>
       </property>
       <property name="rowCount">
        <number>8</number>
@@ -5432,6 +5519,9 @@
         <height>491</height>
        </rect>
       </property>
+      <property name="editTriggers">
+       <set>QAbstractItemView::NoEditTriggers</set>
+      </property>
       <property name="rowCount">
        <number>100</number>
       </property>
@@ -5740,6 +5830,9 @@
         <pointsize>12</pointsize>
        </font>
       </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
      </widget>
      <widget class="QLabel" name="label_66">
       <property name="geometry">
@@ -5809,6 +5902,9 @@
         <pointsize>12</pointsize>
        </font>
       </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
      </widget>
      <widget class="QLineEdit" name="shade_view_transaction_id">
       <property name="geometry">
@@ -5830,7 +5926,7 @@
        <rect>
         <x>680</x>
         <y>180</y>
-        <width>151</width>
+        <width>341</width>
         <height>41</height>
        </rect>
       </property>
@@ -5838,6 +5934,9 @@
        <font>
         <pointsize>12</pointsize>
        </font>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
       </property>
      </widget>
      <widget class="QLabel" name="label_69">
@@ -5884,6 +5983,9 @@
         <width>411</width>
         <height>251</height>
        </rect>
+      </property>
+      <property name="editTriggers">
+       <set>QAbstractItemView::NoEditTriggers</set>
       </property>
       <property name="rowCount">
        <number>8</number>
@@ -6011,6 +6113,9 @@
         <pointsize>12</pointsize>
        </font>
       </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
      </widget>
      <widget class="QLabel" name="label_70">
       <property name="geometry">
@@ -6117,6 +6222,9 @@
         <width>661</width>
         <height>291</height>
        </rect>
+      </property>
+      <property name="editTriggers">
+       <set>QAbstractItemView::NoEditTriggers</set>
       </property>
       <property name="rowCount">
        <number>8</number>
@@ -6262,6 +6370,9 @@
         <width>931</width>
         <height>481</height>
        </rect>
+      </property>
+      <property name="editTriggers">
+       <set>QAbstractItemView::NoEditTriggers</set>
       </property>
       <property name="rowCount">
        <number>100</number>
@@ -6592,6 +6703,9 @@
         <height>41</height>
        </rect>
       </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
       <property name="displayFormat">
        <string>dd/MM/yyyy</string>
       </property>
@@ -6669,6 +6783,9 @@
       <property name="text">
        <string/>
       </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
      </widget>
      <widget class="QLabel" name="label_81">
       <property name="geometry">
@@ -6704,6 +6821,9 @@
       </property>
       <property name="text">
        <string/>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
       </property>
      </widget>
      <widget class="QPushButton" name="back_view_rm_11">
@@ -6786,6 +6906,9 @@
         <width>561</width>
         <height>381</height>
        </rect>
+      </property>
+      <property name="editTriggers">
+       <set>QAbstractItemView::NoEditTriggers</set>
       </property>
       <property name="rowCount">
        <number>100</number>
@@ -7002,6 +7125,9 @@
       <property name="text">
        <string/>
       </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
      </widget>
      <widget class="QLabel" name="label_85">
       <property name="geometry">
@@ -7037,6 +7163,9 @@
       </property>
       <property name="text">
        <string/>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
       </property>
      </widget>
      <widget class="QLabel" name="label_86">
@@ -7083,6 +7212,9 @@
         <width>561</width>
         <height>381</height>
        </rect>
+      </property>
+      <property name="editTriggers">
+       <set>QAbstractItemView::NoEditTriggers</set>
       </property>
       <property name="rowCount">
        <number>100</number>
@@ -7809,7 +7941,7 @@
        <rect>
         <x>390</x>
         <y>540</y>
-        <width>121</width>
+        <width>141</width>
         <height>31</height>
        </rect>
       </property>
@@ -7845,6 +7977,11 @@
         <width>111</width>
         <height>31</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
       </property>
       <property name="styleSheet">
        <string notr="true">QRadioButton::indicator { width: 20px; height: 20px;};</string>
@@ -8010,6 +8147,9 @@
         <pointsize>12</pointsize>
        </font>
       </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
      </widget>
      <widget class="QLineEdit" name="new_rm_delete_product_name">
       <property name="geometry">
@@ -8025,13 +8165,16 @@
         <pointsize>12</pointsize>
        </font>
       </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
      </widget>
      <widget class="QRadioButton" name="radioButton_6">
       <property name="geometry">
        <rect>
-        <x>410</x>
+        <x>400</x>
         <y>580</y>
-        <width>121</width>
+        <width>141</width>
         <height>31</height>
        </rect>
       </property>
@@ -8058,6 +8201,9 @@
         <height>32</height>
        </size>
       </property>
+      <property name="checkable">
+       <bool>true</bool>
+      </property>
      </widget>
      <widget class="QRadioButton" name="radioButton_5">
       <property name="geometry">
@@ -8068,11 +8214,19 @@
         <height>31</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
       <property name="styleSheet">
        <string notr="true">QRadioButton::indicator { width: 20px; height: 20px;};</string>
       </property>
       <property name="text">
        <string>Colour</string>
+      </property>
+      <property name="checkable">
+       <bool>true</bool>
       </property>
      </widget>
     </widget>
@@ -8098,11 +8252,14 @@
      <widget class="QTableWidget" name="tableWidget_2">
       <property name="geometry">
        <rect>
-        <x>320</x>
-        <y>220</y>
-        <width>471</width>
-        <height>471</height>
+        <x>230</x>
+        <y>210</y>
+        <width>551</width>
+        <height>501</height>
        </rect>
+      </property>
+      <property name="editTriggers">
+       <set>QAbstractItemView::NoEditTriggers</set>
       </property>
       <property name="rowCount">
        <number>20</number>
@@ -8501,6 +8658,56 @@
         </font>
        </property>
       </column>
+      <item row="0" column="1">
+       <property name="text">
+        <string/>
+       </property>
+      </item>
+      <item row="1" column="1">
+       <property name="flags">
+        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="2" column="1">
+       <property name="flags">
+        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="3" column="1">
+       <property name="flags">
+        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="4" column="1">
+       <property name="flags">
+        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="5" column="1">
+       <property name="flags">
+        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="6" column="1">
+       <property name="flags">
+        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="7" column="1">
+       <property name="flags">
+        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="8" column="1">
+       <property name="flags">
+        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="9" column="1">
+       <property name="flags">
+        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
+       </property>
+      </item>
      </widget>
     </widget>
     <widget class="QWidget" name="new_shade_delete_2">
@@ -8617,6 +8824,9 @@
         <width>421</width>
         <height>381</height>
        </rect>
+      </property>
+      <property name="editTriggers">
+       <set>QAbstractItemView::NoEditTriggers</set>
       </property>
       <property name="rowCount">
        <number>10</number>
@@ -8763,6 +8973,9 @@
         <height>381</height>
        </rect>
       </property>
+      <property name="editTriggers">
+       <set>QAbstractItemView::NoEditTriggers</set>
+      </property>
       <property name="rowCount">
        <number>10</number>
       </property>
@@ -8817,13 +9030,26 @@
        <rect>
         <x>430</x>
         <y>220</y>
-        <width>151</width>
+        <width>181</width>
         <height>561</height>
        </rect>
       </property>
-      <property name="rowCount">
-       <number>10</number>
+      <property name="editTriggers">
+       <set>QAbstractItemView::NoEditTriggers</set>
       </property>
+      <property name="rowCount">
+       <number>20</number>
+      </property>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
       <row/>
       <row/>
       <row/>
@@ -9060,6 +9286,9 @@
         <pointsize>12</pointsize>
        </font>
       </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
      </widget>
      <widget class="QLineEdit" name="sales_add_date">
       <property name="geometry">
@@ -9074,6 +9303,9 @@
        <font>
         <pointsize>12</pointsize>
        </font>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
       </property>
      </widget>
      <widget class="QTableWidget" name="sales_add_table">
@@ -9213,7 +9445,7 @@
        <rect>
         <x>690</x>
         <y>200</y>
-        <width>171</width>
+        <width>391</width>
         <height>51</height>
        </rect>
       </property>
@@ -9477,7 +9709,7 @@
        <rect>
         <x>740</x>
         <y>210</y>
-        <width>151</width>
+        <width>311</width>
         <height>41</height>
        </rect>
       </property>
@@ -9558,6 +9790,9 @@
        <font>
         <pointsize>12</pointsize>
        </font>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
       </property>
      </widget>
      <widget class="QLabel" name="label_117">
@@ -9644,6 +9879,9 @@
         <width>531</width>
         <height>401</height>
        </rect>
+      </property>
+      <property name="editTriggers">
+       <set>QAbstractItemView::NoEditTriggers</set>
       </property>
       <row>
        <property name="text">
@@ -9941,13 +10179,16 @@
         <pointsize>12</pointsize>
        </font>
       </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
      </widget>
      <widget class="QLineEdit" name="sales_delete_remark">
       <property name="geometry">
        <rect>
         <x>760</x>
         <y>210</y>
-        <width>181</width>
+        <width>331</width>
         <height>41</height>
        </rect>
       </property>
@@ -9955,6 +10196,9 @@
        <font>
         <pointsize>12</pointsize>
        </font>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
       </property>
      </widget>
      <widget class="QLineEdit" name="sales_delete_trans_id">
@@ -10153,7 +10397,7 @@
        <rect>
         <x>790</x>
         <y>210</y>
-        <width>151</width>
+        <width>311</width>
         <height>41</height>
        </rect>
       </property>
@@ -10439,6 +10683,9 @@
         <width>161</width>
         <height>51</height>
        </rect>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
       </property>
       <property name="displayFormat">
        <string>dd/MM/yyyy</string>
