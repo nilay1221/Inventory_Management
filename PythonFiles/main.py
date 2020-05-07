@@ -47,6 +47,8 @@ pagesDict = {
         'sales_view_by_custom': 38,
     }
 
+DEFAULT_SHOW = "RC"
+
 class MainWindow(QMainWindow):
     def __init__(self,parent=None):
         super(MainWindow,self).__init__(parent)
@@ -269,7 +271,7 @@ class MainWindow(QMainWindow):
         self.uiWindow.rm_new_confirm.clicked.connect(lambda: operations_callbacks.callback_add_raw_material(self))
         self.uiWindow.new_rm_view.clicked.connect(lambda: operations_callbacks.view_new_rm_data(self))
         self.uiWindow.tableWidget.cellChanged.connect(lambda row, column: operations_callbacks.display_product_name(row, column, self, 0,
-                                                                          self.uiWindow.tableWidget))
+                                                                          "C",self.uiWindow.tableWidget))
         self.uiWindow.shade_new_confirm.clicked.connect(lambda: operations_callbacks.add_shade_material(self))
         self.uiWindow.shade_new__view_number.returnPressed.connect(
             lambda: operations_callbacks.view_new_shade_details(self))
@@ -282,14 +284,14 @@ class MainWindow(QMainWindow):
             lambda: operations_callbacks.show_new_rm_del_info(self))
         self.uiWindow.rm_new_delete_confirm.clicked.connect(lambda: operations_callbacks.del_new_rm(self))
         self.uiWindow.rm_addtable.cellChanged.connect(
-            lambda row, column: operations_callbacks.display_product_name(row, column, self, 0,self.uiWindow.rm_addtable))
+            lambda row, column: operations_callbacks.display_product_name(row, column, self, 0,"R",self.uiWindow.rm_addtable))
         self.uiWindow.shade_new__delete_number.returnPressed.connect(lambda : operations_callbacks.show_new_shade_del_info(self))
         self.uiWindow.shade_new__modify_number.returnPressed.connect(
             lambda: operations_callbacks.show_new_shade_modify_info(self))
         self.uiWindow.rm_new_delete_confirm_2.clicked.connect(lambda: operations_callbacks.del_new_shade(self))
         self.uiWindow.rm_new_modify_confirm_2.clicked.connect(lambda :operations_callbacks.modify_new_shade_data(self))
         self.uiWindow.shade_new_modify_details_table.cellChanged.connect(lambda row, column: operations_callbacks.display_product_name(row, column, self, 0,
-                                                                          self.uiWindow.shade_new_modify_details_table))
+                                                                          "C",self.uiWindow.shade_new_modify_details_table))
         self.uiWindow.new_shade_view_all.clicked.connect(lambda : operations_callbacks.shade_view_all(self))
         self.uiWindow.rm_add_2.clicked.connect(lambda : operations_callbacks.set_raw_material_data(self))
         self.uiWindow.rm_confirm.clicked.connect(lambda : operations_callbacks.add_raw_material_callback(self))
@@ -300,7 +302,7 @@ class MainWindow(QMainWindow):
         self.uiWindow.rw_modify_transaction_id.returnPressed.connect(lambda : operations_callbacks.set_modify_rm(self))
         self.uiWindow.rm_view_table.cellChanged.connect(
             lambda row, column: operations_callbacks.display_product_name(row, column, self, 0,
-                                                                          self.uiWindow.rm_view_table))
+                                                                          "R",self.uiWindow.rm_view_table))
         self.uiWindow.rm_modify_confirm.clicked.connect(lambda: operations_callbacks.modify_rm(self))
         self.uiWindow.view_trans.clicked.connect(lambda :operations_callbacks.clear_view_by_id(self))
         # self.uiWindow.rw_view_starting_date_3.dateChanged.connect(lambda : operations_callbacks.view_by_custom_dates(self))
@@ -308,7 +310,7 @@ class MainWindow(QMainWindow):
         shortcut1.activated.connect(lambda : operations_callbacks.view_by_custom_dates(self))
         self.uiWindow.shade_add_2.clicked.connect(lambda: operations_callbacks.set_shade_number_transacs(self))
         self.uiWindow.shade_number_add.returnPressed.connect(lambda : operations_callbacks.set_shade_number_details(self,self.uiWindow.shade_number_add,self.uiWindow.shade_addtable,self.uiWindow.shade_colortable,self.uiWindow.shade_add_total))
-        self.uiWindow.shade_addtable.cellChanged.connect(lambda row,column : operations_callbacks.display_product_name(row,column,self,0,self.uiWindow.shade_addtable))
+        self.uiWindow.shade_addtable.cellChanged.connect(lambda row,column : operations_callbacks.display_product_name(row,column,self,0,"R",self.uiWindow.shade_addtable))
         self.uiWindow.shade_addtable.cellChanged.connect(lambda row,column: operations_callbacks.set_total_quantity(row,column,self,self.uiWindow.shade_addtable,self.uiWindow.shade_colortable,self.uiWindow.shade_add_total))
         self.uiWindow.shade_confirm.clicked.connect(lambda : operations_callbacks.confirm_add_shade_number(self))
         self.uiWindow.shade_view_transaction_id.returnPressed.connect(lambda:operations_callbacks.view_shade_stock_by_id(self))
@@ -316,7 +318,7 @@ class MainWindow(QMainWindow):
         self.uiWindow.shade_delete_transaction_id.returnPressed.connect(lambda : operations_callbacks.set_delete_shade_transaction(self))
         self.uiWindow.shade_delete_confirm.clicked.connect(lambda : operations_callbacks.delete_shade_transaction(self))
         self.uiWindow.shade_modify_transaction_id.returnPressed.connect(lambda:operations_callbacks.set_modify_shade_transaction(self))
-        self.uiWindow.shade_addtable_3.cellChanged.connect(lambda row,column:operations_callbacks.display_product_name(row,column,self,0,self.uiWindow.shade_addtable_3))
+        self.uiWindow.shade_addtable_3.cellChanged.connect(lambda row,column:operations_callbacks.display_product_name(row,column,self,0,"R",self.uiWindow.shade_addtable_3))
         self.uiWindow.shade_addtable_3.cellChanged.connect(lambda row,column:operations_callbacks.set_total_quantity(row,column,self,self.uiWindow.shade_addtable_3,self.uiWindow.shade_colortable_3,self.uiWindow.shade_add_total_3))
         # self.uiWindow.shade_modify_transaction_id.returnPressed.connect(lambda:operations_callbacks.set_modify_shade_transaction(self))
         self.uiWindow.shade_number_modify.returnPressed.connect(lambda : operations_callbacks.set_shade_number_details(self,self.uiWindow.shade_number_modify,self.uiWindow.shade_addtable_3,self.uiWindow.shade_colortable_3,self.uiWindow.shade_add_total_3))
@@ -324,17 +326,17 @@ class MainWindow(QMainWindow):
         shortcut2 = QShortcut(QKeySequence('Return'),self.uiWindow.shade_view_end_date)
         shortcut2.activated.connect(lambda : operations_callbacks.shade_view_by_custom_dates(self))
         self.uiWindow.view_trans_2.clicked.connect(lambda:operations_callbacks.clear_shade_view_by_today(self))
-        self.uiWindow.shade_view_table_2.cellChanged.connect(lambda row,column:operations_callbacks.display_product_name(row,column,self,4,self.uiWindow.shade_view_table_2))
-        self.uiWindow.shade_view_table.cellChanged.connect(lambda row,column:operations_callbacks.display_product_name(row,column,self,4,self.uiWindow.shade_view_table))
-        self.uiWindow.rm_view_table_5.cellChanged.connect(lambda row,column:operations_callbacks.display_product_name(row,column,self,3,self.uiWindow.rm_view_table_5))
-        self.uiWindow.rm_view_table_3.cellChanged.connect(lambda row,column: operations_callbacks.display_product_name(row,column,self,4,self.uiWindow.rm_view_table_3))
-        self.uiWindow.rm_view_table_4.cellChanged.connect(lambda row,column: operations_callbacks.display_product_name(row,column,self,0,self.uiWindow.rm_view_table_4))
-        self.uiWindow.shade_addtable_3.cellChanged.connect(lambda row,column:operations_callbacks.display_product_name(row,column,self,0,self.uiWindow.shade_addtable_3))
-        self.uiWindow.rm_delete_table.cellChanged.connect(lambda row,column: operations_callbacks.display_product_name(row,column,self,0,self.uiWindow.rm_delete_table))
-        self.uiWindow.shade_addtable_2.cellChanged.connect(lambda row,column:operations_callbacks.display_product_name(row,column,self,0,self.uiWindow.shade_addtable_2))
-        self.uiWindow.shade_colortable_2.cellChanged.connect(lambda row,column: operations_callbacks.display_product_name(row,column,self,0,self.uiWindow.shade_colortable_2))
-        self.uiWindow.shade_addtable_4.cellChanged.connect(lambda row,column: operations_callbacks.display_product_name(row,column,self,0,self.uiWindow.shade_addtable_4))
-        self.uiWindow.shade_colortable_4.cellChanged.connect(lambda row,column: operations_callbacks.display_product_name(row,column,self,0,self.uiWindow.shade_colortable_4))
+        self.uiWindow.shade_view_table_2.cellChanged.connect(lambda row,column:operations_callbacks.display_product_name(row,column,self,4,DEFAULT_SHOW,self.uiWindow.shade_view_table_2))
+        self.uiWindow.shade_view_table.cellChanged.connect(lambda row,column:operations_callbacks.display_product_name(row,column,self,4,DEFAULT_SHOW,self.uiWindow.shade_view_table))
+        self.uiWindow.rm_view_table_5.cellChanged.connect(lambda row,column:operations_callbacks.display_product_name(row,column,self,3,DEFAULT_SHOW,self.uiWindow.rm_view_table_5))
+        self.uiWindow.rm_view_table_3.cellChanged.connect(lambda row,column: operations_callbacks.display_product_name(row,column,self,4,DEFAULT_SHOW,self.uiWindow.rm_view_table_3))
+        self.uiWindow.rm_view_table_4.cellChanged.connect(lambda row,column: operations_callbacks.display_product_name(row,column,self,0,DEFAULT_SHOW,self.uiWindow.rm_view_table_4))
+        self.uiWindow.shade_addtable_3.cellChanged.connect(lambda row,column:operations_callbacks.display_product_name(row,column,self,0,"R",self.uiWindow.shade_addtable_3))
+        self.uiWindow.rm_delete_table.cellChanged.connect(lambda row,column: operations_callbacks.display_product_name(row,column,self,0,"R",self.uiWindow.rm_delete_table))
+        self.uiWindow.shade_addtable_2.cellChanged.connect(lambda row,column:operations_callbacks.display_product_name(row,column,self,0,"R",self.uiWindow.shade_addtable_2))
+        self.uiWindow.shade_colortable_2.cellChanged.connect(lambda row,column: operations_callbacks.display_product_name(row,column,self,0,"C",self.uiWindow.shade_colortable_2))
+        self.uiWindow.shade_addtable_4.cellChanged.connect(lambda row,column: operations_callbacks.display_product_name(row,column,self,0,"R",self.uiWindow.shade_addtable_4))
+        self.uiWindow.shade_colortable_4.cellChanged.connect(lambda row,column: operations_callbacks.display_product_name(row,column,self,0,"C",self.uiWindow.shade_colortable_4))
         self.uiWindow.sales_add.clicked.connect(lambda: operations_callbacks.set_sales_data(self))
         self.uiWindow.sales_add_confirm.clicked.connect(lambda: operations_callbacks.add_sales_callback(self))
         self.uiWindow.sales_view_today.clicked.connect(lambda: operations_callbacks.view_sales_by_today(self))

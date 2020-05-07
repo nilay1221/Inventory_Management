@@ -10,12 +10,12 @@ def foreign_key_support(mycursor):
     mycursor.execute(sql)
 
 # For addding new raw material
-def add_raw_material(product_code,product_name,product_price):
+def add_raw_material(product_code,product_name,product_price,product_type):
     mydb = sqlite3.connect(DATABASE_NAME)
     mycursor = mydb.cursor()
     try:
         sql = f"""
-            INSERT into Raw_Material VALUES('{product_code}','{product_name}',{product_price});
+            INSERT into Raw_Material VALUES('{product_code}','{product_name}',{product_price},'{product_type}');
         """
         try:
             mycursor.execute(sql)
@@ -46,14 +46,15 @@ def return_modify_info(product_code):
     mycursor = mydb.cursor()
     try:
         sql = f"""
-            SELECT product_name,product_price from Raw_Material where product_code = '{product_code}';
+            SELECT product_name,product_price,product_type from Raw_Material where product_code = '{product_code}';
         """
         try:
             mycursor.execute(sql)
             results = mycursor.fetchone()
             return {
                 'product_name':results[0],
-                'product_price':results[1]
+                'product_price':results[1],
+                'product_type':results[2]
             }
         except :
             #TODO Checking for exception if product code not exists
@@ -63,7 +64,21 @@ def return_modify_info(product_code):
     finally:
         mydb.close()
 
-def modify_info(product_code,product_name,product_price,product_code_changed=False):
+def get_all_raw_material():
+    mydb = sqlite3.connect(DATABASE_NAME)
+    mycursor = mydb.cursor()
+    try:
+        sql = "SELECT product_code from raw_material where product_type = 'R' ;"
+        mycursor.execute(sql)
+        results = mycursor.fetchall()
+        myList = [each[0] for each in results]
+        return myList
+    except:
+        pass
+    finally:
+        mydb.close
+
+def modify_info(product_code,product_name,product_price,product_type,product_code_changed=False):
     mydb = sqlite3.connect(DATABASE_NAME)
     mycursor = mydb.cursor()
     # foreign_key_support(mycursor)
@@ -77,7 +92,7 @@ def modify_info(product_code,product_name,product_price,product_code_changed=Fal
         else:
             sql = f"""
                 UPDATE Raw_Material
-                SET product_name = '{product_name}' , product_price = {product_price}
+                SET product_name = '{product_name}' , product_price = {product_price} , product_type = '{product_type}'
                 WHERE product_code = '{product_code}';
             """
         # print(sql)
@@ -134,15 +149,20 @@ def delete_new_rm(product_code):
         print("false")
         return False
 
-def get_product_name(code):
+def get_product_name(code,product_type):
     mydb = sqlite3.connect(DATABASE_NAME)
     mycursor = mydb.cursor()
     try:
-        sql = f"SELECT product_name from raw_material where product_code='{code}';"
+        sql = f"SELECT product_name,product_type from raw_material where product_code='{code}';"
         try:
             mycursor.execute(sql)
             result = mycursor.fetchall()
-            return result[0][0]
+            if product_type != "RC" and result[0][1] == product_type:
+                return result[0][0]
+            elif product_type == "RC":
+                return result[0][0]
+            else:
+                return "Product mismatch"
         except Exception as e:
             return "false"
     except:
@@ -329,7 +349,8 @@ def add_raw_material_data(trans_id,date,customer,remark,productDetails,type="IN"
         mycursor.execute(sql)
         mydb.commit()
         for each in productDetails:
-            sql = f"INSERT into has_rm VALUES('{type}',{each[1]},'{trans_id}','{each[0]}')"
+            sql = f"INSERT into has_rm VALUES('{type}',{each[1]},'{trans_id}','{each[0]}','{each[2]}')"
+            # print(sql)
             try:
                 mycursor.execute(sql)
             except:
@@ -337,7 +358,8 @@ def add_raw_material_data(trans_id,date,customer,remark,productDetails,type="IN"
         mydb.commit()
         return True
     except Exception as e:
-        print(e)
+        # print(e)
+        pass
     finally:
         mydb.close()
 
@@ -434,7 +456,7 @@ def check_rm_transacs(trans_id):
 def delete_rm_transacs(trans_id):
     mydb = sqlite3.connect(DATABASE_NAME)
     mycursor = mydb.cursor()
-    # foreign_key_support(mycursor)
+    foreign_key_support(mycursor)
     sql = f"DELETE from rm_stock where trans_id = '{trans_id}';"
     mycursor.execute(sql)
     mydb.commit()
@@ -557,8 +579,10 @@ def view_shade_transaction(by_Id=False,by_today=False,by_custom=False):
                 AND madeup_of.shade_number = "{shade_number}"
                 AND has_rm.product_code NOT IN(SELECT has_shade.product_code from has_shade WHERE trans_id = "{shade_trans_id}");
                 """
+            # print(sql)
             mycursor.execute(sql)
             table2_details = mycursor.fetchall()
+            # print(table2_details)
             return {
                 'trans_details':trans_details,
                 'table1_details':table1_details,
@@ -635,7 +659,7 @@ def get_raw_trans(shade_trans_id):
     mycursor = mydb.cursor()
     try:
         sql = f"SELECT rm_trans_id from duplicates where shade_trans_id = '{shade_trans_id}';"
-        print(sql)
+        # print(sql)
         mycursor.execute(sql)
         return mycursor.fetchone()[0]
     except:

@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>34</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="Home">
      <widget class="QPushButton" name="RM_3">
@@ -414,8 +414,8 @@
      <widget class="QPushButton" name="rm_new_confirm">
       <property name="geometry">
        <rect>
-        <x>450</x>
-        <y>500</y>
+        <x>470</x>
+        <y>550</y>
         <width>111</width>
         <height>51</height>
        </rect>
@@ -460,6 +460,55 @@
        <font>
         <pointsize>12</pointsize>
        </font>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="radioButton_9">
+      <property name="geometry">
+       <rect>
+        <x>400</x>
+        <y>490</y>
+        <width>121</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="baseSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QRadioButton::indicator { width: 20px; height: 20px;};</string>
+      </property>
+      <property name="text">
+       <string>Raw Material</string>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>32</width>
+        <height>32</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="radioButton_10">
+      <property name="geometry">
+       <rect>
+        <x>570</x>
+        <y>490</y>
+        <width>111</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QRadioButton::indicator { width: 20px; height: 20px;};</string>
+      </property>
+      <property name="text">
+       <string>Colour</string>
       </property>
      </widget>
     </widget>
@@ -7647,8 +7696,8 @@
      <widget class="QPushButton" name="rm_new_modify_confirm">
       <property name="geometry">
        <rect>
-        <x>430</x>
-        <y>550</y>
+        <x>440</x>
+        <y>610</y>
         <width>111</width>
         <height>51</height>
        </rect>
@@ -7713,13 +7762,62 @@
        </font>
       </property>
      </widget>
+     <widget class="QRadioButton" name="radioButton_7">
+      <property name="geometry">
+       <rect>
+        <x>390</x>
+        <y>540</y>
+        <width>121</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="baseSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QRadioButton::indicator { width: 20px; height: 20px;};</string>
+      </property>
+      <property name="text">
+       <string>Raw Material</string>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>32</width>
+        <height>32</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="radioButton_8">
+      <property name="geometry">
+       <rect>
+        <x>560</x>
+        <y>540</y>
+        <width>111</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QRadioButton::indicator { width: 20px; height: 20px;};</string>
+      </property>
+      <property name="text">
+       <string>Colour</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="new_rm_delete_2">
      <widget class="QPushButton" name="rm_new_delete_confirm">
       <property name="geometry">
        <rect>
-        <x>450</x>
-        <y>590</y>
+        <x>480</x>
+        <y>650</y>
         <width>111</width>
         <height>51</height>
        </rect>
@@ -7886,6 +7984,55 @@
        </font>
       </property>
      </widget>
+     <widget class="QRadioButton" name="radioButton_6">
+      <property name="geometry">
+       <rect>
+        <x>410</x>
+        <y>580</y>
+        <width>121</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="baseSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QRadioButton::indicator { width: 20px; height: 20px;};</string>
+      </property>
+      <property name="text">
+       <string>Raw Material</string>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>32</width>
+        <height>32</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="radioButton_5">
+      <property name="geometry">
+       <rect>
+        <x>580</x>
+        <y>580</y>
+        <width>111</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QRadioButton::indicator { width: 20px; height: 20px;};</string>
+      </property>
+      <property name="text">
+       <string>Colour</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="new_rm_view_2">
      <widget class="QPushButton" name="pushButton_21">
@@ -7911,7 +8058,7 @@
        <rect>
         <x>320</x>
         <y>220</y>
-        <width>421</width>
+        <width>471</width>
         <height>471</height>
        </rect>
       </property>
@@ -7963,6 +8110,17 @@
       <column>
        <property name="text">
         <string>Price</string>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Type</string>
        </property>
        <property name="font">
         <font>
@@ -10959,7 +11117,7 @@
      <x>0</x>
      <y>0</y>
      <width>1262</width>
-     <height>26</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>
