@@ -218,7 +218,7 @@ def add_shade_material(self):
                     print(e)
                     break
             if flag==0:
-                if check_for_no_product_code(self.uiWindow.tableWidget):
+                if check_for_no_product_code(self.uiWindow.tableWidget,'C'):
                     if add_new_shade_material(shade_no):
                         for i in range(10):
                             try:
@@ -241,8 +241,8 @@ def add_shade_material(self):
                 else:
                     message = "Please enter proper Product code"
                     self.show_warning_info(message)
-        except:
-            pass
+        except Exception as e:
+            print(e)
     else:
         self.show_warning_info("Please fill out the info")
 
@@ -346,7 +346,7 @@ def modify_new_shade_data(self,show=1):
             if flag==0:
                 if shade_no == OLD_SHADE_NUMBER:
                     try:
-                        if check_for_no_product_code(self.uiWindow.shade_new_modify_details_table):
+                        if check_for_no_product_code(self.uiWindow.shade_new_modify_details_table,'C'):
                             if remove_previous_data(shade_no):
                                 for i in range(10):
                                     try:
@@ -368,7 +368,7 @@ def modify_new_shade_data(self,show=1):
                         pass
                 else:
                     try:
-                        if check_for_no_product_code(self.uiWindow.shade_new_modify_details_table):
+                        if check_for_no_product_code(self.uiWindow.shade_new_modify_details_table,'C'):
                             if readd_shade_material_on_modify(self):
                                 self.show_info_popup("Details Modified Sucessfully")
                         else:
