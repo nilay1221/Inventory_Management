@@ -845,8 +845,13 @@ def raw_material_closing_stock(code):
         sql = f"""Select sum(quantity) from has_rm where product_code='{code}' and type = 'OUT'"""
         mycursor.execute(sql)
         total_out = mycursor.fetchone()
+        if total_in=="None":
+            if not total_out[0]:
+                return 'None'
+            else:
+                total_in=0
         if not total_out[0]:
-            total_out = ""
+            total_out = 0
         else:
             total_out = total_out[0]
         total= total_in-total_out
@@ -898,14 +903,19 @@ def shade_raw_closing_stock(shade,code):
         mycursor.execute(sql)
         total_in = mycursor.fetchone()
         if not total_in[0]:
-            total_in = "None"
+            total_in = 0
         else:
             total_in = total_in[0]
         sql = f"""Select sum(quantity) from consists_of where product_code='{code}' and shade_number={shade} and type = 'OUT'"""
         mycursor.execute(sql)
         total_out = mycursor.fetchone()
+        if total_in == "None":
+            if not total_out[0]:
+                return 'None'
+            else:
+                total_in = 0
         if not total_out[0]:
-            total_out = ""
+            total_out = 0
         else:
             total_out = total_out[0]
         total = total_in - total_out

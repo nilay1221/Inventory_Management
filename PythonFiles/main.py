@@ -47,6 +47,7 @@ pagesDict = {
         'sales_view_by_custom': 38,
         'rm_closing_stock': 39,
         'colour_closing_stock': 40,
+        'shade_closing_stock': 41,
     }
 
 DEFAULT_SHOW = "RC"
@@ -206,9 +207,13 @@ class MainWindow(QMainWindow):
             lambda: self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['rm_closing_stock']))
         self.uiWindow.colour_end_stock.clicked.connect(
             lambda: self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['colour_closing_stock']))
+        self.uiWindow.shade_end_stock.clicked.connect(
+            lambda: self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['shade_closing_stock']))
         self.uiWindow.back_add_rm_14.clicked.connect(
             lambda: self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['Home']))
         self.uiWindow.back_add_rm_29.clicked.connect(
+            lambda: self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['Home']))
+        self.uiWindow.back_add_rm_30.clicked.connect(
             lambda: self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['Home']))
         self.uiWindow.new_rm_delete_product_name.setReadOnly(True)
         self.uiWindow.new_rm_delete_product_price.setReadOnly(True)
