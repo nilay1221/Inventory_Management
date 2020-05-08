@@ -218,7 +218,6 @@ class MainWindow(QMainWindow):
         msg.setWindowTitle("Message")
         msg.setText(message)
         msg.setIcon(QMessageBox.Information)
-
         x = msg.exec_()
 
     def show_warning_info(self,message):
@@ -266,18 +265,14 @@ class MainWindow(QMainWindow):
         msg.buttonClicked.connect(lambda i: operations_callbacks.delete_sales(self,btn=i))
         x = msg.exec_()
 
-    def eventFilter(self, widget, event):
-        if (event.type() == QtCore.QEvent.KeyPress and
-                widget is self.uiWindow.shade_view_ending_date):
-            key = event.key()
-            if key == QtCore.Qt.Key_Return:
-                print('return')
-            elif key == QtCore.Qt.Key_Enter:
-                print('enter')
-            return True
-        return QMainWindow.eventFilter(self, widget, event)
-
-
+    def show_stock_popup(self,message1,message2):
+        # TODO change icon
+        msg = QMessageBox()
+        msg.setWindowTitle("Message")
+        msg.setText(f"""<P><FONT COLOR='#800000'>'{message2}'</FONT></P>
+                    <P><FONT COLOR='#000080'>'{message1}'</FONT></P>""")
+        msg.setIcon(QMessageBox.Information)
+        x = msg.exec_()
 
     def maintain_operations(self):
         self.uiWindow.rm_new_confirm.clicked.connect(lambda: operations_callbacks.callback_add_raw_material(self))
