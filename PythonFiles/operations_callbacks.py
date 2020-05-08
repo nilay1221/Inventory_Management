@@ -1411,7 +1411,8 @@ def modify_sales(self):
         customer = customer_widget.currentText()
         remark = remark_widget.text()
         if customer and remark:
-            if check_for_no_product_code(self.uiWindow.sales_modify_table,'R'):
+            checktable = check_for_no_product_code(self.uiWindow.sales_add_table, 'R')
+            if checktable == "True":
                 sales = []
                 for i in range(8):
                     try:
