@@ -2559,7 +2559,7 @@ class Ui_MainWindow(object):
         self.rm_stock_view_clear_2.setFont(font)
         self.rm_stock_view_clear_2.setObjectName("rm_stock_view_clear_2")
         self.rm_view_stock_confirm = QtWidgets.QPushButton(self.rm_stock_view_2)
-        self.rm_view_stock_confirm.setGeometry(QtCore.QRect(480, 700, 111, 51))
+        self.rm_view_stock_confirm.setGeometry(QtCore.QRect(770, 250, 111, 51))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.rm_view_stock_confirm.setFont(font)
@@ -2695,7 +2695,7 @@ class Ui_MainWindow(object):
         self.shade_stock_view_clear.setFont(font)
         self.shade_stock_view_clear.setObjectName("shade_stock_view_clear")
         self.shade_view_stock_confirm = QtWidgets.QPushButton(self.shade_stock_view)
-        self.shade_view_stock_confirm.setGeometry(QtCore.QRect(440, 740, 111, 51))
+        self.shade_view_stock_confirm.setGeometry(QtCore.QRect(760, 320, 111, 51))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.shade_view_stock_confirm.setFont(font)
@@ -4224,7 +4224,7 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(4)
+        self.stackedWidget.setCurrentIndex(20)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
