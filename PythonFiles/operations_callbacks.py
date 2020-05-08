@@ -158,18 +158,24 @@ def view_new_rm_data(self):
             self.uiWindow.tableWidget_2.setItem(row_number, column_number, QtWidgets.QTableWidgetItem(str(data)))
 
 
-def display_product_name(row, column, self, col, product_type,tableWidget):
+def display_product_name(row, column, self, col, product_type,tableWidget,sales=False):
     try:
         code = tableWidget.item(row, column).text()
         list_of_entries=[]
         if column == col:
-            for i in range(tableWidget.currentRow()):
-                list_of_entries.append(tableWidget.item(i, col).text())
+            if sales:
+                for i in range(tableWidget.currentRow()):
+                    list_of_entries.append((tableWidget.item(i, col-1).text(),tableWidget.item(i, col).text()))
+            else:
+                for i in range(tableWidget.currentRow()):
+                    list_of_entries.append(tableWidget.item(i, col).text())
             try:
                 if code == "":
                     tableWidget.setItem(row, column + 1, QtWidgets.QTableWidgetItem(""))
-                elif code in list_of_entries:
+                elif code in list_of_entries and sales == False:
                     tableWidget.setItem(row, column + 1, QtWidgets.QTableWidgetItem("Product already added above"))
+                elif sales and (tableWidget.item(row,col-1).text(),code) in list_of_entries: 
+                        tableWidget.setItem(row, column + 1, QtWidgets.QTableWidgetItem("Product already added above"))
                 else:
                     result = get_product_name(code,product_type)
                     if result == 'false':
@@ -191,6 +197,8 @@ def display_product_name(row, column, self, col, product_type,tableWidget):
                 print(e)
     except Exception as e:
         print(e)
+
+
 
 
 

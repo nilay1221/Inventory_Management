@@ -349,7 +349,7 @@ class MainWindow(QMainWindow):
         self.uiWindow.sales_view_today.clicked.connect(lambda: operations_callbacks.view_sales_by_today(self))
         self.uiWindow.sales_add_table.cellChanged.connect(
             lambda row,column: operations_callbacks.find_shade(row,column,self,0,self.uiWindow.sales_add_table))
-        self.uiWindow.sales_add_table.cellChanged.connect(lambda row,column: operations_callbacks.display_product_name(row,column,self,1,'R',self.uiWindow.sales_add_table))
+        self.uiWindow.sales_add_table.cellChanged.connect(lambda row,column: operations_callbacks.display_product_name(row,column,self,1,'R',self.uiWindow.sales_add_table,sales=True))
         self.uiWindow.sales_view_today_table.cellChanged.connect(
             lambda row, column: operations_callbacks.display_product_name(row, column, self, 4,'R',
                                                                           self.uiWindow.sales_view_today_table))
@@ -369,11 +369,11 @@ class MainWindow(QMainWindow):
         self.uiWindow.sales_modify_confirm.clicked.connect(lambda: operations_callbacks.modify_sales(self))
         self.uiWindow.sales_modify_table.cellChanged.connect(
             lambda row, column: operations_callbacks.display_product_name(row, column, self, 1,'R',
-                                                                          self.uiWindow.sales_modify_table)
+                                                                          self.uiWindow.sales_modify_table,sales=True)
         )
         self.uiWindow.sales_delete_table.cellChanged.connect(
             lambda row, column: operations_callbacks.display_product_name(row, column, self, 1, 'R',
-                                                                          self.uiWindow.sales_delete_table)
+                                                                          self.uiWindow.sales_delete_table,sales=True)
         )
         self.uiWindow.sales_modify_table.cellChanged.connect(
             lambda row, column: operations_callbacks.find_shade(row, column, self, 0, self.uiWindow.sales_modify_table))
@@ -397,13 +397,3 @@ if __name__ == "__main__":
 
 
 
-
-
-# if __name__ == "__main__":
-#     import sys
-#     app = QtWidgets.QApplication(sys.argv)
-#     MainWindow = QtWidgets.QMainWindow()
-#     ui = Ui_MainWindow()
-#     ui.setupUi(MainWindow)
-#     MainWindow.show()
-#     sys.exit(app.exec_())
