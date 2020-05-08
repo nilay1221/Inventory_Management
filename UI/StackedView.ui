@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>36</number>
+     <number>21</number>
     </property>
     <widget class="QWidget" name="Home">
      <widget class="QPushButton" name="RM_3">
@@ -7301,6 +7301,24 @@
        <string>Clear</string>
       </property>
      </widget>
+     <widget class="QPushButton" name="rm_view_stock_confirm">
+      <property name="geometry">
+       <rect>
+        <x>480</x>
+        <y>700</y>
+        <width>111</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>VIEW</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="shade_stock_view">
      <widget class="QLineEdit" name="shade_view_stock_name">
@@ -7749,6 +7767,24 @@
       </property>
       <property name="text">
        <string>Clear</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="shade_view_stock_confirm">
+      <property name="geometry">
+       <rect>
+        <x>440</x>
+        <y>740</y>
+        <width>111</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>VIEW</string>
       </property>
      </widget>
     </widget>
