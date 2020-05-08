@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>shade_add_clear</class>
- <widget class="QMainWindow" name="shade_add_clear">
+ <class>shade_add</class>
+ <widget class="QMainWindow" name="shade_add">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -576,7 +576,7 @@
      </font>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="shade_add_clear">
     <property name="geometry">
      <rect>
       <x>890</x>
