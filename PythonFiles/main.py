@@ -269,8 +269,8 @@ class MainWindow(QMainWindow):
         # TODO change icon
         msg = QMessageBox()
         msg.setWindowTitle("Message")
-        msg.setText(f"""<P><FONT COLOR='#800000'>'{message2}'</FONT></P>
-                    <P><FONT COLOR='#000080'>'{message1}'</FONT></P>""")
+        msg.setText(f"""<P><FONT COLOR='#800000'>{message2}</FONT></P>
+                    <P><FONT COLOR='#000080'>{message1}</FONT></P>""")
         msg.setIcon(QMessageBox.Information)
         x = msg.exec_()
 

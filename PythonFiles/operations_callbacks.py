@@ -799,9 +799,9 @@ def confirm_add_shade_number(self):
                             for each_raw in results:
                                 x = raw_material_closing_stock(each_raw[0])
                                 if x < 0:
-                                    message2 = message2 + f"Closing stock for '{each_raw[0]}'  is '{x}'\n"
+                                    message2 = message2 + f"Closing stock for {each_raw[0]}  is {x} <br>"
                                 else:
-                                    message1 = message1 + f"Closing stock for '{each_raw[0]}'  is '{x}'\n"
+                                    message1 = message1 + f"Closing stock for {each_raw[0]}  is {x}<br>"
                             self.show_stock_popup(message1, message2)
                             self.show_info_popup("Transaction Completed Successfully")
                             set_shade_number_transacs(self)
@@ -1016,9 +1016,9 @@ def confirm_modify_shade_trans(self):
                                     for each_raw in results:
                                         x= raw_material_closing_stock(each_raw[0])
                                         if x < 0:
-                                            message2 = message2 + f"Closing stock for '{each_raw[0]}'  is '{x}'\n"
+                                            message2 = message2 + f"Closing stock for {each_raw[0]}  is {x} <br>"
                                         else:
-                                            message1 = message1 + f"Closing stock for '{each_raw[0]}'  is '{x}'\n"
+                                            message1 = message1 + f"Closing stock for {each_raw[0]}  is '{x} <br>"
                                     self.show_stock_popup(message1, message2)
                                     self.show_info_popup("Transaction Modified Successfully")
                                     # set_shade_number_transacs(self)
@@ -1198,9 +1198,9 @@ def add_sales_callback(self):
                                         for each in sales:
                                             x = shade_raw_closing_stock(each[0], each[1])
                                             if x < 0:
-                                                message2 = message2 + f"Closing stock for '{each[0]}' and '{each[1]}' is '{x}'\n"
+                                                message2 = message2 + f"Closing stock for {each[0]} and {each[1]} is {x}<br>"
                                             else:
-                                                message1 = message1 + f"Closing stock for '{each[0]}' and '{each[1]}' is '{x}'\n"
+                                                message1 = message1 + f"Closing stock for {each[0]} and {each[1]} is {x}<br>"
                                         self.show_stock_popup(message1, message2)
                                         set_sales_data(self)
                                         customer_widget.clearEditText()
@@ -1491,9 +1491,9 @@ def modify_sales(self):
                                         for each in sales:
                                             x=shade_raw_closing_stock(each[0],each[1])
                                             if x<0:
-                                                message2=message2+f"Closing stock for '{each[0]}' and '{each[1]}' is '{x}'\n"
+                                                message2=message2+f"Closing stock for {each[0]} and {each[1]} is {x}<br>"
                                             else:
-                                                message1=message1+f"Closing stock for '{each[0]}' and '{each[1]}' is '{x}'\n"
+                                                message1=message1+f"Closing stock for {each[0]} and {each[1]} is {x}<br>"
                                         self.show_stock_popup(message1,message2)
                                         set_sales_data(self)
                                         customer_widget.clearEditText()
