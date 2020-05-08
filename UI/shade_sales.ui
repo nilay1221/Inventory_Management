@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1136</width>
-    <height>770</height>
+    <height>815</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -86,7 +86,7 @@
      <string>Confirm</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="shade_add_total">
+   <widget class="QLineEdit" name="shade_sales_total">
     <property name="geometry">
      <rect>
       <x>260</x>
@@ -264,7 +264,7 @@
      <string>Transaction ID : </string>
     </property>
    </widget>
-   <widget class="QTableWidget" name="shade_addtable">
+   <widget class="QTableWidget" name="shade_sales_table">
     <property name="geometry">
      <rect>
       <x>200</x>
@@ -396,7 +396,7 @@
      </property>
     </item>
    </widget>
-   <widget class="QDateEdit" name="dateEdit">
+   <widget class="QDateEdit" name="shade_sales_date">
     <property name="geometry">
      <rect>
       <x>630</x>
@@ -407,6 +407,24 @@
     </property>
     <property name="displayFormat">
      <string>dd/MM/yyyy</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="shade_sales_clear">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>710</y>
+      <width>131</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Clear</string>
     </property>
    </widget>
   </widget>

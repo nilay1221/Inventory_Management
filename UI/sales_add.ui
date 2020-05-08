@@ -335,7 +335,7 @@
      </font>
     </property>
    </widget>
-   <widget class="QComboBox" name="sales_modify_customer">
+   <widget class="QComboBox" name="sales_add_customer">
     <property name="geometry">
      <rect>
       <x>200</x>

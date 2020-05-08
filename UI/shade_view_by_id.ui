@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLineEdit" name="date">
+   <widget class="QLineEdit" name="shade_date">
     <property name="geometry">
      <rect>
       <x>640</x>
@@ -29,7 +29,7 @@
      </font>
     </property>
    </widget>
-   <widget class="QTableWidget" name="shade_addtable">
+   <widget class="QTableWidget" name="shade_view_by_id_table">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -400,7 +400,7 @@
      </font>
     </property>
    </widget>
-   <widget class="QTableWidget" name="shade_colortable">
+   <widget class="QTableWidget" name="shade_view_by_id_colortable">
     <property name="geometry">
      <rect>
       <x>480</x>
@@ -532,7 +532,7 @@
      </property>
     </item>
    </widget>
-   <widget class="QLineEdit" name="shade_add_total">
+   <widget class="QLineEdit" name="shade_viewbyid_add_total">
     <property name="geometry">
      <rect>
       <x>270</x>

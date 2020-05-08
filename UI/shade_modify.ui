@@ -197,7 +197,7 @@
      <string>Total Quantity :</string>
     </property>
    </widget>
-   <widget class="QTableWidget" name="shade_addtable">
+   <widget class="QTableWidget" name="shade_modify_table">
     <property name="geometry">
      <rect>
       <x>30</x>
@@ -336,7 +336,7 @@
      <string>Date :</string>
     </property>
    </widget>
-   <widget class="QTableWidget" name="shade_colortable">
+   <widget class="QTableWidget" name="shade_modify_colortable">
     <property name="geometry">
      <rect>
       <x>490</x>
@@ -545,7 +545,7 @@
      </font>
     </property>
    </widget>
-   <widget class="QLineEdit" name="shade_add_total">
+   <widget class="QLineEdit" name="shade_modify_total">
     <property name="geometry">
      <rect>
       <x>280</x>

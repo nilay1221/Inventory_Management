@@ -266,7 +266,7 @@
      <string>Shade Number :</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="shade_add_total">
+   <widget class="QLineEdit" name="shade_delete_total">
     <property name="geometry">
      <rect>
       <x>260</x>
@@ -281,7 +281,7 @@
      </font>
     </property>
    </widget>
-   <widget class="QTableWidget" name="shade_addtable">
+   <widget class="QTableWidget" name="shade_delete_table">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -417,7 +417,7 @@
      </font>
     </property>
    </widget>
-   <widget class="QTableWidget" name="shade_colortable">
+   <widget class="QTableWidget" name="shade_delete_colortable">
     <property name="geometry">
      <rect>
       <x>470</x>
