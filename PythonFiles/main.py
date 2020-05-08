@@ -389,6 +389,7 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     w = MainWindow()
+    w.move(275,10)
     sys.exit(app.exec_())
 
 
