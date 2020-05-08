@@ -414,7 +414,34 @@ class MainWindow(QMainWindow):
             display_product_name(row, column, self, 1,"R",self.uiWindow.shade_closing_stock_table,sales=True))
         self.uiWindow.shade_closing_stock_table.cellChanged.connect(
             lambda row, column: operations_callbacks.find_shade(row, column, self, 0, self.uiWindow.shade_closing_stock_table))
-        self.uiWindow.shade_end_stock_view_confirm.clicked.connect(lambda : operations_callbacks.shade_display_closing(self))
+        self.uiWindow.shade_end_stock_view_confirm.clicked.connect(lambda: operations_callbacks.shade_display_closing(self))
+        self.uiWindow.new_rm_entry_clear.clicked.connect(lambda: clear.new_rm_entry_clear_button(self))
+        self.uiWindow.new_rm_add_clear.clicked.connect(lambda: clear.new_rm_add_clear_button(self))
+        self.uiWindow.new_rm_modify_clear.clicked.connect(lambda: clear.new_rm_modify_clear_button(self))
+        self.uiWindow.new_shade_delete_clear.clicked.connect(lambda: clear.new_shade_delete_clear_button(self))
+        self.uiWindow.new_shade_entry_clear.clicked.connect(lambda: clear.new_shade_entry_clear_button(self))
+        self.uiWindow.new_shade_modify_clear.clicked.connect(lambda: clear.new_shade_modify_clear_button(self))
+        self.uiWindow.new_shade_view_clear.clicked.connect(lambda: clear.new_shade_view_clear_button(self))
+        self.uiWindow.rm_delete_clear.clicked.connect(lambda: clear.rm_delete_clear_button(self))
+        self.uiWindow.rm_modify_clear.clicked.connect(lambda: clear.rm_modify_clear_button(self))
+        self.uiWindow.rm_stock_view_clear.clicked.connect(lambda: clear.rm_stock_view_clear_button(self))
+        self.uiWindow.rm_view_by_id_clear.clicked.connect(lambda: clear.rm_view_by_id_clear_button(self))
+        self.uiWindow.sales_add_clear.clicked.connect(lambda: clear.sales_add_clear_button(self))
+        self.uiWindow.sales_delete_clear.clicked.connect(lambda: clear.sales_delete_clear_button(self))
+        self.uiWindow.sales_modify_clear.clicked.connect(lambda: clear.sales_modify_clear_button(self))
+        self.uiWindow.sales_view_by_id_clear.clicked.connect(lambda: clear.sales_view_by_id_clear_button(self))
+        self.uiWindow.shade_add_clear.clicked.connect(lambda: clear.shade_add_clear_button(self))
+        self.uiWindow.shade_delete_clear.clicked.connect(lambda: clear.shade_delete_clear_button(self))
+        self.uiWindow.shade_modify_clear.clicked.connect(lambda: clear.shade_modify_clear_button(self))
+        self.uiWindow.shade_stock_view_clear.clicked.connect(lambda: clear.shade_stock_view_clear_button(self))
+        self.uiWindow.rm_stock_view_clear_2_clear.clicked.connect(lambda: clear.rm_stock_view_clear_2_clear_button(self))
+        self.uiWindow.shade_view_by_id_clear.clicked.connect(lambda: clear.shade_view_by_id_clear_button(self))
+        self.uiWindow.sales_view_custom_back.clicked.connect(lambda: clear.sales_view_custom_back_button(self))
+        self.uiWindow.back_view_rm_4_back.clicked.connect(lambda: clear.back_view_rm_4_back_button(self))
+        self.uiWindow.back_view_rm_9_back.clicked.connect(lambda: clear.back_view_rm_9_back_button(self))
+
+
+
 
 
 

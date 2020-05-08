@@ -52,7 +52,7 @@ def rm_modify_clear_button(self):
     self.uiWindow.rm_modify_remark.clear()
     self.uiWindow.rm_view_table.clearContents()
 #
-def rm_stock_view(self):
+def rm_stock_view_clear_button(self):
     self.uiWindow.rw_view_stock_code.clear()
     self.uiWindow.rw_view_stock_name.clear()
     self.uiWindow.rm_view_table_2.clearContents()
