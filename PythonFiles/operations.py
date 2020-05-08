@@ -915,3 +915,20 @@ def shade_raw_closing_stock(shade,code):
     finally:
         mydb.close()
 
+def get_all_rm_data(type):
+    mydb = sqlite3.connect(DATABASE_NAME)
+    mycursor = mydb.cursor()
+    try:
+        sql = f"SELECT product_code,product_name from Raw_Material where product_type='{type}' order by product_code;"
+        try:
+            mycursor.execute(sql)
+            results = mycursor.fetchall()
+            return results
+        except Exception as e:
+            print(e)
+    except:
+        pass
+    finally:
+        mydb.close()
+
+

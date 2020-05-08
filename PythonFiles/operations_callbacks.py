@@ -1699,3 +1699,33 @@ def set_sales_product_name(self):
             self.uiWindow.shade_view_stock_name.setText(result)
     except Exception as e:
         print(e)
+
+
+def raw_material_display_closing(self):
+    try:
+        self.uiWindow.rm_closing_stock_table.setRowCount(0)
+        results = get_all_rm_data('R')
+        # print(results)
+        for row_number, row_data in enumerate(results):
+            self.uiWindow.rm_closing_stock_table.insertRow(row_number)
+            for column_number, data in enumerate(row_data):
+                self.uiWindow.rm_closing_stock_table.setItem(row_number, column_number, QtWidgets.QTableWidgetItem(str(data)))
+                if column_number==0:
+                    self.uiWindow.rm_closing_stock_table.setItem(row_number, column_number+2, QtWidgets.QTableWidgetItem(str(raw_material_closing_stock(data))))
+    except Exception as e:
+        print(e)
+
+
+def colour_display_closing(self):
+    try:
+        self.uiWindow.colour_closing_stock_table.setRowCount(0)
+        results = get_all_rm_data('C')
+        # print(results)
+        for row_number, row_data in enumerate(results):
+            self.uiWindow.colour_closing_stock_table.insertRow(row_number)
+            for column_number, data in enumerate(row_data):
+                self.uiWindow.colour_closing_stock_table.setItem(row_number, column_number, QtWidgets.QTableWidgetItem(str(data)))
+                if column_number==0:
+                    self.uiWindow.colour_closing_stock_table.setItem(row_number, column_number+2, QtWidgets.QTableWidgetItem(str(raw_material_closing_stock(data))))
+    except Exception as e:
+        print(e)

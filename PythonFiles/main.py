@@ -349,7 +349,7 @@ class MainWindow(QMainWindow):
         self.uiWindow.rm_view_table_3.cellChanged.connect(lambda row,column: operations_callbacks.display_product_name(row,column,self,4,DEFAULT_SHOW,self.uiWindow.rm_view_table_3))
         self.uiWindow.rm_view_table_4.cellChanged.connect(lambda row,column: operations_callbacks.display_product_name(row,column,self,0,DEFAULT_SHOW,self.uiWindow.rm_view_table_4))
         self.uiWindow.shade_addtable_3.cellChanged.connect(lambda row,column:operations_callbacks.display_product_name(row,column,self,0,"R",self.uiWindow.shade_addtable_3))
-        self.uiWindow.rm_delete_table.cellChanged.connect(lambda row,column: operations_callbacks.display_product_name(row,column,self,0,"R",self.uiWindow.rm_delete_table))
+        self.uiWindow.rm_delete_table.cellChanged.connect(lambda row,column: operations_callbacks.display_product_name(row,column,self,0,"RC",self.uiWindow.rm_delete_table))
         self.uiWindow.shade_addtable_2.cellChanged.connect(lambda row,column:operations_callbacks.display_product_name(row,column,self,0,"R",self.uiWindow.shade_addtable_2))
         self.uiWindow.shade_colortable_2.cellChanged.connect(lambda row,column: operations_callbacks.display_product_name(row,column,self,0,"C",self.uiWindow.shade_colortable_2))
         self.uiWindow.shade_addtable_4.cellChanged.connect(lambda row,column: operations_callbacks.display_product_name(row,column,self,0,"R",self.uiWindow.shade_addtable_4))
@@ -393,6 +393,8 @@ class MainWindow(QMainWindow):
             lambda: operations_callbacks.check_shade(self))
         self.uiWindow.shade_view_stock_code.returnPressed.connect(lambda: operations_callbacks.set_sales_product_name(self))
         self.uiWindow.shade_view_stock_confirm.clicked.connect(lambda: operations_callbacks.shade_stock_view(self))
+        self.uiWindow.rm_end_stock.clicked.connect(lambda : operations_callbacks.raw_material_display_closing(self))
+        self.uiWindow.colour_end_stock.clicked.connect(lambda: operations_callbacks.colour_display_closing(self))
 
 
 if __name__ == "__main__":

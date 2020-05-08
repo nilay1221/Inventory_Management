@@ -461,6 +461,7 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(12)
         self.rm_delete_remark.setFont(font)
+        self.rm_delete_remark.setReadOnly(True)
         self.rm_delete_remark.setObjectName("rm_delete_remark")
         self.pushButton_4 = QtWidgets.QPushButton(self.rm_delete)
         self.pushButton_4.setGeometry(QtCore.QRect(630, 50, 161, 41))
@@ -560,7 +561,7 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(12)
         self.rw_delete_transaction_id.setFont(font)
-        self.rw_delete_transaction_id.setReadOnly(True)
+        self.rw_delete_transaction_id.setReadOnly(False)
         self.rw_delete_transaction_id.setObjectName("rw_delete_transaction_id")
         self.rm_delete_date = QtWidgets.QLineEdit(self.rm_delete)
         self.rm_delete_date.setGeometry(QtCore.QRect(670, 140, 151, 41))
@@ -4223,7 +4224,7 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(40)
+        self.stackedWidget.setCurrentIndex(4)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
