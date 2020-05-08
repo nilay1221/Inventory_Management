@@ -271,6 +271,15 @@ class MainWindow(QMainWindow):
         msg.buttonClicked.connect(lambda i: operations_callbacks.delete_rm(self,btn=i))
         x = msg.exec_()
 
+    def delete_confirm_dialog_shade_trans(self):
+        msg = QMessageBox()
+        msg.setWindowTitle("Message")
+        msg.setText("Are you sure want to Delete?")
+        msg.setIcon(QMessageBox.Question)
+        msg.setStandardButtons(QMessageBox.No|QMessageBox.Yes)
+        msg.buttonClicked.connect(lambda i: operations_callbacks.delete_shade_transaction(self,btn=i))
+        x = msg.exec_()
+
     def delete_confirm_dialog_sales(self):
         msg = QMessageBox()
         msg.setWindowTitle("Message")
@@ -338,7 +347,7 @@ class MainWindow(QMainWindow):
         self.uiWindow.shade_view_transaction_id.returnPressed.connect(lambda:operations_callbacks.view_shade_stock_by_id(self))
         self.uiWindow.view_today_2.clicked.connect(lambda: operations_callbacks.view_shade_transaction_today(self))
         self.uiWindow.shade_delete_transaction_id.returnPressed.connect(lambda : operations_callbacks.set_delete_shade_transaction(self))
-        self.uiWindow.shade_delete_confirm.clicked.connect(lambda : operations_callbacks.delete_shade_transaction(self))
+        self.uiWindow.shade_delete_confirm.clicked.connect(lambda : self.delete_confirm_dialog_shade_trans())
         self.uiWindow.shade_modify_transaction_id.returnPressed.connect(lambda:operations_callbacks.set_modify_shade_transaction(self))
         self.uiWindow.shade_addtable_3.cellChanged.connect(lambda row,column:operations_callbacks.display_product_name(row,column,self,0,"R",self.uiWindow.shade_addtable_3))
         self.uiWindow.shade_addtable_3.cellChanged.connect(lambda row,column:operations_callbacks.set_total_quantity(row,column,self,self.uiWindow.shade_addtable_3,self.uiWindow.shade_colortable_3,self.uiWindow.shade_add_total_3))
@@ -400,6 +409,13 @@ class MainWindow(QMainWindow):
         self.uiWindow.shade_view_stock_confirm.clicked.connect(lambda: operations_callbacks.shade_stock_view(self))
         self.uiWindow.rm_end_stock.clicked.connect(lambda : operations_callbacks.raw_material_display_closing(self))
         self.uiWindow.colour_end_stock.clicked.connect(lambda: operations_callbacks.colour_display_closing(self))
+        self.uiWindow.shade_closing_stock_table.cellChanged.connect(
+            lambda row, column: operations_callbacks.
+            display_product_name(row, column, self, 1,"R",self.uiWindow.shade_closing_stock_table))
+        self.uiWindow.shade_closing_stock_table.cellChanged.connect(
+            lambda row, column: operations_callbacks.find_shade(row, column, self, 0, self.uiWindow.shade_closing_stock_table))
+        self.uiWindow.shade_end_stock_view_confirm.clicked.connect(lambda : operations_callbacks.shade_display_closing(self))
+
 
 
 if __name__ == "__main__":

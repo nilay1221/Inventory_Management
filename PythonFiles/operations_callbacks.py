@@ -912,21 +912,22 @@ def set_delete_shade_transaction(self):
         self.show_warning_info("Transaction id does not exists")
 
 
-def delete_shade_transaction(self):
+def delete_shade_transaction(self,btn):
     trans_id = "SNT" + str(self.uiWindow.shade_delete_transaction_id.text()).zfill(5)
     if check_shade_trans(trans_id):
-        if delete_shade_trans(trans_id):
-            self.show_info_popup("Deleted Successfully")
-            self.uiWindow.shade_delete_transaction_id.clear()
-            self.uiWindow.shade_delete_date.clear()
-            self.uiWindow.shade_delete_customer.clearEditText()
-            self.uiWindow.shade_delete_remark.clear()
-            self.uiWindow.shade_addtable_2.clearContents()
-            self.uiWindow.shade_colortable_2.clearContents()
-            self.uiWindow.shade_add_total_2.clear()
-
-        else:
-            self.show_warning_info("Deletion UnSuccessful")
+        if btn.text() == "&Yes":
+            if delete_shade_trans(trans_id):
+                self.show_info_popup("Deleted Successfully")
+                self.uiWindow.shade_delete_transaction_id.clear()
+                self.uiWindow.shade_delete_date.clear()
+                self.uiWindow.shade_delete_customer.clearEditText()
+                self.uiWindow.shade_delete_remark.clear()
+                self.uiWindow.shade_number_delete.clear()
+                self.uiWindow.shade_addtable_2.clearContents()
+                self.uiWindow.shade_colortable_2.clearContents()
+                self.uiWindow.shade_add_total_2.clear()
+            else:
+                self.show_warning_info("Deletion UnSuccessful")
 
 
 def set_modify_shade_transaction(self):
@@ -1095,7 +1096,7 @@ def clear_shade_view_by_today(self):
 
 def check_for_no_product_code(tableWidget,product_type):
     results = tableWidget.findItems("No such product code",QtCore.Qt.MatchExactly)
-    # print(results)
+    print(results)
     if product_type == "R":
         results1 = tableWidget.findItems("Only Raw Material Allowed",QtCore.Qt.MatchExactly)
     elif product_type == "C" :
@@ -1586,12 +1587,12 @@ def product_stock_view(self):
                     #             else:
                     #                 self.uiWindow.rm_view_table_6.setItem(row_number, column_number,
                     #                                                       QtWidgets.QTableWidgetItem(str(data)))
-                    closing = raw_material_closing_stock(code)
-                    self.uiWindow.rw_view_closing.setText(str(closing))
                 except Exception as e:
                     print(e)
             else:
-                pass
+                self.show_info_popup("No transactions in given dates")
+            closing = raw_material_closing_stock(code)
+            self.uiWindow.rw_view_closing.setText(str(closing))
         else:
             self.show_warning_info("Please select correct date")
     else:
@@ -1637,12 +1638,12 @@ def shade_stock_view(self):
                                                                                               QtWidgets.QTableWidgetItem(
                                                                                                   str(each_list[row][
                                                                                                           column])))
-                                closing = shade_raw_closing_stock(shade,code)
-                                self.uiWindow.shade_view_closing.setText(str(closing))
                             except Exception as e:
                                 print(e)
                         else:
-                            pass
+                            self.show_info_popup("No transactions in given dates")
+                        closing = shade_raw_closing_stock(shade, code)
+                        self.uiWindow.shade_view_closing.setText(str(closing))
                     else:
                         self.show_warning_info("Please select correct date")
                 else:
@@ -1688,7 +1689,7 @@ def set_sales_product_name(self):
     try:
         code =self.uiWindow.shade_view_stock_code.text()
         result = get_product_name(code,'R')
-        print("result")
+        # print("result")
         if result == "false":
             self.uiWindow.shade_view_stock_name.setText("No such product Code")
         elif result=="Product mismatch":
@@ -1727,5 +1728,36 @@ def colour_display_closing(self):
                 self.uiWindow.colour_closing_stock_table.setItem(row_number, column_number, QtWidgets.QTableWidgetItem(str(data)))
                 if column_number==0:
                     self.uiWindow.colour_closing_stock_table.setItem(row_number, column_number+2, QtWidgets.QTableWidgetItem(str(raw_material_closing_stock(data))))
+    except Exception as e:
+        print(e)
+
+def shade_display_closing(self):
+    try:
+        # print(results)
+        if check_for_no_product_code(self.uiWindow.shade_closing_stock_table,'R'):
+            try:
+                for row_number in range(20):
+                    for column_number in range(1):
+                        if column_number == 0:
+                                if self.uiWindow.shade_closing_stock_table.item(row_number,
+                                                                            column_number).text() or self.uiWindow.shade_closing_stock_table.item(
+                                                                            row_number, column_number+1).text():
+                                    pass
+            except:
+                self.show_warning_info(f"Please fill info at row '{row_number}'")
+            for row_number in range(20):
+                for column_number in range(1):
+                    if column_number == 0:
+                        if self.uiWindow.shade_closing_stock_table.item(row_number,
+                                                                        column_number).text() and self.uiWindow.shade_closing_stock_table.item(
+                                                                        row_number, column_number+1).text():
+                            x = shade_raw_closing_stock(
+                                self.uiWindow.shade_closing_stock_table.item(row_number, column_number).text(),
+                                self.uiWindow.shade_closing_stock_table.item(row_number, column_number+1).text())
+                            print(x)
+                            self.uiWindow.shade_closing_stock_table.setItem(row_number, column_number + 3,
+                                                                             QtWidgets.QTableWidgetItem(str(x)))
+        else:
+            self.show_warning_info("Please select correct product code")
     except Exception as e:
         print(e)

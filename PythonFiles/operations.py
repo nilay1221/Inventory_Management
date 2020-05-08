@@ -903,7 +903,7 @@ def shade_raw_closing_stock(shade,code):
         mycursor.execute(sql)
         total_in = mycursor.fetchone()
         if not total_in[0]:
-            total_in = 0
+            total_in = "None"
         else:
             total_in = total_in[0]
         sql = f"""Select sum(quantity) from consists_of where product_code='{code}' and shade_number={shade} and type = 'OUT'"""
