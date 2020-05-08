@@ -199,9 +199,6 @@ def display_product_name(row, column, self, col, product_type,tableWidget,sales=
         print(e)
 
 
-
-
-
 def add_shade_material(self):
     flag=0
     i = 0
@@ -349,7 +346,7 @@ def modify_new_shade_data(self,show=1):
                             flag = 1
                             break
                 except Exception as e:
-                    print("inside exception")
+                    # print("inside exception")
                     break
             if flag==0:
                 if shade_no == OLD_SHADE_NUMBER:
@@ -456,7 +453,7 @@ def add_raw_material_callback(self):
                         self.show_warning_info("Please fill info")
                         break
                     except:
-                        print("inside exception")
+                        # print("inside exception")
                         if products:
                             # print(products)
                             if add_raw_material_data(trans_id,date,customer,remark,products):
@@ -570,7 +567,7 @@ def delete_rm(self,btn):
 
 def set_modify_rm(self):
     trans_id = "RMT" + str(self.uiWindow.rw_modify_transaction_id.text()).zfill(5)
-    print(trans_id)
+    # print(trans_id)
     if check_rm_transacs(trans_id) :
         results = get_rm_transacs(by_Id=trans_id)
         # print(results)
@@ -1525,7 +1522,7 @@ def set_product_name(self):
     try:
         code =self.uiWindow.rw_view_stock_code_2.text()
         result = get_product_name(code,'RC')
-        print("result")
+        # print("result")
         if result == "false":
             self.uiWindow.rw_view_stock_name_2.setText("No such product Code")
         else:
@@ -1784,7 +1781,7 @@ def shade_display_closing(self):
                                 x = shade_raw_closing_stock(
                                     self.uiWindow.shade_closing_stock_table.item(row_number, column_number).text(),
                                     self.uiWindow.shade_closing_stock_table.item(row_number, column_number+1).text())
-                                print(x)
+                                # print(x)
                                 self.uiWindow.shade_closing_stock_table.setItem(row_number, column_number + 3,
                                                                                  QtWidgets.QTableWidgetItem(str(x)))
         else:

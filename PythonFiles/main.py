@@ -411,7 +411,7 @@ class MainWindow(QMainWindow):
         self.uiWindow.colour_end_stock.clicked.connect(lambda: operations_callbacks.colour_display_closing(self))
         self.uiWindow.shade_closing_stock_table.cellChanged.connect(
             lambda row, column: operations_callbacks.
-            display_product_name(row, column, self, 1,"R",self.uiWindow.shade_closing_stock_table))
+            display_product_name(row, column, self, 1,"R",self.uiWindow.shade_closing_stock_table,sales=True))
         self.uiWindow.shade_closing_stock_table.cellChanged.connect(
             lambda row, column: operations_callbacks.find_shade(row, column, self, 0, self.uiWindow.shade_closing_stock_table))
         self.uiWindow.shade_end_stock_view_confirm.clicked.connect(lambda : operations_callbacks.shade_display_closing(self))
