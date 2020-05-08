@@ -1096,7 +1096,6 @@ def clear_shade_view_by_today(self):
 
 def check_for_no_product_code(tableWidget,product_type):
     results = tableWidget.findItems("No such product code",QtCore.Qt.MatchExactly)
-    print(results)
     if product_type == "R":
         results1 = tableWidget.findItems("Only Raw Material Allowed",QtCore.Qt.MatchExactly)
     elif product_type == "C" :
@@ -1130,7 +1129,8 @@ def add_sales_callback(self):
         customer = customer_widget.currentText()
         remark = remark_widget.text()
         if customer and remark:
-            if check_for_no_product_code(self.uiWindow.sales_add_table,'R'):
+            checktable = check_for_no_product_code(self.uiWindow.sales_add_table,'R')
+            if checktable=="True":
                 sales = []
                 for i in range(8):
                     try:
@@ -1733,30 +1733,60 @@ def colour_display_closing(self):
 
 def shade_display_closing(self):
     try:
+        flag=0
         # print(results)
-        if check_for_no_product_code(self.uiWindow.shade_closing_stock_table,'R'):
+        if "True"==check_for_no_product_code(self.uiWindow.shade_closing_stock_table,'R'):
             try:
+                for i in range(20):
+                    try:
+                        if self.uiWindow.shade_closing_stock_table.item(i, 0).text():
+                            try:
+                                self.uiWindow.shade_closing_stock_table.item(i, 1).text()
+                                if self.uiWindow.shade_closing_stock_table.item(i,0).text() == '' or \
+                                        self.uiWindow.shade_closing_stock_table.item(i, 1).text() == '':
+                                    self.show_warning_info(f"Please fill info in the table at '{i + 1}'")
+                                    flag = 1
+                                    break
+                            except:
+                                self.show_warning_info(f"Please fill info in the table at '{i + 1}'")
+                                flag = 1
+                                break
+                        if self.uiWindow.shade_closing_stock_table.item(i, 1).text():
+                            try:
+                                self.uiWindow.shade_closing_stock_table.item(i, 0).text()
+                                if self.uiWindow.shade_closing_stock_table.item(i,0).text() == '' or \
+                                        self.uiWindow.shade_closing_stock_table.item(i, 1).text() == '' :
+                                    self.show_warning_info(f"Please fill info in the table at '{i + 1}'")
+                                    flag = 1
+                                    break
+                            except:
+                                self.show_warning_info(f"Please fill info in the table at '{i + 1}'")
+                                flag = 1
+                                break
+                    except:
+                        try:
+                            if self.uiWindow.shade_closing_stock_table.item(i,1).text() != '' :
+                                self.show_warning_info(f"Please fill info in the table at '{i + 1}'")
+                                flag = 1
+                                break
+                        except Exception as e:
+                            print(e)
+                            break
+            except:
+                pass
+            if flag == 0:
                 for row_number in range(20):
                     for column_number in range(1):
                         if column_number == 0:
-                                if self.uiWindow.shade_closing_stock_table.item(row_number,
-                                                                            column_number).text() or self.uiWindow.shade_closing_stock_table.item(
+                            if self.uiWindow.shade_closing_stock_table.item(row_number,
+                                                                            column_number).text() and self.uiWindow.shade_closing_stock_table.item(
                                                                             row_number, column_number+1).text():
-                                    pass
-            except:
-                self.show_warning_info(f"Please fill info at row '{row_number}'")
-            for row_number in range(20):
-                for column_number in range(1):
-                    if column_number == 0:
-                        if self.uiWindow.shade_closing_stock_table.item(row_number,
-                                                                        column_number).text() and self.uiWindow.shade_closing_stock_table.item(
-                                                                        row_number, column_number+1).text():
-                            x = shade_raw_closing_stock(
-                                self.uiWindow.shade_closing_stock_table.item(row_number, column_number).text(),
-                                self.uiWindow.shade_closing_stock_table.item(row_number, column_number+1).text())
-                            print(x)
-                            self.uiWindow.shade_closing_stock_table.setItem(row_number, column_number + 3,
-                                                                             QtWidgets.QTableWidgetItem(str(x)))
+                                x = shade_raw_closing_stock(
+                                    self.uiWindow.shade_closing_stock_table.item(row_number, column_number).text(),
+                                    self.uiWindow.shade_closing_stock_table.item(row_number, column_number+1).text())
+                                print(x)
+                                self.uiWindow.shade_closing_stock_table.setItem(row_number, column_number + 3,
+                                                                                 QtWidgets.QTableWidgetItem(str(x)))
         else:
             self.show_warning_info("Please select correct product code")
     except Exception as e:
