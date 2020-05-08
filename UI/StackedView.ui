@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1262</width>
-    <height>873</height>
+    <height>959</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,14 +17,14 @@
    <widget class="QStackedWidget" name="stackedWidget">
     <property name="geometry">
      <rect>
-      <x>50</x>
+      <x>80</x>
       <y>10</y>
       <width>1171</width>
       <height>811</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>28</number>
+     <number>4</number>
     </property>
     <widget class="QWidget" name="Home">
      <widget class="QPushButton" name="RM_3">
@@ -480,6 +480,24 @@
        <string>Colour</string>
       </property>
      </widget>
+     <widget class="QPushButton" name="new_rm_add_clear">
+      <property name="geometry">
+       <rect>
+        <x>750</x>
+        <y>550</y>
+        <width>131</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Clear</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="new_shade_entry">
      <widget class="QPushButton" name="back_add_rm_2">
@@ -572,8 +590,8 @@
      <widget class="QPushButton" name="shade_new_confirm">
       <property name="geometry">
        <rect>
-        <x>800</x>
-        <y>610</y>
+        <x>600</x>
+        <y>620</y>
         <width>171</width>
         <height>71</height>
        </rect>
@@ -687,6 +705,24 @@
         <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
        </property>
       </item>
+     </widget>
+     <widget class="QPushButton" name="new_shade_entry_clear">
+      <property name="geometry">
+       <rect>
+        <x>840</x>
+        <y>620</y>
+        <width>161</width>
+        <height>71</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Clear</string>
+      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="rm_add">
@@ -1047,6 +1083,24 @@
        <font>
         <pointsize>12</pointsize>
        </font>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="rm_add_clear">
+      <property name="geometry">
+       <rect>
+        <x>790</x>
+        <y>640</y>
+        <width>141</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Clear</string>
       </property>
      </widget>
     </widget>
@@ -1415,6 +1469,24 @@
        <string>Remark :</string>
       </property>
      </widget>
+     <widget class="QPushButton" name="rm_delete_clear">
+      <property name="geometry">
+       <rect>
+        <x>750</x>
+        <y>690</y>
+        <width>151</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Clear</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="rm_modify">
      <widget class="QLineEdit" name="rm_modify_date">
@@ -1777,6 +1849,24 @@
         <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
        </property>
       </item>
+     </widget>
+     <widget class="QPushButton" name="rm_modify_clear">
+      <property name="geometry">
+       <rect>
+        <x>770</x>
+        <y>700</y>
+        <width>141</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Clear</string>
+      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="rm_operations">
@@ -2279,6 +2369,24 @@
       </property>
       <property name="displayFormat">
        <string>dd/MM/yyyy</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="rm_stock_view_clear">
+      <property name="geometry">
+       <rect>
+        <x>800</x>
+        <y>740</y>
+        <width>141</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Clear</string>
       </property>
      </widget>
     </widget>
@@ -3098,6 +3206,24 @@
       </property>
       <property name="text">
        <string>Back to Main Menu</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="rm_view_by_id_clear">
+      <property name="geometry">
+       <rect>
+        <x>780</x>
+        <y>650</y>
+        <width>121</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Clear</string>
       </property>
      </widget>
     </widget>
@@ -4015,6 +4141,24 @@
        </property>
       </item>
      </widget>
+     <widget class="QPushButton" name="shade_add_clear">
+      <property name="geometry">
+       <rect>
+        <x>860</x>
+        <y>730</y>
+        <width>121</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>13</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Clear</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="shade_delete">
      <widget class="QLineEdit" name="shade_add_total_2">
@@ -4599,6 +4743,24 @@
        </property>
       </item>
      </widget>
+     <widget class="QPushButton" name="shade_delete_clear">
+      <property name="geometry">
+       <rect>
+        <x>840</x>
+        <y>740</y>
+        <width>131</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Clear</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="shade_modify">
      <widget class="QLineEdit" name="shade_modify_transaction_id">
@@ -5173,6 +5335,24 @@
         <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
        </property>
       </item>
+     </widget>
+     <widget class="QPushButton" name="shade_modify_clear">
+      <property name="geometry">
+       <rect>
+        <x>740</x>
+        <y>730</y>
+        <width>121</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Clear</string>
+      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="shade_operations">
@@ -6335,6 +6515,24 @@
        </property>
       </item>
      </widget>
+     <widget class="QPushButton" name="shade_view_by_id_clear">
+      <property name="geometry">
+       <rect>
+        <x>730</x>
+        <y>690</y>
+        <width>111</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Clear</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="shade_view_by_today">
      <widget class="QTableWidget" name="shade_view_table_2">
@@ -7081,6 +7279,24 @@
        <string>dd/MM/yyyy</string>
       </property>
      </widget>
+     <widget class="QPushButton" name="rm_stock_view_clear_2">
+      <property name="geometry">
+       <rect>
+        <x>820</x>
+        <y>760</y>
+        <width>141</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Clear</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="shade_stock_view">
      <widget class="QLineEdit" name="shade_view_stock_name">
@@ -7511,6 +7727,24 @@
       </property>
       <property name="displayFormat">
        <string>dd/MM/yyyy</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="shade_stock_view_clear">
+      <property name="geometry">
+       <rect>
+        <x>1010</x>
+        <y>750</y>
+        <width>151</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Clear</string>
       </property>
      </widget>
     </widget>
@@ -7965,6 +8199,24 @@
        <string>Colour</string>
       </property>
      </widget>
+     <widget class="QPushButton" name="new_rm_modify_clear">
+      <property name="geometry">
+       <rect>
+        <x>700</x>
+        <y>610</y>
+        <width>111</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Clear</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="new_rm_delete_2">
      <widget class="QPushButton" name="rm_new_delete_confirm">
@@ -8202,6 +8454,24 @@
       </property>
       <property name="checkable">
        <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="new_rm_entry_clear">
+      <property name="geometry">
+       <rect>
+        <x>690</x>
+        <y>650</y>
+        <width>131</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Clear</string>
       </property>
      </widget>
     </widget>
@@ -8684,6 +8954,24 @@
        </property>
       </item>
      </widget>
+     <widget class="QPushButton" name="new_shade_modify_clear">
+      <property name="geometry">
+       <rect>
+        <x>800</x>
+        <y>650</y>
+        <width>111</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Clear</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="new_shade_delete_2">
      <widget class="QPushButton" name="rm_new_delete_confirm_2">
@@ -8850,6 +9138,24 @@
        </property>
       </column>
      </widget>
+     <widget class="QPushButton" name="new_shade_delete_clear">
+      <property name="geometry">
+       <rect>
+        <x>790</x>
+        <y>640</y>
+        <width>121</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Clear</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="new_shade_view_2">
      <widget class="QLineEdit" name="shade_new__view_number">
@@ -8997,6 +9303,24 @@
         </font>
        </property>
       </column>
+     </widget>
+     <widget class="QPushButton" name="new_shade_view_clear">
+      <property name="geometry">
+       <rect>
+        <x>800</x>
+        <y>630</y>
+        <width>141</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Clear</string>
+      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="new_view_all_shade">
@@ -9473,6 +9797,24 @@
        </property>
       </item>
      </widget>
+     <widget class="QPushButton" name="sales_add_clear">
+      <property name="geometry">
+       <rect>
+        <x>990</x>
+        <y>740</y>
+        <width>111</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Clear</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="sales_modify_2">
      <widget class="QPushButton" name="sales_modify_back">
@@ -9844,6 +10186,24 @@
        <string>Customer Name:</string>
       </property>
      </widget>
+     <widget class="QPushButton" name="sales_modify_clear">
+      <property name="geometry">
+       <rect>
+        <x>920</x>
+        <y>690</y>
+        <width>131</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Clear</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="sales_delete_2">
      <widget class="QTableWidget" name="sales_delete_table">
@@ -10189,6 +10549,24 @@
        <font>
         <pointsize>12</pointsize>
        </font>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="sales_delete_clear">
+      <property name="geometry">
+       <rect>
+        <x>830</x>
+        <y>730</y>
+        <width>131</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Clear</string>
       </property>
      </widget>
     </widget>
@@ -10646,6 +11024,24 @@
       </property>
       <property name="text">
        <string>Remark :</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="sales_view_by_id_clear">
+      <property name="geometry">
+       <rect>
+        <x>880</x>
+        <y>700</y>
+        <width>121</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Clear</string>
       </property>
      </widget>
     </widget>
