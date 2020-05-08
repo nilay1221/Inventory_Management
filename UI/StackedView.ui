@@ -17,14 +17,14 @@
    <widget class="QStackedWidget" name="stackedWidget">
     <property name="geometry">
      <rect>
-      <x>80</x>
-      <y>10</y>
+      <x>20</x>
+      <y>20</y>
       <width>1171</width>
       <height>811</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>4</number>
+     <number>21</number>
     </property>
     <widget class="QWidget" name="Home">
      <widget class="QPushButton" name="RM_3">
@@ -378,7 +378,7 @@
      <widget class="QPushButton" name="rm_new_confirm">
       <property name="geometry">
        <rect>
-        <x>470</x>
+        <x>480</x>
         <y>550</y>
         <width>111</width>
         <height>51</height>
@@ -483,7 +483,7 @@
      <widget class="QPushButton" name="new_rm_add_clear">
       <property name="geometry">
        <rect>
-        <x>750</x>
+        <x>120</x>
         <y>550</y>
         <width>131</width>
         <height>51</height>
@@ -709,7 +709,7 @@
      <widget class="QPushButton" name="new_shade_entry_clear">
       <property name="geometry">
        <rect>
-        <x>840</x>
+        <x>110</x>
         <y>620</y>
         <width>161</width>
         <height>71</height>
@@ -718,6 +718,8 @@
       <property name="font">
        <font>
         <pointsize>12</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
        </font>
       </property>
       <property name="text">
@@ -983,10 +985,10 @@
      <widget class="QPushButton" name="rm_confirm">
       <property name="geometry">
        <rect>
-        <x>790</x>
-        <y>550</y>
-        <width>111</width>
-        <height>51</height>
+        <x>650</x>
+        <y>660</y>
+        <width>131</width>
+        <height>61</height>
        </rect>
       </property>
       <property name="font">
@@ -1088,10 +1090,10 @@
      <widget class="QPushButton" name="rm_add_clear">
       <property name="geometry">
        <rect>
-        <x>790</x>
-        <y>640</y>
-        <width>141</width>
-        <height>51</height>
+        <x>90</x>
+        <y>670</y>
+        <width>131</width>
+        <height>61</height>
        </rect>
       </property>
       <property name="font">
@@ -1238,8 +1240,8 @@
      <widget class="QPushButton" name="rm_delete_confirm">
       <property name="geometry">
        <rect>
-        <x>750</x>
-        <y>590</y>
+        <x>680</x>
+        <y>670</y>
         <width>141</width>
         <height>61</height>
        </rect>
@@ -1472,8 +1474,8 @@
      <widget class="QPushButton" name="rm_delete_clear">
       <property name="geometry">
        <rect>
-        <x>750</x>
-        <y>690</y>
+        <x>100</x>
+        <y>670</y>
         <width>151</width>
         <height>61</height>
        </rect>
@@ -1481,6 +1483,8 @@
       <property name="font">
        <font>
         <pointsize>12</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
        </font>
       </property>
       <property name="text">
@@ -1582,8 +1586,8 @@
      <widget class="QPushButton" name="rm_modify_confirm">
       <property name="geometry">
        <rect>
-        <x>770</x>
-        <y>600</y>
+        <x>710</x>
+        <y>670</y>
         <width>141</width>
         <height>61</height>
        </rect>
@@ -1853,8 +1857,8 @@
      <widget class="QPushButton" name="rm_modify_clear">
       <property name="geometry">
        <rect>
-        <x>770</x>
-        <y>700</y>
+        <x>90</x>
+        <y>670</y>
         <width>141</width>
         <height>61</height>
        </rect>
@@ -2374,8 +2378,8 @@
      <widget class="QPushButton" name="rm_stock_view_clear">
       <property name="geometry">
        <rect>
-        <x>800</x>
-        <y>740</y>
+        <x>110</x>
+        <y>680</y>
         <width>141</width>
         <height>51</height>
        </rect>
@@ -3211,8 +3215,8 @@
      <widget class="QPushButton" name="rm_view_by_id_clear">
       <property name="geometry">
        <rect>
-        <x>780</x>
-        <y>650</y>
+        <x>80</x>
+        <y>700</y>
         <width>121</width>
         <height>51</height>
        </rect>
@@ -3642,10 +3646,10 @@
      <widget class="QPushButton" name="shade_confirm">
       <property name="geometry">
        <rect>
-        <x>860</x>
-        <y>640</y>
-        <width>111</width>
-        <height>51</height>
+        <x>620</x>
+        <y>690</y>
+        <width>141</width>
+        <height>71</height>
        </rect>
       </property>
       <property name="font">
@@ -4144,8 +4148,8 @@
      <widget class="QPushButton" name="shade_add_clear">
       <property name="geometry">
        <rect>
-        <x>860</x>
-        <y>730</y>
+        <x>120</x>
+        <y>720</y>
         <width>121</width>
         <height>51</height>
        </rect>
@@ -4580,8 +4584,8 @@
      <widget class="QPushButton" name="shade_delete_confirm">
       <property name="geometry">
        <rect>
-        <x>830</x>
-        <y>640</y>
+        <x>680</x>
+        <y>690</y>
         <width>141</width>
         <height>61</height>
        </rect>
@@ -4746,8 +4750,8 @@
      <widget class="QPushButton" name="shade_delete_clear">
       <property name="geometry">
        <rect>
-        <x>840</x>
-        <y>740</y>
+        <x>190</x>
+        <y>690</y>
         <width>131</width>
         <height>61</height>
        </rect>
@@ -4799,8 +4803,8 @@
      <widget class="QPushButton" name="shade_modify_confirm">
       <property name="geometry">
        <rect>
-        <x>730</x>
-        <y>640</y>
+        <x>680</x>
+        <y>690</y>
         <width>141</width>
         <height>61</height>
        </rect>
@@ -5339,8 +5343,8 @@
      <widget class="QPushButton" name="shade_modify_clear">
       <property name="geometry">
        <rect>
-        <x>740</x>
-        <y>730</y>
+        <x>170</x>
+        <y>690</y>
         <width>121</width>
         <height>61</height>
        </rect>
@@ -6518,8 +6522,8 @@
      <widget class="QPushButton" name="shade_view_by_id_clear">
       <property name="geometry">
        <rect>
-        <x>730</x>
-        <y>690</y>
+        <x>170</x>
+        <y>720</y>
         <width>111</width>
         <height>51</height>
        </rect>
@@ -7282,8 +7286,8 @@
      <widget class="QPushButton" name="rm_stock_view_clear_2">
       <property name="geometry">
        <rect>
-        <x>820</x>
-        <y>760</y>
+        <x>170</x>
+        <y>700</y>
         <width>141</width>
         <height>51</height>
        </rect>
@@ -7295,6 +7299,24 @@
       </property>
       <property name="text">
        <string>Clear</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="rm_view_stock_confirm">
+      <property name="geometry">
+       <rect>
+        <x>480</x>
+        <y>700</y>
+        <width>111</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>VIEW</string>
       </property>
      </widget>
     </widget>
@@ -7732,8 +7754,8 @@
      <widget class="QPushButton" name="shade_stock_view_clear">
       <property name="geometry">
        <rect>
-        <x>1010</x>
-        <y>750</y>
+        <x>150</x>
+        <y>740</y>
         <width>151</width>
         <height>51</height>
        </rect>
@@ -7745,6 +7767,24 @@
       </property>
       <property name="text">
        <string>Clear</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="shade_view_stock_confirm">
+      <property name="geometry">
+       <rect>
+        <x>440</x>
+        <y>740</y>
+        <width>111</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>VIEW</string>
       </property>
      </widget>
     </widget>
@@ -8202,7 +8242,7 @@
      <widget class="QPushButton" name="new_rm_modify_clear">
       <property name="geometry">
        <rect>
-        <x>700</x>
+        <x>90</x>
         <y>610</y>
         <width>111</width>
         <height>51</height>
@@ -8459,7 +8499,7 @@
      <widget class="QPushButton" name="new_rm_entry_clear">
       <property name="geometry">
        <rect>
-        <x>690</x>
+        <x>80</x>
         <y>650</y>
         <width>131</width>
         <height>51</height>
@@ -8957,7 +8997,7 @@
      <widget class="QPushButton" name="new_shade_modify_clear">
       <property name="geometry">
        <rect>
-        <x>800</x>
+        <x>80</x>
         <y>650</y>
         <width>111</width>
         <height>51</height>
@@ -9141,7 +9181,7 @@
      <widget class="QPushButton" name="new_shade_delete_clear">
       <property name="geometry">
        <rect>
-        <x>790</x>
+        <x>100</x>
         <y>640</y>
         <width>121</width>
         <height>51</height>
@@ -9307,8 +9347,8 @@
      <widget class="QPushButton" name="new_shade_view_clear">
       <property name="geometry">
        <rect>
-        <x>800</x>
-        <y>630</y>
+        <x>130</x>
+        <y>660</y>
         <width>141</width>
         <height>51</height>
        </rect>
@@ -9520,10 +9560,10 @@
      <widget class="QPushButton" name="sales_add_confirm">
       <property name="geometry">
        <rect>
-        <x>810</x>
-        <y>740</y>
-        <width>131</width>
-        <height>41</height>
+        <x>770</x>
+        <y>700</y>
+        <width>161</width>
+        <height>61</height>
        </rect>
       </property>
       <property name="font">
@@ -9800,8 +9840,8 @@
      <widget class="QPushButton" name="sales_add_clear">
       <property name="geometry">
        <rect>
-        <x>990</x>
-        <y>740</y>
+        <x>150</x>
+        <y>710</y>
         <width>111</width>
         <height>41</height>
        </rect>
@@ -10189,8 +10229,8 @@
      <widget class="QPushButton" name="sales_modify_clear">
       <property name="geometry">
        <rect>
-        <x>920</x>
-        <y>690</y>
+        <x>140</x>
+        <y>700</y>
         <width>131</width>
         <height>61</height>
        </rect>
@@ -10431,10 +10471,10 @@
      <widget class="QPushButton" name="sales_delete_confirm">
       <property name="geometry">
        <rect>
-        <x>500</x>
-        <y>740</y>
-        <width>151</width>
-        <height>51</height>
+        <x>570</x>
+        <y>730</y>
+        <width>161</width>
+        <height>61</height>
        </rect>
       </property>
       <property name="font">
@@ -10554,7 +10594,7 @@
      <widget class="QPushButton" name="sales_delete_clear">
       <property name="geometry">
        <rect>
-        <x>830</x>
+        <x>110</x>
         <y>730</y>
         <width>131</width>
         <height>61</height>
@@ -11029,8 +11069,8 @@
      <widget class="QPushButton" name="sales_view_by_id_clear">
       <property name="geometry">
        <rect>
-        <x>880</x>
-        <y>700</y>
+        <x>130</x>
+        <y>680</y>
         <width>121</width>
         <height>61</height>
        </rect>
