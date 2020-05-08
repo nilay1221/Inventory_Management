@@ -160,7 +160,7 @@
    <widget class="QPushButton" name="shade_new_confirm">
     <property name="geometry">
      <rect>
-      <x>730</x>
+      <x>390</x>
       <y>590</y>
       <width>171</width>
       <height>71</height>
@@ -175,6 +175,24 @@
     </property>
     <property name="text">
      <string>Confirm</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="new_shade_entry_clear">
+    <property name="geometry">
+     <rect>
+      <x>630</x>
+      <y>590</y>
+      <width>161</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Clear</string>
     </property>
    </widget>
   </widget>

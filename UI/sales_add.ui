@@ -71,8 +71,8 @@
    <widget class="QPushButton" name="sales_add_confirm">
     <property name="geometry">
      <rect>
-      <x>740</x>
-      <y>740</y>
+      <x>540</x>
+      <y>690</y>
       <width>131</width>
       <height>41</height>
      </rect>
@@ -377,6 +377,24 @@
       <string>Parth</string>
      </property>
     </item>
+   </widget>
+   <widget class="QPushButton" name="sales_add_clear">
+    <property name="geometry">
+     <rect>
+      <x>890</x>
+      <y>690</y>
+      <width>111</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Clear</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">

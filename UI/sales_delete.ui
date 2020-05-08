@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Sales_delete</class>
- <widget class="QMainWindow" name="Sales_delete">
+ <class>sales_delete_clear</class>
+ <widget class="QMainWindow" name="sales_delete_clear">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -175,8 +175,8 @@
    <widget class="QPushButton" name="sales_delete">
     <property name="geometry">
      <rect>
-      <x>790</x>
-      <y>770</y>
+      <x>620</x>
+      <y>740</y>
       <width>151</width>
       <height>51</height>
      </rect>
@@ -319,6 +319,19 @@
       <string>Parth</string>
      </property>
     </item>
+   </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>860</x>
+      <y>730</y>
+      <width>131</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Clear</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">

@@ -578,6 +578,24 @@
      <string>Back to Main Menu</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="shade_modify_clear">
+    <property name="geometry">
+     <rect>
+      <x>950</x>
+      <y>670</y>
+      <width>121</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Clear</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
