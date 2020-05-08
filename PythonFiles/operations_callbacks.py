@@ -794,9 +794,15 @@ def confirm_add_shade_number(self):
                         if add_raw_material_data(negative_trans_id,date,customer,remark,results,type="OUT"):
                             add_shade_stock_trans(trans_id,date,customer,remark,shade_number,raw_details)
                             add_into_duplicates(trans_id,negative_trans_id)
+                            message1 = ""
+                            message2 = ""
                             for each_raw in results:
-                                if raw_material_closing_stock(each_raw[0]) < 0:
-                                    self.show_info_popup(f"Raw Material with Product Code {each_raw[0]} has negative closing stock")
+                                x = raw_material_closing_stock(each_raw[0])
+                                if x < 0:
+                                    message2 = message2 + f"Closing stock for '{each_raw[0]}'  is '{x}'\n"
+                                else:
+                                    message1 = message1 + f"Closing stock for '{each_raw[0]}'  is '{x}'\n"
+                            self.show_stock_popup(message1, message2)
                             self.show_info_popup("Transaction Completed Successfully")
                             set_shade_number_transacs(self)
                             self.uiWindow.shade_customer.clearEditText()
@@ -1005,10 +1011,15 @@ def confirm_modify_shade_trans(self):
                                 if add_raw_material_data(negative_trans_id,date,customer,remark,results,type="OUT"):
                                     add_shade_stock_trans(trans_id,date,customer,remark,shade_number,raw_details)
                                     add_into_duplicates(trans_id,negative_trans_id)
+                                    message1 = ""
+                                    message2 = ""
                                     for each_raw in results:
-                                        if raw_material_closing_stock(each_raw[0]) < 0:
-                                            self.show_info_popup(
-                                                f"Raw Material with Product Code {each_raw[0]} has negative closing stock")
+                                        x= raw_material_closing_stock(each_raw[0])
+                                        if x < 0:
+                                            message2 = message2 + f"Closing stock for '{each_raw[0]}'  is '{x}'\n"
+                                        else:
+                                            message1 = message1 + f"Closing stock for '{each_raw[0]}'  is '{x}'\n"
+                                    self.show_stock_popup(message1, message2)
                                     self.show_info_popup("Transaction Modified Successfully")
                                     # set_shade_number_transacs(self)
                                     self.uiWindow.shade_modify_transaction_id.clear()
@@ -1182,9 +1193,15 @@ def add_sales_callback(self):
                                     # print(sales)
                                     if add_sales_data(trans_id,date,customer,remark,sales):
                                         # print("Inside")
+                                        message1 = ""
+                                        message2 = ""
                                         for each in sales:
-                                            if shade_raw_closing_stock(each[0],each[1])<0:
-                                                self.show_warning_info(f"Stock for shade number'{each[0]}' and product code '{each[1]}' is negative")
+                                            x = shade_raw_closing_stock(each[0], each[1])
+                                            if x < 0:
+                                                message2 = message2 + f"Closing stock for '{each[0]}' and '{each[1]}' is '{x}'\n"
+                                            else:
+                                                message1 = message1 + f"Closing stock for '{each[0]}' and '{each[1]}' is '{x}'\n"
+                                        self.show_stock_popup(message1, message2)
                                         set_sales_data(self)
                                         customer_widget.clearEditText()
                                         remark_widget.clear()
@@ -1469,10 +1486,15 @@ def modify_sales(self):
                                     # print(sales)
                                     if add_sales_data(trans_id, date, customer, remark, sales):
                                         # print("Inside")
-
+                                        message1=""
+                                        message2=""
                                         for each in sales:
-                                            if shade_raw_closing_stock(each[0],each[1])<0:
-                                                self.show_warning_info(f"Stock for shade number'{each[0]}' and product code '{each[1]}' is negative")
+                                            x=shade_raw_closing_stock(each[0],each[1])
+                                            if x<0:
+                                                message2=message2+f"Closing stock for '{each[0]}' and '{each[1]}' is '{x}'\n"
+                                            else:
+                                                message1=message1+f"Closing stock for '{each[0]}' and '{each[1]}' is '{x}'\n"
+                                        self.show_stock_popup(message1,message2)
                                         set_sales_data(self)
                                         customer_widget.clearEditText()
                                         remark_widget.clear()
