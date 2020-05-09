@@ -397,8 +397,8 @@ class MainWindow(QMainWindow):
                                                                           self.uiWindow.sales_modify_table)
         )
         self.uiWindow.sales_delete_table.cellChanged.connect(
-            lambda row, column: operations_callbacks.display_product_name(row, column, self, 1, 'R',
-                                                                          self.uiWindow.sales_delete_table,sales=True)
+            lambda row, column: operations_callbacks.display_product_name_sales(row, column, self, 1,
+                                                                          self.uiWindow.sales_delete_table)
         )
         self.uiWindow.sales_modify_table.cellChanged.connect(
             lambda row, column: operations_callbacks.find_shade(row, column, self, 0, self.uiWindow.sales_modify_table))
@@ -410,9 +410,12 @@ class MainWindow(QMainWindow):
         self.uiWindow.shade_view_stock_confirm.clicked.connect(lambda: operations_callbacks.shade_stock_view(self))
         self.uiWindow.rm_end_stock.clicked.connect(lambda : operations_callbacks.raw_material_display_closing(self))
         self.uiWindow.colour_end_stock.clicked.connect(lambda: operations_callbacks.colour_display_closing(self))
-        self.uiWindow.shade_closing_stock_table.cellChanged.connect(
-            lambda row, column: operations_callbacks.
-            display_product_name(row, column, self, 1,"R",self.uiWindow.shade_closing_stock_table,sales=True))
+        try:
+            self.uiWindow.shade_closing_stock_table.cellChanged.connect(
+                lambda row, column: operations_callbacks.display_product_name_sales(row, column, self, 1,
+                                                                                    self.uiWindow.shade_closing_stock_table))
+        except Exception as e:
+            print(e)
         self.uiWindow.shade_closing_stock_table.cellChanged.connect(
             lambda row, column: operations_callbacks.find_shade(row, column, self, 0, self.uiWindow.shade_closing_stock_table))
         self.uiWindow.shade_end_stock_view_confirm.clicked.connect(lambda: operations_callbacks.shade_display_closing(self))
