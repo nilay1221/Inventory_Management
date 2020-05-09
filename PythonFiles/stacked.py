@@ -4399,6 +4399,12 @@ class Ui_MainWindow(object):
         font.setPointSize(14)
         self.shade_end_stock_view_confirm.setFont(font)
         self.shade_end_stock_view_confirm.setObjectName("shade_end_stock_view_confirm")
+        self.shade_end_stock_view_clear = QtWidgets.QPushButton(self.shade_closing_stock)
+        self.shade_end_stock_view_clear.setGeometry(QtCore.QRect(50, 740, 191, 61))
+        font = QtGui.QFont()
+        font.setPointSize(14)
+        self.shade_end_stock_view_clear.setFont(font)
+        self.shade_end_stock_view_clear.setObjectName("shade_end_stock_view_clear")
         self.stackedWidget.addWidget(self.shade_closing_stock)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
@@ -5156,6 +5162,7 @@ class Ui_MainWindow(object):
         self.back_add_rm_30.setText(_translate("MainWindow", "Back"))
         self.label_278.setText(_translate("MainWindow", "Shade Number:"))
         self.shade_end_stock_view_confirm.setText(_translate("MainWindow", "View"))
+        self.shade_end_stock_view_clear.setText(_translate("MainWindow", "Clear"))
 
 
 if __name__ == "__main__":

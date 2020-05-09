@@ -4,6 +4,7 @@ from PyQt5.QtGui import QGuiApplication
 from PyQt5.QtWidgets import QMainWindow,QMessageBox,QShortcut
 from PyQt5.QtGui import QKeySequence
 import operations_callbacks
+import clear
 
 pagesDict = {
         'Home': 0,
@@ -422,6 +423,7 @@ class MainWindow(QMainWindow):
         self.uiWindow.new_shade_entry_clear.clicked.connect(lambda: clear.new_shade_entry_clear_button(self))
         self.uiWindow.new_shade_modify_clear.clicked.connect(lambda: clear.new_shade_modify_clear_button(self))
         self.uiWindow.new_shade_view_clear.clicked.connect(lambda: clear.new_shade_view_clear_button(self))
+        self.uiWindow.rm_add_clear.clicked.connect(lambda: clear.rm_add_clear_button(self))
         self.uiWindow.rm_delete_clear.clicked.connect(lambda: clear.rm_delete_clear_button(self))
         self.uiWindow.rm_modify_clear.clicked.connect(lambda: clear.rm_modify_clear_button(self))
         self.uiWindow.rm_stock_view_clear.clicked.connect(lambda: clear.rm_stock_view_clear_button(self))
@@ -434,15 +436,12 @@ class MainWindow(QMainWindow):
         self.uiWindow.shade_delete_clear.clicked.connect(lambda: clear.shade_delete_clear_button(self))
         self.uiWindow.shade_modify_clear.clicked.connect(lambda: clear.shade_modify_clear_button(self))
         self.uiWindow.shade_stock_view_clear.clicked.connect(lambda: clear.shade_stock_view_clear_button(self))
-        self.uiWindow.rm_stock_view_clear_2_clear.clicked.connect(lambda: clear.rm_stock_view_clear_2_clear_button(self))
+        self.uiWindow.rm_stock_view_clear_2.clicked.connect(lambda: clear.rm_stock_view_clear_2_clear_button(self))
         self.uiWindow.shade_view_by_id_clear.clicked.connect(lambda: clear.shade_view_by_id_clear_button(self))
         self.uiWindow.sales_view_custom_back.clicked.connect(lambda: clear.sales_view_custom_back_button(self))
-        self.uiWindow.back_view_rm_4_back.clicked.connect(lambda: clear.back_view_rm_4_back_button(self))
-        self.uiWindow.back_view_rm_9_back.clicked.connect(lambda: clear.back_view_rm_9_back_button(self))
-
-
-
-
+        self.uiWindow.back_view_rm_4.clicked.connect(lambda: clear.back_view_rm_4_back_button(self))
+        self.uiWindow.back_view_rm_9.clicked.connect(lambda: clear.back_view_rm_9_back_button(self))
+        self.uiWindow.shade_end_stock_view_clear.clicked.connect(lambda: clear.clear_shade_closing_stock(self))
 
 
 if __name__ == "__main__":

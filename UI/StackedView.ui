@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>38</number>
+     <number>41</number>
     </property>
     <widget class="QWidget" name="Home">
      <widget class="QPushButton" name="RM_3">
@@ -12596,6 +12596,24 @@
       </property>
       <property name="text">
        <string>View</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="shade_end_stock_view_clear">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>740</y>
+        <width>191</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Clear</string>
       </property>
      </widget>
     </widget>

@@ -760,73 +760,74 @@ def confirm_add_shade_number(self):
     remark = remark_widget.text()
     shade_number = shade_number_widget.text()
     if trans_id and date and customer and remark and shade_number:
-        table_check = check_for_no_product_code(self.uiWindow.shade_addtable,"R")
-        if table_check == "True":
-            try:
-                row_count_1 = self.uiWindow.shade_addtable.rowCount()
-                row_count_2 = self.uiWindow.shade_colortable.rowCount()
+        if get_shade(shade_number):
+            table_check = check_for_no_product_code(self.uiWindow.shade_addtable,"R")
+            if table_check == "True":
                 try:
-                    results = []
-                    raw_details = []
-                    for i in range(row_count_1):
-                            if self.uiWindow.shade_addtable.item(i,0).text() and self.uiWindow.shade_addtable.item(i,2).text():
-                                x = self.uiWindow.shade_addtable.item(i,0).text()
-                                y = self.uiWindow.shade_addtable.item(i,2).text()
-                                results.append((x,y,"R"))
-                                raw_details.append((x,y))
-                            else:
-                                raise Exception
-                except:
+                    row_count_1 = self.uiWindow.shade_addtable.rowCount()
+                    row_count_2 = self.uiWindow.shade_colortable.rowCount()
                     try:
-                        if i!=0:
-                            if not self.uiWindow.shade_addtable.item(i,0).text():
-                                raise Exception
-                        self.show_warning_info("Please complete table")
-                    except:
-                        for i in range(row_count_2):
-                            x = self.uiWindow.shade_colortable.item(i,0).text()
-                            y = float(self.uiWindow.shade_colortable.item(i,3).text())/1000
-                            for each in raw_details:
-                                if x == each[0]:
-                                    # print(each[0])
-                                    # print(x)
-                                    raise Exception("Colour cannot be used")
-                            results.append((x,y,"C"))
-                            # raw_details.append((x,y))
-                        
-                        negative_trans_id = "SRT" + str(get_trans_id('rm_stock','SRT'))
-                        # print(results)
-                        if add_raw_material_data(negative_trans_id,date,customer,remark,results,type="OUT"):
-                            add_shade_stock_trans(trans_id,date,customer,remark,shade_number,raw_details)
-                            add_into_duplicates(trans_id,negative_trans_id)
-                            message1 = ""
-                            message2 = ""
-                            for each_raw in results:
-                                x = raw_material_closing_stock(each_raw[0])
-                                if x < 0:
-                                    message2 = message2 + f"Closing stock for {each_raw[0]}  is {x} <br>"
+                        results = []
+                        raw_details = []
+                        for i in range(row_count_1):
+                                if self.uiWindow.shade_addtable.item(i,0).text() and self.uiWindow.shade_addtable.item(i,2).text():
+                                    x = self.uiWindow.shade_addtable.item(i,0).text()
+                                    y = self.uiWindow.shade_addtable.item(i,2).text()
+                                    results.append((x,y,"R"))
+                                    raw_details.append((x,y))
                                 else:
-                                    message1 = message1 + f"Closing stock for {each_raw[0]}  is {x}<br>"
-                            self.show_stock_popup(message1, message2)
-                            self.show_info_popup("Transaction Completed Successfully")
-                            set_shade_number_transacs(self)
-                            self.uiWindow.shade_customer.clearEditText()
-                            self.uiWindow.shade_remark.clear()
-                            self.uiWindow.shade_number_add.clear()
-                            self.uiWindow.shade_addtable.clearContents()
-                            self.uiWindow.shade_colortable.clearContents()
-                            self.uiWindow.shade_add_total.clear()
+                                    raise Exception
+                    except:
+                        try:
+                            if i!=0:
+                                if not self.uiWindow.shade_addtable.item(i,0).text():
+                                    raise Exception
+                            self.show_warning_info("Please complete table")
+                        except:
+                            for i in range(row_count_2):
+                                x = self.uiWindow.shade_colortable.item(i,0).text()
+                                y = float(self.uiWindow.shade_colortable.item(i,3).text())/1000
+                                for each in raw_details:
+                                    if x == each[0]:
+                                        # print(each[0])
+                                        # print(x)
+                                        raise Exception("Colour cannot be used")
+                                results.append((x,y,"C"))
+                                # raw_details.append((x,y))
 
-
-
-                        else:
-                            self.show_warning_info("Transaction UnSuccessfull")
-            except Exception as err:
-                self.show_warning_info(err.__str__())
-        elif table_check == "False":
-            self.show_warning_info("Please choose from available product codes")
-        elif table_check == "Product Mismatch":
-            self.show_warning_info("Please choose Raw Material only")
+                            negative_trans_id = "SRT" + str(get_trans_id('rm_stock','SRT'))
+                            # print(results)
+                            if add_raw_material_data(negative_trans_id,date,customer,remark,results,type="OUT"):
+                                add_shade_stock_trans(trans_id,date,customer,remark,shade_number,raw_details)
+                                add_into_duplicates(trans_id,negative_trans_id)
+                                message1 = ""
+                                message2 = ""
+                                for each_raw in results:
+                                    x = raw_material_closing_stock(each_raw[0])
+                                    if x < 0:
+                                        message2 = message2 + f"Closing stock for {each_raw[0]}  is {x} <br>"
+                                    else:
+                                        message1 = message1 + f"Closing stock for {each_raw[0]}  is {x}<br>"
+                                self.show_stock_popup(message1, message2)
+                                self.show_info_popup("Transaction Completed Successfully")
+                                set_shade_number_transacs(self)
+                                self.uiWindow.shade_customer.clearEditText()
+                                self.uiWindow.shade_remark.clear()
+                                self.uiWindow.shade_number_add.clear()
+                                self.uiWindow.shade_addtable.clearContents()
+                                self.uiWindow.shade_colortable.clearContents()
+                                self.uiWindow.shade_add_total.clear()
+                            else:
+                                self.show_warning_info("Transaction UnSuccessfull")
+                except Exception as err:
+                    self.show_warning_info(err.__str__())
+            elif table_check == "False":
+                self.show_warning_info("Please choose from available product codes")
+            elif table_check == "Product Mismatch":
+                self.show_warning_info("Please choose Raw Material only")
+        else:
+            self.show_warning_info("Please enter correct shade number")
+            self.uiWindow.shade_number_add.clear()
     else:
         self.show_warning_info("Please fill out the info")
 
@@ -978,72 +979,76 @@ def confirm_modify_shade_trans(self):
             remark = remark_widget.text()
             shade_number = shade_number_widget.text()
             if trans_id and date and customer and remark and shade_number:
-                table_check = check_for_no_product_code(self.uiWindow.shade_addtable_3,"R")
-                if table_check == "True":
-                    try:
-                        row_count_1 = self.uiWindow.shade_addtable_3.rowCount()
-                        row_count_2 = self.uiWindow.shade_colortable_3.rowCount()
+                if get_shade(shade_number):
+                    table_check = check_for_no_product_code(self.uiWindow.shade_addtable_3,"R")
+                    if table_check == "True":
                         try:
-                            results = []
-                            raw_details = []
-                            for i in range(row_count_1):
-                                    if self.uiWindow.shade_addtable_3.item(i,0).text() and self.uiWindow.shade_addtable_3.item(i,2).text():
-                                        x = self.uiWindow.shade_addtable_3.item(i,0).text()
-                                        y = self.uiWindow.shade_addtable_3.item(i,2).text()
-                                        results.append((x,y,"R"))
-                                        raw_details.append((x,y))
-                                    else:
-                                        raise Exception
-                        except:
+                            row_count_1 = self.uiWindow.shade_addtable_3.rowCount()
+                            row_count_2 = self.uiWindow.shade_colortable_3.rowCount()
                             try:
-                                if i!=0:
-                                    if not self.uiWindow.shade_addtable_3.item(i,0).text():
-                                        raise Exception
-                                self.show_warning_info("Please complete table")
-                            except:
-                                for i in range(row_count_2):
-                                    x = self.uiWindow.shade_colortable_3.item(i,0).text()
-                                    y = float(self.uiWindow.shade_colortable_3.item(i,3).text())/1000
-                                    for each in raw_details:
-                                        if x == each[0]:
-                                            # print(each[0])
-                                            # print(x)
-                                            raise Exception("Colour cannot be used")
-                                    results.append((x,y,"C"))
-                                    # raw_details.append((x,y))
-
-                                # negative_trans_id = "SRT" + str(get_trans_id('rm_stock','SRT'))
-                                # print(results)
-                                if add_raw_material_data(negative_trans_id,date,customer,remark,results,type="OUT"):
-                                    add_shade_stock_trans(trans_id,date,customer,remark,shade_number,raw_details)
-                                    add_into_duplicates(trans_id,negative_trans_id)
-                                    message1 = ""
-                                    message2 = ""
-                                    for each_raw in results:
-                                        x= raw_material_closing_stock(each_raw[0])
-                                        if x < 0:
-                                            message2 = message2 + f"Closing stock for {each_raw[0]}  is {x} <br>"
+                                results = []
+                                raw_details = []
+                                for i in range(row_count_1):
+                                        if self.uiWindow.shade_addtable_3.item(i,0).text() and self.uiWindow.shade_addtable_3.item(i,2).text():
+                                            x = self.uiWindow.shade_addtable_3.item(i,0).text()
+                                            y = self.uiWindow.shade_addtable_3.item(i,2).text()
+                                            results.append((x,y,"R"))
+                                            raw_details.append((x,y))
                                         else:
-                                            message1 = message1 + f"Closing stock for {each_raw[0]}  is '{x} <br>"
-                                    self.show_stock_popup(message1, message2)
-                                    self.show_info_popup("Transaction Modified Successfully")
-                                    # set_shade_number_transacs(self)
-                                    self.uiWindow.shade_modify_transaction_id.clear()
-                                    self.uiWindow.shade_modify_date.clear()
-                                    self.uiWindow.shade_modify_customer.clearEditText()
-                                    self.uiWindow.shade_modify_remark.clear()
-                                    self.uiWindow.shade_number_modify.clear()
-                                    self.uiWindow.shade_addtable_3.clearContents()
-                                    self.uiWindow.shade_colortable_3.clearContents()
-                                    self.uiWindow.shade_add_total_3.clear()
-                                else:
-                                    self.show_warning_info("Transaction UnSuccessfull")
-                    except Exception as err:
-                        self.show_warning_info(err.__str__())
-                elif table_check == "False":
-                    self.show_warning_info("Please fill out from available product code")
-                elif table_check == "Product Mismatch":
-                    self.show_warning_info("Please select Raw Materials Only")
+                                            raise Exception
+                            except:
+                                try:
+                                    if i!=0:
+                                        if not self.uiWindow.shade_addtable_3.item(i,0).text():
+                                            raise Exception
+                                    self.show_warning_info("Please complete table")
+                                except:
+                                    for i in range(row_count_2):
+                                        x = self.uiWindow.shade_colortable_3.item(i,0).text()
+                                        y = float(self.uiWindow.shade_colortable_3.item(i,3).text())/1000
+                                        for each in raw_details:
+                                            if x == each[0]:
+                                                # print(each[0])
+                                                # print(x)
+                                                raise Exception("Colour cannot be used")
+                                        results.append((x,y,"C"))
+                                        # raw_details.append((x,y))
+
+                                    # negative_trans_id = "SRT" + str(get_trans_id('rm_stock','SRT'))
+                                    # print(results)
+                                    if add_raw_material_data(negative_trans_id,date,customer,remark,results,type="OUT"):
+                                        add_shade_stock_trans(trans_id,date,customer,remark,shade_number,raw_details)
+                                        add_into_duplicates(trans_id,negative_trans_id)
+                                        message1 = ""
+                                        message2 = ""
+                                        for each_raw in results:
+                                            x= raw_material_closing_stock(each_raw[0])
+                                            if x < 0:
+                                                message2 = message2 + f"Closing stock for {each_raw[0]}  is {x} <br>"
+                                            else:
+                                                message1 = message1 + f"Closing stock for {each_raw[0]}  is '{x} <br>"
+                                        self.show_stock_popup(message1, message2)
+                                        self.show_info_popup("Transaction Modified Successfully")
+                                        # set_shade_number_transacs(self)
+                                        self.uiWindow.shade_modify_transaction_id.clear()
+                                        self.uiWindow.shade_modify_date.clear()
+                                        self.uiWindow.shade_modify_customer.clearEditText()
+                                        self.uiWindow.shade_modify_remark.clear()
+                                        self.uiWindow.shade_number_modify.clear()
+                                        self.uiWindow.shade_addtable_3.clearContents()
+                                        self.uiWindow.shade_colortable_3.clearContents()
+                                        self.uiWindow.shade_add_total_3.clear()
+                                    else:
+                                        self.show_warning_info("Transaction UnSuccessfull")
+                        except Exception as err:
+                            self.show_warning_info(err.__str__())
+                    elif table_check == "False":
+                        self.show_warning_info("Please fill out from available product code")
+                    elif table_check == "Product Mismatch":
+                        self.show_warning_info("Please select Raw Materials Only")
+                else:
+                    self.show_warning_info("Please enter correct shade number")
+                    self.uiWindow.shade_number_modify.clear()
             else:
                 self.show_warning_info("Please fill out the info")
 

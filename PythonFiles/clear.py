@@ -81,7 +81,7 @@ def sales_delete_clear_button(self):
 
 #
 def sales_modify_clear_button(self):
-    self.uiWindow.sales_modify_transid.clear()
+    self.uiWindow.sales_modify_trans_id.clear()
     self.uiWindow.sales_modify_date.clear()
     self.uiWindow.sales_modify_customer.clearEditText()
     self.uiWindow.sales_modify_remark.clear()
@@ -130,8 +130,6 @@ def shade_stock_view_clear_button(self):
     self.uiWindow.shade_view_stock_shade_number.clear()
     self.uiWindow.shade_view_stock_code.clear()
     self.uiWindow.shade_view_stock_name.clear()
-    self.uiWindow.shade_view_starting_date.clear()
-    self.uiWindow.shade_view_ending_date.clear()
     self.uiWindow.shade_view_closing.clear()
     self.uiWindow.shade_view_table_3.clearContents()
 
@@ -139,8 +137,6 @@ def shade_stock_view_clear_button(self):
 def rm_stock_view_clear_2_clear_button(self):
     self.uiWindow.rw_view_stock_code_2.clear()
     self.uiWindow.rw_view_stock_name_2.clear()
-    self.uiWindow.rw_view_starting_date_4.clear()
-    self.uiWindow.rw_view_ending_date_3.clear()
     self.uiWindow.rw_view_closing.clear()
     self.uiWindow.rm_view_table_6.clearContents()
 
@@ -170,3 +166,7 @@ def back_view_rm_9_back_button(self):
     self.uiWindow.shade_view_start_date.clear()
     self.uiWindow.shade_view_end_date.clear()
     self.uiWindow.shade_view_table.clearContents()
+
+
+def clear_shade_closing_stock(self):
+    self.uiWindow.shade_closing_stock_table.clearContents()
