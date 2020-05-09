@@ -158,46 +158,78 @@ def view_new_rm_data(self):
             self.uiWindow.tableWidget_2.setItem(row_number, column_number, QtWidgets.QTableWidgetItem(str(data)))
 
 
-def display_product_name(row, column, self, col, product_type,tableWidget,sales=False):
+def display_product_name(row, column, self, col, product_type,tableWidget):
     try:
         code = tableWidget.item(row, column).text()
         list_of_entries=[]
         if column == col:
-            if sales:
-                for i in range(tableWidget.currentRow()):
-                    list_of_entries.append((tableWidget.item(i, col-1).text(),tableWidget.item(i, col).text()))
-            else:
                 for i in range(tableWidget.currentRow()):
                     list_of_entries.append(tableWidget.item(i, col).text())
-            try:
-                if code == "":
-                    tableWidget.setItem(row, column + 1, QtWidgets.QTableWidgetItem(""))
-                elif code in list_of_entries and sales == False:
-                    tableWidget.setItem(row, column + 1, QtWidgets.QTableWidgetItem("Product already added above"))
-                elif sales and (tableWidget.item(row,col-1).text(),code) in list_of_entries: 
+                try:
+                    if code == "":
+                        tableWidget.setItem(row, column + 1, QtWidgets.QTableWidgetItem(""))
+                    elif code in list_of_entries:
                         tableWidget.setItem(row, column + 1, QtWidgets.QTableWidgetItem("Product already added above"))
-                else:
-                    result = get_product_name(code,product_type)
-                    if result == 'false':
-                        tableWidget.setItem(row, column + 1, QtWidgets.QTableWidgetItem("No such product code"))
-                    elif result == "Product mismatch":
-                        if product_type == "R" :
-                            tableWidget.removeRow(row)
-                            tableWidget.insertRow(row)
-                            self.show_warning_info("Select only from raw materials")
-                            # tableWidget.setItem(row, column + 1, QtWidgets.QTableWidgetItem("Only Raw Material Allowed"))
-                        else:
-                            tableWidget.removeRow(row)
-                            tableWidget.insertRow(row)
-                            self.show_warning_info("Select only from Colours")
-                            # tableWidget.setItem(row, column + 1, QtWidgets.QTableWidgetItem("Only Colour Allowed"))
                     else:
-                        tableWidget.setItem(row, column + 1, QtWidgets.QTableWidgetItem(result))
-            except Exception as e:
-                print(e)
+                        result = get_product_name(code,product_type)
+                        if result == 'false':
+                            tableWidget.setItem(row, column + 1, QtWidgets.QTableWidgetItem("No such product code"))
+                        elif result == "Product mismatch":
+                            if product_type == "R" :
+                                tableWidget.removeRow(row)
+                                tableWidget.insertRow(row)
+                                self.show_warning_info("Select only from raw materials")
+                                # tableWidget.setItem(row, column + 1, QtWidgets.QTableWidgetItem("Only Raw Material Allowed"))
+                            else:
+                                tableWidget.removeRow(row)
+                                tableWidget.insertRow(row)
+                                self.show_warning_info("Select only from Colours")
+                                # tableWidget.setItem(row, column + 1, QtWidgets.QTableWidgetItem("Only Colour Allowed"))
+                        else:
+                            tableWidget.setItem(row, column + 1, QtWidgets.QTableWidgetItem(result))
+                except Exception as e:
+                    print(e)
     except Exception as e:
         print(e)
 
+
+def display_product_name_sales(row, column, self, col,tableWidget):
+    if column == col or column == col -1:
+        try:
+            product_code = tableWidget.item(row,col).text()
+            shade_number = tableWidget.item(row,col-1).text()
+            list_of_entries = []
+            # print(product_code)
+            for i in range(tableWidget.currentRow()):
+                try:
+                    shade_number_before = tableWidget.item(i,col-1).text()
+                    product_code_before = tableWidget.item(i,col).text()
+                    list_of_entries.append((shade_number_before,product_code_before))
+                except:
+                    pass
+            product_type = "R"
+            # print(product_code)
+            if (shade_number,product_code) in list_of_entries:
+                tableWidget.setItem(row,col+1,QtWidgets.QTableWidgetItem("Product code already exists"))
+            else:
+                result = get_product_name(product_code,product_type)
+                if result == 'false':
+                    tableWidget.setItem(row, col + 1, QtWidgets.QTableWidgetItem("No such product code"))
+                elif result == "Product mismatch":
+                    if product_type == "R" :
+                        tableWidget.removeRow(row)
+                        tableWidget.insertRow(row)
+                        self.show_warning_info("Select only from raw materials")
+                        # tableWidget.setItem(row, column + 1, QtWidgets.QTableWidgetItem("Only Raw Material Allowed"))
+                    else:
+                        tableWidget.removeRow(row)
+                        tableWidget.insertRow(row)
+                        self.show_warning_info("Select only from Colours")
+                        # tableWidget.setItem(row, column + 1, QtWidgets.QTableWidgetItem("Only Colour Allowed"))
+                else:
+                    tableWidget.setItem(row, col + 1, QtWidgets.QTableWidgetItem(result))
+        except:
+            pass
 
 
 
