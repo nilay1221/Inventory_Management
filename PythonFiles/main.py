@@ -4,6 +4,7 @@ from PyQt5.QtGui import QGuiApplication
 from PyQt5.QtWidgets import QMainWindow,QMessageBox,QShortcut
 from PyQt5.QtGui import QKeySequence
 import operations_callbacks
+import clear
 
 pagesDict = {
         'Home': 0,
@@ -45,6 +46,9 @@ pagesDict = {
         'sales_view_by_id': 36,
         'sales_view_by_today': 37,
         'sales_view_by_custom': 38,
+        'rm_closing_stock': 39,
+        'colour_closing_stock': 40,
+        'shade_closing_stock': 41,
     }
 
 DEFAULT_SHOW = "RC"
@@ -200,6 +204,18 @@ class MainWindow(QMainWindow):
             lambda: self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['sales_view']))
         self.uiWindow.sales_view_today_back.clicked.connect(
             lambda: self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['sales_view']))
+        self.uiWindow.rm_end_stock.clicked.connect(
+            lambda: self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['rm_closing_stock']))
+        self.uiWindow.colour_end_stock.clicked.connect(
+            lambda: self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['colour_closing_stock']))
+        self.uiWindow.shade_end_stock.clicked.connect(
+            lambda: self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['shade_closing_stock']))
+        self.uiWindow.back_add_rm_14.clicked.connect(
+            lambda: self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['Home']))
+        self.uiWindow.back_add_rm_29.clicked.connect(
+            lambda: self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['Home']))
+        self.uiWindow.back_add_rm_30.clicked.connect(
+            lambda: self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['Home']))
         self.uiWindow.new_rm_delete_product_name.setReadOnly(True)
         self.uiWindow.new_rm_delete_product_price.setReadOnly(True)
         self.uiWindow.new_rm_modify_product_name.setReadOnly(True)
@@ -254,6 +270,15 @@ class MainWindow(QMainWindow):
         msg.setIcon(QMessageBox.Question)
         msg.setStandardButtons(QMessageBox.No|QMessageBox.Yes)
         msg.buttonClicked.connect(lambda i: operations_callbacks.delete_rm(self,btn=i))
+        x = msg.exec_()
+
+    def delete_confirm_dialog_shade_trans(self):
+        msg = QMessageBox()
+        msg.setWindowTitle("Message")
+        msg.setText("Are you sure want to Delete?")
+        msg.setIcon(QMessageBox.Question)
+        msg.setStandardButtons(QMessageBox.No|QMessageBox.Yes)
+        msg.buttonClicked.connect(lambda i: operations_callbacks.delete_shade_transaction(self,btn=i))
         x = msg.exec_()
 
     def delete_confirm_dialog_sales(self):
@@ -323,7 +348,7 @@ class MainWindow(QMainWindow):
         self.uiWindow.shade_view_transaction_id.returnPressed.connect(lambda:operations_callbacks.view_shade_stock_by_id(self))
         self.uiWindow.view_today_2.clicked.connect(lambda: operations_callbacks.view_shade_transaction_today(self))
         self.uiWindow.shade_delete_transaction_id.returnPressed.connect(lambda : operations_callbacks.set_delete_shade_transaction(self))
-        self.uiWindow.shade_delete_confirm.clicked.connect(lambda : operations_callbacks.delete_shade_transaction(self))
+        self.uiWindow.shade_delete_confirm.clicked.connect(lambda : self.delete_confirm_dialog_shade_trans())
         self.uiWindow.shade_modify_transaction_id.returnPressed.connect(lambda:operations_callbacks.set_modify_shade_transaction(self))
         self.uiWindow.shade_addtable_3.cellChanged.connect(lambda row,column:operations_callbacks.display_product_name(row,column,self,0,"R",self.uiWindow.shade_addtable_3))
         self.uiWindow.shade_addtable_3.cellChanged.connect(lambda row,column:operations_callbacks.set_total_quantity(row,column,self,self.uiWindow.shade_addtable_3,self.uiWindow.shade_colortable_3,self.uiWindow.shade_add_total_3))
@@ -339,7 +364,7 @@ class MainWindow(QMainWindow):
         self.uiWindow.rm_view_table_3.cellChanged.connect(lambda row,column: operations_callbacks.display_product_name(row,column,self,4,DEFAULT_SHOW,self.uiWindow.rm_view_table_3))
         self.uiWindow.rm_view_table_4.cellChanged.connect(lambda row,column: operations_callbacks.display_product_name(row,column,self,0,DEFAULT_SHOW,self.uiWindow.rm_view_table_4))
         self.uiWindow.shade_addtable_3.cellChanged.connect(lambda row,column:operations_callbacks.display_product_name(row,column,self,0,"R",self.uiWindow.shade_addtable_3))
-        self.uiWindow.rm_delete_table.cellChanged.connect(lambda row,column: operations_callbacks.display_product_name(row,column,self,0,"R",self.uiWindow.rm_delete_table))
+        self.uiWindow.rm_delete_table.cellChanged.connect(lambda row,column: operations_callbacks.display_product_name(row,column,self,0,"RC",self.uiWindow.rm_delete_table))
         self.uiWindow.shade_addtable_2.cellChanged.connect(lambda row,column:operations_callbacks.display_product_name(row,column,self,0,"R",self.uiWindow.shade_addtable_2))
         self.uiWindow.shade_colortable_2.cellChanged.connect(lambda row,column: operations_callbacks.display_product_name(row,column,self,0,"C",self.uiWindow.shade_colortable_2))
         self.uiWindow.shade_addtable_4.cellChanged.connect(lambda row,column: operations_callbacks.display_product_name(row,column,self,0,"R",self.uiWindow.shade_addtable_4))
@@ -383,6 +408,40 @@ class MainWindow(QMainWindow):
             lambda: operations_callbacks.check_shade(self))
         self.uiWindow.shade_view_stock_code.returnPressed.connect(lambda: operations_callbacks.set_sales_product_name(self))
         self.uiWindow.shade_view_stock_confirm.clicked.connect(lambda: operations_callbacks.shade_stock_view(self))
+        self.uiWindow.rm_end_stock.clicked.connect(lambda : operations_callbacks.raw_material_display_closing(self))
+        self.uiWindow.colour_end_stock.clicked.connect(lambda: operations_callbacks.colour_display_closing(self))
+        self.uiWindow.shade_closing_stock_table.cellChanged.connect(
+            lambda row, column: operations_callbacks.
+            display_product_name(row, column, self, 1,"R",self.uiWindow.shade_closing_stock_table,sales=True))
+        self.uiWindow.shade_closing_stock_table.cellChanged.connect(
+            lambda row, column: operations_callbacks.find_shade(row, column, self, 0, self.uiWindow.shade_closing_stock_table))
+        self.uiWindow.shade_end_stock_view_confirm.clicked.connect(lambda: operations_callbacks.shade_display_closing(self))
+        self.uiWindow.new_rm_entry_clear.clicked.connect(lambda: clear.new_rm_entry_clear_button(self))
+        self.uiWindow.new_rm_add_clear.clicked.connect(lambda: clear.new_rm_add_clear_button(self))
+        self.uiWindow.new_rm_modify_clear.clicked.connect(lambda: clear.new_rm_modify_clear_button(self))
+        self.uiWindow.new_shade_delete_clear.clicked.connect(lambda: clear.new_shade_delete_clear_button(self))
+        self.uiWindow.new_shade_entry_clear.clicked.connect(lambda: clear.new_shade_entry_clear_button(self))
+        self.uiWindow.new_shade_modify_clear.clicked.connect(lambda: clear.new_shade_modify_clear_button(self))
+        self.uiWindow.new_shade_view_clear.clicked.connect(lambda: clear.new_shade_view_clear_button(self))
+        self.uiWindow.rm_add_clear.clicked.connect(lambda: clear.rm_add_clear_button(self))
+        self.uiWindow.rm_delete_clear.clicked.connect(lambda: clear.rm_delete_clear_button(self))
+        self.uiWindow.rm_modify_clear.clicked.connect(lambda: clear.rm_modify_clear_button(self))
+        self.uiWindow.rm_stock_view_clear.clicked.connect(lambda: clear.rm_stock_view_clear_button(self))
+        self.uiWindow.rm_view_by_id_clear.clicked.connect(lambda: clear.rm_view_by_id_clear_button(self))
+        self.uiWindow.sales_add_clear.clicked.connect(lambda: clear.sales_add_clear_button(self))
+        self.uiWindow.sales_delete_clear.clicked.connect(lambda: clear.sales_delete_clear_button(self))
+        self.uiWindow.sales_modify_clear.clicked.connect(lambda: clear.sales_modify_clear_button(self))
+        self.uiWindow.sales_view_by_id_clear.clicked.connect(lambda: clear.sales_view_by_id_clear_button(self))
+        self.uiWindow.shade_add_clear.clicked.connect(lambda: clear.shade_add_clear_button(self))
+        self.uiWindow.shade_delete_clear.clicked.connect(lambda: clear.shade_delete_clear_button(self))
+        self.uiWindow.shade_modify_clear.clicked.connect(lambda: clear.shade_modify_clear_button(self))
+        self.uiWindow.shade_stock_view_clear.clicked.connect(lambda: clear.shade_stock_view_clear_button(self))
+        self.uiWindow.rm_stock_view_clear_2.clicked.connect(lambda: clear.rm_stock_view_clear_2_clear_button(self))
+        self.uiWindow.shade_view_by_id_clear.clicked.connect(lambda: clear.shade_view_by_id_clear_button(self))
+        self.uiWindow.sales_view_custom_back.clicked.connect(lambda: clear.sales_view_custom_back_button(self))
+        self.uiWindow.back_view_rm_4.clicked.connect(lambda: clear.back_view_rm_4_back_button(self))
+        self.uiWindow.back_view_rm_9.clicked.connect(lambda: clear.back_view_rm_9_back_button(self))
+        self.uiWindow.shade_end_stock_view_clear.clicked.connect(lambda: clear.clear_shade_closing_stock(self))
 
 
 if __name__ == "__main__":

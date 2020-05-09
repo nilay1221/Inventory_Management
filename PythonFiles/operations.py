@@ -839,12 +839,17 @@ def raw_material_closing_stock(code):
         mycursor.execute(sql)
         total_in = mycursor.fetchone()
         if not total_in[0]:
-            total_in = 0
+            total_in = "None"
         else:
             total_in = total_in[0]
         sql = f"""Select sum(quantity) from has_rm where product_code='{code}' and type = 'OUT'"""
         mycursor.execute(sql)
         total_out = mycursor.fetchone()
+        if total_in=="None":
+            if not total_out[0]:
+                return 'None'
+            else:
+                total_in=0
         if not total_out[0]:
             total_out = 0
         else:
@@ -898,12 +903,17 @@ def shade_raw_closing_stock(shade,code):
         mycursor.execute(sql)
         total_in = mycursor.fetchone()
         if not total_in[0]:
-            total_in = 0
+            total_in = "None"
         else:
             total_in = total_in[0]
         sql = f"""Select sum(quantity) from consists_of where product_code='{code}' and shade_number={shade} and type = 'OUT'"""
         mycursor.execute(sql)
         total_out = mycursor.fetchone()
+        if total_in == "None":
+            if not total_out[0]:
+                return 'None'
+            else:
+                total_in = 0
         if not total_out[0]:
             total_out = 0
         else:
@@ -914,4 +924,21 @@ def shade_raw_closing_stock(shade,code):
         print(e)
     finally:
         mydb.close()
+
+def get_all_rm_data(type):
+    mydb = sqlite3.connect(DATABASE_NAME)
+    mycursor = mydb.cursor()
+    try:
+        sql = f"SELECT product_code,product_name from Raw_Material where product_type='{type}' order by product_code;"
+        try:
+            mycursor.execute(sql)
+            results = mycursor.fetchall()
+            return results
+        except Exception as e:
+            print(e)
+    except:
+        pass
+    finally:
+        mydb.close()
+
 
