@@ -855,7 +855,7 @@ def raw_material_closing_stock(code):
         else:
             total_out = total_out[0]
         total= total_in-total_out
-        return total
+        return round(total,2)
     except Exception as e:
         # print("inside")
         print(e)
@@ -919,7 +919,7 @@ def shade_raw_closing_stock(shade,code):
         else:
             total_out = total_out[0]
         total = total_in - total_out
-        return total
+        return round(total,2)
     except Exception as e:
         print(e)
     finally:
