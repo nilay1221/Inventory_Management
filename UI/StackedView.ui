@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>41</number>
+     <number>14</number>
     </property>
     <widget class="QWidget" name="Home">
      <widget class="QPushButton" name="RM_3">
@@ -4163,7 +4163,7 @@
        </rect>
       </property>
       <property name="editTriggers">
-       <set>QAbstractItemView::NoEditTriggers</set>
+       <set>QAbstractItemView::DoubleClicked</set>
       </property>
       <property name="rowCount">
        <number>8</number>
@@ -5402,7 +5402,7 @@
        </rect>
       </property>
       <property name="editTriggers">
-       <set>QAbstractItemView::NoEditTriggers</set>
+       <set>QAbstractItemView::DoubleClicked</set>
       </property>
       <property name="rowCount">
        <number>8</number>

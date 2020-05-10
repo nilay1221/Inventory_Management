@@ -1458,7 +1458,7 @@ class Ui_MainWindow(object):
         self.pushButton_10.setObjectName("pushButton_10")
         self.shade_colortable = QtWidgets.QTableWidget(self.shade_add)
         self.shade_colortable.setGeometry(QtCore.QRect(610, 330, 801, 321))
-        self.shade_colortable.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
+        self.shade_colortable.setEditTriggers(QtWidgets.QAbstractItemView.DoubleClicked)
         self.shade_colortable.setRowCount(8)
         self.shade_colortable.setColumnCount(6)
         self.shade_colortable.setObjectName("shade_colortable")
@@ -1931,7 +1931,7 @@ class Ui_MainWindow(object):
         self.label_59.setObjectName("label_59")
         self.shade_colortable_3 = QtWidgets.QTableWidget(self.shade_modify)
         self.shade_colortable_3.setGeometry(QtCore.QRect(620, 310, 791, 311))
-        self.shade_colortable_3.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
+        self.shade_colortable_3.setEditTriggers(QtWidgets.QAbstractItemView.DoubleClicked)
         self.shade_colortable_3.setRowCount(8)
         self.shade_colortable_3.setColumnCount(6)
         self.shade_colortable_3.setObjectName("shade_colortable_3")
@@ -4548,7 +4548,7 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(41)
+        self.stackedWidget.setCurrentIndex(14)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):

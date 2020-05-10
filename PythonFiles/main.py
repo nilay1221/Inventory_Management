@@ -367,6 +367,9 @@ class MainWindow(QMainWindow):
         self.uiWindow.rm_delete_table.cellChanged.connect(lambda row,column: operations_callbacks.display_product_name(row,column,self,0,"RC",self.uiWindow.rm_delete_table))
         self.uiWindow.shade_addtable_2.cellChanged.connect(lambda row,column:operations_callbacks.display_product_name(row,column,self,0,"R",self.uiWindow.shade_addtable_2))
         self.uiWindow.shade_colortable_2.cellChanged.connect(lambda row,column: operations_callbacks.display_product_name(row,column,self,0,"C",self.uiWindow.shade_colortable_2))
+        self.uiWindow.shade_colortable_3.cellChanged.connect(
+            lambda row, column: operations_callbacks.display_product_name(row, column, self, 0, "C",
+                                                                          self.uiWindow.shade_colortable_3))
         self.uiWindow.shade_addtable_4.cellChanged.connect(lambda row,column: operations_callbacks.display_product_name(row,column,self,0,"R",self.uiWindow.shade_addtable_4))
         self.uiWindow.shade_colortable_4.cellChanged.connect(lambda row,column: operations_callbacks.display_product_name(row,column,self,0,"C",self.uiWindow.shade_colortable_4))
         self.uiWindow.sales_add.clicked.connect(lambda: operations_callbacks.set_sales_data(self))

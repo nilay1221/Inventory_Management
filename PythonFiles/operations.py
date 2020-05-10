@@ -351,7 +351,7 @@ def add_raw_material_data(trans_id,date,customer,remark,productDetails,type="IN"
         mycursor.execute(sql)
         mydb.commit()
         for each in productDetails:
-            sql = f"INSERT into has_rm VALUES('{type}',{each[1]},'{trans_id}','{each[0]}','{each[2]}')"
+            sql = f"INSERT into has_rm VALUES('{type}',{each[1]},'{trans_id}','{each[0]}','{each[2]}','{each[3]}')"
             # print(sql)
             try:
                 mycursor.execute(sql)
@@ -378,7 +378,7 @@ def get_rm_transacs(by_Id=False,by_Today=False,by_custom=False):
             mycursor.execute(sql)
             results = mycursor.fetchone()
             if results:
-                sql = f"SELECT has_rm.product_code,'-',has_rm.quantity from has_rm WHERE has_rm.trans_id = '{trans_id}';"
+                sql = f"SELECT has_rm.product_code,'-',has_rm.quantity,has_rm.lot_no from has_rm WHERE has_rm.trans_id = '{trans_id}';"
                 # print(sql)
                 mycursor.execute(sql)
                 products = mycursor.fetchall()
@@ -390,7 +390,7 @@ def get_rm_transacs(by_Id=False,by_Today=False,by_custom=False):
         if by_Today:
             by_Today = datetime.date.today().strftime("%d-%m-%Y")
             sql =f"""
-                SELECT rm_stock.trans_id,rm_stock.customer_id,rm_stock.remark,has_rm.product_code,'-',has_rm.quantity
+                SELECT rm_stock.trans_id,rm_stock.customer_id,rm_stock.remark,has_rm.product_code,'-',has_rm.quantity,has_rm.lot_no
                 FROM rm_stock
                 JOIN has_rm ON
                 rm_stock.trans_id = has_rm.trans_id
@@ -411,11 +411,11 @@ def get_rm_transacs(by_Id=False,by_Today=False,by_custom=False):
             results=[]
             for each_date in all_dates:
                 sql =f"""
-                    SELECT rm_stock.trans_id,rm_stock.date,rm_stock.customer_id,rm_stock.remark,has_rm.product_code,'-',has_rm.quantity
+                    SELECT rm_stock.trans_id,rm_stock.date,rm_stock.customer_id,rm_stock.remark,has_rm.product_code,'-',has_rm.quantity,has_rm.lot_no
                     FROM rm_stock
                     JOIN has_rm ON
                     rm_stock.trans_id = has_rm.trans_id
-                    WHERE rm_stock.date = '{each_date}';
+                    WHERE rm_stock.date = '{each_date}' order by date,rm_stock.trans_id;
                 """
                 try:
                     # print(sql)
@@ -511,7 +511,7 @@ def add_shade_stock_trans(trans_id,date,customer,remark,shade_number,productDeta
         mydb.commit()
         try:
             for each in productDetails:
-                sql = f"INSERT INTO has_shade VALUES('{type}',{each[1]},'{trans_id}','{shade_number}','{each[0]}'); "
+                sql = f"INSERT INTO has_shade VALUES('{type}',{each[1]},'{trans_id}','{shade_number}','{each[0]}','{each[2]}'); "
                 mycursor.execute(sql)
                 mydb.commit()
         except:
@@ -564,14 +564,14 @@ def view_shade_transaction(by_Id=False,by_today=False,by_custom=False):
             trans_details = mycursor.fetchone()
             shade_number = trans_details[3]
             sql = f"""
-                    SELECT has_shade.product_code , '-' ,has_shade.quantity 
+                    SELECT has_shade.product_code , '-' ,has_shade.quantity,has_shade.lot_no 
                     FROM has_shade
                     WHERE has_shade.trans_id = '{shade_trans_id}';
             """
             mycursor.execute(sql)
             table1_details = mycursor.fetchall()
             sql = f"""
-                SELECT has_rm.product_code,'-',madeup_of.product_percentage,has_rm.quantity*1000,has_rm.quantity * raw_material.product_price * 1000 FROM
+                SELECT has_rm.product_code,'-',madeup_of.product_percentage,has_rm.quantity*1000,has_rm.quantity * raw_material.product_price * 1000,has_rm.lot_no  FROM
                 has_rm
                 JOIN madeup_of ON
                 has_rm.product_code = madeup_of.product_code
@@ -593,7 +593,7 @@ def view_shade_transaction(by_Id=False,by_today=False,by_custom=False):
         if by_today:
             today_date = datetime.date.today().strftime('%d-%m-%Y')
             sql = f"""
-                 SELECT shade_stock.trans_id , shade_stock.customer_id , shade_stock.remark , shade_stock.shade_number , has_shade.product_code ,'-',has_shade.quantity FROM shade_stock
+                 SELECT shade_stock.trans_id , shade_stock.customer_id , shade_stock.remark , shade_stock.shade_number , has_shade.product_code ,'-',has_shade.quantity,has_shade.lot_no  FROM shade_stock
                  JOIN has_shade
                  ON shade_stock.trans_id = has_shade.trans_id
                  WHERE shade_stock.date = '{today_date}';
@@ -612,10 +612,10 @@ def view_shade_transaction(by_Id=False,by_today=False,by_custom=False):
             results=[]
             for each_date in all_dates:
                 sql = f"""
-                 SELECT shade_stock.trans_id , shade_stock.date, shade_stock.customer_id , shade_stock.remark , shade_stock.shade_number , has_shade.product_code ,'-',has_shade.quantity FROM shade_stock
+                 SELECT shade_stock.trans_id , shade_stock.date, shade_stock.customer_id , shade_stock.remark , shade_stock.shade_number , has_shade.product_code ,'-',has_shade.quantity,has_shade.lot_no  FROM shade_stock
                  JOIN has_shade
                  ON shade_stock.trans_id = has_shade.trans_id
-                 WHERE shade_stock.date = '{each_date}';
+                 WHERE shade_stock.date = '{each_date}' order by date,shade_stock.trans_id;
                 """
                 try:
                     # print(sql)
@@ -679,7 +679,7 @@ def add_sales_data(trans_id,date,customer,remark,productDetails,type="OUT"):
         mycursor.execute(sql)
         mydb.commit()
         for each in productDetails:
-            sql = f"INSERT into consists_of VALUES('{type}',{each[2]},'{trans_id}','{each[0]}','{each[1]}')"
+            sql = f"INSERT into consists_of VALUES('{type}',{each[2]},'{trans_id}','{each[0]}','{each[1]}','{each[3]}')"
             try:
                 mycursor.execute(sql)
             except:
@@ -702,7 +702,7 @@ def get_sales_transacs(by_Id=False,by_Today=False,by_custom=False):
             mycursor.execute(sql)
             results = mycursor.fetchone()
             if results:
-                sql = f"""SELECT consists_of.shade_number,consists_of.product_code,'-',consists_of.quantity 
+                sql = f"""SELECT consists_of.shade_number,consists_of.product_code,'-',consists_of.quantity,consists_of.lot_no
                 from consists_of WHERE consists_of.trans_id = '{trans_id}';"""
                 # print(sql)
                 mycursor.execute(sql)
@@ -716,7 +716,7 @@ def get_sales_transacs(by_Id=False,by_Today=False,by_custom=False):
             by_Today = datetime.date.today().strftime("%d-%m-%Y")
             sql =f"""
                 SELECT sales.trans_id,sales.customer_id,sales.remark,
-                consists_of.shade_number,consists_of.product_code,'-',consists_of.quantity
+                consists_of.shade_number,consists_of.product_code,'-',consists_of.quantity,consists_of.lot_no
                 FROM sales
                 JOIN consists_of ON
                 sales.trans_id = consists_of.trans_id
@@ -725,6 +725,7 @@ def get_sales_transacs(by_Id=False,by_Today=False,by_custom=False):
             # print(sql)
             mycursor.execute(sql)
             results = mycursor.fetchall()
+            # print(results)
             return results
         if by_custom:
             start_date = datetime.datetime.strptime(by_custom[0],'%d/%m/%Y').date()
@@ -738,11 +739,11 @@ def get_sales_transacs(by_Id=False,by_Today=False,by_custom=False):
             for each_date in all_dates:
                 sql =f"""
                     SELECT sales.trans_id,sales.date,sales.customer_id,sales.remark,
-                    consists_of.shade_number,consists_of.product_code,'-',consists_of.quantity
+                    consists_of.shade_number,consists_of.product_code,'-',consists_of.quantity,consists_of.lot_no
                     FROM sales
                     JOIN consists_of ON
                     sales.trans_id = consists_of.trans_id
-                    WHERE sales.date = '{each_date}';
+                    WHERE sales.date = '{each_date}' order by date,sales.trans_id;
                 """
                 try:
                     # print(sql)
@@ -754,8 +755,8 @@ def get_sales_transacs(by_Id=False,by_Today=False,by_custom=False):
                 except:
                     pass
             return results
-    except:
-        pass
+    except Exception as e:
+        print(e)
     finally:
         mydb.close()
 
