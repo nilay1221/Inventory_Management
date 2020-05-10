@@ -636,7 +636,6 @@ def modify_rm(self):
     # print("Inside")
     trans_id = "RMT" + str(self.uiWindow.rw_modify_transaction_id.text()).zfill(5)
     if check_rm_transacs(trans_id):
-        delete_rm_transacs(trans_id)
         # print("Deleted")
         trans_id_widget = self.uiWindow.rw_modify_transaction_id
         date_widget = self.uiWindow.rm_modify_date
@@ -665,6 +664,7 @@ def modify_rm(self):
                             # print("inside exception")
                             # print(products)
                             if products:
+                                delete_rm_transacs(trans_id)
                                 if add_raw_material_data(trans_id,date,customer,remark,products):
                                     # set_raw_material_data(self)
                                     self.uiWindow.rw_modify_transaction_id.clear()
@@ -673,6 +673,7 @@ def modify_rm(self):
                                     remark_widget.clear()
                                     self.uiWindow.rm_view_table.clearContents()
                                     self.show_info_popup("Transaction Modified Successfully")
+                                    break
                             else:
                                 self.show_warning_info("Please fill info")
                                 break
@@ -1002,7 +1003,6 @@ def confirm_modify_shade_trans(self):
     if check_shade_trans(trans_id):
             negative_trans_id = get_raw_trans(trans_id)
             # print(negative_trans_id)
-            delete_shade_trans(trans_id)
             trans_widget = self.uiWindow.shade_modify_transaction_id
             date_widget = self.uiWindow.shade_modify_date
             customer_widget = self.uiWindow.shade_modify_customer
@@ -1051,6 +1051,7 @@ def confirm_modify_shade_trans(self):
 
                                     # negative_trans_id = "SRT" + str(get_trans_id('rm_stock','SRT'))
                                     # print(results)
+                                    delete_shade_trans(trans_id)
                                     if add_raw_material_data(negative_trans_id,date,customer,remark,results,type="OUT"):
                                         add_shade_stock_trans(trans_id,date,customer,remark,shade_number,raw_details)
                                         add_into_duplicates(trans_id,negative_trans_id)
