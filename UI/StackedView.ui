@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>41</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="Home">
      <widget class="QPushButton" name="RM_3">
@@ -881,7 +881,7 @@
         <string/>
        </property>
        <property name="flags">
-        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
+        <set>ItemIsSelectable|ItemIsDragEnabled</set>
        </property>
       </item>
       <item row="1" column="1">
