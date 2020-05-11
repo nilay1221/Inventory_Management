@@ -1017,4 +1017,54 @@ def get_all_rm_data(type):
     finally:
         mydb.close()
 
+def add_rm_opening(product_code, lot, opening):
+    mydb = sqlite3.connect(DATABASE_NAME)
+    mycursor = mydb.cursor()
+    try:
+        sql = f"""
+            INSERT into rm_opening_stock VALUES('{product_code}','{lot}',{opening});
+        """
+        try:
+            mycursor.execute(sql)
+        # Checking if product code already exists or not in Database
+        except sqlite3.IntegrityError as e:
+            print(e)
+            return False
+        mydb.commit()
+        return True
+    except:
+        pass
+    finally:
+        mydb.close()
+
+def view_rm_opening(code,lot):
+    mydb = sqlite3.connect(DATABASE_NAME)
+    mycursor = mydb.cursor()
+    try:
+        sql = f"""
+                select opening from rm_opening_stock where product_code='{code}' and lot_no='{lot}';
+            """
+        mycursor.execute(sql)
+        result=mycursor.fetchone()
+        return result[0]
+    except Exception as e:
+        print(e)
+    finally:
+        mydb.close()
+
+def del_rm_opening(code, lot):
+    mydb = sqlite3.connect(DATABASE_NAME)
+    mycursor = mydb.cursor()
+    try:
+        sql = f"""
+                    delete from rm_opening_stock where product_code='{code}' and lot_no='{lot}';
+                """
+        mycursor.execute(sql)
+        mydb.commit()
+        return True
+    except Exception as e:
+        print(e)
+        return False
+    finally:
+        mydb.close()
 

@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>46</number>
+     <number>48</number>
     </property>
     <widget class="QWidget" name="Home">
      <widget class="QPushButton" name="RM_3">
@@ -13135,7 +13135,7 @@
       <property name="geometry">
        <rect>
         <x>790</x>
-        <y>410</y>
+        <y>460</y>
         <width>421</width>
         <height>41</height>
        </rect>
@@ -13168,7 +13168,7 @@
       <property name="geometry">
        <rect>
         <x>540</x>
-        <y>410</y>
+        <y>460</y>
         <width>201</width>
         <height>51</height>
        </rect>
@@ -13233,7 +13233,7 @@
        </font>
       </property>
       <property name="text">
-       <string>Confirm</string>
+       <string>ADD</string>
       </property>
      </widget>
      <widget class="QPushButton" name="pushButton_30">
@@ -13269,7 +13269,7 @@
        </font>
       </property>
       <property name="text">
-       <string>Enter Product Name : </string>
+       <string>Product Name : </string>
       </property>
      </widget>
      <widget class="QPushButton" name="back_add_rm_15">
@@ -13294,7 +13294,7 @@
       <property name="geometry">
        <rect>
         <x>790</x>
-        <y>470</y>
+        <y>400</y>
         <width>421</width>
         <height>41</height>
        </rect>
@@ -13309,7 +13309,7 @@
       <property name="geometry">
        <rect>
         <x>540</x>
-        <y>470</y>
+        <y>400</y>
         <width>201</width>
         <height>51</height>
        </rect>
@@ -13359,7 +13359,7 @@
       <property name="geometry">
        <rect>
         <x>810</x>
-        <y>430</y>
+        <y>480</y>
         <width>421</width>
         <height>41</height>
        </rect>
@@ -13392,7 +13392,7 @@
       <property name="geometry">
        <rect>
         <x>560</x>
-        <y>430</y>
+        <y>480</y>
         <width>201</width>
         <height>51</height>
        </rect>
@@ -13403,7 +13403,7 @@
        </font>
       </property>
       <property name="text">
-       <string>Enter Opening Stock : </string>
+       <string>Opening Stock : </string>
       </property>
      </widget>
      <widget class="QLabel" name="label_148">
@@ -13457,7 +13457,7 @@
        </font>
       </property>
       <property name="text">
-       <string>Confirm</string>
+       <string>Modify</string>
       </property>
      </widget>
      <widget class="QPushButton" name="pushButton_31">
@@ -13493,7 +13493,7 @@
        </font>
       </property>
       <property name="text">
-       <string>Enter Product Name : </string>
+       <string>Product Name : </string>
       </property>
      </widget>
      <widget class="QPushButton" name="back_add_rm_16">
@@ -13518,7 +13518,7 @@
       <property name="geometry">
        <rect>
         <x>810</x>
-        <y>490</y>
+        <y>420</y>
         <width>421</width>
         <height>41</height>
        </rect>
@@ -13533,7 +13533,7 @@
       <property name="geometry">
        <rect>
         <x>560</x>
-        <y>490</y>
+        <y>420</y>
         <width>201</width>
         <height>51</height>
        </rect>
@@ -13564,7 +13564,7 @@
        </font>
       </property>
       <property name="text">
-       <string>Enter Product Name : </string>
+       <string>Product Name : </string>
       </property>
      </widget>
      <widget class="QLabel" name="label_152">
@@ -13640,7 +13640,7 @@
       <property name="geometry">
        <rect>
         <x>810</x>
-        <y>440</y>
+        <y>490</y>
         <width>421</width>
         <height>41</height>
        </rect>
@@ -13688,7 +13688,7 @@
       <property name="geometry">
        <rect>
         <x>560</x>
-        <y>440</y>
+        <y>490</y>
         <width>201</width>
         <height>51</height>
        </rect>
@@ -13699,7 +13699,7 @@
        </font>
       </property>
       <property name="text">
-       <string>Enter Opening Stock : </string>
+       <string>Opening Stock : </string>
       </property>
      </widget>
      <widget class="QLabel" name="label_154">
@@ -13735,14 +13735,14 @@
        </font>
       </property>
       <property name="text">
-       <string>Confirm</string>
+       <string>Delete</string>
       </property>
      </widget>
      <widget class="QLineEdit" name="rm_opening_delete_lot">
       <property name="geometry">
        <rect>
         <x>810</x>
-        <y>500</y>
+        <y>430</y>
         <width>421</width>
         <height>41</height>
        </rect>
@@ -13757,7 +13757,7 @@
       <property name="geometry">
        <rect>
         <x>560</x>
-        <y>500</y>
+        <y>430</y>
         <width>201</width>
         <height>51</height>
        </rect>
@@ -13777,7 +13777,7 @@
       <property name="geometry">
        <rect>
         <x>520</x>
-        <y>370</y>
+        <y>360</y>
         <width>201</width>
         <height>51</height>
        </rect>
@@ -13788,7 +13788,7 @@
        </font>
       </property>
       <property name="text">
-       <string>Enter Product Name : </string>
+       <string>Product Name : </string>
       </property>
      </widget>
      <widget class="QLabel" name="label_156">
@@ -13864,7 +13864,7 @@
       <property name="geometry">
        <rect>
         <x>770</x>
-        <y>440</y>
+        <y>490</y>
         <width>421</width>
         <height>41</height>
        </rect>
@@ -13912,7 +13912,7 @@
       <property name="geometry">
        <rect>
         <x>520</x>
-        <y>440</y>
+        <y>480</y>
         <width>201</width>
         <height>51</height>
        </rect>
@@ -13923,7 +13923,7 @@
        </font>
       </property>
       <property name="text">
-       <string>Enter Opening Stock : </string>
+       <string>Opening Stock : </string>
       </property>
      </widget>
      <widget class="QLabel" name="label_158">
@@ -13959,14 +13959,14 @@
        </font>
       </property>
       <property name="text">
-       <string>Confirm</string>
+       <string>View</string>
       </property>
      </widget>
      <widget class="QLineEdit" name="rm_opening_view_lot">
       <property name="geometry">
        <rect>
         <x>770</x>
-        <y>500</y>
+        <y>430</y>
         <width>421</width>
         <height>41</height>
        </rect>
@@ -13981,7 +13981,7 @@
       <property name="geometry">
        <rect>
         <x>520</x>
-        <y>500</y>
+        <y>420</y>
         <width>201</width>
         <height>51</height>
        </rect>
@@ -14176,14 +14176,14 @@
        </font>
       </property>
       <property name="text">
-       <string>Enter Product Name : </string>
+       <string>Product Name : </string>
       </property>
      </widget>
      <widget class="QLineEdit" name="shade_opening_add_stock">
       <property name="geometry">
        <rect>
         <x>790</x>
-        <y>440</y>
+        <y>490</y>
         <width>421</width>
         <height>41</height>
        </rect>
@@ -14198,7 +14198,7 @@
       <property name="geometry">
        <rect>
         <x>540</x>
-        <y>440</y>
+        <y>490</y>
         <width>201</width>
         <height>51</height>
        </rect>
@@ -14209,7 +14209,7 @@
        </font>
       </property>
       <property name="text">
-       <string>Enter opening stock : </string>
+       <string>Opening stock : </string>
       </property>
      </widget>
      <widget class="QPushButton" name="shade_opening_add_confirm">
@@ -14227,7 +14227,7 @@
        </font>
       </property>
       <property name="text">
-       <string>Confirm</string>
+       <string>ADD</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_162">
@@ -14336,7 +14336,7 @@
       <property name="geometry">
        <rect>
         <x>790</x>
-        <y>500</y>
+        <y>430</y>
         <width>421</width>
         <height>41</height>
        </rect>
@@ -14351,7 +14351,7 @@
       <property name="geometry">
        <rect>
         <x>540</x>
-        <y>500</y>
+        <y>430</y>
         <width>201</width>
         <height>51</height>
        </rect>
@@ -14389,7 +14389,7 @@
       <property name="geometry">
        <rect>
         <x>680</x>
-        <y>460</y>
+        <y>510</y>
         <width>421</width>
         <height>41</height>
        </rect>
@@ -14433,7 +14433,7 @@
        </font>
       </property>
       <property name="text">
-       <string>Enter Product Name : </string>
+       <string>Product Name : </string>
       </property>
      </widget>
      <widget class="QPushButton" name="pushButton_35">
@@ -14458,7 +14458,7 @@
       <property name="geometry">
        <rect>
         <x>430</x>
-        <y>460</y>
+        <y>510</y>
         <width>201</width>
         <height>51</height>
        </rect>
@@ -14469,7 +14469,7 @@
        </font>
       </property>
       <property name="text">
-       <string>Enter opening stock : </string>
+       <string>Opening stock : </string>
       </property>
      </widget>
      <widget class="QLabel" name="label_168">
@@ -14586,14 +14586,14 @@
        </font>
       </property>
       <property name="text">
-       <string>Confirm</string>
+       <string>Modify</string>
       </property>
      </widget>
      <widget class="QLineEdit" name="shade_opening_modify_lot">
       <property name="geometry">
        <rect>
         <x>680</x>
-        <y>520</y>
+        <y>450</y>
         <width>421</width>
         <height>41</height>
        </rect>
@@ -14608,7 +14608,7 @@
       <property name="geometry">
        <rect>
         <x>430</x>
-        <y>520</y>
+        <y>450</y>
         <width>201</width>
         <height>51</height>
        </rect>
@@ -14628,7 +14628,7 @@
       <property name="geometry">
        <rect>
         <x>750</x>
-        <y>470</y>
+        <y>530</y>
         <width>421</width>
         <height>41</height>
        </rect>
@@ -14709,7 +14709,7 @@
       <property name="geometry">
        <rect>
         <x>500</x>
-        <y>470</y>
+        <y>530</y>
         <width>201</width>
         <height>51</height>
        </rect>
@@ -14720,7 +14720,7 @@
        </font>
       </property>
       <property name="text">
-       <string>Enter opening stock : </string>
+       <string>Opening stock : </string>
       </property>
      </widget>
      <widget class="QLabel" name="label_172">
@@ -14738,7 +14738,7 @@
        </font>
       </property>
       <property name="text">
-       <string>Enter Product Name : </string>
+       <string>Product Name : </string>
       </property>
      </widget>
      <widget class="QLabel" name="label_173">
@@ -14825,7 +14825,7 @@
        </font>
       </property>
       <property name="text">
-       <string>Confirm</string>
+       <string>Delete</string>
       </property>
      </widget>
      <widget class="QPushButton" name="pushButton_36">
@@ -14850,7 +14850,7 @@
       <property name="geometry">
        <rect>
         <x>750</x>
-        <y>530</y>
+        <y>460</y>
         <width>421</width>
         <height>41</height>
        </rect>
@@ -14865,7 +14865,7 @@
       <property name="geometry">
        <rect>
         <x>500</x>
-        <y>530</y>
+        <y>460</y>
         <width>201</width>
         <height>51</height>
        </rect>
@@ -14884,8 +14884,8 @@
      <widget class="QLabel" name="label_175">
       <property name="geometry">
        <rect>
-        <x>470</x>
-        <y>470</y>
+        <x>460</x>
+        <y>530</y>
         <width>201</width>
         <height>51</height>
        </rect>
@@ -14896,7 +14896,7 @@
        </font>
       </property>
       <property name="text">
-       <string>Enter opening stock : </string>
+       <string>Opening stock : </string>
       </property>
      </widget>
      <widget class="QLabel" name="label_176">
@@ -14983,14 +14983,14 @@
        </font>
       </property>
       <property name="text">
-       <string>Enter Product Name : </string>
+       <string>Product Name : </string>
       </property>
      </widget>
      <widget class="QLineEdit" name="shade_opening_view_stock">
       <property name="geometry">
        <rect>
-        <x>720</x>
-        <y>470</y>
+        <x>710</x>
+        <y>530</y>
         <width>421</width>
         <height>41</height>
        </rect>
@@ -15016,7 +15016,7 @@
        </font>
       </property>
       <property name="text">
-       <string>Confirm</string>
+       <string>View</string>
       </property>
      </widget>
      <widget class="QPushButton" name="back_add_rm_22">
@@ -15107,7 +15107,7 @@
       <property name="geometry">
        <rect>
         <x>720</x>
-        <y>530</y>
+        <y>470</y>
         <width>421</width>
         <height>41</height>
        </rect>
@@ -15122,7 +15122,7 @@
       <property name="geometry">
        <rect>
         <x>470</x>
-        <y>530</y>
+        <y>470</y>
         <width>201</width>
         <height>51</height>
        </rect>

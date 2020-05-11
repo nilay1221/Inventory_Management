@@ -512,6 +512,25 @@ class MainWindow(QMainWindow):
         self.uiWindow.back_view_rm_4.clicked.connect(lambda: clear.back_view_rm_4_back_button(self))
         self.uiWindow.back_view_rm_9.clicked.connect(lambda: clear.back_view_rm_9_back_button(self))
         self.uiWindow.shade_end_stock_view_clear.clicked.connect(lambda: clear.clear_shade_closing_stock(self))
+        self.uiWindow.rm_opening_product_code.returnPressed.connect(
+            lambda: operations_callbacks.set_opening_product_name_raw(self,self.uiWindow.rm_opening_product_code,self.uiWindow.rm_opening_product_name))
+        self.uiWindow.rm_opening_add_confirm.clicked.connect(lambda: operations_callbacks.add_raw_opening(self))
+        self.uiWindow.rm_opening_view_product_code.returnPressed.connect(
+            lambda: operations_callbacks.set_opening_product_name_raw(self, self.uiWindow.rm_opening_view_product_code,
+                                                                      self.uiWindow.rm_opening_view_product_name))
+        self.uiWindow.rm_opening_view_confirm.clicked.connect(lambda: operations_callbacks.view_raw_opening(self))
+        self.uiWindow.rm_opening_modify_product_code.returnPressed.connect(
+            lambda: operations_callbacks.set_opening_product_name_raw(self, self.uiWindow.rm_opening_modify_product_code,
+                                                                      self.uiWindow.rm_opening_modify_product_name))
+        self.uiWindow.rm_opening_modify_lot.returnPressed.connect(lambda: operations_callbacks.set_modify_raw_opening(self))
+        self.uiWindow.rm_opening_modify_confirm.clicked.connect(
+            lambda: operations_callbacks.modify_raw_opening(self))
+        self.uiWindow.rm_opening_delete_product_code.returnPressed.connect(
+            lambda: operations_callbacks.set_opening_product_name_raw(self, self.uiWindow.rm_opening_delete_product_code,
+                                                                      self.uiWindow.rm_opening_delete_product_name))
+        self.uiWindow.rm_opening_delete_lot.returnPressed.connect(lambda: operations_callbacks.set_delete_raw_opening(self))
+        self.uiWindow.rm_opening_delete_confirm.clicked.connect(
+            lambda: operations_callbacks.delete_raw_opening(self))
 
 
 if __name__ == "__main__":
