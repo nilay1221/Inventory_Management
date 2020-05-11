@@ -843,7 +843,7 @@ def confirm_add_shade_number(self):
                                 message1 = ""
                                 message2 = ""
                                 for each_raw in results:
-                                    x = raw_material_closing_stock(each_raw[0])
+                                    x = raw_material_closing_stock(each_raw[0],each_raw[3])
                                     if x < 0:
                                         message2 = message2 + f"Closing stock for {each_raw[0]}  is {x} in lot {each_raw[3]}<br>"
                                     else:
@@ -1065,7 +1065,7 @@ def confirm_modify_shade_trans(self):
                                         message1 = ""
                                         message2 = ""
                                         for each_raw in results:
-                                            x= raw_material_closing_stock(each_raw[0])
+                                            x= raw_material_closing_stock(each_raw[0],each_raw[3])
                                             if x < 0:
                                                 message2 = message2 + f"Closing stock for {each_raw[0]}  is {x} in lot {each_raw[3]} in lot {each_raw[3]}<br>"
                                             else:
@@ -1252,11 +1252,11 @@ def add_sales_callback(self):
                                         message1 = ""
                                         message2 = ""
                                         for each in sales:
-                                            x = shade_raw_closing_stock(each[0], each[1])
+                                            x = shade_raw_closing_stock(each[0], each[1],each[3])
                                             if x < 0:
-                                                message2 = message2 + f"Closing stock for {each[0]} and {each[1]} is {x} in lot {each_raw[3]}<br>"
+                                                message2 = message2 + f"Closing stock for {each[0]} and {each[1]} is {x} in lot {each[3]}<br>"
                                             else:
-                                                message1 = message1 + f"Closing stock for {each[0]} and {each[1]} is {x} in lot {each_raw[3]}<br>"
+                                                message1 = message1 + f"Closing stock for {each[0]} and {each[1]} is {x} in lot {each[3]}<br>"
                                         self.show_stock_popup(message1, message2)
                                         set_sales_data(self)
                                         customer_widget.clearEditText()
@@ -1548,11 +1548,11 @@ def modify_sales(self):
                                         message1=""
                                         message2=""
                                         for each in sales:
-                                            x=shade_raw_closing_stock(each[0],each[1])
+                                            x=shade_raw_closing_stock(each[0],each[1],each[3])
                                             if x<0:
-                                                message2=message2+f"Closing stock for {each[0]} and {each[1]} is {x}<br>"
+                                                message2=message2+f"Closing stock for {each[0]} and {each[1]} is {x} in lot {each[3]}<br>"
                                             else:
-                                                message1=message1+f"Closing stock for {each[0]} and {each[1]} is {x}<br>"
+                                                message1=message1+f"Closing stock for {each[0]} and {each[1]} is {x} in lot {each[3]}<br>"
                                         self.show_stock_popup(message1,message2)
                                         set_sales_data(self)
                                         customer_widget.clearEditText()
@@ -1587,6 +1587,7 @@ def set_product_name(self):
 
 def product_stock_view(self):
     code = self.uiWindow.rw_view_stock_code_2.text()
+    lot = self.uiWindow.rw_stock_view_lot.text()
     d1 = self.uiWindow.rw_view_starting_date_4.date()
     d2 = self.uiWindow.rw_view_ending_date_3.date()
     x = d1.toString('dd/MM/yyyy')
@@ -1597,7 +1598,7 @@ def product_stock_view(self):
     delta = y_date - x_date
     if self.uiWindow.rw_view_stock_name_2.text() != "No such product Code":
         if delta.days > 0:
-            results = get_product_stock(code,by_custom=[x,y])
+            results = get_product_stock(code,lot,by_custom=[x,y])
             if results:
                 # print(results)
                 try:
@@ -1641,7 +1642,7 @@ def product_stock_view(self):
                     print(e)
             else:
                 self.show_info_popup("No transactions in given dates")
-            closing = raw_material_closing_stock(code)
+            closing = raw_material_closing_stock(code,lot)
             self.uiWindow.rw_view_closing.setText(str(closing))
         else:
             self.show_warning_info("Please select correct date")
@@ -1653,6 +1654,7 @@ def shade_stock_view(self):
         if check_for_shade(self):
             code = self.uiWindow.shade_view_stock_code.text()
             shade = self.uiWindow.shade_view_stock_shade_number.text()
+            lot = self.uiWindow.shade_view_stock_lot.text()
             d1 = self.uiWindow.shade_view_starting_date.date()
             d2 = self.uiWindow.shade_view_ending_date.date()
             x = d1.toString('dd/MM/yyyy')
@@ -1664,7 +1666,7 @@ def shade_stock_view(self):
             if shade!="":
                 if self.uiWindow.shade_view_stock_name.text() != "No such product Code":
                     if delta.days > 0:
-                        results = get_shade_stock(shade,code,by_custom=[x,y])
+                        results = get_shade_stock(shade,code,lot,by_custom=[x,y])
                         # print(results)
                         if results:
                             # print(results)
@@ -1692,7 +1694,7 @@ def shade_stock_view(self):
                                 print(e)
                         else:
                             self.show_info_popup("No transactions in given dates")
-                        closing = shade_raw_closing_stock(shade, code)
+                        closing = shade_raw_closing_stock(shade, code,lot)
                         self.uiWindow.shade_view_closing.setText(str(closing))
                     else:
                         self.show_warning_info("Please select correct date")
@@ -1762,7 +1764,7 @@ def raw_material_display_closing(self):
             for column_number, data in enumerate(row_data):
                 self.uiWindow.rm_closing_stock_table.setItem(row_number, column_number, QtWidgets.QTableWidgetItem(str(data)))
                 if column_number==0:
-                    self.uiWindow.rm_closing_stock_table.setItem(row_number, column_number+2, QtWidgets.QTableWidgetItem(str(raw_material_closing_stock(data))))
+                    self.uiWindow.rm_closing_stock_table.setItem(row_number, column_number+2, QtWidgets.QTableWidgetItem(str(raw_material_closing_stock(data,'all'))))
     except Exception as e:
         print(e)
 
@@ -1777,7 +1779,7 @@ def colour_display_closing(self):
             for column_number, data in enumerate(row_data):
                 self.uiWindow.colour_closing_stock_table.setItem(row_number, column_number, QtWidgets.QTableWidgetItem(str(data)))
                 if column_number==0:
-                    self.uiWindow.colour_closing_stock_table.setItem(row_number, column_number+2, QtWidgets.QTableWidgetItem(str(raw_material_closing_stock(data))))
+                    self.uiWindow.colour_closing_stock_table.setItem(row_number, column_number+2, QtWidgets.QTableWidgetItem(str(raw_material_closing_stock(data,'all'))))
     except Exception as e:
         print(e)
 
@@ -1833,7 +1835,7 @@ def shade_display_closing(self):
                                                                             row_number, column_number+1).text():
                                 x = shade_raw_closing_stock(
                                     self.uiWindow.shade_closing_stock_table.item(row_number, column_number).text(),
-                                    self.uiWindow.shade_closing_stock_table.item(row_number, column_number+1).text())
+                                    self.uiWindow.shade_closing_stock_table.item(row_number, column_number+1).text(),'all')
                                 # print(x)
                                 self.uiWindow.shade_closing_stock_table.setItem(row_number, column_number + 3,
                                                                                  QtWidgets.QTableWidgetItem(str(x)))

@@ -803,7 +803,7 @@ def delete_sales_transacs(trans_id):
 
 
 # Closing stock view for Raw material
-def get_product_stock(code,by_custom):
+def get_product_stock(code,lot,by_custom):
     start_date = datetime.datetime.strptime(by_custom[0], '%d/%m/%Y').date()
     end_date = datetime.datetime.strptime(by_custom[1], '%d/%m/%Y').date()
     delta = end_date - start_date
@@ -815,48 +815,85 @@ def get_product_stock(code,by_custom):
     mydb = sqlite3.connect(DATABASE_NAME)
     mycursor = mydb.cursor()
     try:
-        for each in all_dates:
-            sql = f"""select * from 
-             (select RM_Stock.trans_id,RM_Stock.date,has_rm.quantity,'-' from has_rm join RM_Stock on RM_Stock.trans_id= has_rm.trans_id 
-              where type = "IN" and product_code = '{code}' and date='{each}'
-			  UNION
-			  select RM_Stock.trans_id,RM_Stock.date,'-',has_rm.quantity from has_rm join RM_Stock on RM_Stock.trans_id= has_rm.trans_id
-              where type = "OUT" and product_code = '{code}' and date='{each}') order by date;"""
-            mycursor.execute(sql)
-            result=mycursor.fetchall()
-            if result:
-                results.append(result)
-        return results
+        if lot == "All" or lot == "all" or lot == "ALL":
+            for each in all_dates:
+                sql = f"""select * from 
+                 (select RM_Stock.trans_id,RM_Stock.date,has_rm.quantity,'-' from has_rm join RM_Stock on RM_Stock.trans_id= has_rm.trans_id 
+                  where type = "IN" and product_code = '{code}' and date='{each}'
+                  UNION
+                  select RM_Stock.trans_id,RM_Stock.date,'-',has_rm.quantity from has_rm join RM_Stock on RM_Stock.trans_id= has_rm.trans_id
+                  where type = "OUT" and product_code = '{code}' and date='{each}') order by date;"""
+                mycursor.execute(sql)
+                result=mycursor.fetchall()
+                if result:
+                    results.append(result)
+            return results
+        else:
+            for each in all_dates:
+                sql = f"""select * from 
+                 (select RM_Stock.trans_id,RM_Stock.date,has_rm.quantity,'-' from has_rm join RM_Stock on RM_Stock.trans_id= has_rm.trans_id 
+                  where type = "IN" and product_code = '{code}' and date='{each}'and lot_no='{lot}'
+                  UNION
+                  select RM_Stock.trans_id,RM_Stock.date,'-',has_rm.quantity from has_rm join RM_Stock on RM_Stock.trans_id= has_rm.trans_id
+                  where type = "OUT" and product_code = '{code}' and date='{each}'and lot_no='{lot}') order by date;"""
+                mycursor.execute(sql)
+                result=mycursor.fetchall()
+                if result:
+                    results.append(result)
+            return results
     except:
         pass
     finally:
         mydb.close()
 
-def raw_material_closing_stock(code):
+def raw_material_closing_stock(code,lot):
     mydb = sqlite3.connect(DATABASE_NAME)
     mycursor = mydb.cursor()
     try:
-        sql = f"""Select sum(quantity) from has_rm where product_code='{code}' and type = 'IN'"""
-        mycursor.execute(sql)
-        total_in = mycursor.fetchone()
-        if not total_in[0]:
-            total_in = "None"
-        else:
-            total_in = total_in[0]
-        sql = f"""Select sum(quantity) from has_rm where product_code='{code}' and type = 'OUT'"""
-        mycursor.execute(sql)
-        total_out = mycursor.fetchone()
-        if total_in=="None":
-            if not total_out[0]:
-                return 'None'
+        if lot=="All" or lot=="all" or lot=="ALL":
+            sql = f"""Select sum(quantity) from has_rm where product_code='{code}' and type = 'IN'"""
+            mycursor.execute(sql)
+            total_in = mycursor.fetchone()
+            if not total_in[0]:
+                total_in = "None"
             else:
-                total_in=0
-        if not total_out[0]:
-            total_out = 0
+                total_in = total_in[0]
+            sql = f"""Select sum(quantity) from has_rm where product_code='{code}' and type = 'OUT'"""
+            mycursor.execute(sql)
+            total_out = mycursor.fetchone()
+            if total_in == "None":
+                if not total_out[0]:
+                    return 'None'
+                else:
+                    total_in = 0
+            if not total_out[0]:
+                total_out = 0
+            else:
+                total_out = total_out[0]
+            total = total_in - total_out
+            return round(total, 2)
         else:
-            total_out = total_out[0]
-        total= total_in-total_out
-        return round(total,2)
+            sql = f"""Select sum(quantity) from has_rm where product_code='{code}' and type = 'IN' and lot_no='{lot}'"""
+            mycursor.execute(sql)
+            total_in = mycursor.fetchone()
+            if not total_in[0]:
+                total_in = "None"
+            else:
+                total_in = total_in[0]
+            sql = f"""Select sum(quantity) from has_rm where product_code='{code}' and type = 'OUT' and lot_no='{lot}'"""
+            mycursor.execute(sql)
+            total_out = mycursor.fetchone()
+            if total_in=="None":
+                if not total_out[0]:
+                    return 'None'
+                else:
+                    total_in=0
+            if not total_out[0]:
+                total_out = 0
+            else:
+                total_out = total_out[0]
+            total= total_in-total_out
+            return round(total,2)
     except Exception as e:
         # print("inside")
         print(e)
@@ -864,7 +901,7 @@ def raw_material_closing_stock(code):
         mydb.close()
 
 
-def get_shade_stock(shade,code,by_custom):
+def get_shade_stock(shade,code,lot,by_custom):
     start_date = datetime.datetime.strptime(by_custom[0], '%d/%m/%Y').date()
     end_date = datetime.datetime.strptime(by_custom[1], '%d/%m/%Y').date()
     delta = end_date - start_date
@@ -876,19 +913,34 @@ def get_shade_stock(shade,code,by_custom):
     mydb = sqlite3.connect(DATABASE_NAME)
     mycursor = mydb.cursor()
     try:
-        for each in all_dates:
-            sql=f"""select * from 
-                    (select has_shade.trans_id,date,quantity,'-' from has_shade 
-                    join shade_Stock on shade_stock.trans_id= has_shade.trans_id 
-                    where product_code = '{code}' and has_shade.shade_number = {shade} 
-                    UNION select consists_of.trans_id,date,'-',quantity from consists_of 
-                    join sales on sales.trans_id= consists_of.trans_id 
-                    where product_code = '{code}' and consists_of.shade_number = {shade}) where date='{each}'"""
-            mycursor.execute(sql)
-            result=mycursor.fetchall()
-            if result:
-                results.append(result)
-        return results
+        if lot == "All" or lot == "all" or lot == "ALL":
+            for each in all_dates:
+                sql=f"""select * from 
+                        (select has_shade.trans_id,date,quantity,'-' from has_shade 
+                        join shade_Stock on shade_stock.trans_id= has_shade.trans_id 
+                        where product_code = '{code}' and has_shade.shade_number = {shade} and lot_no = '{lot}'
+                        UNION select consists_of.trans_id,date,'-',quantity from consists_of 
+                        join sales on sales.trans_id= consists_of.trans_id 
+                        where product_code = '{code}' and consists_of.shade_number = {shade} and lot_no = '{lot}') where date='{each}'"""
+                mycursor.execute(sql)
+                result=mycursor.fetchall()
+                if result:
+                    results.append(result)
+            return results
+        else:
+            for each in all_dates:
+                sql=f"""select * from 
+                        (select has_shade.trans_id,date,quantity,'-' from has_shade 
+                        join shade_Stock on shade_stock.trans_id= has_shade.trans_id 
+                        where product_code = '{code}' and has_shade.shade_number = {shade} and lot_no = '{lot}'
+                        UNION select consists_of.trans_id,date,'-',quantity from consists_of 
+                        join sales on sales.trans_id= consists_of.trans_id 
+                        where product_code = '{code}' and consists_of.shade_number = {shade} and lot_no = '{lot}') where date='{each}'"""
+                mycursor.execute(sql)
+                result=mycursor.fetchall()
+                if result:
+                    results.append(result)
+            return results
     except Exception as e:
         print(e)
     finally:
@@ -896,31 +948,54 @@ def get_shade_stock(shade,code,by_custom):
 
 
 
-def shade_raw_closing_stock(shade,code):
+def shade_raw_closing_stock(shade,code,lot):
     mydb = sqlite3.connect(DATABASE_NAME)
     mycursor = mydb.cursor()
     try:
-        sql = f"""Select sum(quantity) from has_shade where product_code='{code}' and shade_number={shade} and type = 'IN'"""
-        mycursor.execute(sql)
-        total_in = mycursor.fetchone()
-        if not total_in[0]:
-            total_in = "None"
-        else:
-            total_in = total_in[0]
-        sql = f"""Select sum(quantity) from consists_of where product_code='{code}' and shade_number={shade} and type = 'OUT'"""
-        mycursor.execute(sql)
-        total_out = mycursor.fetchone()
-        if total_in == "None":
-            if not total_out[0]:
-                return 'None'
+        if lot == "All" or lot == "all" or lot == "ALL":
+            sql = f"""Select sum(quantity) from has_shade where product_code='{code}' and shade_number={shade} and type = 'IN'"""
+            mycursor.execute(sql)
+            total_in = mycursor.fetchone()
+            if not total_in[0]:
+                total_in = "None"
             else:
-                total_in = 0
-        if not total_out[0]:
-            total_out = 0
+                total_in = total_in[0]
+            sql = f"""Select sum(quantity) from consists_of where product_code='{code}' and shade_number={shade} and type = 'OUT'"""
+            mycursor.execute(sql)
+            total_out = mycursor.fetchone()
+            if total_in == "None":
+                if not total_out[0]:
+                    return 'None'
+                else:
+                    total_in = 0
+            if not total_out[0]:
+                total_out = 0
+            else:
+                total_out = total_out[0]
+            total = total_in - total_out
+            return round(total,2)
         else:
-            total_out = total_out[0]
-        total = total_in - total_out
-        return round(total,2)
+            sql = f"""Select sum(quantity) from has_shade where product_code='{code}' and shade_number={shade} and type = 'IN' and lot_no='{lot}'"""
+            mycursor.execute(sql)
+            total_in = mycursor.fetchone()
+            if not total_in[0]:
+                total_in = "None"
+            else:
+                total_in = total_in[0]
+            sql = f"""Select sum(quantity) from consists_of where product_code='{code}' and shade_number={shade} and type = 'OUT' and lot_no='{lot}'"""
+            mycursor.execute(sql)
+            total_out = mycursor.fetchone()
+            if total_in == "None":
+                if not total_out[0]:
+                    return 'None'
+                else:
+                    total_in = 0
+            if not total_out[0]:
+                total_out = 0
+            else:
+                total_out = total_out[0]
+            total = total_in - total_out
+            return round(total, 2)
     except Exception as e:
         print(e)
     finally:

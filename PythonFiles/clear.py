@@ -131,6 +131,7 @@ def shade_stock_view_clear_button(self):
     self.uiWindow.shade_view_stock_code.clear()
     self.uiWindow.shade_view_stock_name.clear()
     self.uiWindow.shade_view_closing.clear()
+    self.uiWindow.shade_view_stock_lot.clear()
     self.uiWindow.shade_view_table_3.clearContents()
 
 #
@@ -138,6 +139,7 @@ def rm_stock_view_clear_2_clear_button(self):
     self.uiWindow.rw_view_stock_code_2.clear()
     self.uiWindow.rw_view_stock_name_2.clear()
     self.uiWindow.rw_view_closing.clear()
+    self.uiWindow.rw_stock_view_lot.clear()
     self.uiWindow.rm_view_table_6.clearContents()
 
 #

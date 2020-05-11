@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>14</number>
+     <number>21</number>
     </property>
     <widget class="QWidget" name="Home">
      <widget class="QPushButton" name="RM_3">
@@ -7145,8 +7145,8 @@
      <widget class="QLabel" name="label_79">
       <property name="geometry">
        <rect>
-        <x>790</x>
-        <y>180</y>
+        <x>780</x>
+        <y>250</y>
         <width>181</width>
         <height>51</height>
        </rect>
@@ -7163,8 +7163,8 @@
      <widget class="QLabel" name="label_80">
       <property name="geometry">
        <rect>
-        <x>880</x>
-        <y>690</y>
+        <x>870</x>
+        <y>760</y>
         <width>181</width>
         <height>51</height>
        </rect>
@@ -7238,8 +7238,8 @@
      <widget class="QLineEdit" name="rw_view_closing">
       <property name="geometry">
        <rect>
-        <x>1040</x>
-        <y>700</y>
+        <x>1030</x>
+        <y>770</y>
         <width>151</width>
         <height>41</height>
        </rect>
@@ -7313,8 +7313,8 @@
      <widget class="QLabel" name="label_83">
       <property name="geometry">
        <rect>
-        <x>340</x>
-        <y>180</y>
+        <x>330</x>
+        <y>250</y>
         <width>181</width>
         <height>51</height>
        </rect>
@@ -7331,8 +7331,8 @@
      <widget class="QTableWidget" name="rm_view_table_6">
       <property name="geometry">
        <rect>
-        <x>360</x>
-        <y>280</y>
+        <x>350</x>
+        <y>350</y>
         <width>561</width>
         <height>381</height>
        </rect>
@@ -7513,8 +7513,8 @@
      <widget class="QDateEdit" name="rw_view_starting_date_4">
       <property name="geometry">
        <rect>
-        <x>530</x>
-        <y>190</y>
+        <x>520</x>
+        <y>260</y>
         <width>161</width>
         <height>41</height>
        </rect>
@@ -7526,8 +7526,8 @@
      <widget class="QDateEdit" name="rw_view_ending_date_3">
       <property name="geometry">
        <rect>
-        <x>980</x>
-        <y>190</y>
+        <x>970</x>
+        <y>260</y>
         <width>171</width>
         <height>41</height>
        </rect>
@@ -7539,8 +7539,8 @@
      <widget class="QPushButton" name="rm_stock_view_clear_2">
       <property name="geometry">
        <rect>
-        <x>400</x>
-        <y>720</y>
+        <x>390</x>
+        <y>790</y>
         <width>141</width>
         <height>51</height>
        </rect>
@@ -7557,8 +7557,8 @@
      <widget class="QPushButton" name="rm_view_stock_confirm">
       <property name="geometry">
        <rect>
-        <x>1000</x>
-        <y>270</y>
+        <x>990</x>
+        <y>340</y>
         <width>111</width>
         <height>51</height>
        </rect>
@@ -7570,6 +7570,42 @@
       </property>
       <property name="text">
        <string>VIEW</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="rw_stock_view_lot">
+      <property name="geometry">
+       <rect>
+        <x>730</x>
+        <y>190</y>
+        <width>151</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_139">
+      <property name="geometry">
+       <rect>
+        <x>570</x>
+        <y>180</y>
+        <width>181</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Enter lot no. : </string>
       </property>
      </widget>
     </widget>
@@ -7598,7 +7634,7 @@
      <widget class="QLabel" name="label_85">
       <property name="geometry">
        <rect>
-        <x>620</x>
+        <x>380</x>
         <y>100</y>
         <width>181</width>
         <height>51</height>
@@ -7927,7 +7963,7 @@
      <widget class="QLineEdit" name="shade_view_stock_shade_number">
       <property name="geometry">
        <rect>
-        <x>810</x>
+        <x>570</x>
         <y>110</y>
         <width>151</width>
         <height>41</height>
@@ -8038,6 +8074,42 @@
       </property>
       <property name="text">
        <string>VIEW</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="shade_view_stock_lot">
+      <property name="geometry">
+       <rect>
+        <x>1010</x>
+        <y>110</y>
+        <width>151</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_140">
+      <property name="geometry">
+       <rect>
+        <x>830</x>
+        <y>110</y>
+        <width>181</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Enter lot no. : </string>
       </property>
      </widget>
     </widget>
