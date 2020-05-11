@@ -501,6 +501,7 @@ def add_raw_material_callback(self):
                                 self.show_info_popup("Transaction Added Successfully")
                                 break
                         else:
+                            print("in")
                             self.show_warning_info("Please fill info")
                             break
         elif check_table == "False" :
@@ -787,6 +788,7 @@ def set_total_quantity(row,column,self,tableWidget1,tableWidget2,quantitywidget)
                 pass
 
 def confirm_add_shade_number(self):
+    flag=0
     trans_widget = self.uiWindow.shade_transaction_id
     date_widget = self.uiWindow.date_2
     customer_widget = self.uiWindow.shade_customer
@@ -798,7 +800,13 @@ def confirm_add_shade_number(self):
     remark = remark_widget.text()
     shade_number = shade_number_widget.text()
     if trans_id and date and customer and remark and shade_number:
-        if get_shade(shade_number):
+        try:
+            for i in range(self.uiWindow.shade_colortable.rowCount()):
+                self.uiWindow.shade_colortable.item(i, 5).text()
+        except:
+            flag = 1
+            self.show_warning_info(f"Please fill out the lot in second table at row '{i+1}'")
+        if get_shade(shade_number) and flag==0:
             table_check = check_for_no_product_code(self.uiWindow.shade_addtable,"R")
             if table_check == "True":
                 try:
@@ -866,8 +874,9 @@ def confirm_add_shade_number(self):
             elif table_check == "Product Mismatch":
                 self.show_warning_info("Please choose Raw Material only")
         else:
-            self.show_warning_info("Please enter correct shade number")
-            self.uiWindow.shade_number_add.clear()
+            if flag!=1:
+                self.show_warning_info("Please enter correct shade number")
+                self.uiWindow.shade_number_add.clear()
     else:
         self.show_warning_info("Please fill out the info")
 
@@ -1019,7 +1028,13 @@ def confirm_modify_shade_trans(self):
             remark = remark_widget.text()
             shade_number = shade_number_widget.text()
             if trans_id and date and customer and remark and shade_number:
-                if get_shade(shade_number):
+                try:
+                    for i in range(self.uiWindow.shade_colortable_3.rowCount()):
+                        self.uiWindow.shade_colortable_3.item(i,5).text()
+                except:
+                    flag=1
+                    self.show_warning_info(f"Please fill out the lot in second table at row '{i+1}'")
+                if get_shade(shade_number) and flag==0:
                     table_check = check_for_no_product_code(self.uiWindow.shade_addtable_3,"R")
                     if table_check == "True":
                         try:
@@ -1090,8 +1105,9 @@ def confirm_modify_shade_trans(self):
                     elif table_check == "Product Mismatch":
                         self.show_warning_info("Please select Raw Materials Only")
                 else:
-                    self.show_warning_info("Please enter correct shade number")
-                    self.uiWindow.shade_number_modify.clear()
+                    if flag!=1:
+                        self.show_warning_info("Please enter correct shade number")
+                        self.uiWindow.shade_number_modify.clear()
             else:
                 self.show_warning_info("Please fill out the info")
 
@@ -1164,6 +1180,7 @@ def add_sales_callback(self):
     # print("Inside")
     # TODO check if table is empty or not
     flag = 0
+    tableflag=0
     try:
         trans_id_widget = self.uiWindow.sales_add_transid
         date_widget = self.uiWindow.sales_add_date
@@ -1174,8 +1191,23 @@ def add_sales_callback(self):
         customer = customer_widget.currentText()
         remark = remark_widget.text()
         if customer and remark:
+            try:
+                for i in range(self.uiWindow.sales_add_table.rowCount()):
+                    self.uiWindow.sales_add_table.item(i,0).text()
+                    self.uiWindow.sales_add_table.item(i, 1).text()
+                    self.uiWindow.sales_add_table.item(i, 3).text()
+                    self.uiWindow.sales_add_table.item(i, 4).text()
+            except:
+                try:
+                    if i != 0:
+                        if not self.uiWindow.shade_addtable.item(i, 0).text():
+                            raise Exception
+                    tableflag=1
+                    self.show_warning_info(f"Please fill out the table at row {i+1}")
+                except:
+                    pass
             checktable = check_for_no_product_code(self.uiWindow.sales_add_table,'R')
-            if checktable=="True":
+            if checktable=="True" and tableflag==0:
                 sales = []
                 for i in range(8):
                     try:
@@ -1268,7 +1300,8 @@ def add_sales_callback(self):
                                     self.show_warning_info("Please fill info")
                                     break
             else:
-                self.show_warning_info("Please fill out from available product code")
+                if tableflag!=1:
+                    self.show_warning_info("Please fill out from available product code")
         else:
             self.show_warning_info("Please fill out the form")
     except Exception as e:
@@ -1449,6 +1482,7 @@ def set_modify_sales(self):
 def modify_sales(self):
     # print("Inside")
     flag=0
+    tableflag=0
     trans_id = "SLS" + str(self.uiWindow.sales_modify_trans_id.text()).zfill(5)
     if check_sales_transacs(trans_id):
         # print("Deleted")
@@ -1461,8 +1495,23 @@ def modify_sales(self):
         customer = customer_widget.currentText()
         remark = remark_widget.text()
         if customer and remark:
-            checktable = check_for_no_product_code(self.uiWindow.sales_add_table, 'R')
-            if checktable == "True":
+            try:
+                for i in range(self.uiWindow.sales_modify_table.rowCount()):
+                    self.uiWindow.sales_modify_table.item(i,0).text()
+                    self.uiWindow.sales_modify_table.item(i, 1).text()
+                    self.uiWindow.sales_modify_table.item(i, 3).text()
+                    self.uiWindow.sales_modify_table.item(i, 4).text()
+            except:
+                try:
+                    if i != 0:
+                        if not self.self.uiWindow.sales_modify_table.item(i, 0).text():
+                            raise Exception
+                    tableflag=1
+                    self.show_warning_info(f"Please fill out the table at row {i+1}")
+                except:
+                    pass
+            checktable = check_for_no_product_code(self.uiWindow.sales_modify_table, 'R')
+            if checktable == "True" and tableflag==0:
                 sales = []
                 for i in range(8):
                     try:
@@ -1566,7 +1615,8 @@ def modify_sales(self):
                                     self.show_warning_info("Please fill info")
                                     break
             else:
-                self.show_warning_info("Please fill out from available product code")
+                if tableflag!=1:
+                    self.show_warning_info("Please fill out from available product code")
         else:
             self.show_warning_info("Please fill out the form")
 
@@ -1586,68 +1636,71 @@ def set_product_name(self):
 
 
 def product_stock_view(self):
-    code = self.uiWindow.rw_view_stock_code_2.text()
-    lot = self.uiWindow.rw_stock_view_lot.text()
-    d1 = self.uiWindow.rw_view_starting_date_4.date()
-    d2 = self.uiWindow.rw_view_ending_date_3.date()
-    x = d1.toString('dd/MM/yyyy')
-    y = d2.toString('dd/MM/yyyy')
-    # print(type(x))
-    x_date = datetime.datetime.strptime(x,'%d/%m/%Y')
-    y_date = datetime.datetime.strptime(y,'%d/%m/%Y')
-    delta = y_date - x_date
-    if self.uiWindow.rw_view_stock_name_2.text() != "No such product Code":
-        if delta.days > 0:
-            results = get_product_stock(code,lot,by_custom=[x,y])
-            if results:
-                # print(results)
-                try:
-                    self.uiWindow.rm_view_table_6.setRowCount(0)
-                    trans_list = []
-                    for each_list in results:
-                        for row in range(len(each_list)):
-                            self.uiWindow.rm_view_table_6.insertRow(row)
-                            for column in range(len(each_list[row])):
-                                if column == 0:
-                                    if str(each_list[row][column]) not in trans_list:
-                                        trans_list.append(str(each_list[row][column]))
+    try:
+        code = self.uiWindow.rw_view_stock_code_2.text()
+        lot = self.uiWindow.rw_stock_view_lot.text()
+        d1 = self.uiWindow.rw_view_starting_date_4.date()
+        d2 = self.uiWindow.rw_view_ending_date_3.date()
+        x = d1.toString('dd/MM/yyyy')
+        y = d2.toString('dd/MM/yyyy')
+        # print(type(x))
+        x_date = datetime.datetime.strptime(x,'%d/%m/%Y')
+        y_date = datetime.datetime.strptime(y,'%d/%m/%Y')
+        delta = y_date - x_date
+        if self.uiWindow.rw_view_stock_name_2.text() != "No such product Code":
+            if delta.days > 0:
+                results = get_product_stock(code,lot,by_custom=[x,y])
+                if results:
+                    # print(results)
+                    try:
+                        self.uiWindow.rm_view_table_6.setRowCount(0)
+                        trans_list = []
+                        for each_list in results:
+                            for row in range(len(each_list)):
+                                self.uiWindow.rm_view_table_6.insertRow(row)
+                                for column in range(len(each_list[row])):
+                                    if column == 0:
+                                        if str(each_list[row][column]) not in trans_list:
+                                            trans_list.append(str(each_list[row][column]))
+                                            self.uiWindow.rm_view_table_6.setItem(row, column,
+                                                                                     QtWidgets.QTableWidgetItem(
+                                                                                         str(each_list[
+                                                                                                 row][
+                                                                                                 column])))
+                                    else:
                                         self.uiWindow.rm_view_table_6.setItem(row, column,
                                                                                  QtWidgets.QTableWidgetItem(
-                                                                                     str(each_list[
-                                                                                             row][
+                                                                                     str(each_list[row][
                                                                                              column])))
-                                else:
-                                    self.uiWindow.rm_view_table_6.setItem(row, column,
-                                                                             QtWidgets.QTableWidgetItem(
-                                                                                 str(each_list[row][
-                                                                                         column])))
-                    # self.uiWindow.rm_view_table_6.setRowCount(0)
-                    # for row_number, row_data in enumerate(results):
-                    #     self.uiWindow.rm_view_table_6.insertRow(row_number)
-                    #     for column_number, data in enumerate(row_data):
-                    #         if str(data)== "OUT" or str(data)=="IN":
-                    #             pass
-                    #         else:
-                    #             if column_number==3:
-                    #                 if results[row_number][2]=="IN":
-                    #                     self.uiWindow.rm_view_table_6.setItem(row_number, column_number-1,
-                    #                                                                QtWidgets.QTableWidgetItem(str(data)))
-                    #                 elif results[row_number][2]=="OUT":
-                    #                     self.uiWindow.rm_view_table_6.setItem(row_number, column_number,
-                    #                                                           QtWidgets.QTableWidgetItem(str(data)))
-                    #             else:
-                    #                 self.uiWindow.rm_view_table_6.setItem(row_number, column_number,
-                    #                                                       QtWidgets.QTableWidgetItem(str(data)))
-                except Exception as e:
-                    print(e)
+                        # self.uiWindow.rm_view_table_6.setRowCount(0)
+                        # for row_number, row_data in enumerate(results):
+                        #     self.uiWindow.rm_view_table_6.insertRow(row_number)
+                        #     for column_number, data in enumerate(row_data):
+                        #         if str(data)== "OUT" or str(data)=="IN":
+                        #             pass
+                        #         else:
+                        #             if column_number==3:
+                        #                 if results[row_number][2]=="IN":
+                        #                     self.uiWindow.rm_view_table_6.setItem(row_number, column_number-1,
+                        #                                                                QtWidgets.QTableWidgetItem(str(data)))
+                        #                 elif results[row_number][2]=="OUT":
+                        #                     self.uiWindow.rm_view_table_6.setItem(row_number, column_number,
+                        #                                                           QtWidgets.QTableWidgetItem(str(data)))
+                        #             else:
+                        #                 self.uiWindow.rm_view_table_6.setItem(row_number, column_number,
+                        #                                                       QtWidgets.QTableWidgetItem(str(data)))
+                    except Exception as e:
+                        print(e)
+                else:
+                    self.show_info_popup("No transactions in given dates")
+                closing = raw_material_closing_stock(code,lot)
+                self.uiWindow.rw_view_closing.setText(str(closing))
             else:
-                self.show_info_popup("No transactions in given dates")
-            closing = raw_material_closing_stock(code,lot)
-            self.uiWindow.rw_view_closing.setText(str(closing))
+                self.show_warning_info("Please select correct date")
         else:
-            self.show_warning_info("Please select correct date")
-    else:
-        self.show_warning_info("Please select correct product code")
+            self.show_warning_info("Please select correct product code")
+    except:
+        self.show_warning_info("Please enter all details")
 
 def shade_stock_view(self):
     try:
@@ -1704,7 +1757,7 @@ def shade_stock_view(self):
                 self.show_warning_info("Please enter shade number")
     except Exception as e:
         print(e)
-        self.show_warning_info("Please fill the complete form")
+        self.show_warning_info("Please enter all details")
 
 def check_shade(self):
     code = self.uiWindow.shade_view_stock_shade_number.text()

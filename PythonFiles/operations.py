@@ -918,10 +918,10 @@ def get_shade_stock(shade,code,lot,by_custom):
                 sql=f"""select * from 
                         (select has_shade.trans_id,date,quantity,'-' from has_shade 
                         join shade_Stock on shade_stock.trans_id= has_shade.trans_id 
-                        where product_code = '{code}' and has_shade.shade_number = {shade} and lot_no = '{lot}'
+                        where product_code = '{code}' and has_shade.shade_number = {shade}
                         UNION select consists_of.trans_id,date,'-',quantity from consists_of 
                         join sales on sales.trans_id= consists_of.trans_id 
-                        where product_code = '{code}' and consists_of.shade_number = {shade} and lot_no = '{lot}') where date='{each}'"""
+                        where product_code = '{code}' and consists_of.shade_number = {shade}) where date='{each}'"""
                 mycursor.execute(sql)
                 result=mycursor.fetchall()
                 if result:
