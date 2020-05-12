@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>48</number>
+     <number>43</number>
     </property>
     <widget class="QWidget" name="Home">
      <widget class="QPushButton" name="RM_3">
@@ -13130,6 +13130,9 @@
         <pointsize>12</pointsize>
        </font>
       </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
      </widget>
      <widget class="QLineEdit" name="rm_opening_add_stock">
       <property name="geometry">
@@ -13353,6 +13356,9 @@
        <font>
         <pointsize>12</pointsize>
        </font>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
       </property>
      </widget>
      <widget class="QLineEdit" name="rm_opening_modify_stock">
@@ -13650,6 +13656,9 @@
         <pointsize>12</pointsize>
        </font>
       </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
      </widget>
      <widget class="QLineEdit" name="rm_opening_delete_product_name">
       <property name="geometry">
@@ -13664,6 +13673,9 @@
        <font>
         <pointsize>12</pointsize>
        </font>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
       </property>
      </widget>
      <widget class="QPushButton" name="back_add_rm_17">
@@ -13874,6 +13886,9 @@
         <pointsize>12</pointsize>
        </font>
       </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
      </widget>
      <widget class="QLineEdit" name="rm_opening_view_product_name">
       <property name="geometry">
@@ -13888,6 +13903,9 @@
        <font>
         <pointsize>12</pointsize>
        </font>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
       </property>
      </widget>
      <widget class="QPushButton" name="back_add_rm_18">
@@ -14262,6 +14280,9 @@
         <pointsize>12</pointsize>
        </font>
       </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
      </widget>
      <widget class="QPushButton" name="shade_opening_add_clear">
       <property name="geometry">
@@ -14552,6 +14573,9 @@
         <pointsize>12</pointsize>
        </font>
       </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
      </widget>
      <widget class="QPushButton" name="shade_opening_modify_clear">
       <property name="geometry">
@@ -14637,6 +14661,9 @@
        <font>
         <pointsize>12</pointsize>
        </font>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
       </property>
      </widget>
      <widget class="QPushButton" name="back_add_rm_21">
@@ -14772,6 +14799,9 @@
        <font>
         <pointsize>12</pointsize>
        </font>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
       </property>
      </widget>
      <widget class="QLabel" name="label_174">
@@ -14989,7 +15019,7 @@
      <widget class="QLineEdit" name="shade_opening_view_stock">
       <property name="geometry">
        <rect>
-        <x>710</x>
+        <x>720</x>
         <y>530</y>
         <width>421</width>
         <height>41</height>
@@ -14999,6 +15029,9 @@
        <font>
         <pointsize>12</pointsize>
        </font>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
       </property>
      </widget>
      <widget class="QPushButton" name="shade_opening_view_confirm">
@@ -15101,6 +15134,9 @@
        <font>
         <pointsize>12</pointsize>
        </font>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
       </property>
      </widget>
      <widget class="QLineEdit" name="shade_opening_view_lot">

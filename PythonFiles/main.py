@@ -232,6 +232,8 @@ class MainWindow(QMainWindow):
             lambda: self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['Home']))
         self.uiWindow.back_6.clicked.connect(
             lambda: self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['Home']))
+        self.uiWindow.back_7.clicked.connect(
+            lambda: self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['Home']))
         self.uiWindow.pushButton_30.clicked.connect(
             lambda: self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['Home']))
         self.uiWindow.pushButton_31.clicked.connect(
@@ -472,7 +474,7 @@ class MainWindow(QMainWindow):
         self.uiWindow.rw_view_stock_code_2.returnPressed.connect(lambda: operations_callbacks.set_product_name(self))
         self.uiWindow.rm_view_stock_confirm.clicked.connect(lambda: operations_callbacks.product_stock_view(self))
         self.uiWindow.shade_view_stock_shade_number.returnPressed.connect(
-            lambda: operations_callbacks.check_shade(self))
+            lambda: operations_callbacks.check_shade(self,self.uiWindow.shade_view_stock_shade_number))
         self.uiWindow.shade_view_stock_code.returnPressed.connect(lambda: operations_callbacks.set_sales_product_name(self))
         self.uiWindow.shade_view_stock_confirm.clicked.connect(lambda: operations_callbacks.shade_stock_view(self))
         self.uiWindow.rm_end_stock.clicked.connect(lambda : operations_callbacks.raw_material_display_closing(self))
@@ -531,6 +533,30 @@ class MainWindow(QMainWindow):
         self.uiWindow.rm_opening_delete_lot.returnPressed.connect(lambda: operations_callbacks.set_delete_raw_opening(self))
         self.uiWindow.rm_opening_delete_confirm.clicked.connect(
             lambda: operations_callbacks.delete_raw_opening(self))
+        self.uiWindow.shade_opening_product_code.returnPressed.connect(
+            lambda: operations_callbacks.set_opening_product_name_raw(self, self.uiWindow.shade_opening_product_code,
+                                                                      self.uiWindow.shade_opening_product_name))
+        self.uiWindow.shade_opening_add_number.returnPressed.connect(
+            lambda: operations_callbacks.check_shade(self, self.uiWindow.shade_opening_add_number))
+        self.uiWindow.shade_opening_add_confirm.clicked.connect(lambda : operations_callbacks.add_shade_opening(self))
+        self.uiWindow.shade_opening_modify_product_code.returnPressed.connect(
+            lambda: operations_callbacks.set_opening_product_name_raw(self, self.uiWindow.shade_opening_modify_product_code,
+                                                                      self.uiWindow.shade_opening_modify_product_name))
+        self.uiWindow.shade_opening_modify_lot.returnPressed.connect(
+            lambda : operations_callbacks.set_modify_shade_opening(self))
+        self.uiWindow.shade_opening_modify_confirm.clicked.connect(
+            lambda : operations_callbacks.modify_shade_opening(self))
+        self.uiWindow.shade_opening_delete_product_code.returnPressed.connect(
+            lambda: operations_callbacks.set_opening_product_name_raw(self, self.uiWindow.shade_opening_delete_product_code,
+                                                                      self.uiWindow.shade_opening_delete_product_name))
+        self.uiWindow.shade_opening_delete_lot.returnPressed.connect(
+            lambda: operations_callbacks.set_delete_shade_opening(self))
+        self.uiWindow.shade_opening_delete_confirm.clicked.connect(
+            lambda: operations_callbacks.delete_shade_opening(self))
+        self.uiWindow.shade_opening_view_product_code.returnPressed.connect(
+            lambda: operations_callbacks.set_opening_product_name_raw(self, self.uiWindow.shade_opening_view_product_code,
+                                                                      self.uiWindow.shade_opening_view_product_name))
+        self.uiWindow.shade_opening_view_confirm.clicked.connect(lambda: operations_callbacks.shade_view_opening(self))
 
 
 if __name__ == "__main__":

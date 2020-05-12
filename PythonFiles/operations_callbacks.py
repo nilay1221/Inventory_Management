@@ -1742,8 +1742,8 @@ def shade_stock_view(self):
         print(e)
         self.show_warning_info("Please enter all details")
 
-def check_shade(self):
-    code = self.uiWindow.shade_view_stock_shade_number.text()
+def check_shade(self,inputbox):
+    code = inputbox.text()
     try:
         if code=="":
             pass
@@ -1753,7 +1753,7 @@ def check_shade(self):
                 pass
             else:
                 self.show_warning_info("The shade number entered does not exist")
-                self.uiWindow.shade_view_stock_shade_number.setText("")
+                inputbox.setText("")
     except:
         pass
 
@@ -1881,45 +1881,11 @@ def shade_display_closing(self):
         print(e)
 
 
-def check_shade_for_opening(self,inputbox):
-    code = self.uiWindow.inputbox.text()
-    try:
-        if code=="":
-            pass
-        else:
-            results=get_shade(code)
-            if results:
-                return True
-            else:
-                self.show_warning_info("The shade number entered does not exist")
-                return False
-        return False
-    except:
-        pass
-
 
 def set_opening_product_name_raw(self,inputbox,outputbox):
     try:
         code = inputbox.text()
         result = get_product_name(code,'RC')
-        # print("result")
-        if result == "false":
-            self.uiWindow.ouputbox.setText("No such product Code")
-        elif result=="Product mismatch":
-            inputbox.setText("")
-            outputbox.setText("")
-            self.show_warning_info("Only raw material is allowed")
-        else:
-            outputbox.setText(result)
-    except Exception as e:
-        print(e)
-
-
-
-def set_opening_product_name_shade(self,inputbox,outputbox):
-    try:
-        code =inputbox.text()
-        result = get_product_name(code,'R')
         # print("result")
         if result == "false":
             outputbox.setText("No such product Code")
@@ -1932,32 +1898,36 @@ def set_opening_product_name_shade(self,inputbox,outputbox):
     except Exception as e:
         print(e)
 
+
 def add_raw_opening(self):
-    product_code = self.uiWindow.rm_opening_product_code.text()
-    opening = self.uiWindow.rm_opening_add_stock.text()
-    lot = self.uiWindow.rm_opening_add_lot.text()
-    if ""!=self.uiWindow.rm_opening_product_name.text() and "No such product code"!=self.uiWindow.rm_opening_product_name.text():
-        if product_code and opening and lot:
-            try:
-                if add_rm_opening(product_code, lot, float(opening)):
-                    message = "Raw Material Added Successfully"
-                    self.uiWindow.rm_opening_product_code.clear()
-                    self.uiWindow.rm_opening_product_name.clear()
-                    self.uiWindow.rm_opening_add_stock.clear()
-                    self.uiWindow.rm_opening_add_lot.clear()
-                    self.show_info_popup(message)
-                else:
-                    message = "Product Code and lot Already Exists"
-                    self.show_warning_info(message)
-            except Exception as e:
-                print(e)
-                pass
-                # TODO exception
+    try:
+        product_code = self.uiWindow.rm_opening_product_code.text()
+        opening = self.uiWindow.rm_opening_add_stock.text()
+        lot = self.uiWindow.rm_opening_add_lot.text()
+        if ""!=self.uiWindow.rm_opening_product_name.text() and "No such product code"!=self.uiWindow.rm_opening_product_name.text():
+            if product_code and opening and lot:
+                try:
+                    if add_rm_opening(product_code, lot, float(opening)):
+                        message = "Raw Material Added Successfully"
+                        self.uiWindow.rm_opening_product_code.clear()
+                        self.uiWindow.rm_opening_product_name.clear()
+                        self.uiWindow.rm_opening_add_stock.clear()
+                        self.uiWindow.rm_opening_add_lot.clear()
+                        self.show_info_popup(message)
+                    else:
+                        message = "Product Code and lot Already Exists"
+                        self.show_warning_info(message)
+                except Exception as e:
+                    print(e)
+                    pass
+                    # TODO exception
+            else:
+                # TODO Error handling if any of the fields empty
+                self.show_warning_info("Please fill out the info")
         else:
-            # TODO Error handling if any of the fields empty
-            self.show_warning_info("Please fill out the info")
-    else:
-        self.show_warning_info("Please fill correct product code")
+            self.show_warning_info("Please fill correct product code")
+    except:
+        self.show_warning_info("Please fill out the info")
 
 def view_raw_opening(self):
     try:
@@ -1987,27 +1957,30 @@ def set_delete_raw_opening(self):
 
 
 def delete_raw_opening(self):
-    code = self.uiWindow.rm_opening_delete_product_code.text()
-    lot = self.uiWindow.rm_opening_delete_lot.text()
-    if ""!=self.uiWindow.rm_opening_delete_product_name.text() and "No such product code"!=self.uiWindow.rm_opening_delete_product_name.text():
-        if code and lot:
-            try:
-                if del_rm_opening(code, lot):
-                    message = "Raw Material deleted Successfully"
-                    self.uiWindow.rm_opening_delete_product_code.clear()
-                    self.uiWindow.rm_opening_delete_product_name.clear()
-                    self.uiWindow.rm_opening_delete_stock.clear()
-                    self.uiWindow.rm_opening_delete_lot.clear()
-                    self.show_info_popup(message)
-            except Exception as e:
-                print(e)
-                pass
-                # TODO exception
+    try:
+        code = self.uiWindow.rm_opening_delete_product_code.text()
+        lot = self.uiWindow.rm_opening_delete_lot.text()
+        if ""!=self.uiWindow.rm_opening_delete_product_name.text() and "No such product code"!=self.uiWindow.rm_opening_delete_product_name.text():
+            if code and lot:
+                try:
+                    if del_rm_opening(code, lot):
+                        message = "Raw Material deleted Successfully"
+                        self.uiWindow.rm_opening_delete_product_code.clear()
+                        self.uiWindow.rm_opening_delete_product_name.clear()
+                        self.uiWindow.rm_opening_delete_stock.clear()
+                        self.uiWindow.rm_opening_delete_lot.clear()
+                        self.show_info_popup(message)
+                except Exception as e:
+                    print(e)
+                    pass
+                    # TODO exception
+            else:
+                # TODO Error handling if any of the fields empty
+                self.show_warning_info("Please fill out the info")
         else:
-            # TODO Error handling if any of the fields empty
-            self.show_warning_info("Please fill out the info")
-    else:
-        self.show_warning_info("Please fill correct product code")
+            self.show_warning_info("Please fill correct product code")
+    except:
+        self.show_warning_info("Please fill out the info")
 
 
 def set_modify_raw_opening(self):
@@ -2025,26 +1998,166 @@ def set_modify_raw_opening(self):
 
 
 def modify_raw_opening(self):
-    code = self.uiWindow.rm_opening_modify_product_code.text()
-    lot = self.uiWindow.rm_opening_modify_lot.text()
-    opening = self.uiWindow.rm_opening_modify_stock.text()
-    if ""!=self.uiWindow.rm_opening_modify_product_name.text() and "No such product code"!=self.uiWindow.rm_opening_modify_product_name.text():
-        if code and lot:
-            try:
-                if del_rm_opening(code, lot):
-                    if add_rm_opening(code,lot,opening):
-                        message = "Raw Material Modified Successfully"
-                        self.uiWindow.rm_opening_modify_product_code.clear()
-                        self.uiWindow.rm_opening_modify_product_name.clear()
-                        self.uiWindow.rm_opening_modify_stock.clear()
-                        self.uiWindow.rm_opening_modify_lot.clear()
-                        self.show_info_popup(message)
-            except Exception as e:
-                print(e)
-                pass
-                # TODO exception
+    try:
+        code = self.uiWindow.rm_opening_modify_product_code.text()
+        lot = self.uiWindow.rm_opening_modify_lot.text()
+        opening = self.uiWindow.rm_opening_modify_stock.text()
+        if ""!=self.uiWindow.rm_opening_modify_product_name.text() and "No such product code"!=self.uiWindow.rm_opening_modify_product_name.text():
+            if code and lot and opening:
+                try:
+                    if del_rm_opening(code, lot):
+                        if add_rm_opening(code,lot,opening):
+                            message = "Raw Material Modified Successfully"
+                            self.uiWindow.rm_opening_modify_product_code.clear()
+                            self.uiWindow.rm_opening_modify_product_name.clear()
+                            self.uiWindow.rm_opening_modify_stock.clear()
+                            self.uiWindow.rm_opening_modify_lot.clear()
+                            self.show_info_popup(message)
+                except Exception as e:
+                    print(e)
+                    pass
+                    # TODO exception
+            else:
+                # TODO Error handling if any of the fields empty
+                self.show_warning_info("Please fill out the info")
         else:
-            # TODO Error handling if any of the fields empty
-            self.show_warning_info("Please fill out the info")
-    else:
-        self.show_warning_info("Please fill correct product code")
+            self.show_warning_info("Please fill correct product code")
+    except:
+        self.show_warning_info("Please fill out the info")
+
+
+def add_shade_opening(self):
+    try:
+        shade = self.uiWindow.shade_opening_add_number.text()
+        product_code = self.uiWindow.shade_opening_product_code.text()
+        opening = self.uiWindow.shade_opening_add_stock.text()
+        lot = self.uiWindow.shade_opening_add_lot.text()
+        if ""!=self.uiWindow.shade_opening_product_name.text() and "No such product code"!=self.uiWindow.shade_opening_product_name.text():
+            if shade and product_code and opening and lot:
+                try:
+                    if shade_add_opening(shade,product_code, lot, float(opening)):
+                        message = "Shade number Added Successfully"
+                        self.uiWindow.shade_opening_add_number.clear()
+                        self.uiWindow.shade_opening_product_code.clear()
+                        self.uiWindow.shade_opening_product_name.clear()
+                        self.uiWindow.shade_opening_add_stock.clear()
+                        self.uiWindow.shade_opening_add_lot.clear()
+                        self.show_info_popup(message)
+                    else:
+                        message = "Product Code and lot Already Exists"
+                        self.show_warning_info(message)
+                except Exception as e:
+                    print(e)
+                    pass
+                    # TODO exception
+            else:
+                # TODO Error handling if any of the fields empty
+                self.show_warning_info("Please fill out the info")
+        else:
+            self.show_warning_info("Please fill correct product code")
+    except:
+        self.show_warning_info("Please fill out the info")
+
+def shade_view_opening(self):
+    try:
+        shade = self.uiWindow.shade_opening_view_number.text()
+        code = self.uiWindow.shade_opening_view_product_code.text()
+        lot = self.uiWindow.shade_opening_view_lot.text()
+        result = view_shade_opening(shade,code,lot)
+        if result:
+            self.uiWindow.shade_opening_view_stock.setText(str(result))
+        else:
+            self.show_warning_info("No details found")
+    except Exception as e:
+        print(e)
+        self.show_warning_info("Please fill complete info")
+
+
+def set_modify_shade_opening(self):
+    try:
+        shade = self.uiWindow.shade_opening_modify_number.text()
+        code = self.uiWindow.shade_opening_modify_product_code.text()
+        lot = self.uiWindow.shade_opening_modify_lot.text()
+        result = view_shade_opening(shade,code,lot)
+        if result:
+            self.uiWindow.shade_opening_modify_stock.setText(str(result))
+        else:
+            self.show_warning_info("No details found")
+    except Exception as e:
+        print(e)
+        self.show_warning_info("Please fill complete info")
+
+
+def set_delete_shade_opening(self):
+    try:
+        shade = self.uiWindow.shade_opening_delete_number.text()
+        code = self.uiWindow.shade_opening_delete_product_code.text()
+        lot = self.uiWindow.shade_opening_delete_lot.text()
+        result = view_shade_opening(shade,code,lot)
+        if result:
+            self.uiWindow.shade_opening_delete_stock.setText(str(result))
+        else:
+            self.show_warning_info("No details found")
+    except Exception as e:
+        print(e)
+        self.show_warning_info("Please fill complete info")
+
+
+def delete_shade_opening(self):
+    try:
+        shade = self.uiWindow.shade_opening_delete_number.text()
+        code = self.uiWindow.shade_opening_delete_product_code.text()
+        lot = self.uiWindow.shade_opening_delete_lot.text()
+        if ""!=self.uiWindow.shade_opening_delete_product_name.text() and "No such product code"!=self.uiWindow.shade_opening_delete_product_name.text():
+            if shade and code and lot:
+                try:
+                    if shade_del_opening(shade,code, lot):
+                        message = "Shade number deleted Successfully"
+                        self.uiWindow.shade_opening_delete_number.clear()
+                        self.uiWindow.shade_opening_delete_product_code.clear()
+                        self.uiWindow.shade_opening_delete_product_name.clear()
+                        self.uiWindow.shade_opening_delete_stock.clear()
+                        self.uiWindow.shade_opening_delete_lot.clear()
+                        self.show_info_popup(message)
+                except Exception as e:
+                    print(e)
+                    pass
+                    # TODO exception
+            else:
+                # TODO Error handling if any of the fields empty
+                self.show_warning_info("Please fill out the info")
+        else:
+            self.show_warning_info("Please fill correct product code")
+    except:
+        self.show_warning_info("Please fill out the info")
+
+
+def modify_shade_opening(self):
+    try:
+        shade = self.uiWindow.shade_opening_modify_number.text()
+        code = self.uiWindow.shade_opening_modify_product_code.text()
+        lot = self.uiWindow.shade_opening_modify_lot.text()
+        opening = self.uiWindow.shade_opening_modify_stock.text()
+        if ""!=self.uiWindow.shade_opening_modify_product_name.text() and "No such product code"!=self.uiWindow.shade_opening_modify_product_name.text():
+            if shade and code and lot and opening:
+                try:
+                    if shade_del_opening(shade,code, lot):
+                        if shade_add_opening(shade,code,lot,opening):
+                            message = "Shade number Modified Successfully"
+                            self.uiWindow.shade_opening_modify_number.clear()
+                            self.uiWindow.shade_opening_modify_product_code.clear()
+                            self.uiWindow.shade_opening_modify_product_name.clear()
+                            self.uiWindow.shade_opening_modify_stock.clear()
+                            self.uiWindow.shade_opening_modify_lot.clear()
+                            self.show_info_popup(message)
+                except Exception as e:
+                    print(e)
+                    pass
+                    # TODO exception
+            else:
+                # TODO Error handling if any of the fields empty
+                self.show_warning_info("Please fill out the info")
+        else:
+            self.show_warning_info("Please fill correct product code")
+    except:
+        self.show_warning_info("Please fill out the info")

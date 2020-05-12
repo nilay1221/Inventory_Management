@@ -846,11 +846,19 @@ def get_product_stock(code,lot,by_custom):
     finally:
         mydb.close()
 
+
 def raw_material_closing_stock(code,lot):
     mydb = sqlite3.connect(DATABASE_NAME)
     mycursor = mydb.cursor()
     try:
         if lot=="All" or lot=="all" or lot=="ALL":
+            sql = f"""Select sum(opening) from rm_opening_stock where product_code='{code}'"""
+            mycursor.execute(sql)
+            opening = mycursor.fetchone()
+            if not opening[0]:
+                stock_opening = 0
+            else:
+                stock_opening = opening[0]
             sql = f"""Select sum(quantity) from has_rm where product_code='{code}' and type = 'IN'"""
             mycursor.execute(sql)
             total_in = mycursor.fetchone()
@@ -863,16 +871,25 @@ def raw_material_closing_stock(code,lot):
             total_out = mycursor.fetchone()
             if total_in == "None":
                 if not total_out[0]:
-                    return 'None'
+                    return str(stock_opening)
                 else:
                     total_in = 0
             if not total_out[0]:
                 total_out = 0
             else:
                 total_out = total_out[0]
-            total = total_in - total_out
+            # print(stock_opening)
+            total = stock_opening + total_in - total_out
+            # print(total - stock_opening)
             return round(total, 2)
         else:
+            sql = f"""Select sum(opening) from rm_opening_stock where product_code='{code}' and lot_no='{lot}'"""
+            mycursor.execute(sql)
+            opening = mycursor.fetchone()
+            if not opening[0]:
+                stock_opening = 0
+            else:
+                stock_opening = opening[0]
             sql = f"""Select sum(quantity) from has_rm where product_code='{code}' and type = 'IN' and lot_no='{lot}'"""
             mycursor.execute(sql)
             total_in = mycursor.fetchone()
@@ -885,14 +902,14 @@ def raw_material_closing_stock(code,lot):
             total_out = mycursor.fetchone()
             if total_in=="None":
                 if not total_out[0]:
-                    return 'None'
+                    return str(stock_opening)
                 else:
                     total_in=0
             if not total_out[0]:
                 total_out = 0
             else:
                 total_out = total_out[0]
-            total= total_in-total_out
+            total= stock_opening + total_in - total_out
             return round(total,2)
     except Exception as e:
         # print("inside")
@@ -947,34 +964,47 @@ def get_shade_stock(shade,code,lot,by_custom):
         mydb.close()
 
 
-
 def shade_raw_closing_stock(shade,code,lot):
     mydb = sqlite3.connect(DATABASE_NAME)
     mycursor = mydb.cursor()
     try:
         if lot == "All" or lot == "all" or lot == "ALL":
-            sql = f"""Select sum(quantity) from has_shade where product_code='{code}' and shade_number={shade} and type = 'IN'"""
+            sql = f"""Select sum(opening_stock) from sn_opening_stock where product_code='{code}' and shade_number='{shade}'"""
+            mycursor.execute(sql)
+            opening = mycursor.fetchone()
+            if not opening[0]:
+                stock_opening = 0
+            else:
+                stock_opening = opening[0]
+            sql = f"""Select sum(quantity) from has_shade where product_code='{code}' and shade_number='{shade}' and type = 'IN'"""
             mycursor.execute(sql)
             total_in = mycursor.fetchone()
             if not total_in[0]:
                 total_in = "None"
             else:
                 total_in = total_in[0]
-            sql = f"""Select sum(quantity) from consists_of where product_code='{code}' and shade_number={shade} and type = 'OUT'"""
+            sql = f"""Select sum(quantity) from consists_of where product_code='{code}' and shade_number='{shade}' and type = 'OUT'"""
             mycursor.execute(sql)
             total_out = mycursor.fetchone()
             if total_in == "None":
                 if not total_out[0]:
-                    return 'None'
+                    return str(stock_opening)
                 else:
                     total_in = 0
             if not total_out[0]:
                 total_out = 0
             else:
                 total_out = total_out[0]
-            total = total_in - total_out
+            total = stock_opening + total_in - total_out
             return round(total,2)
         else:
+            sql = f"""Select sum(opening_stock) from sn_opening_stock where product_code='{code}' and shade_number='{shade}' and lot_no='{lot}'"""
+            mycursor.execute(sql)
+            opening = mycursor.fetchone()
+            if not opening[0]:
+                stock_opening = 0
+            else:
+                stock_opening = opening[0]
             sql = f"""Select sum(quantity) from has_shade where product_code='{code}' and shade_number={shade} and type = 'IN' and lot_no='{lot}'"""
             mycursor.execute(sql)
             total_in = mycursor.fetchone()
@@ -987,14 +1017,16 @@ def shade_raw_closing_stock(shade,code,lot):
             total_out = mycursor.fetchone()
             if total_in == "None":
                 if not total_out[0]:
-                    return 'None'
+                    return str(stock_opening)
                 else:
                     total_in = 0
             if not total_out[0]:
                 total_out = 0
             else:
                 total_out = total_out[0]
-            total = total_in - total_out
+            # print(stock_opening)
+            total = stock_opening + total_in - total_out
+            # print(total-stock_opening)
             return round(total, 2)
     except Exception as e:
         print(e)
@@ -1058,6 +1090,59 @@ def del_rm_opening(code, lot):
     try:
         sql = f"""
                     delete from rm_opening_stock where product_code='{code}' and lot_no='{lot}';
+                """
+        mycursor.execute(sql)
+        mydb.commit()
+        return True
+    except Exception as e:
+        print(e)
+        return False
+    finally:
+        mydb.close()
+
+
+def shade_add_opening(shade,product_code, lot, opening):
+    mydb = sqlite3.connect(DATABASE_NAME)
+    mycursor = mydb.cursor()
+    try:
+        sql = f"""
+            INSERT into sn_opening_stock VALUES('{shade}','{product_code}','{lot}',{opening});
+        """
+        try:
+            mycursor.execute(sql)
+        # Checking if product code already exists or not in Database
+        except sqlite3.IntegrityError as e:
+            print(e)
+            return False
+        mydb.commit()
+        return True
+    except:
+        pass
+    finally:
+        mydb.close()
+
+def view_shade_opening(shade,code,lot):
+    mydb = sqlite3.connect(DATABASE_NAME)
+    mycursor = mydb.cursor()
+    try:
+        sql = f"""
+                select opening_stock from sn_opening_stock where shade_number='{shade}' and product_code='{code}' and lot_no='{lot}';
+            """
+        mycursor.execute(sql)
+        result=mycursor.fetchone()
+        return result[0]
+    except Exception as e:
+        print(e)
+    finally:
+        mydb.close()
+
+
+def shade_del_opening(shade,code, lot):
+    mydb = sqlite3.connect(DATABASE_NAME)
+    mycursor = mydb.cursor()
+    try:
+        sql = f"""
+                    delete from sn_opening_stock where shade_number='{shade}' and product_code='{code}' and lot_no='{lot}';
                 """
         mycursor.execute(sql)
         mydb.commit()
