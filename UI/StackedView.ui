@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>43</number>
+     <number>21</number>
     </property>
     <widget class="QWidget" name="Home">
      <widget class="QPushButton" name="RM_3">
@@ -7220,7 +7220,7 @@
       <property name="geometry">
        <rect>
         <x>870</x>
-        <y>760</y>
+        <y>790</y>
         <width>181</width>
         <height>51</height>
        </rect>
@@ -7295,7 +7295,7 @@
       <property name="geometry">
        <rect>
         <x>1030</x>
-        <y>770</y>
+        <y>800</y>
         <width>151</width>
         <height>41</height>
        </rect>
@@ -7664,6 +7664,105 @@
        <string>Enter lot no. : </string>
       </property>
      </widget>
+     <widget class="QLineEdit" name="rm_view_stock_total_in">
+      <property name="geometry">
+       <rect>
+        <x>640</x>
+        <y>740</y>
+        <width>121</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_188">
+      <property name="geometry">
+       <rect>
+        <x>540</x>
+        <y>730</y>
+        <width>91</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Total : </string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="rm_view_stock_total_out">
+      <property name="geometry">
+       <rect>
+        <x>770</x>
+        <y>740</y>
+        <width>121</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_190">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>730</y>
+        <width>181</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Opening Stock :</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="rm_view_opening">
+      <property name="geometry">
+       <rect>
+        <x>360</x>
+        <y>740</y>
+        <width>151</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="shade_stock_view">
      <widget class="QLineEdit" name="shade_view_stock_name">
@@ -7708,8 +7807,8 @@
      <widget class="QLineEdit" name="shade_view_closing">
       <property name="geometry">
        <rect>
-        <x>1080</x>
-        <y>760</y>
+        <x>1070</x>
+        <y>790</y>
         <width>151</width>
         <height>41</height>
        </rect>
@@ -7729,8 +7828,8 @@
      <widget class="QLabel" name="label_86">
       <property name="geometry">
        <rect>
-        <x>920</x>
-        <y>750</y>
+        <x>910</x>
+        <y>780</y>
         <width>181</width>
         <height>51</height>
        </rect>
@@ -8100,7 +8199,7 @@
       <property name="geometry">
        <rect>
         <x>420</x>
-        <y>750</y>
+        <y>780</y>
         <width>151</width>
         <height>51</height>
        </rect>
@@ -8166,6 +8265,105 @@
       </property>
       <property name="text">
        <string>Enter lot no. : </string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_189">
+      <property name="geometry">
+       <rect>
+        <x>590</x>
+        <y>720</y>
+        <width>91</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Total : </string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="shade_view_stock_total_in">
+      <property name="geometry">
+       <rect>
+        <x>690</x>
+        <y>730</y>
+        <width>121</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="shade_view_stock_total_out">
+      <property name="geometry">
+       <rect>
+        <x>820</x>
+        <y>730</y>
+        <width>121</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="shade_view_opening">
+      <property name="geometry">
+       <rect>
+        <x>420</x>
+        <y>730</y>
+        <width>151</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_191">
+      <property name="geometry">
+       <rect>
+        <x>260</x>
+        <y>720</y>
+        <width>181</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Opening Stock :</string>
       </property>
      </widget>
     </widget>
