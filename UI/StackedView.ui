@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>10</number>
+     <number>21</number>
     </property>
     <widget class="QWidget" name="Home">
      <widget class="QPushButton" name="RM_3">
@@ -7389,8 +7389,8 @@
        <rect>
         <x>350</x>
         <y>350</y>
-        <width>561</width>
-        <height>381</height>
+        <width>671</width>
+        <height>371</height>
        </rect>
       </property>
       <property name="editTriggers">
@@ -7400,7 +7400,7 @@
        <number>100</number>
       </property>
       <property name="columnCount">
-       <number>4</number>
+       <number>5</number>
       </property>
       <row/>
       <row/>
@@ -7547,6 +7547,17 @@
         </font>
        </property>
       </column>
+      <column>
+       <property name="text">
+        <string>Lot no.</string>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+      </column>
      </widget>
      <widget class="QLabel" name="label_84">
       <property name="geometry">
@@ -7613,7 +7624,7 @@
      <widget class="QPushButton" name="rm_view_stock_confirm">
       <property name="geometry">
        <rect>
-        <x>990</x>
+        <x>1110</x>
         <y>340</y>
         <width>111</width>
         <height>51</height>
@@ -7866,8 +7877,8 @@
        <rect>
         <x>400</x>
         <y>340</y>
-        <width>561</width>
-        <height>381</height>
+        <width>681</width>
+        <height>371</height>
        </rect>
       </property>
       <property name="editTriggers">
@@ -7877,7 +7888,7 @@
        <number>100</number>
       </property>
       <property name="columnCount">
-       <number>4</number>
+       <number>5</number>
       </property>
       <row/>
       <row/>
@@ -8016,6 +8027,17 @@
       <column>
        <property name="text">
         <string>Out</string>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Lot no.</string>
        </property>
        <property name="font">
         <font>
@@ -8216,7 +8238,7 @@
      <widget class="QPushButton" name="shade_view_stock_confirm">
       <property name="geometry">
        <rect>
-        <x>1030</x>
+        <x>1130</x>
         <y>330</y>
         <width>111</width>
         <height>51</height>

@@ -818,10 +818,10 @@ def get_product_stock(code,lot,by_custom):
         if lot == "All" or lot == "all" or lot == "ALL":
             for each in all_dates:
                 sql = f"""select * from 
-                 (select RM_Stock.trans_id,RM_Stock.date,has_rm.quantity,'-' from has_rm join RM_Stock on RM_Stock.trans_id= has_rm.trans_id 
+                 (select RM_Stock.trans_id,RM_Stock.date,has_rm.quantity,'-',has_rm.lot_no from has_rm join RM_Stock on RM_Stock.trans_id= has_rm.trans_id 
                   where type = "IN" and product_code = '{code}' and date='{each}'
                   UNION
-                  select RM_Stock.trans_id,RM_Stock.date,'-',has_rm.quantity from has_rm join RM_Stock on RM_Stock.trans_id= has_rm.trans_id
+                  select RM_Stock.trans_id,RM_Stock.date,'-',has_rm.quantity,has_rm.lot_no from has_rm join RM_Stock on RM_Stock.trans_id= has_rm.trans_id
                   where type = "OUT" and product_code = '{code}' and date='{each}') order by date;"""
                 mycursor.execute(sql)
                 result=mycursor.fetchall()
@@ -831,10 +831,10 @@ def get_product_stock(code,lot,by_custom):
         else:
             for each in all_dates:
                 sql = f"""select * from 
-                 (select RM_Stock.trans_id,RM_Stock.date,has_rm.quantity,'-' from has_rm join RM_Stock on RM_Stock.trans_id= has_rm.trans_id 
+                 (select RM_Stock.trans_id,RM_Stock.date,has_rm.quantity,'-',has_rm.lot_no from has_rm join RM_Stock on RM_Stock.trans_id= has_rm.trans_id 
                   where type = "IN" and product_code = '{code}' and date='{each}'and lot_no='{lot}'
                   UNION
-                  select RM_Stock.trans_id,RM_Stock.date,'-',has_rm.quantity from has_rm join RM_Stock on RM_Stock.trans_id= has_rm.trans_id
+                  select RM_Stock.trans_id,RM_Stock.date,'-',has_rm.quantity,has_rm.lot_no from has_rm join RM_Stock on RM_Stock.trans_id= has_rm.trans_id
                   where type = "OUT" and product_code = '{code}' and date='{each}'and lot_no='{lot}') order by date;"""
                 mycursor.execute(sql)
                 result=mycursor.fetchall()
@@ -939,10 +939,10 @@ def get_shade_stock(shade,code,lot,by_custom):
         if lot == "All" or lot == "all" or lot == "ALL":
             for each in all_dates:
                 sql=f"""select * from 
-                        (select has_shade.trans_id,date,quantity,'-' from has_shade 
+                        (select has_shade.trans_id,date,quantity,'-',has_shade.lot_no from has_shade 
                         join shade_Stock on shade_stock.trans_id= has_shade.trans_id 
                         where product_code = '{code}' and has_shade.shade_number = {shade}
-                        UNION select consists_of.trans_id,date,'-',quantity from consists_of 
+                        UNION select consists_of.trans_id,date,'-',quantity,consists_of.lot_no from consists_of 
                         join sales on sales.trans_id= consists_of.trans_id 
                         where product_code = '{code}' and consists_of.shade_number = {shade}) where date='{each}'"""
                 mycursor.execute(sql)
@@ -953,10 +953,10 @@ def get_shade_stock(shade,code,lot,by_custom):
         else:
             for each in all_dates:
                 sql=f"""select * from 
-                        (select has_shade.trans_id,date,quantity,'-' from has_shade 
+                        (select has_shade.trans_id,date,quantity,'-',has_shade.lot_no from has_shade 
                         join shade_Stock on shade_stock.trans_id= has_shade.trans_id 
                         where product_code = '{code}' and has_shade.shade_number = {shade} and lot_no = '{lot}'
-                        UNION select consists_of.trans_id,date,'-',quantity from consists_of 
+                        UNION select consists_of.trans_id,date,'-',quantity,consists_of.lot_no from consists_of 
                         join sales on sales.trans_id= consists_of.trans_id 
                         where product_code = '{code}' and consists_of.shade_number = {shade} and lot_no = '{lot}') where date='{each}'"""
                 mycursor.execute(sql)
