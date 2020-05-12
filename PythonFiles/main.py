@@ -402,7 +402,6 @@ class MainWindow(QMainWindow):
             lambda row, column: operations_callbacks.display_product_name(row, column, self, 0,
                                                                           "RC",self.uiWindow.rm_view_table))
         self.uiWindow.rm_modify_confirm.clicked.connect(lambda: operations_callbacks.modify_rm(self))
-        self.uiWindow.view_trans.clicked.connect(lambda :operations_callbacks.clear_view_by_id(self))
         # self.uiWindow.rw_view_starting_date_3.dateChanged.connect(lambda : operations_callbacks.view_by_custom_dates(self))
         shortcut1 = QShortcut(QKeySequence('Return'),self.uiWindow.rw_view_ending_date_2)
         shortcut1.activated.connect(lambda : operations_callbacks.view_by_custom_dates(self))
@@ -423,7 +422,6 @@ class MainWindow(QMainWindow):
         self.uiWindow.shade_modify_confirm.clicked.connect(lambda:operations_callbacks.confirm_modify_shade_trans(self))
         shortcut2 = QShortcut(QKeySequence('Return'),self.uiWindow.shade_view_end_date)
         shortcut2.activated.connect(lambda : operations_callbacks.shade_view_by_custom_dates(self))
-        self.uiWindow.view_trans_2.clicked.connect(lambda:operations_callbacks.clear_shade_view_by_today(self))
         self.uiWindow.shade_view_table_2.cellChanged.connect(lambda row,column:operations_callbacks.display_product_name(row,column,self,4,DEFAULT_SHOW,self.uiWindow.shade_view_table_2))
         self.uiWindow.shade_view_table.cellChanged.connect(lambda row,column:operations_callbacks.display_product_name(row,column,self,5,DEFAULT_SHOW,self.uiWindow.shade_view_table))
         self.uiWindow.rm_view_table_5.cellChanged.connect(lambda row,column:operations_callbacks.display_product_name(row,column,self,3,DEFAULT_SHOW,self.uiWindow.rm_view_table_5))

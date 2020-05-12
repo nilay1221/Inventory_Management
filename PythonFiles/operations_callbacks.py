@@ -688,13 +688,6 @@ def modify_rm(self):
         else:
             self.show_warning_info("Please fill out the form")
 
-def clear_view_by_id(self):
-    self.uiWindow.rw_view_transaction_id.clear()
-    self.uiWindow.rm_view_date.clear()
-    self.uiWindow.rm_view_customer.clearEditText()
-    self.uiWindow.rm_view_remark.clear()
-    self.uiWindow.rm_view_table_4.clear()
-    self.uiWindow.rm_view_table_4.setRowCount(9)
 
 def view_by_custom_dates(self):
     d1 = self.uiWindow.rw_view_starting_date_3.date()
@@ -914,6 +907,7 @@ def view_shade_stock_by_id(self):
 
 
 def view_shade_transaction_today(self):
+    trans_list=[]
     self.uiWindow.shade_view_today_date.setDate(QtCore.QDate.currentDate())
     results = view_shade_transaction(by_today=True)
     if results:
@@ -922,7 +916,12 @@ def view_shade_transaction_today(self):
         for row in range(len(results)):
             self.uiWindow.shade_view_table_2.insertRow(row)
             for column in range(len(results[row])):
-                if results[row][column] != '-':
+                if column == 0:
+                    if str(results[row][column]) not in trans_list:
+                        trans_list.append(str(results[row][column]))
+                        self.uiWindow.shade_view_table_2.setItem(row, column,
+                                                               QtWidgets.QTableWidgetItem(str(results[row][column])))
+                elif results[row][column] != '-':
                     self.uiWindow.shade_view_table_2.setItem(row,column,QtWidgets.QTableWidgetItem(str(results[row][column])))
     else:
         self.show_info_popup("No Transactions Done Today")
@@ -1142,18 +1141,6 @@ def shade_view_by_custom_dates(self):
     else:
         self.show_warning_info("Please select correct date")
 
-
-def clear_shade_view_by_today(self):
-    self.uiWindow.shade_view_transaction_id.clear()
-    self.uiWindow.date_3.clear()
-    self.uiWindow.shade_view_customer.clearEditText()
-    self.uiWindow.shade_view_remark.clear()
-    self.uiWindow.shade_number_add_view.clear()
-    self.uiWindow.shade_addtable_4.clearContents()
-    self.uiWindow.shade_addtable_4.setRowCount(0)
-    self.uiWindow.shade_colortable_4.clearContents()
-    self.uiWindow.shade_colortable_4.setRowCount(0)
-    self.uiWindow.shade_add_total_4.clear()
 
 def check_for_no_product_code(tableWidget,product_type):
     results = tableWidget.findItems("No such product code",QtCore.Qt.MatchExactly)
