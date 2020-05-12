@@ -21,6 +21,10 @@ All the above stages have operations like add records,modify present records,del
 
 This projects manages all the transactions that occur in a thread dyeing factory from the records of buying the raw materials to the sales of the end products produced in the factory.
 
+To run this app run main.py file in PythonFiles folder.
+
+This project is a part of OSTPL course.
+
 # Software Requirements:
 - Python3
 - PyQt5
