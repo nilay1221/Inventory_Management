@@ -557,6 +557,15 @@ class MainWindow(QMainWindow):
             lambda: operations_callbacks.set_opening_product_name_raw(self, self.uiWindow.shade_opening_view_product_code,
                                                                       self.uiWindow.shade_opening_view_product_name))
         self.uiWindow.shade_opening_view_confirm.clicked.connect(lambda: operations_callbacks.shade_view_opening(self))
+        self.uiWindow.rm_opening_add_clear.clicked.connect(lambda : clear.clear_rm_opening_add(self))
+        self.uiWindow.rm_opening_modify_clear.clicked.connect(lambda: clear.clear_rm_opening_modify(self))
+        self.uiWindow.rm_opening_delete_clear.clicked.connect(lambda: clear.clear_rm_opening_delete(self))
+        self.uiWindow.rm_opening_view_clear.clicked.connect(lambda: clear.clear_rm_opening_view(self))
+        self.uiWindow.shade_opening_add_clear.clicked.connect(lambda: clear.clear_shade_opening_add(self))
+        self.uiWindow.shade_opening_modify_clear.clicked.connect(lambda: clear.clear_shade_opening_modify(self))
+        self.uiWindow.shade_opening_delete_clear.clicked.connect(lambda: clear.clear_shade_opening_delete(self))
+        self.uiWindow.shade_opening_view_clear.clicked.connect(lambda: clear.clear_shade_opening_view(self))
+
 
 
 if __name__ == "__main__":
