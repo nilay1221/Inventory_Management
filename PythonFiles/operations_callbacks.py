@@ -1638,6 +1638,7 @@ def set_product_name(self):
 def product_stock_view(self):
     total_in = 0
     total_out = 0
+    flag =0
     try:
         code = self.uiWindow.rw_view_stock_code_2.text()
         lot = self.uiWindow.rw_stock_view_lot.text()
@@ -1684,8 +1685,10 @@ def product_stock_view(self):
                         print(e)
                 else:
                     self.show_info_popup("No transactions in given dates")
+                    flag=1
                 closing = raw_material_closing_stock(code,lot)
-                self.uiWindow.rm_view_opening.setText(str(closing+total_out-total_in))
+                if flag==0:
+                    self.uiWindow.rm_view_opening.setText(str(closing+total_out-total_in))
                 self.uiWindow.rw_view_closing.setText(str(closing))
             else:
                 self.show_warning_info("Please select correct date")
@@ -1697,6 +1700,7 @@ def product_stock_view(self):
 def shade_stock_view(self):
     total_in=0
     total_out=0
+    flag=0
     try:
         if check_for_shade(self):
             code = self.uiWindow.shade_view_stock_code.text()
@@ -1747,8 +1751,10 @@ def shade_stock_view(self):
                                 print(e)
                         else:
                             self.show_info_popup("No transactions in given dates")
+                            flag=1
                         closing = shade_raw_closing_stock(shade, code,lot)
-                        self.uiWindow.shade_view_opening.setText(str(closing + total_out - total_in))
+                        if flag==0:
+                            self.uiWindow.shade_view_opening.setText(str(closing + total_out - total_in))
                         self.uiWindow.shade_view_closing.setText(str(closing))
                     else:
                         self.show_warning_info("Please select correct date")

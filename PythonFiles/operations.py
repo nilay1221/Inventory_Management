@@ -871,7 +871,10 @@ def raw_material_closing_stock(code,lot):
             total_out = mycursor.fetchone()
             if total_in == "None":
                 if not total_out[0]:
-                    return str(stock_opening)
+                    if stock_opening!=0:
+                        return str(stock_opening)
+                    else:
+                        return "None"
                 else:
                     total_in = 0
             if not total_out[0]:
@@ -902,7 +905,10 @@ def raw_material_closing_stock(code,lot):
             total_out = mycursor.fetchone()
             if total_in=="None":
                 if not total_out[0]:
-                    return str(stock_opening)
+                    if stock_opening != 0:
+                        return str(stock_opening)
+                    else:
+                        return "None"
                 else:
                     total_in=0
             if not total_out[0]:
@@ -988,7 +994,10 @@ def shade_raw_closing_stock(shade,code,lot):
             total_out = mycursor.fetchone()
             if total_in == "None":
                 if not total_out[0]:
-                    return str(stock_opening)
+                    if stock_opening != 0:
+                        return str(stock_opening)
+                    else:
+                        return "None"
                 else:
                     total_in = 0
             if not total_out[0]:
@@ -1017,7 +1026,10 @@ def shade_raw_closing_stock(shade,code,lot):
             total_out = mycursor.fetchone()
             if total_in == "None":
                 if not total_out[0]:
-                    return str(stock_opening)
+                    if stock_opening != 0:
+                        return str(stock_opening)
+                    else:
+                        return "None"
                 else:
                     total_in = 0
             if not total_out[0]:
