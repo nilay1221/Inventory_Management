@@ -1,6 +1,6 @@
 # Callback Function when Adding raw material
 from operations import *
-from PyQt5 import QtWidgets,QtCore
+from PyQt5 import QtWidgets,QtCore,QtGui
 import datetime
 
 
@@ -718,7 +718,7 @@ def view_by_custom_dates(self):
                             self.uiWindow.rm_view_table_3.setItem(row, column, QtWidgets.QTableWidgetItem(
                                 str(each_list[row][column])))
         else:
-            pass
+            self.show_warning_info("No transactions found")
     else:
         self.show_warning_info("Please select correct date")
 
@@ -1114,7 +1114,7 @@ def shade_view_by_custom_dates(self):
                             self.uiWindow.shade_view_table.setItem(row, column, QtWidgets.QTableWidgetItem(
                                 str(each_list[row][column])))
         else:
-            pass
+            self.show_warning_info("No transactions found")
     else:
         self.show_warning_info("Please select correct date")
 
@@ -1189,7 +1189,16 @@ def add_sales_callback(self):
                                 self.uiWindow.sales_add_table.item(i, 3).text()
                                 if self.uiWindow.sales_add_table.item(i, 0).text() == '' or self.uiWindow.sales_add_table.item(i, 1).text()=='' or self.uiWindow.sales_add_table.item(i, 3).text()=='':
                                     self.show_warning_info(f"Please fill info in the table at '{i + 1}'")
-                                    flag = 1
+                                    flag = 1  self.uiWindow.rw_view_starting_date_3.setMinimumDate(QtCore.QDate(2000,5,1))
+        self.uiWindow.rw_view_ending_date_2.setDate(QtCore.QDate.currentDate())
+        self.uiWindow.shade_view_start_date.setMinimumDate(QtCore.QDate(2000,5,1))
+        self.uiWindow.shade_view_end_date.setDate(QtCore.QDate.currentDate())
+        self.uiWindow.rw_view_starting_date_4.setMinimumDate(QtCore.QDate(2000,5,1))
+        self.uiWindow.rw_view_ending_date_3.setDate(QtCore.QDate.currentDate())
+        self.uiWindow.shade_view_starting_date.setMinimumDate(QtCore.QDate(2000,5,1))
+        self.uiWindow.shade_view_ending_date.setDate(QtCore.QDate.currentDate())
+        self.uiWindow.sales_view_custom_start_date.setMinimumDate(QtCore.QDate(2000,5,1))
+        self.uiWindow.sales_view_custom_end_date.setDate(QtCore.QDate.currentDate())
                                     break
                             except:
                                 self.show_warning_info(f"Please fill info in the table at '{i+1}'")
@@ -1295,7 +1304,16 @@ def find_shade(row, column, self, col, tableWidget):
                 if results:
                     pass
                 else:
-                    self.show_warning_info("The shade number entered does not exist")
+                    self.show_warning_info("The shade number entered does not exist")  self.uiWindow.rw_view_starting_date_3.setMinimumDate(QtCore.QDate(2000,5,1))
+        self.uiWindow.rw_view_ending_date_2.setDate(QtCore.QDate.currentDate())
+        self.uiWindow.shade_view_start_date.setMinimumDate(QtCore.QDate(2000,5,1))
+        self.uiWindow.shade_view_end_date.setDate(QtCore.QDate.currentDate())
+        self.uiWindow.rw_view_starting_date_4.setMinimumDate(QtCore.QDate(2000,5,1))
+        self.uiWindow.rw_view_ending_date_3.setDate(QtCore.QDate.currentDate())
+        self.uiWindow.shade_view_starting_date.setMinimumDate(QtCore.QDate(2000,5,1))
+        self.uiWindow.shade_view_ending_date.setDate(QtCore.QDate.currentDate())
+        self.uiWindow.sales_view_custom_start_date.setMinimumDate(QtCore.QDate(2000,5,1))
+        self.uiWindow.sales_view_custom_end_date.setDate(QtCore.QDate.currentDate())
                     tableWidget.setItem(row,column,QtWidgets.QTableWidgetItem(""))
         except:
             pass
@@ -1357,7 +1375,7 @@ def view_sales_by_custom(self):
                             self.uiWindow.sales_view_custom_table.setItem(row, column, QtWidgets.QTableWidgetItem(
                                 str(each_list[row][column])))
         else:
-            pass
+            self.show_warning_info("No transactions found")
     else:
         self.show_warning_info("Please select correct date")
 
@@ -1744,13 +1762,19 @@ def raw_material_display_closing(self):
     try:
         self.uiWindow.rm_closing_stock_table.setRowCount(0)
         results = get_all_rm_data('R')
-        # print(results)
+        print(results)
         for row_number, row_data in enumerate(results):
             self.uiWindow.rm_closing_stock_table.insertRow(row_number)
             for column_number, data in enumerate(row_data):
                 self.uiWindow.rm_closing_stock_table.setItem(row_number, column_number, QtWidgets.QTableWidgetItem(str(data)))
                 if column_number==0:
-                    self.uiWindow.rm_closing_stock_table.setItem(row_number, column_number+2, QtWidgets.QTableWidgetItem(str(raw_material_closing_stock(data))))
+                    closing_stock = raw_material_closing_stock(data)
+                    self.uiWindow.rm_closing_stock_table.setItem(row_number, column_number+2, QtWidgets.QTableWidgetItem(str(closing_stock)))
+                    if closing_stock != "None":    
+                        if closing_stock > 0:
+                            self.uiWindow.rm_closing_stock_table.item(row_number,column_number+2).setBackground(QtGui.QColor('Green'))
+                        else:
+                            self.uiWindow.rm_closing_stock_table.item(row_number,column_number+2).setBackground(QtGui.QColor('Red'))
     except Exception as e:
         print(e)
 
@@ -1765,7 +1789,14 @@ def colour_display_closing(self):
             for column_number, data in enumerate(row_data):
                 self.uiWindow.colour_closing_stock_table.setItem(row_number, column_number, QtWidgets.QTableWidgetItem(str(data)))
                 if column_number==0:
-                    self.uiWindow.colour_closing_stock_table.setItem(row_number, column_number+2, QtWidgets.QTableWidgetItem(str(raw_material_closing_stock(data))))
+                    closing_stock = raw_material_closing_stock(data)
+                    self.uiWindow.colour_closing_stock_table.setItem(row_number, column_number+2, QtWidgets.QTableWidgetItem(str(closing_stock)))
+                    if closing_stock != "None":
+                        if closing_stock > 0:
+                            self.uiWindow.colour_closing_stock_table.item(row_number,column_number+2).setBackground(QtGui.QColor('Green'))
+                        elif closing_stock < 0:
+                            self.uiWindow.colour_closing_stock_table.item(row_number,column_number+2).setBackground(QtGui.QColor('Red'))
+                    # self.uiWindow.colour_closing_stock_table.setItem(row_number, column_number+2, QtWidgets.QTableWidgetItem(str(raw_material_closing_stock(data))))
     except Exception as e:
         print(e)
 

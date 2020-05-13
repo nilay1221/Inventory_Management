@@ -32,7 +32,8 @@ pagesDict = {
         'sales_operations':22,
         'new_rm_operations':23,
         'new_rm_modify': 24,
-        'new_rm_delete':25,
+        'new_rm_delete':25,retchLastSection(True) 
+        self.uiWindow.colour_closing_stock_table.horizontalHeader().setSe
         'new_rm_view':26,
         'new_shade_operations':27,
         'new_shade_modify':28,
@@ -222,6 +223,27 @@ class MainWindow(QMainWindow):
         self.uiWindow.new_rm_modify_product_price.setReadOnly(True)
         self.uiWindow.rm_view_date.setReadOnly(True)
         self.uiWindow.rm_view_remark.setReadOnly(True)
+        self.uiWindow.rw_view_starting_date_3.setMinimumDate(QtCore.QDate(2000,5,1))
+        self.uiWindow.rw_view_ending_date_2.setDate(QtCore.QDate.currentDate())
+        self.uiWindow.shade_view_start_date.setMinimumDate(QtCore.QDate(2000,5,1))
+        self.uiWindow.shade_view_end_date.setDate(QtCore.QDate.currentDate())
+        self.uiWindow.rw_view_starting_date_4.setMinimumDate(QtCore.QDate(2000,5,1))
+        self.uiWindow.rw_view_ending_date_3.setDate(QtCore.QDate.currentDate())
+        self.uiWindow.shade_view_starting_date.setMinimumDate(QtCore.QDate(2000,5,1))
+        self.uiWindow.shade_view_ending_date.setDate(QtCore.QDate.currentDate())
+        self.uiWindow.sales_view_custom_start_date.setMinimumDate(QtCore.QDate(2000,5,1))
+        self.uiWindow.sales_view_custom_end_date.setDate(QtCore.QDate.currentDate())
+        
+        self.uiWindow.rm_closing_stock_table.horizontalHeader().setStretchLastSection(True) 
+        self.uiWindow.rm_closing_stock_table.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+
+        self.uiWindow.colour_closing_stock_table.horizontalHeader().setStretchLastSection(True) 
+        self.uiWindow.colour_closing_stock_table.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+
+        self.uiWindow.shade_closing_stock_table.horizontalHeader().setStretchLastSection(True) 
+        self.uiWindow.shade_closing_stock_table.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+
+
         # TODO combo box disable 
 
 
