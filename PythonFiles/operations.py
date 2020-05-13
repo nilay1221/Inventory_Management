@@ -343,28 +343,30 @@ def get_trans_id(tableName,fieldName):
     finally:
         mydb.close()
 
-def add_raw_material_data(trans_id,date,customer,remark,productDetails,type="IN"):
-    mydb = sqlite3.connect(DATABASE_NAME)
-    mycursor = mydb.cursor()
-    sql = f"INSERT INTO rm_stock VALUES('{trans_id}','{date}','{remark}','{customer}');"
+def add_raw_material_data(self,trans_id,date,customer,remark,productDetails,type="IN"):
     try:
-        mycursor.execute(sql)
-        mydb.commit()
-        for each in productDetails:
-            sql = f"INSERT into has_rm VALUES('{type}',{each[1]},'{trans_id}','{each[0]}','{each[2]}','{each[3]}')"
-            # print(sql)
-            try:
-                mycursor.execute(sql)
-            except:
-                pass
-        mydb.commit()
-        return True
+        mydb = sqlite3.connect(DATABASE_NAME)
+        mycursor = mydb.cursor()
+        sql = f"INSERT INTO rm_stock VALUES('{trans_id}','{date}','{remark}','{customer}');"
+        try:
+            mycursor.execute(sql)
+            mydb.commit()
+            for each in productDetails:
+                sql = f"INSERT into has_rm VALUES('{type}',{each[1]},'{trans_id}','{each[0]}','{each[2]}','{each[3]}')"
+                # print(sql)
+                try:
+                    mycursor.execute(sql)
+                except:
+                    self.show_warning_info(f"Repeated entry of '{each[0]}' is rejected")
+            mydb.commit()
+            return True
+        except Exception as e:
+            # print(e)
+            pass
+        finally:
+            mydb.close()
     except Exception as e:
-        # print(e)
-        pass
-    finally:
-        mydb.close()
-
+        print(e)
 
 # View Raw Material Transaction
 
@@ -502,7 +504,7 @@ def get_shade_number_details(shade_number):
     else:
         return False
 
-def add_shade_stock_trans(trans_id,date,customer,remark,shade_number,productDetails,type="IN"):
+def add_shade_stock_trans(self,trans_id,date,customer,remark,shade_number,productDetails,type="IN"):
     mydb = sqlite3.connect(DATABASE_NAME)
     mycursor = mydb.cursor()
     try:
@@ -512,8 +514,12 @@ def add_shade_stock_trans(trans_id,date,customer,remark,shade_number,productDeta
         try:
             for each in productDetails:
                 sql = f"INSERT INTO has_shade VALUES('{type}',{each[1]},'{trans_id}','{shade_number}','{each[0]}','{each[2]}'); "
-                mycursor.execute(sql)
-                mydb.commit()
+                try:
+                    mycursor.execute(sql)
+                except:
+                    # self.show_warning_info(f"Repeated entry of '{each[0]}' is rejected")
+                    pass
+            mydb.commit()
         except:
             pass
     except:
@@ -671,7 +677,7 @@ def get_raw_trans(shade_trans_id):
 
 # print(delete_shade_trans)
 
-def add_sales_data(trans_id,date,customer,remark,productDetails,type="OUT"):
+def add_sales_data(self,trans_id,date,customer,remark,productDetails,type="OUT"):
     mydb = sqlite3.connect(DATABASE_NAME)
     mycursor = mydb.cursor()
     sql = f"INSERT INTO sales VALUES('{trans_id}','{customer}','{date}','{remark}');"
@@ -683,7 +689,7 @@ def add_sales_data(trans_id,date,customer,remark,productDetails,type="OUT"):
             try:
                 mycursor.execute(sql)
             except:
-                pass
+                self.show_warning_info(f"Repeated entry of '{each[0]}' and '{each[1]}' is rejected")
         mydb.commit()
         return True
     except Exception as e:
@@ -795,11 +801,15 @@ def check_sales_transacs(trans_id):
 def delete_sales_transacs(trans_id):
     mydb = sqlite3.connect(DATABASE_NAME)
     mycursor = mydb.cursor()
-    foreign_key_support(mycursor)
-    sql = f"DELETE from sales where trans_id = '{trans_id}';"
-    mycursor.execute(sql)
-    mydb.commit()
-    mydb.close()
+    try:
+        foreign_key_support(mycursor)
+        sql = f"DELETE from sales where trans_id = '{trans_id}';"
+        mycursor.execute(sql)
+        mydb.commit()
+    except:
+        pass
+    finally:
+        mydb.close()
 
 
 # Closing stock view for Raw material

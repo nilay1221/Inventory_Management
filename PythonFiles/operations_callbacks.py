@@ -492,7 +492,7 @@ def add_raw_material_callback(self):
                         # print("inside exception")
                         if products:
                             # print(products)
-                            if add_raw_material_data(trans_id,date,customer,remark,products):
+                            if add_raw_material_data(self,trans_id,date,customer,remark,products):
                                 # print("Inside")
                                 set_raw_material_data(self)
                                 customer_widget.clearEditText()
@@ -668,7 +668,7 @@ def modify_rm(self):
                             # print(products)
                             if products:
                                 delete_rm_transacs(trans_id)
-                                if add_raw_material_data(trans_id,date,customer,remark,products):
+                                if add_raw_material_data(self,trans_id,date,customer,remark,products):
                                     # set_raw_material_data(self)
                                     self.uiWindow.rw_modify_transaction_id.clear()
                                     self.uiWindow.rm_modify_date.clear()
@@ -838,17 +838,20 @@ def confirm_add_shade_number(self):
 
                             negative_trans_id = "SRT" + str(get_trans_id('rm_stock','SRT'))
                             # print(results)
-                            if add_raw_material_data(negative_trans_id,date,customer,remark,results,type="OUT"):
-                                add_shade_stock_trans(trans_id,date,customer,remark,shade_number,raw_details)
+                            if add_raw_material_data(self,negative_trans_id,date,customer,remark,results,type="OUT"):
+                                add_shade_stock_trans(self,trans_id,date,customer,remark,shade_number,raw_details)
                                 add_into_duplicates(trans_id,negative_trans_id)
                                 message1 = ""
                                 message2 = ""
                                 for each_raw in results:
                                     x = raw_material_closing_stock(each_raw[0],each_raw[3])
-                                    if x < 0:
-                                        message2 = message2 + f"Closing stock for {each_raw[0]}  is {x} in lot {each_raw[3]}<br>"
-                                    else:
-                                        message1 = message1 + f"Closing stock for {each_raw[0]}  is {x} in lot {each_raw[3]}<br>"
+                                    try:
+                                        if x < 0:
+                                            message2 = message2 + f"Closing stock for {each_raw[0]}  is {x} in lot {each_raw[3]}<br>"
+                                        else:
+                                            message1 = message1 + f"Closing stock for {each_raw[0]}  is {x} in lot {each_raw[3]}<br>"
+                                    except:
+                                        pass
                                 self.show_stock_popup(message1, message2)
                                 self.show_info_popup("Transaction Completed Successfully")
                                 set_shade_number_transacs(self)
@@ -1075,8 +1078,8 @@ def confirm_modify_shade_trans(self):
                                         # negative_trans_id = "SRT" + str(get_trans_id('rm_stock','SRT'))
                                         # print(results)
                                         delete_shade_trans(trans_id)
-                                        if add_raw_material_data(negative_trans_id,date,customer,remark,results,type="OUT"):
-                                            add_shade_stock_trans(trans_id,date,customer,remark,shade_number,raw_details)
+                                        if add_raw_material_data(self,negative_trans_id,date,customer,remark,results,type="OUT"):
+                                            add_shade_stock_trans(self,trans_id,date,customer,remark,shade_number,raw_details)
                                             add_into_duplicates(trans_id,negative_trans_id)
                                             message1 = ""
                                             message2 = ""
@@ -1270,7 +1273,7 @@ def add_sales_callback(self):
                                 # print(sales)
                                 if sales:
                                     # print(sales)
-                                    if add_sales_data(trans_id,date,customer,remark,sales):
+                                    if add_sales_data(self,trans_id,date,customer,remark,sales):
                                         # print("Inside")
                                         message1 = ""
                                         message2 = ""
@@ -1559,7 +1562,6 @@ def modify_sales(self):
                             print(e)
                             break
                 if flag == 0:
-                    delete_sales_transacs(trans_id)
                     for i in range(8):
                         try:
                             if self.uiWindow.sales_modify_table.item(i, 0).text() and \
@@ -1582,8 +1584,9 @@ def modify_sales(self):
                                 # print("inside exception")
                                 # print(sales)
                                 if sales:
+                                    delete_sales_transacs(trans_id)
                                     # print(sales)
-                                    if add_sales_data(trans_id, date, customer, remark, sales):
+                                    if add_sales_data(self,trans_id, date, customer, remark, sales):
                                         # print("Inside")
                                         message1=""
                                         message2=""
