@@ -478,10 +478,11 @@ def add_raw_material_callback(self):
             products = []
             for i in range(8):
                 try:
-                    if self.uiWindow.rm_addtable.item(i,0).text() and self.uiWindow.rm_addtable.item(i,2).text():
+                    if self.uiWindow.rm_addtable.item(i,0).text() and self.uiWindow.rm_addtable.item(i,2).text() and self.uiWindow.rm_addtable.item(i,3).text():
                         product_code = self.uiWindow.rm_addtable.item(i,0).text()
                         quantity = self.uiWindow.rm_addtable.item(i,2).text()
-                        products.append((product_code,float(quantity),"R"))
+                        lot = self.uiWindow.rm_addtable.item(i, 3).text()
+                        products.append((product_code,float(quantity),"R",lot))
                 except:
                     try:
                         self.uiWindow.rm_addtable.item(i,0).text()
@@ -500,6 +501,7 @@ def add_raw_material_callback(self):
                                 self.show_info_popup("Transaction Added Successfully")
                                 break
                         else:
+                            print("in")
                             self.show_warning_info("Please fill info")
                             break
         elif check_table == "False" :
@@ -636,7 +638,6 @@ def modify_rm(self):
     # print("Inside")
     trans_id = "RMT" + str(self.uiWindow.rw_modify_transaction_id.text()).zfill(5)
     if check_rm_transacs(trans_id):
-        delete_rm_transacs(trans_id)
         # print("Deleted")
         trans_id_widget = self.uiWindow.rw_modify_transaction_id
         date_widget = self.uiWindow.rm_modify_date
@@ -652,10 +653,11 @@ def modify_rm(self):
                 products = []
                 for i in range(8):
                     try:
-                        if self.uiWindow.rm_view_table.item(i,0).text() and self.uiWindow.rm_view_table.item(i,2).text():
+                        if self.uiWindow.rm_view_table.item(i,0).text() and self.uiWindow.rm_view_table.item(i,2).text() and self.uiWindow.rm_view_table.item(i,3).text():
                             product_code = self.uiWindow.rm_view_table.item(i,0).text()
                             quantity = self.uiWindow.rm_view_table.item(i,2).text()
-                            products.append((product_code,float(quantity),"R"))
+                            lot = self.uiWindow.rm_view_table.item(i,3).text()
+                            products.append((product_code,float(quantity),"R",lot))
                     except:
                         try:
                             self.uiWindow.rm_view_table.item(i,0).text()
@@ -665,6 +667,7 @@ def modify_rm(self):
                             # print("inside exception")
                             # print(products)
                             if products:
+                                delete_rm_transacs(trans_id)
                                 if add_raw_material_data(trans_id,date,customer,remark,products):
                                     # set_raw_material_data(self)
                                     self.uiWindow.rw_modify_transaction_id.clear()
@@ -673,6 +676,7 @@ def modify_rm(self):
                                     remark_widget.clear()
                                     self.uiWindow.rm_view_table.clearContents()
                                     self.show_info_popup("Transaction Modified Successfully")
+                                    break
                             else:
                                 self.show_warning_info("Please fill info")
                                 break
@@ -684,13 +688,6 @@ def modify_rm(self):
         else:
             self.show_warning_info("Please fill out the form")
 
-def clear_view_by_id(self):
-    self.uiWindow.rw_view_transaction_id.clear()
-    self.uiWindow.rm_view_date.clear()
-    self.uiWindow.rm_view_customer.clearEditText()
-    self.uiWindow.rm_view_remark.clear()
-    self.uiWindow.rm_view_table_4.clear()
-    self.uiWindow.rm_view_table_4.setRowCount(9)
 
 def view_by_custom_dates(self):
     d1 = self.uiWindow.rw_view_starting_date_3.date()
@@ -784,6 +781,7 @@ def set_total_quantity(row,column,self,tableWidget1,tableWidget2,quantitywidget)
                 pass
 
 def confirm_add_shade_number(self):
+    flag=0
     trans_widget = self.uiWindow.shade_transaction_id
     date_widget = self.uiWindow.date_2
     customer_widget = self.uiWindow.shade_customer
@@ -795,7 +793,13 @@ def confirm_add_shade_number(self):
     remark = remark_widget.text()
     shade_number = shade_number_widget.text()
     if trans_id and date and customer and remark and shade_number:
-        if get_shade(shade_number):
+        try:
+            for i in range(self.uiWindow.shade_colortable.rowCount()):
+                self.uiWindow.shade_colortable.item(i, 5).text()
+        except:
+            flag = 1
+            self.show_warning_info(f"Please fill out the lot in second table at row '{i+1}'")
+        if get_shade(shade_number) and flag==0:
             table_check = check_for_no_product_code(self.uiWindow.shade_addtable,"R")
             if table_check == "True":
                 try:
@@ -805,11 +809,12 @@ def confirm_add_shade_number(self):
                         results = []
                         raw_details = []
                         for i in range(row_count_1):
-                                if self.uiWindow.shade_addtable.item(i,0).text() and self.uiWindow.shade_addtable.item(i,2).text():
+                                if self.uiWindow.shade_addtable.item(i,0).text() and self.uiWindow.shade_addtable.item(i,2).text() and self.uiWindow.shade_addtable.item(i,3).text():
                                     x = self.uiWindow.shade_addtable.item(i,0).text()
                                     y = self.uiWindow.shade_addtable.item(i,2).text()
-                                    results.append((x,y,"R"))
-                                    raw_details.append((x,y))
+                                    z = self.uiWindow.shade_addtable.item(i,3).text()
+                                    results.append((x,y,"R",z))
+                                    raw_details.append((x,y,z))
                                 else:
                                     raise Exception
                     except:
@@ -822,12 +827,13 @@ def confirm_add_shade_number(self):
                             for i in range(row_count_2):
                                 x = self.uiWindow.shade_colortable.item(i,0).text()
                                 y = float(self.uiWindow.shade_colortable.item(i,3).text())/1000
+                                z = self.uiWindow.shade_colortable.item(i,5).text()
                                 for each in raw_details:
                                     if x == each[0]:
                                         # print(each[0])
                                         # print(x)
                                         raise Exception("Colour cannot be used")
-                                results.append((x,y,"C"))
+                                results.append((x,y,"C",z))
                                 # raw_details.append((x,y))
 
                             negative_trans_id = "SRT" + str(get_trans_id('rm_stock','SRT'))
@@ -838,11 +844,11 @@ def confirm_add_shade_number(self):
                                 message1 = ""
                                 message2 = ""
                                 for each_raw in results:
-                                    x = raw_material_closing_stock(each_raw[0])
+                                    x = raw_material_closing_stock(each_raw[0],each_raw[3])
                                     if x < 0:
-                                        message2 = message2 + f"Closing stock for {each_raw[0]}  is {x} <br>"
+                                        message2 = message2 + f"Closing stock for {each_raw[0]}  is {x} in lot {each_raw[3]}<br>"
                                     else:
-                                        message1 = message1 + f"Closing stock for {each_raw[0]}  is {x}<br>"
+                                        message1 = message1 + f"Closing stock for {each_raw[0]}  is {x} in lot {each_raw[3]}<br>"
                                 self.show_stock_popup(message1, message2)
                                 self.show_info_popup("Transaction Completed Successfully")
                                 set_shade_number_transacs(self)
@@ -861,8 +867,9 @@ def confirm_add_shade_number(self):
             elif table_check == "Product Mismatch":
                 self.show_warning_info("Please choose Raw Material only")
         else:
-            self.show_warning_info("Please enter correct shade number")
-            self.uiWindow.shade_number_add.clear()
+            if flag!=1:
+                self.show_warning_info("Please enter correct shade number")
+                self.uiWindow.shade_number_add.clear()
     else:
         self.show_warning_info("Please fill out the info")
 
@@ -900,6 +907,7 @@ def view_shade_stock_by_id(self):
 
 
 def view_shade_transaction_today(self):
+    trans_list=[]
     self.uiWindow.shade_view_today_date.setDate(QtCore.QDate.currentDate())
     results = view_shade_transaction(by_today=True)
     if results:
@@ -908,7 +916,12 @@ def view_shade_transaction_today(self):
         for row in range(len(results)):
             self.uiWindow.shade_view_table_2.insertRow(row)
             for column in range(len(results[row])):
-                if results[row][column] != '-':
+                if column == 0:
+                    if str(results[row][column]) not in trans_list:
+                        trans_list.append(str(results[row][column]))
+                        self.uiWindow.shade_view_table_2.setItem(row, column,
+                                                               QtWidgets.QTableWidgetItem(str(results[row][column])))
+                elif results[row][column] != '-':
                     self.uiWindow.shade_view_table_2.setItem(row,column,QtWidgets.QTableWidgetItem(str(results[row][column])))
     else:
         self.show_info_popup("No Transactions Done Today")
@@ -986,106 +999,120 @@ def set_modify_shade_transaction(self):
                     self.uiWindow.shade_addtable_3.setItem(each_row,each_column,QtWidgets.QTableWidgetItem(str(table1_details[each_row][each_column])))
         table2_details = results['table2_detials']
         self.uiWindow.shade_add_total_3.setText(str(total_quantity))
-        set_shade_number_details(self,self.uiWindow.shade_number_modify,self.uiWindow.shade_addtable_3,self.uiWindow.shade_colortable_3,self.uiWindow.shade_add_total_3)
+        # set_shade_number_details(self,self.uiWindow.shade_number_modify,self.uiWindow.shade_addtable_3,self.uiWindow.shade_colortable_3,self.uiWindow.shade_add_total_3)
+        self.uiWindow.shade_colortable_3.setRowCount(0)
+        for row in range(len(table2_details)):
+            self.uiWindow.shade_colortable_3.insertRow(row)
+            for column in range(len(table2_details[row])):
+                if table2_details[row][column] != '-':
+                    self.uiWindow.shade_colortable_3.setItem(row,column,QtWidgets.QTableWidgetItem(str(table2_details[row][column])))
         self.uiWindow.shade_addtable_3.setRowCount(8)
-        # self.uiWindow.shade_colortable_3.setRowCount(10)
-        # for row in range(len(table2_details)):
-        #     self.uiWindow.shade_colortable_3.insertRow(row)
-        #     for column in range(len(table2_details[row])):
-        #         self.uiWindow.shade_colortable_3.setItem(row,column,QtWidgets.QTableWidgetItem(str(table2_details[row][column])))
     else:
         self.show_warning_info("Incorrect transaction id")
 
 
 def confirm_modify_shade_trans(self):
     trans_id = "SNT" + str(self.uiWindow.shade_modify_transaction_id.text()).zfill(5)
-    if check_shade_trans(trans_id):
-            negative_trans_id = get_raw_trans(trans_id)
-            # print(negative_trans_id)
-            delete_shade_trans(trans_id)
-            trans_widget = self.uiWindow.shade_modify_transaction_id
-            date_widget = self.uiWindow.shade_modify_date
-            customer_widget = self.uiWindow.shade_modify_customer
-            remark_widget = self.uiWindow.shade_modify_remark
-            shade_number_widget = self.uiWindow.shade_number_modify
-            # trans_id = "SNT" +  str(trans_widget.text())
-            date = date_widget.text()
-            customer = customer_widget.currentText()
-            remark = remark_widget.text()
-            shade_number = shade_number_widget.text()
-            if trans_id and date and customer and remark and shade_number:
-                if get_shade(shade_number):
-                    table_check = check_for_no_product_code(self.uiWindow.shade_addtable_3,"R")
-                    if table_check == "True":
-                        try:
-                            row_count_1 = self.uiWindow.shade_addtable_3.rowCount()
-                            row_count_2 = self.uiWindow.shade_colortable_3.rowCount()
+    flag=0
+    try:
+        if check_shade_trans(trans_id):
+                negative_trans_id = get_raw_trans(trans_id)
+                # print(negative_trans_id)
+                trans_widget = self.uiWindow.shade_modify_transaction_id
+                date_widget = self.uiWindow.shade_modify_date
+                customer_widget = self.uiWindow.shade_modify_customer
+                remark_widget = self.uiWindow.shade_modify_remark
+                shade_number_widget = self.uiWindow.shade_number_modify
+                # trans_id = "SNT" +  str(trans_widget.text())
+                date = date_widget.text()
+                customer = customer_widget.currentText()
+                remark = remark_widget.text()
+                shade_number = shade_number_widget.text()
+                if trans_id and date and customer and remark and shade_number:
+                    try:
+                        for i in range(self.uiWindow.shade_colortable_3.rowCount()):
+                            self.uiWindow.shade_colortable_3.item(i,5).text()
+                    except:
+                        flag=1
+                        self.show_warning_info(f"Please fill out the lot in second table at row '{i+1}'")
+                    if get_shade(shade_number) and flag==0:
+                        table_check = check_for_no_product_code(self.uiWindow.shade_addtable_3,"R")
+                        if table_check == "True":
                             try:
-                                results = []
-                                raw_details = []
-                                for i in range(row_count_1):
-                                        if self.uiWindow.shade_addtable_3.item(i,0).text() and self.uiWindow.shade_addtable_3.item(i,2).text():
-                                            x = self.uiWindow.shade_addtable_3.item(i,0).text()
-                                            y = self.uiWindow.shade_addtable_3.item(i,2).text()
-                                            results.append((x,y,"R"))
-                                            raw_details.append((x,y))
-                                        else:
-                                            raise Exception
-                            except:
+                                row_count_1 = self.uiWindow.shade_addtable_3.rowCount()
+                                row_count_2 = self.uiWindow.shade_colortable_3.rowCount()
                                 try:
-                                    if i!=0:
-                                        if not self.uiWindow.shade_addtable_3.item(i,0).text():
-                                            raise Exception
-                                    self.show_warning_info("Please complete table")
-                                except:
-                                    for i in range(row_count_2):
-                                        x = self.uiWindow.shade_colortable_3.item(i,0).text()
-                                        y = float(self.uiWindow.shade_colortable_3.item(i,3).text())/1000
-                                        for each in raw_details:
-                                            if x == each[0]:
-                                                # print(each[0])
-                                                # print(x)
-                                                raise Exception("Colour cannot be used")
-                                        results.append((x,y,"C"))
-                                        # raw_details.append((x,y))
-
-                                    # negative_trans_id = "SRT" + str(get_trans_id('rm_stock','SRT'))
-                                    # print(results)
-                                    if add_raw_material_data(negative_trans_id,date,customer,remark,results,type="OUT"):
-                                        add_shade_stock_trans(trans_id,date,customer,remark,shade_number,raw_details)
-                                        add_into_duplicates(trans_id,negative_trans_id)
-                                        message1 = ""
-                                        message2 = ""
-                                        for each_raw in results:
-                                            x= raw_material_closing_stock(each_raw[0])
-                                            if x < 0:
-                                                message2 = message2 + f"Closing stock for {each_raw[0]}  is {x} <br>"
+                                    results = []
+                                    raw_details = []
+                                    for i in range(row_count_1):
+                                            if self.uiWindow.shade_addtable_3.item(i,0).text() and self.uiWindow.shade_addtable_3.item(i,2).text() and self.uiWindow.shade_addtable_3.item(i,3).text():
+                                                x = self.uiWindow.shade_addtable_3.item(i,0).text()
+                                                y = self.uiWindow.shade_addtable_3.item(i,2).text()
+                                                z = self.uiWindow.shade_addtable_3.item(i,3).text()
+                                                results.append((x,y,"R",z))
+                                                raw_details.append((x,y,z))
                                             else:
-                                                message1 = message1 + f"Closing stock for {each_raw[0]}  is '{x} <br>"
-                                        self.show_stock_popup(message1, message2)
-                                        self.show_info_popup("Transaction Modified Successfully")
-                                        # set_shade_number_transacs(self)
-                                        self.uiWindow.shade_modify_transaction_id.clear()
-                                        self.uiWindow.shade_modify_date.clear()
-                                        self.uiWindow.shade_modify_customer.clearEditText()
-                                        self.uiWindow.shade_modify_remark.clear()
-                                        self.uiWindow.shade_number_modify.clear()
-                                        self.uiWindow.shade_addtable_3.clearContents()
-                                        self.uiWindow.shade_colortable_3.clearContents()
-                                        self.uiWindow.shade_add_total_3.clear()
-                                    else:
-                                        self.show_warning_info("Transaction UnSuccessfull")
-                        except Exception as err:
-                            self.show_warning_info(err.__str__())
-                    elif table_check == "False":
-                        self.show_warning_info("Please fill out from available product code")
-                    elif table_check == "Product Mismatch":
-                        self.show_warning_info("Please select Raw Materials Only")
+                                                raise Exception
+                                except:
+                                    try:
+                                        if i!=0:
+                                            if not self.uiWindow.shade_addtable_3.item(i,0).text():
+                                                raise Exception
+                                        self.show_warning_info("Please complete table")
+                                    except:
+                                        for i in range(row_count_2):
+                                            x = self.uiWindow.shade_colortable_3.item(i,0).text()
+                                            y = float(self.uiWindow.shade_colortable_3.item(i,3).text())/1000
+                                            z = self.uiWindow.shade_colortable_3.item(i,5).text()
+                                            for each in raw_details:
+                                                if x == each[0]:
+                                                    # print(each[0])
+                                                    # print(x)
+                                                    raise Exception("Colour cannot be used")
+                                            results.append((x,y,"C",z))
+                                            # raw_details.append((x,y))
+
+                                        # negative_trans_id = "SRT" + str(get_trans_id('rm_stock','SRT'))
+                                        # print(results)
+                                        delete_shade_trans(trans_id)
+                                        if add_raw_material_data(negative_trans_id,date,customer,remark,results,type="OUT"):
+                                            add_shade_stock_trans(trans_id,date,customer,remark,shade_number,raw_details)
+                                            add_into_duplicates(trans_id,negative_trans_id)
+                                            message1 = ""
+                                            message2 = ""
+                                            for each_raw in results:
+                                                x= raw_material_closing_stock(each_raw[0],each_raw[3])
+                                                if x < 0:
+                                                    message2 = message2 + f"Closing stock for {each_raw[0]}  is {x} in lot {each_raw[3]} in lot {each_raw[3]}<br>"
+                                                else:
+                                                    message1 = message1 + f"Closing stock for {each_raw[0]}  is '{x} in lot {each_raw[3]} in lot {each_raw[3]}<br>"
+                                            self.show_stock_popup(message1, message2)
+                                            self.show_info_popup("Transaction Modified Successfully")
+                                            # set_shade_number_transacs(self)
+                                            self.uiWindow.shade_modify_transaction_id.clear()
+                                            self.uiWindow.shade_modify_date.clear()
+                                            self.uiWindow.shade_modify_customer.clearEditText()
+                                            self.uiWindow.shade_modify_remark.clear()
+                                            self.uiWindow.shade_number_modify.clear()
+                                            self.uiWindow.shade_addtable_3.clearContents()
+                                            self.uiWindow.shade_colortable_3.clearContents()
+                                            self.uiWindow.shade_add_total_3.clear()
+                                        else:
+                                            self.show_warning_info("Transaction UnSuccessfull")
+                            except Exception as err:
+                                self.show_warning_info(err.__str__())
+                        elif table_check == "False":
+                            self.show_warning_info("Please fill out from available product code")
+                        elif table_check == "Product Mismatch":
+                            self.show_warning_info("Please select Raw Materials Only")
+                    else:
+                        if flag!=1:
+                            self.show_warning_info("Please enter correct shade number")
+                            self.uiWindow.shade_number_modify.clear()
                 else:
-                    self.show_warning_info("Please enter correct shade number")
-                    self.uiWindow.shade_number_modify.clear()
-            else:
-                self.show_warning_info("Please fill out the info")
+                    self.show_warning_info("Please fill out the info")
+    except Exception as e:
+        print(e)
 
 
 def shade_view_by_custom_dates(self):
@@ -1119,18 +1146,6 @@ def shade_view_by_custom_dates(self):
         self.show_warning_info("Please select correct date")
 
 
-def clear_shade_view_by_today(self):
-    self.uiWindow.shade_view_transaction_id.clear()
-    self.uiWindow.date_3.clear()
-    self.uiWindow.shade_view_customer.clearEditText()
-    self.uiWindow.shade_view_remark.clear()
-    self.uiWindow.shade_number_add_view.clear()
-    self.uiWindow.shade_addtable_4.clearContents()
-    self.uiWindow.shade_addtable_4.setRowCount(0)
-    self.uiWindow.shade_colortable_4.clearContents()
-    self.uiWindow.shade_colortable_4.setRowCount(0)
-    self.uiWindow.shade_add_total_4.clear()
-
 def check_for_no_product_code(tableWidget,product_type):
     results = tableWidget.findItems("No such product code",QtCore.Qt.MatchExactly)
     if product_type == "R":
@@ -1156,6 +1171,7 @@ def add_sales_callback(self):
     # print("Inside")
     # TODO check if table is empty or not
     flag = 0
+    tableflag=0
     try:
         trans_id_widget = self.uiWindow.sales_add_transid
         date_widget = self.uiWindow.sales_add_date
@@ -1166,8 +1182,23 @@ def add_sales_callback(self):
         customer = customer_widget.currentText()
         remark = remark_widget.text()
         if customer and remark:
+            try:
+                for i in range(self.uiWindow.sales_add_table.rowCount()):
+                    self.uiWindow.sales_add_table.item(i,0).text()
+                    self.uiWindow.sales_add_table.item(i, 1).text()
+                    self.uiWindow.sales_add_table.item(i, 3).text()
+                    self.uiWindow.sales_add_table.item(i, 4).text()
+            except:
+                try:
+                    if i != 0:
+                        if not self.uiWindow.shade_addtable.item(i, 0).text():
+                            raise Exception
+                    tableflag=1
+                    self.show_warning_info(f"Please fill out the table at row {i+1}")
+                except:
+                    pass
             checktable = check_for_no_product_code(self.uiWindow.sales_add_table,'R')
-            if checktable=="True":
+            if checktable=="True" and tableflag==0:
                 sales = []
                 for i in range(8):
                     try:
@@ -1233,12 +1264,14 @@ def add_sales_callback(self):
                                 shade_number= self.uiWindow.sales_add_table.item(i,0).text()
                                 product_code = self.uiWindow.sales_add_table.item(i,1).text()
                                 quantity = self.uiWindow.sales_add_table.item(i,3).text()
-                                sales.append((shade_number,product_code,float(quantity)))
+                                lot = self.uiWindow.sales_add_table.item(i,4).text()
+                                sales.append((shade_number,product_code,float(quantity),lot))
                         except:
                             try:
                                 self.uiWindow.sales_add_table.item(i,0).text()
                                 self.uiWindow.sales_add_table.item(i, 1).text()
                                 self.uiWindow.sales_add_table.item(i, 3).text()
+                                self.uiWindow.sales_add_table.item(i, 4).text()
                                 self.show_warning_info("Please fill info")
                                 break
                             except:
@@ -1251,11 +1284,11 @@ def add_sales_callback(self):
                                         message1 = ""
                                         message2 = ""
                                         for each in sales:
-                                            x = shade_raw_closing_stock(each[0], each[1])
+                                            x = shade_raw_closing_stock(each[0], each[1],each[3])
                                             if x < 0:
-                                                message2 = message2 + f"Closing stock for {each[0]} and {each[1]} is {x}<br>"
+                                                message2 = message2 + f"Closing stock for {each[0]} and {each[1]} is {x} in lot {each[3]}<br>"
                                             else:
-                                                message1 = message1 + f"Closing stock for {each[0]} and {each[1]} is {x}<br>"
+                                                message1 = message1 + f"Closing stock for {each[0]} and {each[1]} is {x} in lot {each[3]}<br>"
                                         self.show_stock_popup(message1, message2)
                                         set_sales_data(self)
                                         customer_widget.clearEditText()
@@ -1267,7 +1300,8 @@ def add_sales_callback(self):
                                     self.show_warning_info("Please fill info")
                                     break
             else:
-                self.show_warning_info("Please fill out from available product code")
+                if tableflag!=1:
+                    self.show_warning_info("Please fill out from available product code")
         else:
             self.show_warning_info("Please fill out the form")
     except Exception as e:
@@ -1457,6 +1491,7 @@ def set_modify_sales(self):
 def modify_sales(self):
     # print("Inside")
     flag=0
+    tableflag=0
     trans_id = "SLS" + str(self.uiWindow.sales_modify_trans_id.text()).zfill(5)
     if check_sales_transacs(trans_id):
         # print("Deleted")
@@ -1469,8 +1504,23 @@ def modify_sales(self):
         customer = customer_widget.currentText()
         remark = remark_widget.text()
         if customer and remark:
-            checktable = check_for_no_product_code(self.uiWindow.sales_add_table, 'R')
-            if checktable == "True":
+            try:
+                for i in range(self.uiWindow.sales_modify_table.rowCount()):
+                    self.uiWindow.sales_modify_table.item(i,0).text()
+                    self.uiWindow.sales_modify_table.item(i, 1).text()
+                    self.uiWindow.sales_modify_table.item(i, 3).text()
+                    self.uiWindow.sales_modify_table.item(i, 4).text()
+            except:
+                try:
+                    if i != 0:
+                        if not self.self.uiWindow.sales_modify_table.item(i, 0).text():
+                            raise Exception
+                    tableflag=1
+                    self.show_warning_info(f"Please fill out the table at row {i+1}")
+                except:
+                    pass
+            checktable = check_for_no_product_code(self.uiWindow.sales_modify_table, 'R')
+            if checktable == "True" and tableflag==0:
                 sales = []
                 for i in range(8):
                     try:
@@ -1536,12 +1586,14 @@ def modify_sales(self):
                                 shade_number = self.uiWindow.sales_modify_table.item(i, 0).text()
                                 product_code = self.uiWindow.sales_modify_table.item(i, 1).text()
                                 quantity = self.uiWindow.sales_modify_table.item(i, 3).text()
-                                sales.append((shade_number, product_code, float(quantity)))
+                                lot = self.uiWindow.sales_modify_table.item(i, 4).text()
+                                sales.append((shade_number, product_code, float(quantity),lot))
                         except:
                             try:
                                 self.uiWindow.sales_modify_table.item(i, 0).text()
                                 self.uiWindow.sales_modify_table.item(i, 1).text()
                                 self.uiWindow.sales_modify_table.item(i, 3).text()
+                                self.uiWindow.sales_modify_table.item(i, 4).text()
                                 self.show_warning_info("Please fill info")
                                 break
                             except:
@@ -1554,11 +1606,11 @@ def modify_sales(self):
                                         message1=""
                                         message2=""
                                         for each in sales:
-                                            x=shade_raw_closing_stock(each[0],each[1])
+                                            x=shade_raw_closing_stock(each[0],each[1],each[3])
                                             if x<0:
-                                                message2=message2+f"Closing stock for {each[0]} and {each[1]} is {x}<br>"
+                                                message2=message2+f"Closing stock for {each[0]} and {each[1]} is {x} in lot {each[3]}<br>"
                                             else:
-                                                message1=message1+f"Closing stock for {each[0]} and {each[1]} is {x}<br>"
+                                                message1=message1+f"Closing stock for {each[0]} and {each[1]} is {x} in lot {each[3]}<br>"
                                         self.show_stock_popup(message1,message2)
                                         set_sales_data(self)
                                         customer_widget.clearEditText()
@@ -1572,7 +1624,8 @@ def modify_sales(self):
                                     self.show_warning_info("Please fill info")
                                     break
             else:
-                self.show_warning_info("Please fill out from available product code")
+                if tableflag!=1:
+                    self.show_warning_info("Please fill out from available product code")
         else:
             self.show_warning_info("Please fill out the form")
 
@@ -1592,73 +1645,76 @@ def set_product_name(self):
 
 
 def product_stock_view(self):
-    code = self.uiWindow.rw_view_stock_code_2.text()
-    d1 = self.uiWindow.rw_view_starting_date_4.date()
-    d2 = self.uiWindow.rw_view_ending_date_3.date()
-    x = d1.toString('dd/MM/yyyy')
-    y = d2.toString('dd/MM/yyyy')
-    # print(type(x))
-    x_date = datetime.datetime.strptime(x,'%d/%m/%Y')
-    y_date = datetime.datetime.strptime(y,'%d/%m/%Y')
-    delta = y_date - x_date
-    if self.uiWindow.rw_view_stock_name_2.text() != "No such product Code":
-        if delta.days > 0:
-            results = get_product_stock(code,by_custom=[x,y])
-            if results:
-                # print(results)
-                try:
-                    self.uiWindow.rm_view_table_6.setRowCount(0)
-                    trans_list = []
-                    for each_list in results:
-                        for row in range(len(each_list)):
-                            self.uiWindow.rm_view_table_6.insertRow(row)
-                            for column in range(len(each_list[row])):
-                                if column == 0:
-                                    if str(each_list[row][column]) not in trans_list:
-                                        trans_list.append(str(each_list[row][column]))
+    total_in = 0
+    total_out = 0
+    flag =0
+    try:
+        code = self.uiWindow.rw_view_stock_code_2.text()
+        lot = self.uiWindow.rw_stock_view_lot.text()
+        d1 = self.uiWindow.rw_view_starting_date_4.date()
+        d2 = self.uiWindow.rw_view_ending_date_3.date()
+        x = d1.toString('dd/MM/yyyy')
+        y = d2.toString('dd/MM/yyyy')
+        # print(type(x))
+        x_date = datetime.datetime.strptime(x,'%d/%m/%Y')
+        y_date = datetime.datetime.strptime(y,'%d/%m/%Y')
+        delta = y_date - x_date
+        if self.uiWindow.rw_view_stock_name_2.text() != "No such product Code":
+            if delta.days > 0:
+                results = get_product_stock(code,lot,by_custom=[x,y])
+                if results:
+                    # print(results)
+                    try:
+                        self.uiWindow.rm_view_table_6.setRowCount(0)
+                        trans_list = []
+                        for each_list in results:
+                            for row in range(len(each_list)):
+                                self.uiWindow.rm_view_table_6.insertRow(row)
+                                for column in range(len(each_list[row])):
+                                    if column == 0:
+                                        if str(each_list[row][column]) not in trans_list:
+                                            trans_list.append(str(each_list[row][column]))
+                                            self.uiWindow.rm_view_table_6.setItem(row, column,
+                                                                                     QtWidgets.QTableWidgetItem(
+                                                                                         str(each_list[
+                                                                                                 row][
+                                                                                                 column])))
+                                    else:
                                         self.uiWindow.rm_view_table_6.setItem(row, column,
                                                                                  QtWidgets.QTableWidgetItem(
-                                                                                     str(each_list[
-                                                                                             row][
+                                                                                     str(each_list[row][
                                                                                              column])))
-                                else:
-                                    self.uiWindow.rm_view_table_6.setItem(row, column,
-                                                                             QtWidgets.QTableWidgetItem(
-                                                                                 str(each_list[row][
-                                                                                         column])))
-                    # self.uiWindow.rm_view_table_6.setRowCount(0)
-                    # for row_number, row_data in enumerate(results):
-                    #     self.uiWindow.rm_view_table_6.insertRow(row_number)
-                    #     for column_number, data in enumerate(row_data):
-                    #         if str(data)== "OUT" or str(data)=="IN":
-                    #             pass
-                    #         else:
-                    #             if column_number==3:
-                    #                 if results[row_number][2]=="IN":
-                    #                     self.uiWindow.rm_view_table_6.setItem(row_number, column_number-1,
-                    #                                                                QtWidgets.QTableWidgetItem(str(data)))
-                    #                 elif results[row_number][2]=="OUT":
-                    #                     self.uiWindow.rm_view_table_6.setItem(row_number, column_number,
-                    #                                                           QtWidgets.QTableWidgetItem(str(data)))
-                    #             else:
-                    #                 self.uiWindow.rm_view_table_6.setItem(row_number, column_number,
-                    #                                                       QtWidgets.QTableWidgetItem(str(data)))
-                except Exception as e:
-                    print(e)
+                                        if column == 2 and str(each_list[row][column]) != '-':
+                                            total_in = total_in + float(each_list[row][column])
+                                        if column == 3 and str(each_list[row][column]) != '-':
+                                            total_out = total_out + float(each_list[row][column])
+                        self.uiWindow.rm_view_stock_total_in.setText(str(total_in))
+                        self.uiWindow.rm_view_stock_total_out.setText(str(total_out))
+                    except Exception as e:
+                        print(e)
+                else:
+                    self.show_info_popup("No transactions in given dates")
+                    flag=1
+                closing = raw_material_closing_stock(code,lot)
+                if flag==0:
+                    self.uiWindow.rm_view_opening.setText(str(closing+total_out-total_in))
+                self.uiWindow.rw_view_closing.setText(str(closing))
             else:
-                self.show_info_popup("No transactions in given dates")
-            closing = raw_material_closing_stock(code)
-            self.uiWindow.rw_view_closing.setText(str(closing))
+                self.show_warning_info("Please select correct date")
         else:
-            self.show_warning_info("Please select correct date")
-    else:
-        self.show_warning_info("Please select correct product code")
+            self.show_warning_info("Please select correct product code")
+    except:
+        self.show_warning_info("Please enter all details")
 
 def shade_stock_view(self):
+    total_in=0
+    total_out=0
+    flag=0
     try:
         if check_for_shade(self):
             code = self.uiWindow.shade_view_stock_code.text()
             shade = self.uiWindow.shade_view_stock_shade_number.text()
+            lot = self.uiWindow.shade_view_stock_lot.text()
             d1 = self.uiWindow.shade_view_starting_date.date()
             d2 = self.uiWindow.shade_view_ending_date.date()
             x = d1.toString('dd/MM/yyyy')
@@ -1670,7 +1726,7 @@ def shade_stock_view(self):
             if shade!="":
                 if self.uiWindow.shade_view_stock_name.text() != "No such product Code":
                     if delta.days > 0:
-                        results = get_shade_stock(shade,code,by_custom=[x,y])
+                        results = get_shade_stock(shade,code,lot,by_custom=[x,y])
                         # print(results)
                         if results:
                             # print(results)
@@ -1694,11 +1750,20 @@ def shade_stock_view(self):
                                                                                               QtWidgets.QTableWidgetItem(
                                                                                                   str(each_list[row][
                                                                                                           column])))
+                                                if column==2 and str(each_list[row][column])!='-':
+                                                    total_in = total_in + float(each_list[row][column])
+                                                if column==3 and str(each_list[row][column])!='-':
+                                                    total_out= total_out + float(each_list[row][column])
+                                self.uiWindow.shade_view_stock_total_in.setText(str(total_in))
+                                self.uiWindow.shade_view_stock_total_out.setText(str(total_out))
                             except Exception as e:
                                 print(e)
                         else:
                             self.show_info_popup("No transactions in given dates")
-                        closing = shade_raw_closing_stock(shade, code)
+                            flag=1
+                        closing = shade_raw_closing_stock(shade, code,lot)
+                        if flag==0:
+                            self.uiWindow.shade_view_opening.setText(str(closing + total_out - total_in))
                         self.uiWindow.shade_view_closing.setText(str(closing))
                     else:
                         self.show_warning_info("Please select correct date")
@@ -1708,10 +1773,10 @@ def shade_stock_view(self):
                 self.show_warning_info("Please enter shade number")
     except Exception as e:
         print(e)
-        self.show_warning_info("Please fill the complete form")
+        self.show_warning_info("Please enter all details")
 
-def check_shade(self):
-    code = self.uiWindow.shade_view_stock_shade_number.text()
+def check_shade(self,inputbox):
+    code = inputbox.text()
     try:
         if code=="":
             pass
@@ -1721,7 +1786,7 @@ def check_shade(self):
                 pass
             else:
                 self.show_warning_info("The shade number entered does not exist")
-                self.uiWindow.shade_view_stock_shade_number.setText("")
+                inputbox.setText("")
     except:
         pass
 
@@ -1852,7 +1917,7 @@ def shade_display_closing(self):
                                                                             row_number, column_number+1).text():
                                 x = shade_raw_closing_stock(
                                     self.uiWindow.shade_closing_stock_table.item(row_number, column_number).text(),
-                                    self.uiWindow.shade_closing_stock_table.item(row_number, column_number+1).text())
+                                    self.uiWindow.shade_closing_stock_table.item(row_number, column_number+1).text(),'all')
                                 # print(x)
                                 self.uiWindow.shade_closing_stock_table.setItem(row_number, column_number + 3,
                                                                                  QtWidgets.QTableWidgetItem(str(x)))
@@ -1860,3 +1925,296 @@ def shade_display_closing(self):
             self.show_warning_info("Please select correct product code")
     except Exception as e:
         print(e)
+
+
+
+def set_opening_product_name_raw(self,inputbox,outputbox):
+    try:
+        code = inputbox.text()
+        result = get_product_name(code,'RC')
+        # print("result")
+        if result == "false":
+            outputbox.setText("No such product Code")
+        elif result=="Product mismatch":
+            inputbox.setText("")
+            outputbox.setText("")
+            self.show_warning_info("Only raw material is allowed")
+        else:
+            outputbox.setText(result)
+    except Exception as e:
+        print(e)
+
+
+def add_raw_opening(self):
+    try:
+        product_code = self.uiWindow.rm_opening_product_code.text()
+        opening = self.uiWindow.rm_opening_add_stock.text()
+        lot = self.uiWindow.rm_opening_add_lot.text()
+        if ""!=self.uiWindow.rm_opening_product_name.text() and "No such product code"!=self.uiWindow.rm_opening_product_name.text():
+            if product_code and opening and lot:
+                try:
+                    if add_rm_opening(product_code, lot, float(opening)):
+                        message = "Raw Material Added Successfully"
+                        self.uiWindow.rm_opening_product_code.clear()
+                        self.uiWindow.rm_opening_product_name.clear()
+                        self.uiWindow.rm_opening_add_stock.clear()
+                        self.uiWindow.rm_opening_add_lot.clear()
+                        self.show_info_popup(message)
+                    else:
+                        message = "Product Code and lot Already Exists"
+                        self.show_warning_info(message)
+                except Exception as e:
+                    print(e)
+                    pass
+                    # TODO exception
+            else:
+                # TODO Error handling if any of the fields empty
+                self.show_warning_info("Please fill out the info")
+        else:
+            self.show_warning_info("Please fill correct product code")
+    except:
+        self.show_warning_info("Please fill out the info")
+
+def view_raw_opening(self):
+    try:
+        code = self.uiWindow.rm_opening_view_product_code.text()
+        lot = self.uiWindow.rm_opening_view_lot.text()
+        result = view_rm_opening(code,lot)
+        if result:
+            self.uiWindow.rm_opening_view_stock.setText(str(result))
+        else:
+            self.show_warning_info("No details found")
+    except Exception as e:
+        print(e)
+        self.show_warning_info("Please fill complete info")
+
+def set_delete_raw_opening(self):
+    try:
+        code = self.uiWindow.rm_opening_delete_product_code.text()
+        lot = self.uiWindow.rm_opening_delete_lot.text()
+        result = view_rm_opening(code,lot)
+        if result:
+            self.uiWindow.rm_opening_delete_stock.setText(str(result))
+        else:
+            self.show_warning_info("No details found")
+    except Exception as e:
+        print(e)
+        self.show_warning_info("Please fill complete info")
+
+
+def delete_raw_opening(self):
+    try:
+        code = self.uiWindow.rm_opening_delete_product_code.text()
+        lot = self.uiWindow.rm_opening_delete_lot.text()
+        if ""!=self.uiWindow.rm_opening_delete_product_name.text() and "No such product code"!=self.uiWindow.rm_opening_delete_product_name.text():
+            if code and lot:
+                try:
+                    if del_rm_opening(code, lot):
+                        message = "Raw Material deleted Successfully"
+                        self.uiWindow.rm_opening_delete_product_code.clear()
+                        self.uiWindow.rm_opening_delete_product_name.clear()
+                        self.uiWindow.rm_opening_delete_stock.clear()
+                        self.uiWindow.rm_opening_delete_lot.clear()
+                        self.show_info_popup(message)
+                except Exception as e:
+                    print(e)
+                    pass
+                    # TODO exception
+            else:
+                # TODO Error handling if any of the fields empty
+                self.show_warning_info("Please fill out the info")
+        else:
+            self.show_warning_info("Please fill correct product code")
+    except:
+        self.show_warning_info("Please fill out the info")
+
+
+OLD_RM_LOT_NO=""
+OLD_SHADE_LOT_NO=""
+
+def set_modify_raw_opening(self):
+    global OLD_RM_LOT_NO
+    try:
+        code = self.uiWindow.rm_opening_modify_product_code.text()
+        lot = self.uiWindow.rm_opening_modify_lot.text()
+        OLD_RM_LOT_NO = lot
+        result = view_rm_opening(code,lot)
+        if result:
+            self.uiWindow.rm_opening_modify_stock.setText(str(result))
+        else:
+            self.show_warning_info("No details found")
+    except Exception as e:
+        print(e)
+        self.show_warning_info("Please fill complete info")
+
+
+def modify_raw_opening(self):
+    global OLD_RM_LOT_NO
+    try:
+        code = self.uiWindow.rm_opening_modify_product_code.text()
+        lot = self.uiWindow.rm_opening_modify_lot.text()
+        opening = self.uiWindow.rm_opening_modify_stock.text()
+        if ""!=self.uiWindow.rm_opening_modify_product_name.text() and "No such product code"!=self.uiWindow.rm_opening_modify_product_name.text():
+            if code and lot and opening:
+                try:
+                    if del_rm_opening(code, OLD_RM_LOT_NO):
+                        OLD_RM_LOT_NO = ""
+                        if add_rm_opening(code,lot,opening):
+                            message = "Raw Material Modified Successfully"
+                            self.uiWindow.rm_opening_modify_product_code.clear()
+                            self.uiWindow.rm_opening_modify_product_name.clear()
+                            self.uiWindow.rm_opening_modify_stock.clear()
+                            self.uiWindow.rm_opening_modify_lot.clear()
+                            self.show_info_popup(message)
+                except Exception as e:
+                    print(e)
+                    pass
+                    # TODO exception
+            else:
+                # TODO Error handling if any of the fields empty
+                self.show_warning_info("Please fill out the info")
+        else:
+            self.show_warning_info("Please fill correct product code")
+    except:
+        self.show_warning_info("Please fill out the info")
+
+
+def add_shade_opening(self):
+    try:
+        shade = self.uiWindow.shade_opening_add_number.text()
+        product_code = self.uiWindow.shade_opening_product_code.text()
+        opening = self.uiWindow.shade_opening_add_stock.text()
+        lot = self.uiWindow.shade_opening_add_lot.text()
+        if ""!=self.uiWindow.shade_opening_product_name.text() and "No such product code"!=self.uiWindow.shade_opening_product_name.text():
+            if shade and product_code and opening and lot:
+                try:
+                    if shade_add_opening(shade,product_code, lot, float(opening)):
+                        message = "Shade number Added Successfully"
+                        self.uiWindow.shade_opening_add_number.clear()
+                        self.uiWindow.shade_opening_product_code.clear()
+                        self.uiWindow.shade_opening_product_name.clear()
+                        self.uiWindow.shade_opening_add_stock.clear()
+                        self.uiWindow.shade_opening_add_lot.clear()
+                        self.show_info_popup(message)
+                    else:
+                        message = "Product Code and lot Already Exists"
+                        self.show_warning_info(message)
+                except Exception as e:
+                    print(e)
+                    pass
+                    # TODO exception
+            else:
+                # TODO Error handling if any of the fields empty
+                self.show_warning_info("Please fill out the info")
+        else:
+            self.show_warning_info("Please fill correct product code")
+    except:
+        self.show_warning_info("Please fill out the info")
+
+def shade_view_opening(self):
+    try:
+        shade = self.uiWindow.shade_opening_view_number.text()
+        code = self.uiWindow.shade_opening_view_product_code.text()
+        lot = self.uiWindow.shade_opening_view_lot.text()
+        result = view_shade_opening(shade,code,lot)
+        if result:
+            self.uiWindow.shade_opening_view_stock.setText(str(result))
+        else:
+            self.show_warning_info("No details found")
+    except Exception as e:
+        print(e)
+        self.show_warning_info("Please fill complete info")
+
+
+def set_modify_shade_opening(self):
+    global OLD_SHADE_LOT_NO
+    try:
+        shade = self.uiWindow.shade_opening_modify_number.text()
+        code = self.uiWindow.shade_opening_modify_product_code.text()
+        lot = self.uiWindow.shade_opening_modify_lot.text()
+        OLD_SHADE_LOT_NO = lot
+        result = view_shade_opening(shade,code,lot)
+        if result:
+            self.uiWindow.shade_opening_modify_stock.setText(str(result))
+        else:
+            self.show_warning_info("No details found")
+    except Exception as e:
+        print(e)
+        self.show_warning_info("Please fill complete info")
+
+
+def set_delete_shade_opening(self):
+    try:
+        shade = self.uiWindow.shade_opening_delete_number.text()
+        code = self.uiWindow.shade_opening_delete_product_code.text()
+        lot = self.uiWindow.shade_opening_delete_lot.text()
+        result = view_shade_opening(shade,code,lot)
+        if result:
+            self.uiWindow.shade_opening_delete_stock.setText(str(result))
+        else:
+            self.show_warning_info("No details found")
+    except Exception as e:
+        print(e)
+        self.show_warning_info("Please fill complete info")
+
+
+def delete_shade_opening(self):
+    try:
+        shade = self.uiWindow.shade_opening_delete_number.text()
+        code = self.uiWindow.shade_opening_delete_product_code.text()
+        lot = self.uiWindow.shade_opening_delete_lot.text()
+        if ""!=self.uiWindow.shade_opening_delete_product_name.text() and "No such product code"!=self.uiWindow.shade_opening_delete_product_name.text():
+            if shade and code and lot:
+                try:
+                    if shade_del_opening(shade,code, lot):
+                        message = "Shade number deleted Successfully"
+                        self.uiWindow.shade_opening_delete_number.clear()
+                        self.uiWindow.shade_opening_delete_product_code.clear()
+                        self.uiWindow.shade_opening_delete_product_name.clear()
+                        self.uiWindow.shade_opening_delete_stock.clear()
+                        self.uiWindow.shade_opening_delete_lot.clear()
+                        self.show_info_popup(message)
+                except Exception as e:
+                    print(e)
+                    pass
+                    # TODO exception
+            else:
+                # TODO Error handling if any of the fields empty
+                self.show_warning_info("Please fill out the info")
+        else:
+            self.show_warning_info("Please fill correct product code")
+    except:
+        self.show_warning_info("Please fill out the info")
+
+
+def modify_shade_opening(self):
+    global OLD_SHADE_LOT_NO
+    try:
+        shade = self.uiWindow.shade_opening_modify_number.text()
+        code = self.uiWindow.shade_opening_modify_product_code.text()
+        lot = self.uiWindow.shade_opening_modify_lot.text()
+        opening = self.uiWindow.shade_opening_modify_stock.text()
+        if ""!=self.uiWindow.shade_opening_modify_product_name.text() and "No such product code"!=self.uiWindow.shade_opening_modify_product_name.text():
+            if shade and code and lot and opening:
+                try:
+                    if shade_del_opening(shade,code, OLD_SHADE_LOT_NO):
+                        OLD_SHADE_LOT_NO = ""
+                        if shade_add_opening(shade,code,lot,opening):
+                            message = "Shade number Modified Successfully"
+                            self.uiWindow.shade_opening_modify_number.clear()
+                            self.uiWindow.shade_opening_modify_product_code.clear()
+                            self.uiWindow.shade_opening_modify_product_name.clear()
+                            self.uiWindow.shade_opening_modify_stock.clear()
+                            self.uiWindow.shade_opening_modify_lot.clear()
+                            self.show_info_popup(message)
+                except Exception as e:
+                    print(e)
+                    pass
+                    # TODO exception
+            else:
+                # TODO Error handling if any of the fields empty
+                self.show_warning_info("Please fill out the info")
+        else:
+            self.show_warning_info("Please fill correct product code")
+    except:
+        self.show_warning_info("Please fill out the info")
