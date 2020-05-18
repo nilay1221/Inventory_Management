@@ -340,13 +340,13 @@ class MainWindow(QMainWindow):
 
 
 
-        self.uiWindow.rm_closing_stock_table.horizontalHeader().setStretchLastSection(True) 
+        self.uiWindow.rm_closing_stock_table.horizontalHeader().setStretchLastSection(True)
         self.uiWindow.rm_closing_stock_table.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
 
-        self.uiWindow.colour_closing_stock_table.horizontalHeader().setStretchLastSection(True) 
+        self.uiWindow.colour_closing_stock_table.horizontalHeader().setStretchLastSection(True)
         self.uiWindow.colour_closing_stock_table.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
 
-        self.uiWindow.shade_closing_stock_table.horizontalHeader().setStretchLastSection(True) 
+        self.uiWindow.shade_closing_stock_table.horizontalHeader().setStretchLastSection(True)
         self.uiWindow.shade_closing_stock_table.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
 
 
@@ -625,6 +625,12 @@ class MainWindow(QMainWindow):
         self.uiWindow.shade_opening_modify_clear.clicked.connect(lambda: clear.clear_shade_opening_modify(self))
         self.uiWindow.shade_opening_delete_clear.clicked.connect(lambda: clear.clear_shade_opening_delete(self))
         self.uiWindow.shade_opening_view_clear.clicked.connect(lambda: clear.clear_shade_opening_view(self))
+        self.uiWindow.colour_closing_stock_table.cellChanged.connect(lambda row, column: operations_callbacks.display_product_name(row, column, self, 0,
+                                                                          "C",self.uiWindow.colour_closing_stock_table))
+        self.uiWindow.rm_closing_stock_table.cellChanged.connect(
+            lambda row, column: operations_callbacks.display_product_name(row, column, self, 0,
+                                                                          "R",
+                                                                          self.uiWindow.rm_closing_stock_table))
 
 
 
