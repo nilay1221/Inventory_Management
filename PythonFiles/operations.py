@@ -4,10 +4,34 @@ import datetime
 
 DATABASE_NAME = "NewDatabase.db"
 
+try:
+    mydb = sqlite3.connect(DATABASE_NAME)
+    mycursor = mydb.cursor()
+    tables = ["CREATE TABLE IF NOT EXISTS Raw_Material(product_code varchar(255) NOT NULL UNIQUE PRIMARY KEY, product_name varchar(255), product_price integer, product_type varchar(2) );",
+    "CREATE TABLE IF NOT EXISTS shade_number( shade_number varchar(255) NOT NULL UNIQUE PRIMARY KEY );",
+    "CREATE TABLE IF NOT EXISTS madeup_of( shade_number varchar(255), product_code varchar(255) NOT NULL , product_percentage real, FOREIGN KEY(shade_number) REFERENCES shade_number(shade_number) ON UPDATE CASCADE ON DELETE CASCADE );",
+    "CREATE TABLE IF NOT EXISTS RM_Stock(Trans_id varchar(255) NOT NULL UNIQUE PRIMARY KEY, date text, remark text, customer_id varchar(255) );",
+    "CREATE TABLE IF NOT EXISTS has_rm( type varchar(255), quantity real NOT NULL, trans_id varchar(255) NOT NULL, product_code varchar(255) NOT NULL, product_type varchar(2), lot_no varchar(225), FOREIGN KEY(trans_id) REFERENCES Rm_Stock(Trans_id) ON UPDATE CASCADE ON DELETE CASCADE, FOREIGN KEY(product_code) REFERENCES Raw_Material(product_code) ON UPDATE CASCADE ON DELETE CASCADE, PRIMARY KEY (trans_id,product_code,product_type,lot_no) );",
+    "CREATE TABLE IF NOT EXISTS has_shade( type varchar(255), quantity real, trans_id varchar(255), shade_number varchar(255), product_code varchar(255), lot_no varchar(225), FOREIGN KEY(trans_id) REFERENCES shade_stock(trans_id) ON UPDATE CASCADE ON DELETE CASCADE, PRIMARY KEY(trans_id,shade_number,product_code,lot_no) );",
+    "CREATE TABLE IF NOT EXISTS shade_stock( trans_id varchar(255) NOT NULL UNIQUE PRIMARY KEY, date text, customer_id varchar(255), remark varchar(255), shade_number varchar(255), FOREIGN KEY(shade_number) REFERENCES shade_number(shade_number) ON UPDATE CASCADE ON DELETE CASCADE );",
+    "CREATE TABLE IF NOT EXISTS duplicates( rm_trans_id varchar(255), shade_trans_id varchar(255), FOREIGN KEY(rm_trans_id) REFERENCES Rm_Stock(trans_id) ON UPDATE CASCADE ON DELETE CASCADE, FOREIGN KEY(shade_trans_id) REFERENCES shade_stock(trans_id) ON UPDATE CASCADE ON DELETE CASCADE, PRIMARY KEY (rm_trans_id,shade_trans_id) );",
+    "CREATE TABLE IF NOT EXISTS sales( trans_id varchar(255) NOT NULL UNIQUE PRIMARY KEY, customer_id varchar(255), date text , remark varchar(255) );",
+    "CREATE TABLE IF NOT EXISTS consists_of( type varchar(255), quantity real NOT NULL, trans_id varchar(255) NOT NULL, shade_number varchar(255) NOT NULL, product_code varchar(255) NOT NULL, lot_no varchar(225), FOREIGN KEY(trans_id) REFERENCES sales(trans_id) ON UPDATE CASCADE ON DELETE CASCADE, FOREIGN KEY(shade_number) REFERENCES shade_number(shade_number) ON UPDATE CASCADE ON DELETE CASCADE, FOREIGN KEY(product_code) REFERENCES Raw_Material(product_code) ON UPDATE CASCADE ON DELETE CASCADE, PRIMARY KEY (trans_id,shade_number,product_code,lot_no) );",
+    "CREATE TABLE IF NOT EXISTS rm_opening_stock( product_code varchar(255), lot_no varchar(225), opening stock real, FOREIGN KEY(product_code) REFERENCES Raw_Material(product_code) ON UPDATE CASCADE ON DELETE CASCADE ,PRIMARY Key(product_code,lot_no));",
+    "CREATE TABLE IF NOT EXISTS sn_opening_stock( shade_number varchar(255), product_code varchar(255), lot_no varchar(225), opening_stock real, FOREIGN KEY(shade_number) REFERENCES shade_number(shade_number) ON UPDATE CASCADE ON DELETE CASCADE, FOREIGN KEY(product_code) REFERENCES Raw_Material(product_code) ON UPDATE CASCADE ON DELETE CASCADE, PRIMARY KEY (shade_number,product_code,lot_no) );"]
+    for i in tables:
+        mycursor.execute(i)
+    mydb.commit()
+except Exception as e:
+    print(e)
+finally:
+    mydb.close()
+
 
 def foreign_key_support(mycursor):
     sql = "PRAGMA Foreign_keys = ON;"
     mycursor.execute(sql)
+
 
 # For addding new raw material
 def add_raw_material(product_code,product_name,product_price,product_type):
