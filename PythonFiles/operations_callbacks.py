@@ -781,7 +781,9 @@ def set_total_quantity(row,column,self,tableWidget1,tableWidget2,quantitywidget)
                 pass
 
 def confirm_add_shade_number(self):
+    repeat=[]
     flag=0
+    checkrepeat=0
     trans_widget = self.uiWindow.shade_transaction_id
     date_widget = self.uiWindow.date_2
     customer_widget = self.uiWindow.shade_customer
@@ -835,34 +837,43 @@ def confirm_add_shade_number(self):
                                         raise Exception("Colour cannot be used")
                                 results.append((x,y,"C",z))
                                 # raw_details.append((x,y))
-
-                            negative_trans_id = "SRT" + str(get_trans_id('rm_stock','SRT'))
-                            # print(results)
-                            if add_raw_material_data(self,negative_trans_id,date,customer,remark,results,type="OUT"):
-                                add_shade_stock_trans(self,trans_id,date,customer,remark,shade_number,raw_details)
-                                add_into_duplicates(trans_id,negative_trans_id)
-                                message1 = ""
-                                message2 = ""
-                                for each_raw in results:
-                                    x = raw_material_closing_stock(each_raw[0],each_raw[3])
-                                    try:
-                                        if x < 0:
-                                            message2 = message2 + f"Closing stock for {each_raw[0]}  is {x} in lot {each_raw[3]}<br>"
-                                        else:
-                                            message1 = message1 + f"Closing stock for {each_raw[0]}  is {x} in lot {each_raw[3]}<br>"
-                                    except:
-                                        pass
-                                self.show_stock_popup(message1, message2)
-                                self.show_info_popup("Transaction Completed Successfully")
-                                set_shade_number_transacs(self)
-                                self.uiWindow.shade_customer.clearEditText()
-                                self.uiWindow.shade_remark.clear()
-                                self.uiWindow.shade_number_add.clear()
-                                self.uiWindow.shade_addtable.clearContents()
-                                self.uiWindow.shade_colortable.clearContents()
-                                self.uiWindow.shade_add_total.clear()
-                            else:
-                                self.show_warning_info("Transaction UnSuccessfull")
+                            for i in range(len(raw_details)):
+                                temp=[self.uiWindow.shade_addtable.item(i,0).text(),self.uiWindow.shade_addtable.item(i,3).text()]
+                                if temp not in repeat:
+                                    repeat.append(temp)
+                                else:
+                                    checkrepeat = 1
+                                    message=f"Entry repeated for {temp[0]}"
+                                    self.show_warning_info(message)
+                                    break
+                            if checkrepeat==0:
+                                negative_trans_id = "SRT" + str(get_trans_id('rm_stock','SRT'))
+                                # print(results)
+                                if add_raw_material_data(self,negative_trans_id,date,customer,remark,results,type="OUT"):
+                                    add_shade_stock_trans(self,trans_id,date,customer,remark,shade_number,raw_details)
+                                    add_into_duplicates(trans_id,negative_trans_id)
+                                    message1 = ""
+                                    message2 = ""
+                                    for each_raw in results:
+                                        x = raw_material_closing_stock(each_raw[0],each_raw[3])
+                                        try:
+                                            if x < 0:
+                                                message2 = message2 + f"Closing stock for {each_raw[0]}  is {x} in lot {each_raw[3]}<br>"
+                                            else:
+                                                message1 = message1 + f"Closing stock for {each_raw[0]}  is {x} in lot {each_raw[3]}<br>"
+                                        except:
+                                            pass
+                                    self.show_stock_popup(message1, message2)
+                                    self.show_info_popup("Transaction Completed Successfully")
+                                    set_shade_number_transacs(self)
+                                    self.uiWindow.shade_customer.clearEditText()
+                                    self.uiWindow.shade_remark.clear()
+                                    self.uiWindow.shade_number_add.clear()
+                                    self.uiWindow.shade_addtable.clearContents()
+                                    self.uiWindow.shade_colortable.clearContents()
+                                    self.uiWindow.shade_add_total.clear()
+                                else:
+                                    self.show_warning_info("Transaction UnSuccessfull")
                 except Exception as err:
                     self.show_warning_info(err.__str__())
             elif table_check == "False":
@@ -1015,6 +1026,8 @@ def set_modify_shade_transaction(self):
 
 
 def confirm_modify_shade_trans(self):
+    repeat=[]
+    checkrepeat=0
     trans_id = "SNT" + str(self.uiWindow.shade_modify_transaction_id.text()).zfill(5)
     flag=0
     try:
@@ -1077,31 +1090,42 @@ def confirm_modify_shade_trans(self):
 
                                         # negative_trans_id = "SRT" + str(get_trans_id('rm_stock','SRT'))
                                         # print(results)
-                                        delete_shade_trans(trans_id)
-                                        if add_raw_material_data(self,negative_trans_id,date,customer,remark,results,type="OUT"):
-                                            add_shade_stock_trans(self,trans_id,date,customer,remark,shade_number,raw_details)
-                                            add_into_duplicates(trans_id,negative_trans_id)
-                                            message1 = ""
-                                            message2 = ""
-                                            for each_raw in results:
-                                                x= raw_material_closing_stock(each_raw[0],each_raw[3])
-                                                if x < 0:
-                                                    message2 = message2 + f"Closing stock for {each_raw[0]}  is {x} in lot {each_raw[3]} in lot {each_raw[3]}<br>"
-                                                else:
-                                                    message1 = message1 + f"Closing stock for {each_raw[0]}  is '{x} in lot {each_raw[3]} in lot {each_raw[3]}<br>"
-                                            self.show_stock_popup(message1, message2)
-                                            self.show_info_popup("Transaction Modified Successfully")
-                                            # set_shade_number_transacs(self)
-                                            self.uiWindow.shade_modify_transaction_id.clear()
-                                            self.uiWindow.shade_modify_date.clear()
-                                            self.uiWindow.shade_modify_customer.clearEditText()
-                                            self.uiWindow.shade_modify_remark.clear()
-                                            self.uiWindow.shade_number_modify.clear()
-                                            self.uiWindow.shade_addtable_3.clearContents()
-                                            self.uiWindow.shade_colortable_3.clearContents()
-                                            self.uiWindow.shade_add_total_3.clear()
-                                        else:
-                                            self.show_warning_info("Transaction UnSuccessfull")
+                                        for i in range(len(raw_details)):
+                                            temp = [self.uiWindow.shade_addtable_3.item(i, 0).text(),
+                                                    self.uiWindow.shade_addtable_3.item(i, 3).text()]
+                                            if temp not in repeat:
+                                                repeat.append(temp)
+                                            else:
+                                                checkrepeat = 1
+                                                message = f"Entry repeated for {temp[0]}"
+                                                self.show_warning_info(message)
+                                                break
+                                        if checkrepeat == 0:
+                                            delete_shade_trans(trans_id)
+                                            if add_raw_material_data(self,negative_trans_id,date,customer,remark,results,type="OUT"):
+                                                add_shade_stock_trans(self,trans_id,date,customer,remark,shade_number,raw_details)
+                                                add_into_duplicates(trans_id,negative_trans_id)
+                                                message1 = ""
+                                                message2 = ""
+                                                for each_raw in results:
+                                                    x= raw_material_closing_stock(each_raw[0],each_raw[3])
+                                                    if x < 0:
+                                                        message2 = message2 + f"Closing stock for {each_raw[0]}  is {x} in lot {each_raw[3]} in lot {each_raw[3]}<br>"
+                                                    else:
+                                                        message1 = message1 + f"Closing stock for {each_raw[0]}  is '{x} in lot {each_raw[3]} in lot {each_raw[3]}<br>"
+                                                self.show_stock_popup(message1, message2)
+                                                self.show_info_popup("Transaction Modified Successfully")
+                                                # set_shade_number_transacs(self)
+                                                self.uiWindow.shade_modify_transaction_id.clear()
+                                                self.uiWindow.shade_modify_date.clear()
+                                                self.uiWindow.shade_modify_customer.clearEditText()
+                                                self.uiWindow.shade_modify_remark.clear()
+                                                self.uiWindow.shade_number_modify.clear()
+                                                self.uiWindow.shade_addtable_3.clearContents()
+                                                self.uiWindow.shade_colortable_3.clearContents()
+                                                self.uiWindow.shade_add_total_3.clear()
+                                            else:
+                                                self.show_warning_info("Transaction UnSuccessfull")
                             except Exception as err:
                                 self.show_warning_info(err.__str__())
                         elif table_check == "False":
