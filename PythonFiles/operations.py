@@ -2,7 +2,7 @@ import sqlite3
 from PyQt5 import QtWidgets
 import datetime
 
-DATABASE_NAME = "newtable.db"
+DATABASE_NAME = "NewDatabase.db"
 
 
 def foreign_key_support(mycursor):

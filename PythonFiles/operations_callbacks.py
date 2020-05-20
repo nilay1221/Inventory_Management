@@ -1843,10 +1843,11 @@ def raw_material_display_closing(self):
                 self.uiWindow.rm_closing_stock_table.setItem(row_number, column_number, QtWidgets.QTableWidgetItem(str(data)))
                 if column_number==0:
                     self.uiWindow.rm_closing_stock_table.setItem(row_number, column_number+2, QtWidgets.QTableWidgetItem(str(raw_material_closing_stock(data,'all'))))
-                    if raw_material_closing_stock(data,'all') > 0 :
-                        self.uiWindow.rm_closing_stock_table.item(row_number,column_number+2).setBackground(QtGui.QColor(84, 237, 78))
-                    else:
-                        self.uiWindow.rm_closing_stock_table.item(row_number,column_number+2).setBackground(QtGui.QColor(240, 79, 79))
+                    if raw_material_closing_stock(data,'all') != "None":
+                        if raw_material_closing_stock(data,'all') > 0 :
+                            self.uiWindow.rm_closing_stock_table.item(row_number,column_number+2).setBackground(QtGui.QColor(84, 237, 78))
+                        else:
+                            self.uiWindow.rm_closing_stock_table.item(row_number,column_number+2).setBackground(QtGui.QColor(240, 79, 79))
 
     except Exception as e:
         print(e)
@@ -1863,10 +1864,11 @@ def colour_display_closing(self):
                 self.uiWindow.colour_closing_stock_table.setItem(row_number, column_number, QtWidgets.QTableWidgetItem(str(data)))
                 if column_number==0:
                     self.uiWindow.colour_closing_stock_table.setItem(row_number, column_number+2, QtWidgets.QTableWidgetItem(str(raw_material_closing_stock(data,'all'))))
-                    if raw_material_closing_stock(data,'all') > 0 :
-                        self.uiWindow.colour_closing_stock_table.item(row_number,column_number+2).setBackground(QtGui.QColor(84, 237, 78))
-                    else:
-                        self.uiWindow.colour_closing_stock_table.item(row_number,column_number+2).setBackground(QtGui.QColor(240, 79, 79))
+                    if raw_material_closing_stock(data,'all') != "None" :
+                        if raw_material_closing_stock(data,'all') > 0 :
+                            self.uiWindow.colour_closing_stock_table.item(row_number,column_number+2).setBackground(QtGui.QColor(84, 237, 78))
+                        else:
+                            self.uiWindow.colour_closing_stock_table.item(row_number,column_number+2).setBackground(QtGui.QColor(240, 79, 79))
     except Exception as e:
         print(e)
 
@@ -1926,10 +1928,11 @@ def shade_display_closing(self):
                                 # print(x)
                                 self.uiWindow.shade_closing_stock_table.setItem(row_number, column_number + 3,
                                                                                  QtWidgets.QTableWidgetItem(str(x)))
-                                if x > 0:
-                                    self.uiWindow.shade_closing_stock_table.item(row_number, column_number + 3).setBackground(QtGui.QColor(84, 237, 78))
-                                else:
-                                    self.uiWindow.shade_closing_stock_table.item(row_number, column_number + 3).setBackground(QtGui.QColor(240, 79, 79))
+                                if str(x) != "None":
+                                    if x > 0:
+                                        self.uiWindow.shade_closing_stock_table.item(row_number, column_number + 3).setBackground(QtGui.QColor(84, 237, 78))
+                                    else:
+                                        self.uiWindow.shade_closing_stock_table.item(row_number, column_number + 3).setBackground(QtGui.QColor(240, 79, 79))
 
         else:
             self.show_warning_info("Please select correct product code")
