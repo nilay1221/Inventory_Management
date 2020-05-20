@@ -357,7 +357,7 @@ def add_raw_material_data(self,trans_id,date,customer,remark,productDetails,type
                 try:
                     mycursor.execute(sql)
                 except:
-                    self.show_warning_info(f"Repeated entry of '{each[0]}' is rejected")
+                    self.show_warning_info(f"Repeated entry of '{each[0]}' and '{each[3]}' is rejected")
             mydb.commit()
             return True
         except Exception as e:
@@ -689,7 +689,7 @@ def add_sales_data(self,trans_id,date,customer,remark,productDetails,type="OUT")
             try:
                 mycursor.execute(sql)
             except:
-                self.show_warning_info(f"Repeated entry of '{each[0]}' and '{each[1]}' is rejected")
+                self.show_warning_info(f"Repeated entry of '{each[0]}','{each[1]}' and '{each[3]}' is rejected")
         mydb.commit()
         return True
     except Exception as e:

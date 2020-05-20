@@ -780,6 +780,7 @@ def set_total_quantity(row,column,self,tableWidget1,tableWidget2,quantitywidget)
             except:
                 pass
 
+
 def confirm_add_shade_number(self):
     repeat=[]
     flag=0
@@ -1110,9 +1111,9 @@ def confirm_modify_shade_trans(self):
                                                 for each_raw in results:
                                                     x= raw_material_closing_stock(each_raw[0],each_raw[3])
                                                     if x < 0:
-                                                        message2 = message2 + f"Closing stock for {each_raw[0]}  is {x} in lot {each_raw[3]} in lot {each_raw[3]}<br>"
+                                                        message2 = message2 + f"Closing stock for {each_raw[0]}  is {x} in lot {each_raw[3]}<br>"
                                                     else:
-                                                        message1 = message1 + f"Closing stock for {each_raw[0]}  is '{x} in lot {each_raw[3]} in lot {each_raw[3]}<br>"
+                                                        message1 = message1 + f"Closing stock for {each_raw[0]}  is '{x} in lot {each_raw[3]}<br>"
                                                 self.show_stock_popup(message1, message2)
                                                 self.show_info_popup("Transaction Modified Successfully")
                                                 # set_shade_number_transacs(self)
