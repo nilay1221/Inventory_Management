@@ -992,7 +992,7 @@ def delete_shade_transaction(self,btn):
 
 
 def set_modify_shade_transaction(self):
-    # print("Called")
+    print("Called")
     trans_id = "SNT" +  str(self.uiWindow.shade_modify_transaction_id.text()).zfill(5)
     if check_shade_trans(trans_id):
         results = view_shade_transaction(by_Id=trans_id)
@@ -1021,6 +1021,7 @@ def set_modify_shade_transaction(self):
             for column in range(len(table2_details[row])):
                 if table2_details[row][column] != '-':
                     self.uiWindow.shade_colortable_3.setItem(row,column,QtWidgets.QTableWidgetItem(str(table2_details[row][column])))
+                    print(str(table2_details[row][column]))
         self.uiWindow.shade_addtable_3.setRowCount(8)
     else:
         self.show_warning_info("Incorrect transaction id")
