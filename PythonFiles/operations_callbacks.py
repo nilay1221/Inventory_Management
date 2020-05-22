@@ -323,6 +323,7 @@ def show_new_shade_modify_info(self):
     shade_no = self.uiWindow.shade_new__modify_number.text()
     try:
         results = get_shade_details(shade_no)
+        # print(results)
         if results:
             global OLD_SHADE_NUMBER
             OLD_SHADE_NUMBER=shade_no
@@ -1021,7 +1022,11 @@ def set_modify_shade_transaction(self):
             for column in range(len(table2_details[row])):
                 if table2_details[row][column] != '-':
                     self.uiWindow.shade_colortable_3.setItem(row,column,QtWidgets.QTableWidgetItem(str(table2_details[row][column])))
+<<<<<<< HEAD
                     print(str(table2_details[row][column]))
+=======
+                    # print(table2_details[row][column])
+>>>>>>> 874617815ecd212d82c09442a7222c29ce1a9e72
         self.uiWindow.shade_addtable_3.setRowCount(8)
     else:
         self.show_warning_info("Incorrect transaction id")
@@ -1845,8 +1850,9 @@ def raw_material_display_closing(self):
                 self.uiWindow.rm_closing_stock_table.setItem(row_number, column_number, QtWidgets.QTableWidgetItem(str(data)))
                 if column_number==0:
                     self.uiWindow.rm_closing_stock_table.setItem(row_number, column_number+2, QtWidgets.QTableWidgetItem(str(raw_material_closing_stock(data,'all'))))
+                    print(raw_material_closing_stock(data,'all'))
                     if raw_material_closing_stock(data,'all') != "None":
-                        if raw_material_closing_stock(data,'all') > 0 :
+                        if float(raw_material_closing_stock(data,'all')) > 0:
                             self.uiWindow.rm_closing_stock_table.item(row_number,column_number+2).setBackground(QtGui.QColor(84, 237, 78))
                         else:
                             self.uiWindow.rm_closing_stock_table.item(row_number,column_number+2).setBackground(QtGui.QColor(240, 79, 79))
@@ -1866,8 +1872,8 @@ def colour_display_closing(self):
                 self.uiWindow.colour_closing_stock_table.setItem(row_number, column_number, QtWidgets.QTableWidgetItem(str(data)))
                 if column_number==0:
                     self.uiWindow.colour_closing_stock_table.setItem(row_number, column_number+2, QtWidgets.QTableWidgetItem(str(raw_material_closing_stock(data,'all'))))
-                    if raw_material_closing_stock(data,'all') != "None" :
-                        if raw_material_closing_stock(data,'all') > 0 :
+                    if raw_material_closing_stock(data,'all') != "None":
+                        if float(raw_material_closing_stock(data,'all')) > 0 :
                             self.uiWindow.colour_closing_stock_table.item(row_number,column_number+2).setBackground(QtGui.QColor(84, 237, 78))
                         else:
                             self.uiWindow.colour_closing_stock_table.item(row_number,column_number+2).setBackground(QtGui.QColor(240, 79, 79))
@@ -1931,7 +1937,7 @@ def shade_display_closing(self):
                                 self.uiWindow.shade_closing_stock_table.setItem(row_number, column_number + 3,
                                                                                  QtWidgets.QTableWidgetItem(str(x)))
                                 if str(x) != "None":
-                                    if x > 0:
+                                    if float(x) > 0:
                                         self.uiWindow.shade_closing_stock_table.item(row_number, column_number + 3).setBackground(QtGui.QColor(84, 237, 78))
                                     else:
                                         self.uiWindow.shade_closing_stock_table.item(row_number, column_number + 3).setBackground(QtGui.QColor(240, 79, 79))

@@ -243,7 +243,7 @@ def get_shade_details(shade_no):
                 madeup_of.product_percentage,Raw_Material.product_name 
                 from madeup_of 
                 join Raw_Material where Raw_Material.product_code=madeup_of.product_code)
-                where shade_number={shade_no};"""
+                where shade_number='{shade_no}';"""
         try:
             mycursor.execute(sql)
             # print(sql)
@@ -263,13 +263,13 @@ def new_shade_delete(shade_no):
     mydb = sqlite3.connect(DATABASE_NAME)
     mycursor = mydb.cursor()
     try:
-        sql = f"DELETE FROM shade_number WHERE shade_number = {shade_no};"
+        sql = f"DELETE FROM shade_number WHERE shade_number = '{shade_no}';"
         mycursor.execute("PRAGMA foreign_keys = OFF;")
         # mycursor.execute("PRAGMA foreign_keys")
         # result=mycursor.fetchall()
         # print(result)
         mycursor.execute(sql)
-        sql=f"Delete from madeup_of where shade_number = {shade_no};"
+        sql=f"Delete from madeup_of where shade_number = '{shade_no}';"
         mycursor.execute(sql)
         mydb.commit()
         return True
@@ -282,7 +282,7 @@ def remove_previous_data(shade_no):
     mydb = sqlite3.connect(DATABASE_NAME)
     mycursor = mydb.cursor()
     try:
-        sql = f"DELETE FROM madeup_of WHERE shade_number = {shade_no};"
+        sql = f"DELETE FROM madeup_of WHERE shade_number = '{shade_no}';"
         mycursor.execute("PRAGMA foreign_keys = ON;")
         # mycursor.execute("PRAGMA foreign_keys")
         # result=mycursor.fetchall()
@@ -317,7 +317,7 @@ def modify_new_shade_material(shade_no,old_shade_no):
     mydb = sqlite3.connect(DATABASE_NAME)
     mycursor = mydb.cursor()
     try:
-        sql= f"Update SHADE_NUMBER set shade_number={shade_no} where shade_number={old_shade_no};"
+        sql= f"Update SHADE_NUMBER set shade_number='{shade_no}' where shade_number={old_shade_no};"
         try:
             mycursor.execute("PRAGMA foreign_keys = ON;")
             mycursor.execute(sql)
@@ -601,7 +601,7 @@ def view_shade_transaction(by_Id=False,by_today=False,by_custom=False):
             mycursor.execute(sql)
             table1_details = mycursor.fetchall()
             sql = f"""
-                SELECT has_rm.product_code,'-',madeup_of.product_percentage,has_rm.quantity*1000,has_rm.quantity * raw_material.product_price * 1000,has_rm.lot_no  FROM
+                SELECT has_rm.product_code,'-',madeup_of.product_percentage,has_rm.quantity*1000,has_rm.quantity * raw_material.product_price,has_rm.lot_no  FROM
                 has_rm
                 JOIN madeup_of ON
                 has_rm.product_code = madeup_of.product_code
@@ -795,7 +795,7 @@ def get_shade(shade):
     mydb = sqlite3.connect(DATABASE_NAME)
     mycursor = mydb.cursor()
     try:
-        sql=f"Select * from shade_number where shade_number={shade};"
+        sql=f"Select * from shade_number where shade_number='{shade}';"
         mycursor.execute(sql)
         results=mycursor.fetchone()
         if results[0]:
@@ -975,10 +975,10 @@ def get_shade_stock(shade,code,lot,by_custom):
                 sql=f"""select * from 
                         (select has_shade.trans_id,date,quantity,'-',has_shade.lot_no from has_shade 
                         join shade_Stock on shade_stock.trans_id= has_shade.trans_id 
-                        where product_code = '{code}' and has_shade.shade_number = {shade}
+                        where product_code = '{code}' and has_shade.shade_number = '{shade}'
                         UNION select consists_of.trans_id,date,'-',quantity,consists_of.lot_no from consists_of 
                         join sales on sales.trans_id= consists_of.trans_id 
-                        where product_code = '{code}' and consists_of.shade_number = {shade}) where date='{each}'"""
+                        where product_code = '{code}' and consists_of.shade_number = '{shade}') where date='{each}'"""
                 mycursor.execute(sql)
                 result=mycursor.fetchall()
                 if result:
@@ -989,10 +989,10 @@ def get_shade_stock(shade,code,lot,by_custom):
                 sql=f"""select * from 
                         (select has_shade.trans_id,date,quantity,'-',has_shade.lot_no from has_shade 
                         join shade_Stock on shade_stock.trans_id= has_shade.trans_id 
-                        where product_code = '{code}' and has_shade.shade_number = {shade} and lot_no = '{lot}'
+                        where product_code = '{code}' and has_shade.shade_number = '{shade}' and lot_no = '{lot}'
                         UNION select consists_of.trans_id,date,'-',quantity,consists_of.lot_no from consists_of 
                         join sales on sales.trans_id= consists_of.trans_id 
-                        where product_code = '{code}' and consists_of.shade_number = {shade} and lot_no = '{lot}') where date='{each}'"""
+                        where product_code = '{code}' and consists_of.shade_number = '{shade}' and lot_no = '{lot}') where date='{each}'"""
                 mycursor.execute(sql)
                 result=mycursor.fetchall()
                 if result:
@@ -1048,14 +1048,14 @@ def shade_raw_closing_stock(shade,code,lot):
                 stock_opening = 0
             else:
                 stock_opening = opening[0]
-            sql = f"""Select sum(quantity) from has_shade where product_code='{code}' and shade_number={shade} and type = 'IN' and lot_no='{lot}'"""
+            sql = f"""Select sum(quantity) from has_shade where product_code='{code}' and shade_number='{shade}' and type = 'IN' and lot_no='{lot}'"""
             mycursor.execute(sql)
             total_in = mycursor.fetchone()
             if not total_in[0]:
                 total_in = "None"
             else:
                 total_in = total_in[0]
-            sql = f"""Select sum(quantity) from consists_of where product_code='{code}' and shade_number={shade} and type = 'OUT' and lot_no='{lot}'"""
+            sql = f"""Select sum(quantity) from consists_of where product_code='{code}' and shade_number='{shade}' and type = 'OUT' and lot_no='{lot}'"""
             mycursor.execute(sql)
             total_out = mycursor.fetchone()
             if total_in == "None":
