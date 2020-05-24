@@ -1846,7 +1846,7 @@ def raw_material_display_closing(self):
                 self.uiWindow.rm_closing_stock_table.setItem(row_number, column_number, QtWidgets.QTableWidgetItem(str(data)))
                 if column_number==0:
                     self.uiWindow.rm_closing_stock_table.setItem(row_number, column_number+2, QtWidgets.QTableWidgetItem(str(raw_material_closing_stock(data,'all'))))
-                    print(raw_material_closing_stock(data,'all'))
+                    # print(raw_material_closing_stock(data,'all'))
                     if raw_material_closing_stock(data,'all') != "None":
                         if float(raw_material_closing_stock(data,'all')) > 0:
                             self.uiWindow.rm_closing_stock_table.item(row_number,column_number+2).setBackground(QtGui.QColor(84, 237, 78))
