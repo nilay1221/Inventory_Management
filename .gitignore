@@ -1,3 +1,5 @@
 /venv/
 /.idea/
 /PythonFiles/__pycache__/
+/vscode/
+/myenv/
