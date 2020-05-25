@@ -749,6 +749,19 @@ def set_shade_number_details(self,shadeNumberwidget,rawTable,shadeTable,addTotal
     else:
         self.show_warning_info("Shade Number Does not exists")
 
+def set_original_prices(shade_number):
+    global ORIGIGNAL_PRICES
+    ORIGIGNAL_PRICES = []
+    results = get_shade_number_details(shade_number)
+    # print(results)
+    for each in results:
+        ORIGIGNAL_PRICES.append(each[4])
+    print(ORIGIGNAL_PRICES)
+
+
+# set_original_prices("1622")
+
+
 def set_total_quantity(row,column,self,tableWidget1,tableWidget2,quantitywidget):
     #TODO Check for empty
     if column == 2:
@@ -768,16 +781,17 @@ def set_total_quantity(row,column,self,tableWidget1,tableWidget2,quantitywidget)
                 pass
                 # pass
         # print(total_quantity)
-        quantitywidget.setText(str(total_quantity))
+        quantitywidget.setText(str(round(total_quantity,3)))
         for i in range(tableWidget2.rowCount()):
             # print(i)
             try:
+                # print("before")
                 percentage = float(tableWidget2.item(i,2).text())
-                # print(percentage)
-                quantity = (percentage * total_quantity)*10
-                price = (quantity * float(ORIGIGNAL_PRICES[i]))/1000
-                tableWidget2.setItem(i,3,QtWidgets.QTableWidgetItem(str(quantity)))
-                tableWidget2.setItem(i,4,QtWidgets.QTableWidgetItem(str(price)))
+                print(percentage)
+                quantity = percentage * total_quantity*10
+                price = (quantity * float(ORIGIGNAL_PRICES[i])/1000)
+                tableWidget2.setItem(i,3,QtWidgets.QTableWidgetItem(str(round(quantity,2))))
+                tableWidget2.setItem(i,4,QtWidgets.QTableWidgetItem(str(round(price,2))))
             except:
                 pass
 
@@ -1002,6 +1016,7 @@ def set_modify_shade_transaction(self):
         self.uiWindow.shade_modify_customer.setEditText(str(trans_details[1]))
         self.uiWindow.shade_modify_remark.setText(str(trans_details[2]))
         self.uiWindow.shade_number_modify.setText(str(trans_details[3]))
+        set_original_prices(trans_details[3])
         table1_details = results['table1_details']
         # print(table1_details)
         self.uiWindow.shade_addtable_3.setRowCount(0)
