@@ -279,7 +279,7 @@ class MainWindow(QMainWindow):
         self.uiWindow.opening_shade_modify.clicked.connect(
             lambda: self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['shade_opening_modify']))
         self.uiWindow.opening_shade_delete.clicked.connect(
-            lambda: self.uiWindow.stackedWiSales me today 25 hi rehne deh phirdget.setCurrentIndex(pagesDict['shade_opening_delete']))
+            lambda: self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['shade_opening_delete']))
         self.uiWindow.opening_shade_view.clicked.connect(
             lambda: self.uiWindow.stackedWidget.setCurrentIndex(pagesDict['shade_opening_view']))
         self.uiWindow.new_rm_delete_product_name.setReadOnly(True)
