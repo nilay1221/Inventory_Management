@@ -614,6 +614,7 @@ def view_shade_transaction(by_Id=False,by_today=False,by_custom=False):
             # print(sql)
             mycursor.execute(sql)
             table2_details = mycursor.fetchall()
+            print(table2_details)
             # print(table2_details)
             return {
                 'trans_details':trans_details,

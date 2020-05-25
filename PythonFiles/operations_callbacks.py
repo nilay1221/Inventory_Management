@@ -954,7 +954,11 @@ def view_shade_stock_by_id(self):
             self.uiWindow.shade_colortable_4.insertRow(row)
             for column in range(len(table2_details[row])):
                 if table2_details[row][column] != '-':
-                    self.uiWindow.shade_colortable_4.setItem(row, column, QtWidgets.QTableWidgetItem(
+                    if column == 4 :
+                        self.uiWindow.shade_colortable_4.setItem(row, column, QtWidgets.QTableWidgetItem(
+                            str(round(table2_details[row][column],2))))
+                    else:
+                        self.uiWindow.shade_colortable_4.setItem(row, column, QtWidgets.QTableWidgetItem(
                         str(table2_details[row][column])))
         self.uiWindow.shade_add_total_4.setText(str(total_quantity))
 
@@ -1010,8 +1014,12 @@ def set_delete_shade_transaction(self):
             self.uiWindow.shade_colortable_2.insertRow(row)
             for column in range(len(table2_details[row])):
                 if table2_details[row][column] != '-':
-                    self.uiWindow.shade_colortable_2.setItem(row, column, QtWidgets.QTableWidgetItem(
-                        str(table2_details[row][column])))
+                    if column == 4:
+                        self.uiWindow.shade_colortable_2.setItem(row, column, QtWidgets.QTableWidgetItem(
+                        str(round(table2_details[row][column],2))))
+                    else:
+                        self.uiWindow.shade_colortable_2.setItem(row, column, QtWidgets.QTableWidgetItem(
+                            str(table2_details[row][column])))
         self.uiWindow.shade_add_total_2.setText(str(total_quantity))
     else:
         self.show_warning_info("Transaction id does not exists")
