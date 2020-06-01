@@ -18,7 +18,7 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>20</y>
+      <y>10</y>
       <width>1481</width>
       <height>861</height>
      </rect>
@@ -42,7 +42,7 @@
        </font>
       </property>
       <property name="text">
-       <string>Add New Shade Number</string>
+       <string>New Shade Number</string>
       </property>
      </widget>
      <widget class="QPushButton" name="RM">
@@ -230,7 +230,7 @@
        </font>
       </property>
       <property name="text">
-       <string>Add New Raw Material</string>
+       <string>New Raw Material</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_114">
@@ -7774,6 +7774,19 @@
        <bool>true</bool>
       </property>
      </widget>
+     <widget class="QLabel" name="label_192">
+      <property name="geometry">
+       <rect>
+        <x>890</x>
+        <y>170</y>
+        <width>311</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enter &lt;span style=&quot; font-weight:600;&quot;&gt;all&lt;/span&gt; to get Stock Detail from all lot no.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="shade_stock_view">
      <widget class="QLineEdit" name="shade_view_stock_name">
@@ -8386,6 +8399,19 @@
       </property>
       <property name="text">
        <string>Opening Stock :</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_193">
+      <property name="geometry">
+       <rect>
+        <x>1170</x>
+        <y>90</y>
+        <width>311</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enter &lt;span style=&quot; font-weight:600;&quot;&gt;all&lt;/span&gt; to get Stock Detail from all lot no.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
     </widget>
@@ -15401,7 +15427,7 @@
      <x>0</x>
      <y>0</y>
      <width>1549</width>
-     <height>26</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>
