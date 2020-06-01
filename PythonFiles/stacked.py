@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'UI/StackedView.ui'
+# Form implementation generated from reading ui file 'StackedView.ui'
 #
-# Created by: PyQt5 UI code generator 5.13.2
+# Created by: PyQt5 UI code generator 5.14.2
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -2736,13 +2736,16 @@ class Ui_MainWindow(object):
         self.rm_view_opening.setReadOnly(True)
         self.rm_view_opening.setObjectName("rm_view_opening")
         self.label_192 = QtWidgets.QLabel(self.rm_stock_view_2)
-        self.label_192.setGeometry(QtCore.QRect(890, 170, 311, 81))
+        self.label_192.setGeometry(QtCore.QRect(890, 170, 331, 81))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.label_192.setFont(font)
         self.label_192.setObjectName("label_192")
         self.stackedWidget.addWidget(self.rm_stock_view_2)
         self.shade_stock_view = QtWidgets.QWidget()
         self.shade_stock_view.setObjectName("shade_stock_view")
         self.shade_view_stock_name = QtWidgets.QLineEdit(self.shade_stock_view)
-        self.shade_view_stock_name.setGeometry(QtCore.QRect(1020, 180, 151, 41))
+        self.shade_view_stock_name.setGeometry(QtCore.QRect(970, 180, 151, 41))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.shade_view_stock_name.setFont(font)
@@ -2819,7 +2822,7 @@ class Ui_MainWindow(object):
         self.pushButton_17.setFont(font)
         self.pushButton_17.setObjectName("pushButton_17")
         self.label_88 = QtWidgets.QLabel(self.shade_stock_view)
-        self.label_88.setGeometry(QtCore.QRect(830, 240, 181, 51))
+        self.label_88.setGeometry(QtCore.QRect(780, 240, 181, 51))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.label_88.setFont(font)
@@ -2831,7 +2834,7 @@ class Ui_MainWindow(object):
         self.label_89.setFont(font)
         self.label_89.setObjectName("label_89")
         self.label_90 = QtWidgets.QLabel(self.shade_stock_view)
-        self.label_90.setGeometry(QtCore.QRect(830, 170, 181, 51))
+        self.label_90.setGeometry(QtCore.QRect(780, 170, 181, 51))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.label_90.setFont(font)
@@ -2866,7 +2869,7 @@ class Ui_MainWindow(object):
         self.shade_view_starting_date.setGeometry(QtCore.QRect(570, 250, 151, 41))
         self.shade_view_starting_date.setObjectName("shade_view_starting_date")
         self.shade_view_ending_date = QtWidgets.QDateEdit(self.shade_stock_view)
-        self.shade_view_ending_date.setGeometry(QtCore.QRect(1020, 250, 151, 41))
+        self.shade_view_ending_date.setGeometry(QtCore.QRect(970, 250, 151, 41))
         self.shade_view_ending_date.setObjectName("shade_view_ending_date")
         self.shade_stock_view_clear = QtWidgets.QPushButton(self.shade_stock_view)
         self.shade_stock_view_clear.setGeometry(QtCore.QRect(420, 780, 151, 51))
@@ -2881,14 +2884,14 @@ class Ui_MainWindow(object):
         self.shade_view_stock_confirm.setFont(font)
         self.shade_view_stock_confirm.setObjectName("shade_view_stock_confirm")
         self.shade_view_stock_lot = QtWidgets.QLineEdit(self.shade_stock_view)
-        self.shade_view_stock_lot.setGeometry(QtCore.QRect(1010, 110, 151, 41))
+        self.shade_view_stock_lot.setGeometry(QtCore.QRect(970, 110, 151, 41))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.shade_view_stock_lot.setFont(font)
         self.shade_view_stock_lot.setText("")
         self.shade_view_stock_lot.setObjectName("shade_view_stock_lot")
         self.label_140 = QtWidgets.QLabel(self.shade_stock_view)
-        self.label_140.setGeometry(QtCore.QRect(830, 110, 181, 51))
+        self.label_140.setGeometry(QtCore.QRect(790, 110, 181, 51))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.label_140.setFont(font)
@@ -2930,7 +2933,7 @@ class Ui_MainWindow(object):
         self.label_191.setFont(font)
         self.label_191.setObjectName("label_191")
         self.label_193 = QtWidgets.QLabel(self.shade_stock_view)
-        self.label_193.setGeometry(QtCore.QRect(1170, 90, 311, 81))
+        self.label_193.setGeometry(QtCore.QRect(1130, 120, 341, 31))
         self.label_193.setObjectName("label_193")
         self.stackedWidget.addWidget(self.shade_stock_view)
         self.sales_operations = QtWidgets.QWidget()
@@ -5464,7 +5467,7 @@ class Ui_MainWindow(object):
         self.stackedWidget.addWidget(self.opening_shade_view_2)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 1549, 22))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 1549, 26))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
@@ -5472,7 +5475,7 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(21)
+        self.stackedWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -5486,7 +5489,7 @@ class Ui_MainWindow(object):
         self.label.setText(_translate("MainWindow", "Enter Transactions : "))
         self.label_77.setText(_translate("MainWindow", "Enter Sale Details :"))
         self.RM_5.setText(_translate("MainWindow", "Shade Number"))
-        self.label_2.setText(_translate("MainWindow", "Add new Materail Details : "))
+        self.label_2.setText(_translate("MainWindow", "New Materail Details : "))
         self.RM_6.setText(_translate("MainWindow", "Shade Number"))
         self.RM_2.setText(_translate("MainWindow", "New Raw Material"))
         self.label_114.setText(_translate("MainWindow", "PANKIT PROCESS"))
@@ -5496,7 +5499,7 @@ class Ui_MainWindow(object):
         self.label_137.setText(_translate("MainWindow", "View Ending Stock :"))
         self.rm_opening_stock.setText(_translate("MainWindow", "Raw Material"))
         self.shade_opening_stock.setText(_translate("MainWindow", "Shade Number"))
-        self.label_141.setText(_translate("MainWindow", "Add opening stock :"))
+        self.label_141.setText(_translate("MainWindow", "Opening stock :"))
         self.label_78.setText(_translate("MainWindow", "Enter Product Price : "))
         self.label_4.setText(_translate("MainWindow", "Enter Product Name : "))
         self.label_3.setText(_translate("MainWindow", "Raw Material"))
@@ -5973,7 +5976,7 @@ class Ui_MainWindow(object):
         self.label_140.setText(_translate("MainWindow", "Enter lot no. : "))
         self.label_189.setText(_translate("MainWindow", "Total : "))
         self.label_191.setText(_translate("MainWindow", "Opening Stock :"))
-        self.label_193.setText(_translate("MainWindow", "<html><head/><body><p>Enter <span style=\" font-weight:600;\">all</span> to get Stock Detail from all lot no.</p></body></html>"))
+        self.label_193.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:10pt;\">Enter </span><span style=\" font-size:10pt; font-weight:600;\">all</span><span style=\" font-size:10pt;\"> to get Stock Detail from all lot no.</span></p></body></html>"))
         self.back_5.setText(_translate("MainWindow", "BACK"))
         self.sales_modify.setText(_translate("MainWindow", "MODIFY"))
         self.sales_delete.setText(_translate("MainWindow", "DELETE"))
