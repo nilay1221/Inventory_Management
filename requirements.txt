@@ -8,7 +8,7 @@ drive-cli==2.1.0
 google-api-python-client==1.7.8
 google-auth==1.11.2
 google-auth-httplib2==0.0.3
-httplib2==0.18.0
+httplib2==0.19.0
 idna==2.8
 isort==4.3.21
 lazy-object-proxy==1.4.3
