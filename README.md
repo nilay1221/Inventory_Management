@@ -4,7 +4,7 @@ Inventory Management System for Thread Dyeing Factory
 
 ![Alt text](https://camo.githubusercontent.com/983a524d899f76a28e5e290c180e23bad7492dc6/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4d6164655f776974682d507974686f6e332d626c75653f7374796c653d666f722d7468652d6261646765266c6f676f3d707974686f6e?raw=true "Title")
 
-This is a desktop application that manages all the records of entries of raw material, production ans sales of products in thread dyeing factory.
+This is a desktop application that manages all the records of entries of raw material, production and sales of products in thread dyeing factory.
 
 # Functionalities :
 It has various stages of :
